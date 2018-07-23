@@ -1,0 +1,9 @@
+{
+  "name": "amf-raml",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "amf-client-js": "^1.7.0"
+  }
+}
