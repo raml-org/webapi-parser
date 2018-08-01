@@ -17,6 +17,11 @@ amf.Core.init().then(async () => {
   const baseUnit = await ramlParser.parseFileAsync(`file://${process.argv[2]}`);
   const validations = await amf.AMF.validate(baseUnit, amf.ProfileNames.RAML, amf.ProfileNames.AMFStyle);
   validations.results.map(res => {
-    console.log(`[${res.level}] ${res.message}`);
+    const location = res.location.replace('file://', '');
+    const pos = res.position
+    const position = pos.start.line + ':' + pos.start.column
+    const level = res.level.toUpperCase();
+    const message = res.message;
+    console.log(`[${location}:${position}] ${level} ${message}`);
   });
 }).catch(console.error);
