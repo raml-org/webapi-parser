@@ -59,3 +59,19 @@ typings/
 
 # next.js build output
 .next
+
+# from amf repo
+target/
+output/
+build/
+classes
+*.iml
+*.swp
+*.ipr
+*.iws
+.idea
+.classpath
+.project
+.settings
+.DS_Store
+.gradle
