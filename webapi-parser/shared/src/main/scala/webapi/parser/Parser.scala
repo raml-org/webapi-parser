@@ -1,10 +1,9 @@
 package webapi.parser
 
-import amf.client._
-
-import scala.scalajs.js.annotation.{JSExportAll}
+import scala.scalajs.js.annotation._
 
 @JSExportAll
-object NewAMF extends AMF {
-
+@JSExportTopLevel("WebapiAMF")
+object WebapiAMF {
+  import amf.client.AMF._
 }
