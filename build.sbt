@@ -30,7 +30,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   ********************************************** */
 lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   .settings(name := "webapi-parser")
-  .in(file("./webapi-parser"))
+  .in(file("./"))
   .settings(settings ++ (parallelExecution in ThisBuild := false) : _*)
   .jvmSettings(
     libraryDependencies += "org.scala-js"           %% "scalajs-stubs"          % scalaJSVersion % "provided",
@@ -45,8 +45,8 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
     artifactPath in (Compile, fastOptJS) := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
   )
 
-lazy val webapiJVM = webapi.jvm.in(file("./webapi-parser/jvm"))
-lazy val webapiJS  = webapi.js.in(file("./webapi-parser/js"))
+lazy val webapiJVM = webapi.jvm.in(file("./jvm"))
+lazy val webapiJS  = webapi.js.in(file("./js"))
 
 // Tasks
 
