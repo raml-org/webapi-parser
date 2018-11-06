@@ -42,7 +42,7 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   .jsSettings(
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.2",
     scalaJSModuleKind := ModuleKind.CommonJSModule,
-    artifactPath in (Compile, fullOptJS) := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
+    artifactPath in (Compile, fastOptJS) := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
   )
 
 lazy val webapiJVM = webapi.jvm.in(file("./jvm"))
@@ -54,7 +54,7 @@ val buildJS = TaskKey[Unit](
   "buildJS",
   "Build npm module")
 buildJS := {
-  val _ = (fullOptJS in Compile in webapiJS).value
+  val _ = (fastOptJS in Compile in webapiJS).value
   // "./amf-client/js/build-scripts/buildjs.sh".!
 }
 
