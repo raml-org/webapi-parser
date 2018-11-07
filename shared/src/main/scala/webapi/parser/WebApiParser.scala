@@ -1,13 +1,13 @@
 package webapi.parser
 
-import amf.{Core, MessageStyle, MessageStyles, ProfileName, ProfileNames}
+import amf.{Core, MessageStyles, ProfileNames}
 import amf.plugins.document.{WebApi}
 import amf.plugins.document.webapi.validation.PayloadValidatorPlugin
 import amf.client.parse.{Raml10Parser}
 import amf.client.render.{Raml10Renderer, Oas20Renderer}
 import amf.client.model.document.{BaseUnit}
 import amf.client.validate.ValidationReport
-import amf.client.convert.CoreClientConverters._
+import amf.client.convert.CoreClientConverters.{ClientFuture}
 
 import scala.scalajs.js.annotation._
 
