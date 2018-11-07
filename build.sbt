@@ -55,10 +55,5 @@ val buildJS = TaskKey[Unit](
   "Build npm module")
 buildJS := {
   val _ = (fastOptJS in Compile in webapiJS).value
-  // "./amf-client/js/build-scripts/buildjs.sh".!
+  "./build-scripts/buildjs.sh".!
 }
-
-addCommandAlias(
-  "buildCommandLine",
-  "; clean; clientJVM/assembly"
-)

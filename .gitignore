@@ -75,3 +75,6 @@ classes
 .settings
 .DS_Store
 .gradle
+
+# Ignore generated JS
+/js/module/webapi-parser.js
