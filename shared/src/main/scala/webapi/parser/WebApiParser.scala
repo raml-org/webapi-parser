@@ -62,6 +62,8 @@ object WebApiParser {
   // OAS 2
   def oas20Parser(): Oas20Parser = new Oas20Parser()
 
+  def oas20YamlParser(): Oas20Parser = new Oas20YamlParser()
+
   def oas20Generator(): Oas20Renderer = new Oas20Renderer()
 
   def validateOas20(model: BaseUnit): ClientFuture[ValidationReport] =
