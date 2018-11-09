@@ -36,9 +36,9 @@ object WebApiParser {
 
   def validateRaml10(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
     val reportFuture = for {
-      profName <- Core.loadValidationProfile(profileUrl).asInternal
-      report <- Core.validate(model, profName, MessageStyles.RAML).asInternal
-    } yield (report)
+      profileName <- Core.loadValidationProfile(profileUrl).asInternal
+      validationReport <- Core.validate(model, profileName, MessageStyles.RAML).asInternal
+    } yield (validationReport)
     reportFuture.asClient
   }
 
@@ -55,9 +55,9 @@ object WebApiParser {
 
   def validateRaml08(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
     val reportFuture = for {
-      profName <- Core.loadValidationProfile(profileUrl).asInternal
-      report <- Core.validate(model, profName, MessageStyles.RAML).asInternal
-    } yield (report)
+      profileName <- Core.loadValidationProfile(profileUrl).asInternal
+      validationReport <- Core.validate(model, profileName, MessageStyles.RAML).asInternal
+    } yield (validationReport)
     reportFuture.asClient
   }
 
@@ -76,9 +76,9 @@ object WebApiParser {
 
   def validateOas20(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
     val reportFuture = for {
-      profName <- Core.loadValidationProfile(profileUrl).asInternal
-      report <- Core.validate(model, profName, MessageStyles.OAS).asInternal
-    } yield (report)
+      profileName <- Core.loadValidationProfile(profileUrl).asInternal
+      validationReport <- Core.validate(model, profileName, MessageStyles.OAS).asInternal
+    } yield (validationReport)
     reportFuture.asClient
   }
 
@@ -95,9 +95,9 @@ object WebApiParser {
 
   def validateAmfGraph(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
     val reportFuture = for {
-      profName <- Core.loadValidationProfile(profileUrl).asInternal
-      report <- Core.validate(model, profName, MessageStyles.AMF).asInternal
-    } yield (report)
+      profileName <- Core.loadValidationProfile(profileUrl).asInternal
+      validationReport <- Core.validate(model, profileName, MessageStyles.AMF).asInternal
+    } yield (validationReport)
     reportFuture.asClient
   }
 
