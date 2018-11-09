@@ -35,9 +35,11 @@ object WebApiParser {
     Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML)
 
   def validateRaml10(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val profileFuture = Core.loadValidationProfile(profileUrl).asInternal
-    // TODO: Turn future into ProfileName
-    // Core.validate(model, profileName, MessageStyles.RAML)
+    val reportFuture = for {
+      profName <- Core.loadValidationProfile(profileUrl).asInternal
+      report <- Core.validate(model, profName, MessageStyles.RAML).asInternal
+    } yield (report)
+    reportFuture.asClient
   }
 
   def resolveRaml10(unit: BaseUnit): BaseUnit = new Raml10Resolver().resolve(unit)
@@ -52,8 +54,11 @@ object WebApiParser {
     Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML)
 
   def validateRaml08(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val profileName = Core.loadValidationProfile(profileUrl)
-    Core.validate(model, profileName, MessageStyles.RAML)
+    val reportFuture = for {
+      profName <- Core.loadValidationProfile(profileUrl).asInternal
+      report <- Core.validate(model, profName, MessageStyles.RAML).asInternal
+    } yield (report)
+    reportFuture.asClient
   }
 
   def resolveRaml08(unit: BaseUnit): BaseUnit = new Raml08Resolver().resolve(unit)
@@ -62,7 +67,7 @@ object WebApiParser {
   // OAS 2
   def oas20Parser(): Oas20Parser = new Oas20Parser()
 
-  def oas20YamlParser(): Oas20Parser = new Oas20YamlParser()
+  def oas20YamlParser(): Oas20YamlParser = new Oas20YamlParser()
 
   def oas20Generator(): Oas20Renderer = new Oas20Renderer()
 
@@ -70,8 +75,11 @@ object WebApiParser {
     Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS)
 
   def validateOas20(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val profileName = Core.loadValidationProfile(profileUrl)
-    Core.validate(model, profileName, MessageStyles.OAS)
+    val reportFuture = for {
+      profName <- Core.loadValidationProfile(profileUrl).asInternal
+      report <- Core.validate(model, profName, MessageStyles.OAS).asInternal
+    } yield (report)
+    reportFuture.asClient
   }
 
   def resolveOas20(unit: BaseUnit): BaseUnit = new Oas20Resolver().resolve(unit)
@@ -86,8 +94,11 @@ object WebApiParser {
     Core.validate(model, ProfileNames.AMF, MessageStyles.AMF)
 
   def validateAmfGraph(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val profileName = Core.loadValidationProfile(profileUrl)
-    Core.validate(model, profileName, MessageStyles.AMF)
+    val reportFuture = for {
+      profName <- Core.loadValidationProfile(profileUrl).asInternal
+      report <- Core.validate(model, profName, MessageStyles.AMF).asInternal
+    } yield (report)
+    reportFuture.asClient
   }
 
   def resolveAmfGraph(unit: BaseUnit): BaseUnit = new AmfGraphResolver().resolve(unit)
