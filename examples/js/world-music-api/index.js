@@ -32,20 +32,20 @@ function testWap () {
   let baseUnit
   wap.init().then(function () {
     return raml10Parser.parseStringAsync(ramlStr)
-    // const fpath = path.join(__dirname, '../apis/world-music-api/api.raml')
+    // const fpath = path.join(__dirname, './spec/api.raml')
     // return raml10Parser.parseFileAsync(`file://${fpath}`)
   })
   .then(function (bu) {
     baseUnit = bu
-    console.log('>> Parsed RAML1.0', baseUnit)
+    console.log('> Parsed RAML1.0', baseUnit)
     return oas20Generator.generateString(baseUnit)
   })
   .then(function (generated) {
-    console.log('>> Generated OAS2', generated)
+    console.log('> Generated OAS2', generated)
     return wap.validateRaml10(baseUnit)
   })
   .then(function (report) {
-    console.log('>> RAML validation report', report.results)
+    console.log('> RAML validation report', report.results)
   })
   .catch(function (err) {
     console.log(err)
