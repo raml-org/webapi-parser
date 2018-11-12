@@ -34,14 +34,6 @@ object WebApiParser {
   def validateRaml10(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML)
 
-  def validateRaml10(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val reportFuture = for {
-      profileName <- Core.loadValidationProfile(profileUrl).asInternal
-      validationReport <- Core.validate(model, profileName, MessageStyles.RAML).asInternal
-    } yield (validationReport)
-    reportFuture.asClient
-  }
-
   def resolveRaml10(unit: BaseUnit): BaseUnit = new Raml10Resolver().resolve(unit)
 
 
@@ -52,14 +44,6 @@ object WebApiParser {
 
   def validateRaml08(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML)
-
-  def validateRaml08(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val reportFuture = for {
-      profileName <- Core.loadValidationProfile(profileUrl).asInternal
-      validationReport <- Core.validate(model, profileName, MessageStyles.RAML).asInternal
-    } yield (validationReport)
-    reportFuture.asClient
-  }
 
   def resolveRaml08(unit: BaseUnit): BaseUnit = new Raml08Resolver().resolve(unit)
 
@@ -74,14 +58,6 @@ object WebApiParser {
   def validateOas20(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS)
 
-  def validateOas20(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val reportFuture = for {
-      profileName <- Core.loadValidationProfile(profileUrl).asInternal
-      validationReport <- Core.validate(model, profileName, MessageStyles.OAS).asInternal
-    } yield (validationReport)
-    reportFuture.asClient
-  }
-
   def resolveOas20(unit: BaseUnit): BaseUnit = new Oas20Resolver().resolve(unit)
 
 
@@ -92,14 +68,6 @@ object WebApiParser {
 
   def validateAmfGraph(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.AMF, MessageStyles.AMF)
-
-  def validateAmfGraph(model: BaseUnit, profileUrl: String): ClientFuture[ValidationReport] = {
-    val reportFuture = for {
-      profileName <- Core.loadValidationProfile(profileUrl).asInternal
-      validationReport <- Core.validate(model, profileName, MessageStyles.AMF).asInternal
-    } yield (validationReport)
-    reportFuture.asClient
-  }
 
   def resolveAmfGraph(unit: BaseUnit): BaseUnit = new AmfGraphResolver().resolve(unit)
 
