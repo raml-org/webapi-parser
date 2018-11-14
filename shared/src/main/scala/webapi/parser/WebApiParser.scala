@@ -36,8 +36,8 @@ object WebApiParser {
   // RAML 1.0
   // def raml10Parser(): Raml10Parser = new Raml10Parser()
 
+  // TODO
   def raml10Parser(): ClientFuture[Raml10Parser] = {
-    // TODO: value asClient is not a member of Future[Raml10Parser]
     val ftr: Future[Raml10Parser] = init().asInternal map { _ => new Raml10Parser() }
     ftr.asClient
   }
@@ -47,7 +47,14 @@ object WebApiParser {
   def validateRaml10(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML)
 
-  def resolveRaml10(model: BaseUnit): BaseUnit = new Raml10Resolver().resolve(model)
+  // TODO
+  // Ignore that this doesn't call `init()` - it's just an example atm.
+  def resolveRaml10(model: BaseUnit): ClientFuture[BaseUnit] = {
+    var modelFuture: Future[BaseUnit] = Future {
+      new Raml10Resolver().resolve(model)
+    }
+    modelFuture.asClient
+  }
 
 
   // RAML 0.8
