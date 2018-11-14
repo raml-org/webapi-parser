@@ -29,20 +29,20 @@ const ramlStr = `
 `
 
 function testWap () {
-  let baseUnit
+  let model
   wap.init().then(function () {
     return raml10Parser.parseStringAsync(ramlStr)
     // const fpath = path.join(__dirname, './spec/api.raml')
     // return raml10Parser.parseFileAsync(`file://${fpath}`)
   })
   .then(function (bu) {
-    baseUnit = bu
-    console.log('> Parsed RAML1.0', baseUnit)
-    return oas20Generator.generateString(baseUnit)
+    model = bu
+    console.log('> Parsed RAML1.0', model)
+    return oas20Generator.generateString(model)
   })
   .then(function (generated) {
     console.log('> Generated OAS2', generated)
-    return wap.validateRaml10(baseUnit)
+    return wap.validateRaml10(model)
   })
   .then(function (report) {
     console.log('> RAML validation report', report.results)

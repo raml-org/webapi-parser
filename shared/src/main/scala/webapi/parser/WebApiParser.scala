@@ -34,7 +34,7 @@ object WebApiParser {
   def validateRaml10(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML)
 
-  def resolveRaml10(unit: BaseUnit): BaseUnit = new Raml10Resolver().resolve(unit)
+  def resolveRaml10(model: BaseUnit): BaseUnit = new Raml10Resolver().resolve(model)
 
 
   // RAML 0.8
@@ -45,7 +45,7 @@ object WebApiParser {
   def validateRaml08(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML)
 
-  def resolveRaml08(unit: BaseUnit): BaseUnit = new Raml08Resolver().resolve(unit)
+  def resolveRaml08(model: BaseUnit): BaseUnit = new Raml08Resolver().resolve(model)
 
 
   // OAS 2
@@ -58,7 +58,7 @@ object WebApiParser {
   def validateOas20(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS)
 
-  def resolveOas20(unit: BaseUnit): BaseUnit = new Oas20Resolver().resolve(unit)
+  def resolveOas20(model: BaseUnit): BaseUnit = new Oas20Resolver().resolve(model)
 
 
   // Amf Graph
@@ -69,7 +69,7 @@ object WebApiParser {
   def validateAmfGraph(model: BaseUnit): ClientFuture[ValidationReport] =
     Core.validate(model, ProfileNames.AMF, MessageStyles.AMF)
 
-  def resolveAmfGraph(unit: BaseUnit): BaseUnit = new AmfGraphResolver().resolve(unit)
+  def resolveAmfGraph(model: BaseUnit): BaseUnit = new AmfGraphResolver().resolve(model)
 
 
   // Plain JSON and YAML
