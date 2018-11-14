@@ -17,17 +17,30 @@ import ExecutionContext.Implicits.global
 @JSExportAll
 @JSExportTopLevel("WebApiParser")
 object WebApiParser {
+  var initialized: Boolean = false
 
   // Init
   def init(): ClientFuture[Unit] = {
-    WebApi.register()
-    amf.Core.registerPlugin(PayloadValidatorPlugin)
-    amf.Core.init()
+    if(initialized) {
+      val emptyFuture: Future[Unit] = Future {}
+      emptyFuture.asClient
+    } else {
+      println(">>> Running WebApiParser.init")
+      initialized = true
+      WebApi.register()
+      amf.Core.registerPlugin(PayloadValidatorPlugin)
+      amf.Core.init()
+    }
   }
 
-
   // RAML 1.0
-  def raml10Parser(): Raml10Parser = new Raml10Parser()
+  // def raml10Parser(): Raml10Parser = new Raml10Parser()
+
+  def raml10Parser(): ClientFuture[Raml10Parser] = {
+    // TODO: value asClient is not a member of Future[Raml10Parser]
+    val ftr: Future[Raml10Parser] = init().asInternal map { _ => new Raml10Parser() }
+    ftr.asClient
+  }
 
   def raml10Generator(): Raml10Renderer = new Raml10Renderer()
 
