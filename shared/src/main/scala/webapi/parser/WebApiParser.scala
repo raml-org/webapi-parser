@@ -14,8 +14,6 @@ import scala.concurrent._
 import scala.scalajs.js.annotation._
 import ExecutionContext.Implicits.global
 
-@JSExportAll
-@JSExportTopLevel("WebApiParser")
 object WebApiParser {
   var initialized: Boolean = false
 
