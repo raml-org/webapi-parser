@@ -3,9 +3,6 @@
 const wap = require('webapi-parser').WebApiParser
 const path = require('path')
 
-const raml10Parser = wap.raml10Parser()
-const oas20Generator = wap.oas20Generator()
-
 const ramlStr = `
   #%RAML 1.0
   title: API with Types
@@ -31,18 +28,18 @@ const ramlStr = `
 function testWap () {
   let model
   wap.init().then(function () {
-    return raml10Parser.parseStringAsync(ramlStr)
+    return wap.raml10.parseString(ramlStr)
     // const fpath = path.join(__dirname, './spec/api.raml')
-    // return raml10Parser.parseFileAsync(`file://${fpath}`)
+    // return wap.raml10.parseFile(`file://${fpath}`)
   })
-  .then(function (bu) {
-    model = bu
+  .then(function (m) {
+    model = m
     console.log('> Parsed RAML1.0', model)
-    return oas20Generator.generateString(model)
+    return wap.oas20.generateString(model)
   })
   .then(function (generated) {
     console.log('> Generated OAS2', generated)
-    return wap.validateRaml10(model)
+    return wap.raml10.validate(model)
   })
   .then(function (report) {
     console.log('> RAML validation report', report.results)
