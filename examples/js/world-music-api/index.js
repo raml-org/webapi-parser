@@ -27,26 +27,24 @@ const ramlStr = `
 
 function testWap () {
   let model
-  wap.init().then(function () {
-    return wap.raml10.parseString(ramlStr)
-    // const fpath = path.join(__dirname, './spec/api.raml')
-    // return wap.raml10.parseFile(`file://${fpath}`)
-  })
-  .then(function (m) {
-    model = m
-    console.log('> Parsed RAML1.0', model)
-    return wap.oas20.generateString(model)
-  })
-  .then(function (generated) {
-    console.log('> Generated OAS2', generated)
-    return wap.raml10.validate(model)
-  })
-  .then(function (report) {
-    console.log('> RAML validation report', report.results)
-  })
-  .catch(function (err) {
-    console.log(err)
-  })
+  // const fpath = path.join(__dirname, './spec/api.raml')
+  // return wap.raml10.parseFile(`file://${fpath}`)
+  return wap.raml10.parseString(ramlStr)
+    .then(function (m) {
+      model = m
+      console.log('> Parsed RAML1.0', model)
+      return wap.oas20.generateString(model)
+    })
+    .then(function (generated) {
+      console.log('> Generated OAS2', generated)
+      return wap.raml10.validate(model)
+    })
+    .then(function (report) {
+      console.log('> RAML validation report', report.results)
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
 }
 
 testWap()

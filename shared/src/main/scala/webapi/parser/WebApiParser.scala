@@ -36,95 +36,172 @@ object WebApiParser {
   @JSExportTopLevel("WebApiParser.raml10")
   object raml10 {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
-      new Raml10Parser().parseFileAsync(url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml10Parser().parseFileAsync(url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def parseString(content: String): ClientFuture[BaseUnit] = {
-      new Raml10Parser().parseStringAsync(content)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml10Parser().parseStringAsync(content).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      new Raml10Renderer().generateFile(model, url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml10Renderer().generateFile(model, url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateString(model: BaseUnit): ClientFuture[String] = {
-      new Raml10Renderer().generateString(model)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml10Renderer().generateString(model).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML)
+      val future = for {
+        _ <- init().asInternal
+        result <- Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML).asInternal
+      } yield (result)
+      future.asClient
     }
 
-    def resolve(model: BaseUnit): BaseUnit = {
-      // TODO: Return ClientFuture[BaseUnit]
-      new Raml10Resolver().resolve(model)
-    }
+    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    //   val future = for {
+    //     _ <- init().asInternal
+    //     result <- Future { new Raml10Resolver().resolve(model) }
+    //   } yield (result)
+    //   future.asClient
+    // }
   }
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.raml08")
   object raml08 {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
-      new Raml08Parser().parseFileAsync(url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml08Parser().parseFileAsync(url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def parseString(content: String): ClientFuture[BaseUnit] = {
-      new Raml08Parser().parseStringAsync(content)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml08Parser().parseStringAsync(content).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      new Raml08Renderer().generateFile(model, url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml08Renderer().generateFile(model, url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateString(model: BaseUnit): ClientFuture[String] = {
-      new Raml08Renderer().generateString(model)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Raml08Renderer().generateString(model).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML)
+      val future = for {
+        _ <- init().asInternal
+        result <- Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML).asInternal
+      } yield (result)
+      future.asClient
     }
 
-    def resolve(model: BaseUnit): BaseUnit = {
-      // TODO: Return ClientFuture[BaseUnit]
-      new Raml08Resolver().resolve(model)
-    }
+    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    //   val future = for {
+    //     _ <- init().asInternal
+    //     result <- Future { new Raml08Resolver().resolve(model) }
+    //   } yield (result)
+    //   future.asClient
+    // }
   }
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.oas20")
   object oas20 {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
-      new Oas20Parser().parseFileAsync(url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Oas20Parser().parseFileAsync(url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def parseString(content: String): ClientFuture[BaseUnit] = {
-      new Oas20Parser().parseStringAsync(content)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Oas20Parser().parseStringAsync(content).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      new Oas20Renderer().generateFile(model, url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Oas20Renderer().generateFile(model, url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateString(model: BaseUnit): ClientFuture[String] = {
-      new Oas20Renderer().generateString(model)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Oas20Renderer().generateString(model).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS)
+      val future = for {
+        _ <- init().asInternal
+        result <- Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS).asInternal
+      } yield (result)
+      future.asClient
     }
 
-    def resolve(model: BaseUnit): BaseUnit = {
-      // TODO: Return ClientFuture[BaseUnit]
-      new Oas20Resolver().resolve(model)
-    }
+    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    //   val future = for {
+    //     _ <- init().asInternal
+    //     result <- Future { new Oas20Resolver().resolve(model) }
+    //   } yield (result)
+    //   future.asClient
+    // }
 
     // Specific to oas20 object
     def parseYamlFile(url: String): ClientFuture[BaseUnit] = {
-      new Oas20YamlParser().parseFileAsync(url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Oas20YamlParser().parseFileAsync(url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def parseYamlString(content: String): ClientFuture[BaseUnit] = {
-      new Oas20YamlParser().parseStringAsync(content)
+      val future = for {
+        _ <- init().asInternal
+        result <- new Oas20YamlParser().parseStringAsync(content).asInternal
+      } yield (result)
+      future.asClient
     }
   }
 
@@ -132,28 +209,51 @@ object WebApiParser {
   @JSExportTopLevel("WebApiParser.amfGraph")
   object amfgraph {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
-      new AmfGraphParser().parseFileAsync(url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new AmfGraphParser().parseFileAsync(url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def parseString(content: String): ClientFuture[BaseUnit] = {
-      new AmfGraphParser().parseStringAsync(content)
+      val future = for {
+        _ <- init().asInternal
+        result <- new AmfGraphParser().parseStringAsync(content).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      new AmfGraphRenderer().generateFile(model, url)
+      val future = for {
+        _ <- init().asInternal
+        result <- new AmfGraphRenderer().generateFile(model, url).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def generateString(model: BaseUnit): ClientFuture[String] = {
-      new AmfGraphRenderer().generateString(model)
+      val future = for {
+        _ <- init().asInternal
+        result <- new AmfGraphRenderer().generateString(model).asInternal
+      } yield (result)
+      future.asClient
     }
 
     def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      Core.validate(model, ProfileNames.AMF, MessageStyles.AMF)
+      val future = for {
+        _ <- init().asInternal
+        result <- Core.validate(model, ProfileNames.AMF, MessageStyles.AMF).asInternal
+      } yield (result)
+      future.asClient
     }
 
-    def resolve(model: BaseUnit): BaseUnit = {
-      // TODO: Return ClientFuture[BaseUnit]
-      new AmfGraphResolver().resolve(model)
-    }
+    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    //   val future = for {
+    //     _ <- init().asInternal
+    //     result <- Future { new AmfGraphResolver().resolve(model) }
+    //   } yield (result)
+    //   future.asClient
+    // }
   }
 }
