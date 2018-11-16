@@ -7,6 +7,7 @@ import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
 import amf.client.model.document.{BaseUnit}
+import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 import amf.client.validate.ValidationReport
 import amf.client.convert.CoreClientConverters._
 
@@ -31,11 +32,10 @@ object WebApiParser {
   }
 
   def chainAfterInit[T](func: () => Future[T]): Future[T] = {
-    val future = for {
+    for {
       _ <- init().asInternal
       result <- func()
     } yield (result)
-    future
   }
 
   @JSExportAll
@@ -71,11 +71,14 @@ object WebApiParser {
       }).asClient
     }
 
-    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-    //   chainAfterInit(() => {
-    //     Future { new Raml10Resolver().resolve(model) }
-    //   }).asClient
-    // }
+    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+      chainAfterInit(() => {
+        Future {
+          val resolved: InternalBaseUnit = new Raml10Resolver().resolve(model)
+          resolved
+        }
+      }).asClient
+    }
   }
 
   @JSExportAll
@@ -111,11 +114,14 @@ object WebApiParser {
       }).asClient
     }
 
-    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-    //   chainAfterInit(() => {
-    //     Future { new Raml08Resolver().resolve(model) }
-    //   }).asClient
-    // }
+    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+      chainAfterInit(() => {
+        Future {
+          val resolved: InternalBaseUnit = new Raml08Resolver().resolve(model)
+          resolved
+        }
+      }).asClient
+    }
   }
 
   @JSExportAll
@@ -151,11 +157,14 @@ object WebApiParser {
       }).asClient
     }
 
-    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-    //   chainAfterInit(() => {
-    //     Future { new Oas20Resolver().resolve(model) }
-    //   }).asClient
-    // }
+    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+      chainAfterInit(() => {
+        Future {
+          val resolved: InternalBaseUnit = new Oas20Resolver().resolve(model)
+          resolved
+        }
+      }).asClient
+    }
 
     // Specific to oas20 object
     def parseYamlFile(url: String): ClientFuture[BaseUnit] = {
@@ -204,10 +213,13 @@ object WebApiParser {
       }).asClient
     }
 
-    // def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-    //   chainAfterInit(() => {
-    //     Future { new AmfGraphResolver().resolve(model) }
-    //   }).asClient
-    // }
+    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+      chainAfterInit(() => {
+        Future {
+          val resolved: InternalBaseUnit = new AmfGraphResolver().resolve(model)
+          resolved
+        }
+      }).asClient
+    }
   }
 }

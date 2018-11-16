@@ -31,16 +31,20 @@ function testWap () {
   // return wap.raml10.parseFile(`file://${fpath}`)
   return wap.raml10.parseString(ramlStr)
     .then(function (m) {
+      console.log('\n> Parsed RAML1.0', m)
+      return wap.raml10.resolve(m)
+    })
+    .then(function (m) {
       model = m
-      console.log('> Parsed RAML1.0', model)
+      console.log('\n> Resolved RAML1.0', model)
       return wap.oas20.generateString(model)
     })
     .then(function (generated) {
-      console.log('> Generated OAS2', generated)
+      console.log('\n> Generated OAS2', generated)
       return wap.raml10.validate(model)
     })
     .then(function (report) {
-      console.log('> RAML validation report', report.results)
+      console.log('\n> RAML validation report', report.results)
     })
     .catch(function (err) {
       console.log(err)
