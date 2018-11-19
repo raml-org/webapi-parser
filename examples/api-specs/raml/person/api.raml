@@ -1,0 +1,13 @@
+#%RAML 1.0
+title: Main API
+
+uses:
+  types-lib: types.lib.raml
+
+/person:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: types-lib.Person

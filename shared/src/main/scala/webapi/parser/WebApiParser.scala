@@ -23,7 +23,6 @@ object WebApiParser {
       val emptyFuture: Future[Unit] = Future {}
       emptyFuture.asClient
     } else {
-      println(">>> Running WebApiParser.init")
       initialized = true
       WebApi.register()
       amf.Core.registerPlugin(PayloadValidatorPlugin)
@@ -182,7 +181,7 @@ object WebApiParser {
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.amfGraph")
-  object amfgraph {
+  object amfGraph {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
       chainAfterInit(() => {
         new AmfGraphParser().parseFileAsync(url).asInternal
