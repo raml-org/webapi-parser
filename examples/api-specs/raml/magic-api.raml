@@ -1,0 +1,12 @@
+#%RAML 0.8
+title: Magic API
+version: v3
+baseUri: https://magic.api.com
+/items:
+  get:
+    description: Get a list of magic items
+    queryParameters:
+      page:
+        type: integer
+      per_page:
+        type: integer

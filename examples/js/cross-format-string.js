@@ -24,17 +24,13 @@ const ramlStr = `
 
 async function main () {
   const model = await wap.raml10.parseString(ramlStr)
-  const resolved = await wap.raml10.resolve(model)
-  const report = await wap.raml10.validate(model)
-  console.log('Validation errors:\n', report.results)
 
   // Modify content
   const age = model.findById(
     'http://a.ml/amf/default_document#/declarations/types/User/property/age')
-  age.range.withMinimum(18)
-  age.range.withMaximum(120)
+  age.range.withMaximum(321)
 
-  const generated = await wap.raml10.generateString(model)
+  const generated = await wap.oas20.generateString(model)
   console.log('Generated:\n', generated)
 }
 
