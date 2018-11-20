@@ -4,7 +4,7 @@ apply plugin: 'java'
 apply plugin: "application"
 
 
-mainClassName = "co.acme.parse.AmfParsing"
+mainClassName = "co.acme.demo.WebApiParserDemo"
 
 sourceCompatibility = 1.8
 

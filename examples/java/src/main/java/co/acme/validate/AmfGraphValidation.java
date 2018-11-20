@@ -10,7 +10,6 @@ import amf.client.model.document.BaseUnit;
 import amf.client.parse.Raml08Parser;
 import amf.client.parse.Raml10Parser;
 import amf.client.validate.ValidationReport;
-import co.acme.resource.ExchangeDependencyResourceLoader;
 
 import java.util.concurrent.ExecutionException;
 
