@@ -1,0 +1,10 @@
+product: amfexamples
+component: core
+
+version: 1.0
+strategy: gradlew
+requires:
+  db: false
+  deployment: false
+contains:
+  helmChart: false
