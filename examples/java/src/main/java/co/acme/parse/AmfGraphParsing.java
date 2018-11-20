@@ -7,7 +7,7 @@ import amf.client.parse.AmfGraphParser;
 
 import java.util.concurrent.ExecutionException;
 
-public class AmfParsing {
+public class AmfGraphParsing {
 
   public static void parseFileWithFuture() throws InterruptedException, ExecutionException {
     //#amf-parse-file-future

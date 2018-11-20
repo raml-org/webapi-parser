@@ -13,7 +13,7 @@ import amf.client.validate.ValidationReport;
 
 import java.util.concurrent.ExecutionException;
 
-public class WebApiValidation {
+public class Raml10Validation {
 
   public static ValidationReport validation() throws InterruptedException, ExecutionException {
     //#raml-10-webapi-validation

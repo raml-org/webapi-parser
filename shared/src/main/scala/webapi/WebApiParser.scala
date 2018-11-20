@@ -1,6 +1,6 @@
 package webapi
 
-import amf.{Core, MessageStyles, ProfileNames, ProfileName}
+import amf.{Core, MessageStyles, ProfileNames}
 import amf.plugins.document.{WebApi}
 import amf.plugins.document.webapi.validation.PayloadValidatorPlugin
 import amf.client.parse._

@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-public class Raml10Rendering {
+public class Raml08Rendering {
 
   public static void renderFileWithFuture() throws InterruptedException, ExecutionException, IOException {
     //#raml-10-render-file-future

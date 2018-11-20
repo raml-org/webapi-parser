@@ -4,6 +4,8 @@ This project aims to provide some usage examples to learn how to use `webapi-par
 
 ## Java Examples
 
+When testing against locally built `.jar`, first copy it to `examples/java/libs`.
+
 ```sh
 $ ./gradlew build
 ```

@@ -76,5 +76,6 @@ classes
 .DS_Store
 .gradle
 
-# Ignore generated JS
+# Ignore generated JS and .jar
 /js/module/webapi-parser.js
+/examples/java/libs/*.jar
