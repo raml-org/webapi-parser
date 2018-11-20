@@ -1,4 +1,4 @@
-package webapi.parser
+package webapi
 
 import amf.{Core, MessageStyles, ProfileNames, ProfileName}
 import amf.plugins.document.{WebApi}
@@ -39,7 +39,7 @@ object WebApiParser {
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.raml10")
-  object raml10 {
+  object Raml10 {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
       chainAfterInit(() => {
         new Raml10Parser().parseFileAsync(url).asInternal
@@ -82,7 +82,7 @@ object WebApiParser {
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.raml08")
-  object raml08 {
+  object Raml08 {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
       chainAfterInit(() => {
         new Raml08Parser().parseFileAsync(url).asInternal
@@ -125,7 +125,7 @@ object WebApiParser {
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.oas20")
-  object oas20 {
+  object Oas20 {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
       chainAfterInit(() => {
         new Oas20Parser().parseFileAsync(url).asInternal
@@ -165,7 +165,7 @@ object WebApiParser {
       }).asClient
     }
 
-    // Specific to oas20 object
+    // Specific to Oas20 object
     def parseYamlFile(url: String): ClientFuture[BaseUnit] = {
       chainAfterInit(() => {
         new Oas20YamlParser().parseFileAsync(url).asInternal
@@ -181,7 +181,7 @@ object WebApiParser {
 
   @JSExportAll
   @JSExportTopLevel("WebApiParser.amfGraph")
-  object amfGraph {
+  object AmfGraph {
     def parseFile(url: String): ClientFuture[BaseUnit] = {
       chainAfterInit(() => {
         new AmfGraphParser().parseFileAsync(url).asInternal
