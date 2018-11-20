@@ -26,8 +26,7 @@ async function main () {
   const model = await wap.raml10.parseString(ramlStr)
 
   // Modify content
-  const age = model.findById(
-    'http://a.ml/amf/default_document#/declarations/types/User/property/age')
+  const age = model.declares[0].properties[2]
   age.range.withMaximum(321)
 
   const generated = await wap.oas20.generateString(model)

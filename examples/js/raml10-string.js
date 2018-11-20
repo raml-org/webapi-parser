@@ -24,13 +24,11 @@ const ramlStr = `
 
 async function main () {
   const model = await wap.raml10.parseString(ramlStr)
-  const resolved = await wap.raml10.resolve(model)
   const report = await wap.raml10.validate(model)
   console.log('Validation errors:\n', report.results)
 
   // Modify content
-  const age = model.findById(
-    'http://a.ml/amf/default_document#/declarations/types/User/property/age')
+  const age = model.declares[0].properties[2]
   age.range.withMinimum(18)
   age.range.withMaximum(120)
 

@@ -41,13 +41,11 @@ const oas20Str = `
 
 async function main () {
   const model = await wap.oas20.parseYamlString(oas20Str)
-  const resolved = await wap.oas20.resolve(model)
   const report = await wap.oas20.validate(model)
   console.log('Validation errors:\n', report.results)
 
   // Modify content
-  const age = model.findById(
-    'http://a.ml/amf/default_document#/declarations/types/User/property/age')
+  const age = model.declares[0].properties[2]
   age.range.withMinimum(18)
   age.range.withMaximum(120)
 

@@ -4,19 +4,17 @@ const path = require('path')
 async function main () {
   const inPath = path.join(__dirname, '../api-specs/oas/api-with-types.yaml')
   const model = await wap.oas20.parseYamlFile(`file://${inPath}`)
-  const resolved = await wap.oas20.resolve(model)
 
-  const report = await wap.oas20.validate(resolved)
+  const report = await wap.oas20.validate(model)
   console.log('Validation errors:\n', report.results)
 
   // Modify content
-  const age = resolved.findById(
-    `file://${inPath}#/declarations/types/User/property/age`)
+  const age = model.declares[0].properties[2]
   age.range.withMinimum(18)
   age.range.withMaximum(120)
 
   const outPath = path.join(__dirname, './generated.json')
-  await wap.oas20.generateFile(resolved, `file://${outPath}`)
+  await wap.oas20.generateFile(model, `file://${outPath}`)
 }
 
 main()

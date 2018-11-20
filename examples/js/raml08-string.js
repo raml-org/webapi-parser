@@ -22,8 +22,7 @@ async function main () {
   console.log('Validation errors:\n', report.results)
 
   // Modify content
-  const perPage = model.findById(
-    'http://a.ml/amf/default_document#/web-api/end-points/%2Fitems/get/request/parameter/per_page')
+  const perPage = resolved.encodes.endPoints[0].operations[0].request.queryParameters[1]
   perPage.schema.withMaximum(100)
 
   const generated = await wap.raml08.generateString(model)
