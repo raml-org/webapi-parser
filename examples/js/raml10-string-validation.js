@@ -1,6 +1,6 @@
 const wap = require('webapi-parser').WebApiParser
 
-const ramlStr = `
+const invalidRaml = `
   #%RAML 1.0
   title: API with Types
   types:
@@ -34,8 +34,7 @@ const ramlStr = `
 `
 
 async function main () {
-  const model = await wap.raml10.parseString(ramlStr)
-  // const resolved = await wap.raml10.resolve(model)
+  const model = await wap.raml10.parseString(invalidRaml)
   const report = await wap.raml10.validate(model)
   console.log('Validation errors:\n', report.results)
 }
