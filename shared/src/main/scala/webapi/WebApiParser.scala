@@ -3,6 +3,7 @@ package webapi
 import amf.{Core, MessageStyles, ProfileNames}
 import amf.plugins.document.{WebApi}
 import amf.plugins.document.webapi.validation.PayloadValidatorPlugin
+import amf.plugins.features.AMFValidation
 import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
@@ -25,6 +26,7 @@ object WebApiParser {
     } else {
       initialized = true
       WebApi.register()
+      AMFValidation.register()
       amf.Core.registerPlugin(PayloadValidatorPlugin)
       amf.Core.init()
     }

@@ -20,6 +20,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   aggregate in assembly := false,
   libraryDependencies ++= Seq(
     "com.github.amlorg" %%% "amf-webapi" % "3.0.0",
+    "com.github.amlorg" %%% "amf-validation" % "3.0.0",
     "org.scalatest"     %%% "scalatest" % "3.0.5" % Test,
     "com.github.scopt"  %%% "scopt"     % "3.7.0"
   )
