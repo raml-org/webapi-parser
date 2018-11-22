@@ -1,8 +1,8 @@
 package co.acme.parse;
 
 import webapi.WebApiParser;
-import webapi.client.model.document.BaseUnit;
-import webapi.client.model.document.Document;
+import amf.client.model.document.BaseUnit;
+import amf.client.model.document.Document;
 
 import java.util.concurrent.ExecutionException;
 

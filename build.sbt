@@ -36,11 +36,10 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies += "org.scala-lang.modules" % "scala-java8-compat_2.12" % "0.8.0",
     libraryDependencies += "org.json4s"             %% "json4s-native"         % "3.5.4",
     libraryDependencies += "com.github.everit-org.json-schema" % "org.everit.json.schema" % "1.9.2",
-    artifactPath in (Compile, packageDoc) := baseDirectory.value / "target" / "artifact" / "webapi-parser-javadoc.jar"
-
+    artifactPath in (Compile, packageDoc) := baseDirectory.value / "target" / "artifact" / "webapi-parser-javadoc.jar",
     aggregate in assembly := true,
     test in assembly := {},
-    assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar"),
+    assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar")
   )
   .jsSettings(
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.2",
