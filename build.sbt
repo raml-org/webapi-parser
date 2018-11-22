@@ -19,8 +19,6 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   libraryDependencies ++= Seq(
     "com.github.amlorg" %%% "amf-webapi" % "3.0.0",
     "com.github.amlorg" %%% "amf-validation" % "3.0.0",
-    "org.scalatest"     %%% "scalatest" % "3.0.5" % Test,
-    "com.github.scopt"  %%% "scopt"     % "3.7.0"
   )
 )
 
@@ -39,7 +37,21 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
     artifactPath in (Compile, packageDoc) := baseDirectory.value / "target" / "artifact" / "webapi-parser-javadoc.jar",
     aggregate in assembly := true,
     test in assembly := {},
-    assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar")
+    assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar"),
+    assemblyMergeStrategy in assembly := {
+      case x if x.toString.contains("commons/logging") => {
+        MergeStrategy.discard
+      }
+      case x if x.toString.endsWith("JS_DEPENDENCIES") => {
+        MergeStrategy.discard
+      }
+      case PathList(ps @ _*) if ps.last endsWith "JS_DEPENDENCIES" => {
+        MergeStrategy.discard
+      }
+      case x =>
+        val oldStrategy = (assemblyMergeStrategy in assembly).value
+        oldStrategy(x)
+    }
   )
   .jsSettings(
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.2",
