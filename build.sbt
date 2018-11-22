@@ -8,7 +8,6 @@ name := "webapi-parser"
 version in ThisBuild := "0.0.1"
 
 publish := {}
-parallelExecution in ThisBuild := false
 
 jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv()
 
@@ -32,7 +31,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
 lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   .settings(name := "webapi-parser")
   .in(file("./"))
-  .settings(settings ++ (parallelExecution in ThisBuild := false) : _*)
+  .settings(settings)
   .jvmSettings(
     libraryDependencies += "org.scala-js"           %% "scalajs-stubs"          % scalaJSVersion % "provided",
     libraryDependencies += "org.scala-lang.modules" % "scala-java8-compat_2.12" % "0.8.0",
