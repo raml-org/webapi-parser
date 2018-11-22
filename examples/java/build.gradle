@@ -40,13 +40,10 @@ apply plugin: 'com.bmuschko.docker-java-application'
 
 dependencies {
     // Depend on locally built .jar file
-    compile files('libs/webapi-parser_2.12-0.0.1.jar')
+    compile files('libs/webapi-parser-0.0.1.jar')
 
     // Depend on Maven-published lib
     // compile group: 'com.github.ramlorg', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
-
-    // TODO: Remove when migrated to 'webapi-parser'
-    compile group: 'com.github.amlorg', name: 'amf-client_2.12', version: '3.0.2-SNAPSHOT', configuration: 'compile'
 }
 
 docker {
