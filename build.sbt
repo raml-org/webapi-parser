@@ -15,6 +15,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   organization := "com.github.ramlorg",
   resolvers ++= List(ivyLocal, Common.releases, Common.snapshots, Resolver.mavenLocal),
   resolvers += "jitpack" at "https://jitpack.io",
+  aggregate in assembly := false,
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "com.github.amlorg" %%% "amf-webapi" % "3.0.0",
@@ -67,7 +68,13 @@ lazy val webapiJS  = webapi.js.in(file("./js"))
 val buildJS = TaskKey[Unit](
   "buildJS",
   "Build npm module")
+
 buildJS := {
   val _ = (fastOptJS in Compile in webapiJS).value
   "./build-scripts/buildjs.sh".!
 }
+
+addCommandAlias(
+  "assembleJvm",
+  "; clean; webapiJVM/assembly"
+)

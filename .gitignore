@@ -81,4 +81,4 @@ classes
 /examples/java/libs/*.jar
 
 # Fat jar
-./webapi-parser-*.jar
+./*.jar
