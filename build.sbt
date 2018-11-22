@@ -18,7 +18,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "com.github.amlorg" %%% "amf-webapi" % "3.0.0",
-    "com.github.amlorg" %%% "amf-validation" % "3.0.0",
+    "com.github.amlorg" %%% "amf-validation" % "3.0.0"
   )
 )
 
