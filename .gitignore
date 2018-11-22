@@ -79,3 +79,6 @@ classes
 # Ignore generated JS and .jar
 /js/module/webapi-parser.js
 /examples/java/libs/*.jar
+
+# Fat jar
+./webapi-parser-*.jar

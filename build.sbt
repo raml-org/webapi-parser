@@ -16,7 +16,6 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   resolvers ++= List(ivyLocal, Common.releases, Common.snapshots, Resolver.mavenLocal),
   resolvers += "jitpack" at "https://jitpack.io",
   credentials ++= Common.credentials(),
-  aggregate in assembly := false,
   libraryDependencies ++= Seq(
     "com.github.amlorg" %%% "amf-webapi" % "3.0.0",
     "com.github.amlorg" %%% "amf-validation" % "3.0.0",
@@ -38,6 +37,10 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
     libraryDependencies += "org.json4s"             %% "json4s-native"         % "3.5.4",
     libraryDependencies += "com.github.everit-org.json-schema" % "org.everit.json.schema" % "1.9.2",
     artifactPath in (Compile, packageDoc) := baseDirectory.value / "target" / "artifact" / "webapi-parser-javadoc.jar"
+
+    aggregate in assembly := true,
+    test in assembly := {},
+    assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar"),
   )
   .jsSettings(
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.9.2",
