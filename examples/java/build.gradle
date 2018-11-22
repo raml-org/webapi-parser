@@ -43,7 +43,7 @@ dependencies {
     compile files('libs/webapi-parser-0.0.1.jar')
 
     // Depend on Maven-published lib
-    // compile group: 'com.github.ramlorg', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
+    // compile group: 'com.github.amlorg', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
 }
 
 docker {
