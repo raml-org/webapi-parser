@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: API with Types
+types:
+  User:
+    type: object
+    properties:
+      firstName: string
+      lastName:  string
+      age:
+        type: integer
+        minimum: 0
+        maximum: 99
+        example: 123123
+    example:
+      firstName: John
+      lastName: 123
+      age: 127
+      foo: bar
+/users/{id}:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: User
+            example:
+              firstName: John
+              lastName: 123
+              age: 127
+              foo: bar

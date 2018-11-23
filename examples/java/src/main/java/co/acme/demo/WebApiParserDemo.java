@@ -8,10 +8,10 @@ import co.acme.generate.Raml10Generation;
 import co.acme.generate.Raml08Generation;
 import co.acme.generate.Oas20Generation;
 import co.acme.generate.AmfGraphGeneration;
-// import co.acme.validate.Raml10Validation;
-// import co.acme.validate.Raml08Validation;
-// import co.acme.validate.Oas20Validation;
-// import co.acme.validate.AmfGraphValidation;
+import co.acme.validate.Raml10Validation;
+import co.acme.validate.Raml08Validation;
+import co.acme.validate.Oas20Validation;
+import co.acme.validate.AmfGraphValidation;
 
 import java.util.concurrent.ExecutionException;
 
@@ -42,5 +42,10 @@ public class WebApiParserDemo {
 
     AmfGraphGeneration.generateString();
     AmfGraphGeneration.generateFile();
+
+    Raml10Validation.validate();
+    Raml08Validation.validate();
+    Oas20Validation.validate();
+    AmfGraphValidation.validate();
   }
 }
