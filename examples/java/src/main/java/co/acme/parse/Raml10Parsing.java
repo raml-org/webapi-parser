@@ -8,12 +8,10 @@ import java.util.concurrent.ExecutionException;
 
 public class Raml10Parsing {
 
-  // public static void parseFile() throws InterruptedException, ExecutionException {
-  //   AMF.init().get();
-
-  //   final BaseUnit result = new Raml10Parser().parseFileAsync("file://src/main/resources/examples/banking-api.raml").get();
-  //   System.out.println("Expected unit encoding webapi: " + ((Document) result).encodes());
-  // }
+  public static void parseFile() throws InterruptedException, ExecutionException {
+    final BaseUnit result = Raml10.parseFile("file://../api-specs/raml/api-with-types.raml").get();
+    System.out.println("Parsed Raml10 file. Expected unit encoding webapi: " + ((Document) result).encodes());
+  }
 
   public static void parseString() throws InterruptedException, ExecutionException {
     final BaseUnit result = Raml10.parseString(
@@ -21,6 +19,6 @@ public class Raml10Parsing {
             "\n" +
             "title: ACME Banking HTTP API\n" +
             "version: 1.0").get();
-    System.out.println("Expected unit encoding webapi: " + ((Document) result).encodes());
+    System.out.println("Parsed Raml10 string. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 }

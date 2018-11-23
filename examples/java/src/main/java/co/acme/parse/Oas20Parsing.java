@@ -1,39 +1,42 @@
-// package co.acme.parse;
+package co.acme.parse;
 
-// import amf.client.AMF;
-// import amf.client.model.document.BaseUnit;
-// import amf.client.model.document.Document;
-// import amf.client.parse.Oas20Parser;
+import webapi.Oas20;
+import amf.client.model.document.BaseUnit;
+import amf.client.model.document.Document;
 
-// import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutionException;
 
-// public class Oas20Parsing {
+public class Oas20Parsing {
 
-//   public static void parseFileWithFuture() throws InterruptedException, ExecutionException {
-//     //#oas-20-parse-file-future
-//     AMF.init().get();
+  public static void parseFile() throws InterruptedException, ExecutionException {
+    final BaseUnit result = Oas20.parseFile("file://../api-specs/oas/api-with-types.json").get();
+    System.out.println("Parsed Oas20 JSON file. Expected unit encoding webapi: " + ((Document) result).encodes());
+  }
 
-//     /* Parsing Oas 20 with specified file returning future. */
-//     final BaseUnit result = new Oas20Parser().parseFileAsync("file://src/main/resources/examples/banking-api.json").get();
-//     System.out.println("Expected unit encoding webapi: " + ((Document) result).encodes());
-//     //#oas-20-parse-file-future
-//   }
+  public static void parseString() throws InterruptedException, ExecutionException {
+    final BaseUnit result = Oas20.parseString(
+            "{\n" +
+            "  \"swagger\": \"2.0\",\n" +
+            "  \"info\": {\n" +
+            "    \"title\": \"ACME Banking HTTP API\",\n" +
+            "    \"version\": \"1.0\"\n" +
+            "  },\n" +
+            "  \"host\": \"acme-banking.com\"" +
+            "}").get();
+    System.out.println("Parsed Oas20 JSON string. Expected unit encoding webapi: " + ((Document) result).encodes());
+  }
 
-//   public static void parseStringWithFuture() throws InterruptedException, ExecutionException {
-//     //#oas-20-parse-string-future
-//     AMF.init().get();
+  public static void parseYamlFile() throws InterruptedException, ExecutionException {
+    final BaseUnit result = Oas20.parseYamlFile("file://../api-specs/oas/api-with-types.yaml").get();
+    System.out.println("Parsed Oas20 YAML file. Expected unit encoding webapi: " + ((Document) result).encodes());
+  }
 
-//     /* Parsing Oas 20 with specified content. */
-//     final BaseUnit result = new Oas20Parser().parseStringAsync(
-//             "{\n" +
-//             "  \"swagger\": \"2.0\",\n" +
-//             "  \"info\": {\n" +
-//             "    \"title\": \"ACME Banking HTTP API\",\n" +
-//             "    \"version\": \"1.0\"\n" +
-//             "  },\n" +
-//             "  \"host\": \"acme-banking.com\"" +
-//             "}").get();
-//     System.out.println("Expected unit encoding webapi: " + ((Document) result).encodes());
-//     //#oas-20-parse-string-future
-//   }
-// }
+  public static void parseYamlString() throws InterruptedException, ExecutionException {
+    String oasYaml = "swagger: '2.0'\n" +
+        "info:\n" +
+          "title: API with Types\n" +
+          "version: ''";
+    final BaseUnit result = Oas20.parseYamlString(oasYaml).get();
+    System.out.println("Parsed Oas20 YAML string. Expected unit encoding webapi: " + ((Document) result).encodes());
+  }
+}
