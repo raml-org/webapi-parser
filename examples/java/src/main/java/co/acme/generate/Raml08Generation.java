@@ -10,8 +10,11 @@ public class Raml08Generation {
   public static void generateFile() throws InterruptedException, ExecutionException {
     final BaseUnit result = Raml08.parseFile("file://../api-specs/raml/magic-api.raml").get();
 
+    // Optional step
+    final BaseUnit resolved = Raml08.resolve(result).get();
+
     String fpath = "file://generated.raml";
-    Raml08.generateFile(result, fpath).get();
+    Raml08.generateFile(resolved, fpath).get();
     System.out.println("Generating Raml08 file at: " + fpath);
   }
 

@@ -10,8 +10,11 @@ public class AmfGraphGeneration {
   public static void generateFile() throws InterruptedException, ExecutionException {
     final BaseUnit result = AmfGraph.parseFile("file://../api-specs/amf-graph/api-with-types.json").get();
 
+    // Optional step
+    final BaseUnit resolved = AmfGraph.resolve(result).get();
+
     String fpath = "file://generated.json";
-    AmfGraph.generateFile(result, fpath).get();
+    AmfGraph.generateFile(resolved, fpath).get();
     System.out.println("Generating AmfGraph file at: " + fpath);
   }
 

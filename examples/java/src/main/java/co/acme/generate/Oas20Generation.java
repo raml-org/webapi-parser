@@ -10,8 +10,11 @@ public class Oas20Generation {
   public static void generateFile() throws InterruptedException, ExecutionException {
     final BaseUnit result = Oas20.parseFile("file://../api-specs/oas/api-with-types.json").get();
 
+    // Optional step
+    final BaseUnit resolved = Oas20.resolve(result).get();
+
     String fpath = "file://generated.json";
-    Oas20.generateFile(result, fpath).get();
+    Oas20.generateFile(resolved, fpath).get();
     System.out.println("Generating Oas20 file at: " + fpath);
   }
 
