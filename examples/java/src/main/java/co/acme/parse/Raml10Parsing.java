@@ -1,6 +1,6 @@
 package co.acme.parse;
 
-import webapi.WebApiParser;
+import webapi.Raml10;
 import amf.client.model.document.BaseUnit;
 import amf.client.model.document.Document;
 
@@ -16,7 +16,7 @@ public class Raml10Parsing {
   // }
 
   public static void parseString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = WebApiParser.Raml10.parseString(
+    final BaseUnit result = Raml10.parseString(
             "#%RAML 1.0\n" +
             "\n" +
             "title: ACME Banking HTTP API\n" +

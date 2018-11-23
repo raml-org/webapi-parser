@@ -38,189 +38,189 @@ object WebApiParser {
       result <- func()
     } yield (result)
   }
+}
 
-  @JSExportAll
-  @JSExportTopLevel("WebApiParser.raml10")
-  object Raml10 {
-    def parseFile(url: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Raml10Parser().parseFileAsync(url).asInternal
-      }).asClient
-    }
-
-    def parseString(content: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Raml10Parser().parseStringAsync(content).asInternal
-      }).asClient
-    }
-
-    def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      chainAfterInit(() => {
-        new Raml10Renderer().generateFile(model, url).asInternal
-      }).asClient
-    }
-
-    def generateString(model: BaseUnit): ClientFuture[String] = {
-      chainAfterInit(() => {
-        new Raml10Renderer().generateString(model).asInternal
-      }).asClient
-    }
-
-    def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      chainAfterInit(() => {
-        Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML).asInternal
-      }).asClient
-    }
-
-    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        Future {
-          val resolved: InternalBaseUnit = new Raml10Resolver().resolve(model)
-          resolved
-        }
-      }).asClient
-    }
+@JSExportAll
+@JSExportTopLevel("WebApiParser.raml10")
+object Raml10 {
+  def parseFile(url: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml10Parser().parseFileAsync(url).asInternal
+    }).asClient
   }
 
-  @JSExportAll
-  @JSExportTopLevel("WebApiParser.raml08")
-  object Raml08 {
-    def parseFile(url: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Raml08Parser().parseFileAsync(url).asInternal
-      }).asClient
-    }
-
-    def parseString(content: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Raml08Parser().parseStringAsync(content).asInternal
-      }).asClient
-    }
-
-    def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      chainAfterInit(() => {
-        new Raml08Renderer().generateFile(model, url).asInternal
-      }).asClient
-    }
-
-    def generateString(model: BaseUnit): ClientFuture[String] = {
-      chainAfterInit(() => {
-        new Raml08Renderer().generateString(model).asInternal
-      }).asClient
-    }
-
-    def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      chainAfterInit(() => {
-        Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML).asInternal
-      }).asClient
-    }
-
-    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        Future {
-          val resolved: InternalBaseUnit = new Raml08Resolver().resolve(model)
-          resolved
-        }
-      }).asClient
-    }
+  def parseString(content: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml10Parser().parseStringAsync(content).asInternal
+    }).asClient
   }
 
-  @JSExportAll
-  @JSExportTopLevel("WebApiParser.oas20")
-  object Oas20 {
-    def parseFile(url: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Oas20Parser().parseFileAsync(url).asInternal
-      }).asClient
-    }
-
-    def parseString(content: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Oas20Parser().parseStringAsync(content).asInternal
-      }).asClient
-    }
-
-    def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      chainAfterInit(() => {
-        new Oas20Renderer().generateFile(model, url).asInternal
-      }).asClient
-    }
-
-    def generateString(model: BaseUnit): ClientFuture[String] = {
-      chainAfterInit(() => {
-        new Oas20Renderer().generateString(model).asInternal
-      }).asClient
-    }
-
-    def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      chainAfterInit(() => {
-        Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS).asInternal
-      }).asClient
-    }
-
-    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        Future {
-          val resolved: InternalBaseUnit = new Oas20Resolver().resolve(model)
-          resolved
-        }
-      }).asClient
-    }
-
-    // Specific to Oas20 object
-    def parseYamlFile(url: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Oas20YamlParser().parseFileAsync(url).asInternal
-      }).asClient
-    }
-
-    def parseYamlString(content: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new Oas20YamlParser().parseStringAsync(content).asInternal
-      }).asClient
-    }
+  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml10Renderer().generateFile(model, url).asInternal
+    }).asClient
   }
 
-  @JSExportAll
-  @JSExportTopLevel("WebApiParser.amfGraph")
-  object AmfGraph {
-    def parseFile(url: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new AmfGraphParser().parseFileAsync(url).asInternal
-      }).asClient
-    }
+  def generateString(model: BaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml10Renderer().generateString(model).asInternal
+    }).asClient
+  }
 
-    def parseString(content: String): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        new AmfGraphParser().parseStringAsync(content).asInternal
-      }).asClient
-    }
+  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+    WebApiParser.chainAfterInit(() => {
+      Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML).asInternal
+    }).asClient
+  }
 
-    def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
-      chainAfterInit(() => {
-        new AmfGraphRenderer().generateFile(model, url).asInternal
-      }).asClient
-    }
+  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      Future {
+        val resolved: InternalBaseUnit = new Raml10Resolver().resolve(model)
+        resolved
+      }
+    }).asClient
+  }
+}
 
-    def generateString(model: BaseUnit): ClientFuture[String] = {
-      chainAfterInit(() => {
-        new AmfGraphRenderer().generateString(model).asInternal
-      }).asClient
-    }
+@JSExportAll
+@JSExportTopLevel("WebApiParser.raml08")
+object Raml08 {
+  def parseFile(url: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml08Parser().parseFileAsync(url).asInternal
+    }).asClient
+  }
 
-    def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
-      chainAfterInit(() => {
-        Core.validate(model, ProfileNames.AMF, MessageStyles.AMF).asInternal
-      }).asClient
-    }
+  def parseString(content: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml08Parser().parseStringAsync(content).asInternal
+    }).asClient
+  }
 
-    def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
-      chainAfterInit(() => {
-        Future {
-          val resolved: InternalBaseUnit = new AmfGraphResolver().resolve(model)
-          resolved
-        }
-      }).asClient
-    }
+  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml08Renderer().generateFile(model, url).asInternal
+    }).asClient
+  }
+
+  def generateString(model: BaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml08Renderer().generateString(model).asInternal
+    }).asClient
+  }
+
+  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+    WebApiParser.chainAfterInit(() => {
+      Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML).asInternal
+    }).asClient
+  }
+
+  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      Future {
+        val resolved: InternalBaseUnit = new Raml08Resolver().resolve(model)
+        resolved
+      }
+    }).asClient
+  }
+}
+
+@JSExportAll
+@JSExportTopLevel("WebApiParser.oas20")
+object Oas20 {
+  def parseFile(url: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20Parser().parseFileAsync(url).asInternal
+    }).asClient
+  }
+
+  def parseString(content: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20Parser().parseStringAsync(content).asInternal
+    }).asClient
+  }
+
+  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20Renderer().generateFile(model, url).asInternal
+    }).asClient
+  }
+
+  def generateString(model: BaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20Renderer().generateString(model).asInternal
+    }).asClient
+  }
+
+  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+    WebApiParser.chainAfterInit(() => {
+      Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS).asInternal
+    }).asClient
+  }
+
+  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      Future {
+        val resolved: InternalBaseUnit = new Oas20Resolver().resolve(model)
+        resolved
+      }
+    }).asClient
+  }
+
+  // Specific to Oas20 object
+  def parseYamlFile(url: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20YamlParser().parseFileAsync(url).asInternal
+    }).asClient
+  }
+
+  def parseYamlString(content: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20YamlParser().parseStringAsync(content).asInternal
+    }).asClient
+  }
+}
+
+@JSExportAll
+@JSExportTopLevel("WebApiParser.amfGraph")
+object AmfGraph {
+  def parseFile(url: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new AmfGraphParser().parseFileAsync(url).asInternal
+    }).asClient
+  }
+
+  def parseString(content: String): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new AmfGraphParser().parseStringAsync(content).asInternal
+    }).asClient
+  }
+
+  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new AmfGraphRenderer().generateFile(model, url).asInternal
+    }).asClient
+  }
+
+  def generateString(model: BaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new AmfGraphRenderer().generateString(model).asInternal
+    }).asClient
+  }
+
+  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+    WebApiParser.chainAfterInit(() => {
+      Core.validate(model, ProfileNames.AMF, MessageStyles.AMF).asInternal
+    }).asClient
+  }
+
+  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      Future {
+        val resolved: InternalBaseUnit = new AmfGraphResolver().resolve(model)
+        resolved
+      }
+    }).asClient
   }
 }
