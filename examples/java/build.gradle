@@ -30,43 +30,15 @@ buildscript {
             url 'https://plugins.gradle.org/m2/'
         }
     }
-    dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:3.0.8'
-    }
 }
-
-apply plugin: 'com.bmuschko.docker-remote-api'
-apply plugin: 'com.bmuschko.docker-java-application'
 
 dependencies {
     // Depend on locally built .jar file
     compile files('libs/webapi-parser-0.0.1.jar')
 
     // Depend on Maven-published lib
+    // Uncomment when "webapi-parser" is published
     // compile group: 'com.github.amlorg', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
-}
-
-docker {
-    javaApplication {
-        baseImage = 'devdocker.mulesoft.com:18078/base/java:8-1.5.1-rc.4-4-g1b5d4ef'
-        maintainer = 'mulesoft.com'
-        ports = [8080]
-
-        tag = "$System.env.DOCKER_REGISTRY/$System.env.DOCKER_IMAGE_NAME:$System.env.TAG_VERSION"
-
-        registryCredentials {
-            url = "$System.env.DOCKER_REGISTRY"
-            username = "$System.env.DOCKER_USER"
-            password = "$System.env.DOCKER_PASS"
-            email = "$System.env.DOCKER_EMAIL"
-        }
-    }
-}
-
-
-task valkyrPublish {
-    println "Will publish: $System.env.DOCKER_REGISTRY/$System.env.DOCKER_IMAGE_NAME:$System.env.TAG_VERSION"
-    dependsOn dockerPushImage
 }
 
 task valkyrTest {
