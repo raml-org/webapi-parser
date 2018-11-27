@@ -3,7 +3,7 @@ const path = require('path')
 
 async function main () {
   const inPath = path.join(__dirname, '../api-specs/oas/api-with-types.yaml')
-  const model = await wap.oas20.parseYamlFile(`file://${inPath}`)
+  const model = await wap.oas20.parseYaml(`file://${inPath}`)
 
   const report = await wap.oas20.validate(model)
   console.log('Validation errors:\n', report.results)

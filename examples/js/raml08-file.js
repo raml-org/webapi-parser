@@ -3,7 +3,7 @@ const path = require('path')
 
 async function main () {
   const inPath = path.join(__dirname, '../api-specs/raml/magic-api.raml')
-  const model = await wap.raml08.parseFile(`file://${inPath}`)
+  const model = await wap.raml08.parse(`file://${inPath}`)
   const resolved = await wap.raml08.resolve(model)
 
   const report = await wap.raml08.validate(resolved)

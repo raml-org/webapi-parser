@@ -23,7 +23,7 @@ const ramlStr = `
 `
 
 async function main () {
-  const model = await wap.raml10.parseString(ramlStr)
+  const model = await wap.raml10.parse(ramlStr)
 
   // Modify content
   const age = model.declares[0].properties[2]

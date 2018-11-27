@@ -3,7 +3,7 @@ const path = require('path')
 
 async function main () {
   const inPath = path.join(__dirname, '../api-specs/raml/api-with-types.raml')
-  const model = await wap.raml10.parseFile(`file://${inPath}`)
+  const model = await wap.raml10.parse(`file://${inPath}`)
 
   const report = await wap.raml10.validate(model)
   console.log('Validation errors:\n', report.results)

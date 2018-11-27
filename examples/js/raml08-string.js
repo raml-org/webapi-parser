@@ -16,7 +16,7 @@ const ramlStr = `
 `
 
 async function main () {
-  const model = await wap.raml08.parseString(ramlStr)
+  const model = await wap.raml08.parse(ramlStr)
   const resolved = await wap.raml08.resolve(model)
   const report = await wap.raml08.validate(model)
   console.log('Validation errors:\n', report.results)

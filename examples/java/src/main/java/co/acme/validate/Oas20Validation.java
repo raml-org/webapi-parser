@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
 public class Oas20Validation {
 
   public static void validate() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Oas20.parseFile("file://../api-specs/oas/api-with-types-invalid.json").get();
+    final BaseUnit result = Oas20.parse("file://../api-specs/oas/api-with-types-invalid.json").get();
 
     final ValidationReport report = Oas20.validate(result).get();
     System.out.println("Oas20 validation report: " + report);

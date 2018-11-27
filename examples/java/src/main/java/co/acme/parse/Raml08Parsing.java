@@ -9,12 +9,12 @@ import java.util.concurrent.ExecutionException;
 public class Raml08Parsing {
 
   public static void parseFile() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Raml08.parseFile("file://../api-specs/raml/magic-api.raml").get();
+    final BaseUnit result = Raml08.parse("file://../api-specs/raml/magic-api.raml").get();
     System.out.println("Parsed Raml08 file. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 
   public static void parseString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Raml08.parseString(
+    final BaseUnit result = Raml08.parse(
             "#%RAML 0.8\n" +
             "\n" +
             "title: ACME Banking HTTP API\n" +

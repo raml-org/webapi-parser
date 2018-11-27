@@ -34,7 +34,7 @@ const invalidRaml = `
 `
 
 async function main () {
-  const model = await wap.raml10.parseString(invalidRaml)
+  const model = await wap.raml10.parse(invalidRaml)
   const report = await wap.raml10.validate(model)
   console.log('Validation errors:\n', report.results)
 }

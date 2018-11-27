@@ -4,7 +4,7 @@ const path = require('path')
 async function main () {
   const inPath = path.join(__dirname, '../api-specs/amf-graph/api-with-types.json')
 
-  const model = await wap.amfGraph.parseFile(`file://${inPath}`)
+  const model = await wap.amfGraph.parse(`file://${inPath}`)
   const report = await wap.amfGraph.validate(model)
   console.log('Validation errors:\n', report.results)
 

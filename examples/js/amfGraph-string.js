@@ -6,7 +6,7 @@ async function main () {
   const inPath = path.join(__dirname, '../api-specs/amf-graph/api-with-types.json')
   const graphStr = JSON.stringify(JSON.parse(fs.readFileSync(inPath)))
 
-  const model = await wap.amfGraph.parseString(graphStr)
+  const model = await wap.amfGraph.parse(graphStr)
   const report = await wap.amfGraph.validate(model)
   console.log('Validation errors:\n', report.results)
 

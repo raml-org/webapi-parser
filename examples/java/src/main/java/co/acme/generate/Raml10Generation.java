@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 public class Raml10Generation {
 
   public static void generateFile() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Raml10.parseFile("file://../api-specs/raml/api-with-types.raml").get();
+    final BaseUnit result = Raml10.parse("file://../api-specs/raml/api-with-types.raml").get();
 
     // Optional step
     final BaseUnit resolved = Raml10.resolve(result).get();
@@ -19,7 +19,7 @@ public class Raml10Generation {
   }
 
   public static void generateString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Raml10.parseFile("file://../api-specs/raml/api-with-types.raml").get();
+    final BaseUnit result = Raml10.parse("file://../api-specs/raml/api-with-types.raml").get();
 
     final String output = Raml10.generateString(result).get();
     System.out.println("Generating Raml10 string: " + output);

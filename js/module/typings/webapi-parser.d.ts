@@ -5,9 +5,7 @@ declare module "webapi-parser" {
     namespace WebApiParser {
 
         export class raml10 {
-            static parseFile(url: string): Promise<amf.model.document.BaseUnit>
-
-            static parseString(content: string): Promise<amf.model.document.BaseUnit>
+            static parse(inp: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
@@ -19,9 +17,7 @@ declare module "webapi-parser" {
         }
 
         export class raml08 {
-            static parseFile(url: string): Promise<amf.model.document.BaseUnit>
-
-            static parseString(content: string): Promise<amf.model.document.BaseUnit>
+            static parse(inp: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
@@ -33,9 +29,7 @@ declare module "webapi-parser" {
         }
 
         export class oas20 {
-            static parseFile(url: string): Promise<amf.model.document.BaseUnit>
-
-            static parseString(content: string): Promise<amf.model.document.BaseUnit>
+            static parse(inp: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
@@ -45,15 +39,11 @@ declare module "webapi-parser" {
 
             static resolve(model: amf.model.document.BaseUnit): Promise<amf.model.document.BaseUnit>
 
-            static parseYamlFile(url: string): Promise<amf.model.document.BaseUnit>
-
-            static parseYamlString(content: string): Promise<amf.model.document.BaseUnit>
+            static parseYaml(inp: string): Promise<amf.model.document.BaseUnit>
         }
 
         export class amfGraph {
-            static parseFile(url: string): Promise<amf.model.document.BaseUnit>
-
-            static parseString(content: string): Promise<amf.model.document.BaseUnit>
+            static parse(inp: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 

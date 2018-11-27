@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
 public class Raml10Validation {
 
   public static void validate() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Raml10.parseFile("file://../api-specs/raml/invalid-examples.raml").get();
+    final BaseUnit result = Raml10.parse("file://../api-specs/raml/invalid-examples.raml").get();
 
     final ValidationReport report = Raml10.validate(result).get();
     System.out.println("Raml10 validation report: " + report);

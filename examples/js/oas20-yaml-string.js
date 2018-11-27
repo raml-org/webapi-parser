@@ -40,7 +40,7 @@ const oas20Str = `
 `
 
 async function main () {
-  const model = await wap.oas20.parseYamlString(oas20Str)
+  const model = await wap.oas20.parseYaml(oas20Str)
   const report = await wap.oas20.validate(model)
   console.log('Validation errors:\n', report.results)
 

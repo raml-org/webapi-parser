@@ -9,12 +9,12 @@ import java.util.concurrent.ExecutionException;
 public class AmfGraphParsing {
 
   public static void parseFile() throws InterruptedException, ExecutionException {
-    final BaseUnit result = AmfGraph.parseFile("file://../api-specs/amf-graph/api-with-types.json").get();
+    final BaseUnit result = AmfGraph.parse("file://../api-specs/amf-graph/api-with-types.json").get();
     System.out.println("Parsed AMF Graph file. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 
   public static void parseString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = AmfGraph.parseString(
+    final BaseUnit result = AmfGraph.parse(
             "[\n" +
                     "  {\n" +
                     "    \"@id\": \"\",\n" +

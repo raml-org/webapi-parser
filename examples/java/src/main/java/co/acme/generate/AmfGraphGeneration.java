@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 public class AmfGraphGeneration {
 
   public static void generateFile() throws InterruptedException, ExecutionException {
-    final BaseUnit result = AmfGraph.parseFile("file://../api-specs/amf-graph/api-with-types.json").get();
+    final BaseUnit result = AmfGraph.parse("file://../api-specs/amf-graph/api-with-types.json").get();
 
     // Optional step
     final BaseUnit resolved = AmfGraph.resolve(result).get();
@@ -19,7 +19,7 @@ public class AmfGraphGeneration {
   }
 
   public static void generateString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = AmfGraph.parseFile("file://../api-specs/amf-graph/api-with-types.json").get();
+    final BaseUnit result = AmfGraph.parse("file://../api-specs/amf-graph/api-with-types.json").get();
 
     final String output = AmfGraph.generateString(result).get();
     System.out.println("Generating AmfGraph string: " + output);

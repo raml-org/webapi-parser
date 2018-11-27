@@ -32,6 +32,10 @@ object WebApiParser {
     }
   }
 
+  def isPath(inp: String): Boolean = {
+    (inp.startsWith("http://") || inp.startsWith("https://") || inp.startsWith("file:"))
+  }
+
   def chainAfterInit[T](func: () => Future[T]): Future[T] = {
     for {
       _ <- init().asInternal
@@ -43,15 +47,13 @@ object WebApiParser {
 @JSExportAll
 @JSExportTopLevel("WebApiParser.raml10")
 object Raml10 {
-  def parseFile(url: String): ClientFuture[BaseUnit] = {
+  def parse(inp: String): ClientFuture[BaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Raml10Parser().parseFileAsync(url).asInternal
-    }).asClient
-  }
-
-  def parseString(content: String): ClientFuture[BaseUnit] = {
-    WebApiParser.chainAfterInit(() => {
-      new Raml10Parser().parseStringAsync(content).asInternal
+      if(WebApiParser.isPath(inp)) {
+        new Raml10Parser().parseFileAsync(inp).asInternal
+      } else {
+        new Raml10Parser().parseStringAsync(inp).asInternal
+      }
     }).asClient
   }
 
@@ -86,15 +88,13 @@ object Raml10 {
 @JSExportAll
 @JSExportTopLevel("WebApiParser.raml08")
 object Raml08 {
-  def parseFile(url: String): ClientFuture[BaseUnit] = {
+  def parse(inp: String): ClientFuture[BaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Raml08Parser().parseFileAsync(url).asInternal
-    }).asClient
-  }
-
-  def parseString(content: String): ClientFuture[BaseUnit] = {
-    WebApiParser.chainAfterInit(() => {
-      new Raml08Parser().parseStringAsync(content).asInternal
+      if(WebApiParser.isPath(inp)) {
+        new Raml08Parser().parseFileAsync(inp).asInternal
+      } else {
+        new Raml08Parser().parseStringAsync(inp).asInternal
+      }
     }).asClient
   }
 
@@ -129,15 +129,13 @@ object Raml08 {
 @JSExportAll
 @JSExportTopLevel("WebApiParser.oas20")
 object Oas20 {
-  def parseFile(url: String): ClientFuture[BaseUnit] = {
+  def parse(inp: String): ClientFuture[BaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas20Parser().parseFileAsync(url).asInternal
-    }).asClient
-  }
-
-  def parseString(content: String): ClientFuture[BaseUnit] = {
-    WebApiParser.chainAfterInit(() => {
-      new Oas20Parser().parseStringAsync(content).asInternal
+      if(WebApiParser.isPath(inp)) {
+        new Oas20Parser().parseFileAsync(inp).asInternal
+      } else {
+        new Oas20Parser().parseStringAsync(inp).asInternal
+      }
     }).asClient
   }
 
@@ -168,16 +166,13 @@ object Oas20 {
     }).asClient
   }
 
-  // Specific to Oas20 object
-  def parseYamlFile(url: String): ClientFuture[BaseUnit] = {
+  def parseYaml(inp: String): ClientFuture[BaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas20YamlParser().parseFileAsync(url).asInternal
-    }).asClient
-  }
-
-  def parseYamlString(content: String): ClientFuture[BaseUnit] = {
-    WebApiParser.chainAfterInit(() => {
-      new Oas20YamlParser().parseStringAsync(content).asInternal
+      if(WebApiParser.isPath(inp)) {
+        new Oas20YamlParser().parseFileAsync(inp).asInternal
+      } else {
+        new Oas20YamlParser().parseStringAsync(inp).asInternal
+      }
     }).asClient
   }
 }
@@ -185,15 +180,13 @@ object Oas20 {
 @JSExportAll
 @JSExportTopLevel("WebApiParser.amfGraph")
 object AmfGraph {
-  def parseFile(url: String): ClientFuture[BaseUnit] = {
+  def parse(inp: String): ClientFuture[BaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new AmfGraphParser().parseFileAsync(url).asInternal
-    }).asClient
-  }
-
-  def parseString(content: String): ClientFuture[BaseUnit] = {
-    WebApiParser.chainAfterInit(() => {
-      new AmfGraphParser().parseStringAsync(content).asInternal
+      if(WebApiParser.isPath(inp)) {
+        new AmfGraphParser().parseFileAsync(inp).asInternal
+      } else {
+        new AmfGraphParser().parseStringAsync(inp).asInternal
+      }
     }).asClient
   }
 
