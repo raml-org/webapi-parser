@@ -1,6 +1,10 @@
-# Generating TypeDoc docs
+## Notes
 
-Note: For this to work, [this PR](https://github.com/aml-org/amf/pull/411) needs to merged first because `amf-client-js` typings are incorrect.
+1. For this to work, [this PR](https://github.com/aml-org/amf/pull/411) needs to merged first because `amf-client-js` typings are incorrect.
+
+2. Because if [this issue](https://github.com/TypeStrong/typedoc/issues/319) it's currently only possible to include or exclude ALL lib dependencies from typedoc generation. When generating docs with dependencies, it's possible to navigate to `amf-client-js` model API docs from `webapi-parser` API docs.
+
+## Generating TypeDoc docs
 
 1. Install dependencies:
 
@@ -25,8 +29,15 @@ $ npm install $types/amf-client-js
 3. Generate docs:
 
 ```sh
-$ ./node_modules/typedoc/bin/typedoc --out ./docs/ ./typings/webapi-parser.d.ts --includeDeclarations
+$ ./node_modules/typedoc/bin/typedoc --out ./docs/ ./typings/webapi-parser.d.ts --includeDeclarations --excludeExternals --externalPattern "**/node_modules/**" --mode file
 ```
+
+Or with external libs:
+
+```sh
+$ ./node_modules/typedoc/bin/typedoc --out ./docs/ ./typings/webapi-parser.d.ts --includeDeclarations --mode file
+```
+
 
 4. Open docs in browser:
 
@@ -37,11 +48,5 @@ $ browse ./docs/index.html
 Or go straight to `webapi-parser` module doc:
 
 ```sh
-$ browse ./docs/modules/_typings_webapi_parser_d_.html
-```
-
-Or to `amf-client-js` docs:
-
-```sh
-$ browse ./docs/modules/_node_modules_amf_client_js_typings_amf_client_js_d_._amf_client_js_.html
+$ browse ./docs/modules/_webapi_parser_.html
 ```
