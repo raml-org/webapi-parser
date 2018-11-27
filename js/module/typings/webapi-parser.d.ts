@@ -5,7 +5,7 @@ declare module "webapi-parser" {
     namespace WebApiParser {
 
         export class raml10 {
-            static parse(inp: string): Promise<amf.model.document.BaseUnit>
+            static parse(urlOrContent: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
@@ -17,7 +17,7 @@ declare module "webapi-parser" {
         }
 
         export class raml08 {
-            static parse(inp: string): Promise<amf.model.document.BaseUnit>
+            static parse(urlOrContent: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
@@ -29,7 +29,7 @@ declare module "webapi-parser" {
         }
 
         export class oas20 {
-            static parse(inp: string): Promise<amf.model.document.BaseUnit>
+            static parse(urlOrContent: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
@@ -39,11 +39,11 @@ declare module "webapi-parser" {
 
             static resolve(model: amf.model.document.BaseUnit): Promise<amf.model.document.BaseUnit>
 
-            static parseYaml(inp: string): Promise<amf.model.document.BaseUnit>
+            static parseYaml(urlOrContent: string): Promise<amf.model.document.BaseUnit>
         }
 
         export class amfGraph {
-            static parse(inp: string): Promise<amf.model.document.BaseUnit>
+            static parse(urlOrContent: string): Promise<amf.model.document.BaseUnit>
 
             static generateFile(model: amf.model.document.BaseUnit, url: string): Promise<void>
 
