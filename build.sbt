@@ -23,6 +23,21 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   )
 )
 
+lazy val Javadoc = config("genjavadoc") extend Compile
+
+lazy val javadocSettings = inConfig(Javadoc)(Defaults.configSettings) ++ Seq(
+  scalaVersion := "2.12.6",
+  addCompilerPlugin("com.typesafe.genjavadoc" %% "genjavadoc-plugin" % "0.11" cross CrossVersion.full),
+  scalacOptions += s"-P:genjavadoc:out=${target.value}/java",
+  packageDoc in Compile := (packageDoc in Javadoc).value,
+  sources in Javadoc :=
+    (target.value / "java" ** "*.java").get ++
+    (sources in Compile).value.filter(_.getName.endsWith(".java")),
+  javacOptions in Javadoc := Seq(),
+  artifactName in packageDoc in Javadoc := ((sv, mod, art) =>
+    "" + mod.name + "_" + sv.binary + "-" + mod.revision + "-javadoc.jar")
+)
+
 /** **********************************************
   * WebAPI-Parser
   ********************************************** */
@@ -30,9 +45,10 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   .settings(name := "webapi-parser")
   .in(file("./"))
   .settings(settings)
+  .configs(Javadoc)
+  .settings(javadocSettings: _*)
   .jvmSettings(
     libraryDependencies += "org.scala-js"           %% "scalajs-stubs"          % scalaJSVersion % "provided",
-    artifactPath in (Compile, packageDoc) := baseDirectory.value / "target" / "artifact" / "webapi-parser-javadoc.jar",
     aggregate in assembly := true,
     test in assembly := {},
     assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar"),
@@ -70,10 +86,15 @@ buildJS := {
   "./build-scripts/buildjs.sh".!
 }
 
-
 // Assemble .jar containing all dependencies. Can be used as local jar dependency in
 // another projects.
 addCommandAlias(
   "assembleFatJar",
   "; clean; webapiJVM/assembly"
+)
+
+// Generate Java source from Scala source and javadocs for them. Uses "genjavadoc".
+addCommandAlias(
+  "generateJavadocs",
+  "; clean; webapiJVM/genjavadoc:doc; webapiJVM/packageDoc"
 )
