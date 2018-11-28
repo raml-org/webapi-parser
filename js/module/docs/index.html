@@ -63,9 +63,11 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h2 id="notes">Notes</h2>
-				<p>Notes:</p>
 				<ol>
-					<li>For this to work, <a href="https://github.com/aml-org/amf/pull/411">this PR</a> needs to merged first because <code>amf-client-js</code> typings are incorrect.</li>
+					<li><p>For this to work, <a href="https://github.com/aml-org/amf/pull/411">this PR</a> needs to merged first because <code>amf-client-js</code> typings are incorrect.</p>
+					</li>
+					<li><p>Because if <a href="https://github.com/TypeStrong/typedoc/issues/319">this issue</a> it&#39;s currently only possible to include or exclude ALL lib dependencies from typedoc generation. When generating docs with dependencies, it&#39;s possible to navigate to <code>amf-client-js</code> model API docs from <code>webapi-parser</code> API docs.</p>
+					</li>
 				</ol>
 				<h2 id="generating-typedoc-docs">Generating TypeDoc docs</h2>
 				<ol>
@@ -91,11 +93,7 @@ $ cp ./node_modules/amf-client-js/typings/amf-client-js.d.ts ./node_modules/@typ
 				</ol>
 				<pre><code class="language-sh">$ browse ./docs/index.html</code></pre>
 				<p>Or go straight to <code>webapi-parser</code> module doc:</p>
-				<pre><code class="language-sh">$ browse ./docs/modules/_typings_webapi_parser_d_.html</code></pre>
-				<p>Or to <code>amf-client-js</code> docs:</p>
-				<pre><code class="language-sh">$ browse ./docs/modules/_node_modules_amf_client_js_typings_amf_client_js_d_._amf_client_js_.html</code></pre>
-				<p>/node_modules/foo
-				/node_modules/bar</p>
+				<pre><code class="language-sh">$ browse ./docs/modules/_webapi_parser_.html</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
