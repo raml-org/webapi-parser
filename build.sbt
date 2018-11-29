@@ -13,7 +13,7 @@ jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv()
 
 val settings = Common.settings ++ Common.publish ++ Seq(
   organization := "com.github.amlorg",
-  resolvers ++= List(ivyLocal, Common.releases, Common.snapshots, Resolver.mavenLocal),
+  resolvers ++= List(ivyLocal, Resolver.mavenLocal),
   resolvers += "jitpack" at "https://jitpack.io",
   aggregate in assembly := false,
   credentials ++= Common.credentials(),
@@ -96,5 +96,5 @@ addCommandAlias(
 // Generate Java source from Scala source and javadocs for them. Uses "genjavadoc".
 addCommandAlias(
   "generateJavadocs",
-  "; clean; webapiJVM/genjavadoc:doc; webapiJVM/packageDoc"
+  "; webapiJVM/genjavadoc:doc; webapiJVM/packageDoc"
 )

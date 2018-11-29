@@ -1,0 +1,20 @@
+env:
+    - GPG_EXECUTABLE=gpg2
+before_install:
+    - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
+    - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
+deploy:
+    -
+        provider: script
+        script: bash publish-js.sh
+        skip_cleanup: true
+        on:
+            tags: true
+            branch: master
+    -
+        provider: script
+        script: bash publish-java.sh
+        skip_cleanup: true
+        on:
+            tags: true
+            branch: master
