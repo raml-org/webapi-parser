@@ -9,6 +9,7 @@ object Common {
     fork in Test := false,
     scalacOptions ++= Seq("-unchecked" /*, "-deprecation", "-Xfatal-warnings" */ ),
     scalacOptions ++= Seq("-encoding", "utf-8"),
+    useGpg := true,
     // POM settings for Sonatype
     homepage := Some(url("https://github.com/raml-org/webapi-parser")),
     scmInfo := Some(ScmInfo(url("https://github.com/raml-org/webapi-parser"),
