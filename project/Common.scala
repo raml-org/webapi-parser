@@ -8,18 +8,7 @@ object Common {
     parallelExecution in Test := false,
     fork in Test := false,
     scalacOptions ++= Seq("-unchecked" /*, "-deprecation", "-Xfatal-warnings" */ ),
-    scalacOptions ++= Seq("-encoding", "utf-8"),
-    useGpg := true,
-    // POM settings for Sonatype
-    homepage := Some(url("https://github.com/raml-org/webapi-parser")),
-    scmInfo := Some(ScmInfo(url("https://github.com/raml-org/webapi-parser"),
-                                "scm:git@github.com:raml-org/webapi-parser.git")),
-    developers := List(Developer("raml-org",
-                                 "Raml Org",
-                                 "user@raml.org",
-                                 url("https://github.com/raml-org"))),
-    licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
-    publishMavenStyle := true
+    scalacOptions ++= Seq("-encoding", "utf-8")
   )
 
   val publish: Seq[Def.Setting[_]] = Seq(
@@ -30,6 +19,24 @@ object Common {
       if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
       else Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
+    // POM settings for Sonatype
+    homepage := Some(url("https://github.com/raml-org/webapi-parser")),
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/raml-org/webapi-parser"),
+        "scm:git@github.com:raml-org/webapi-parser.git"
+      )
+    ),
+    developers := List(
+      Developer(
+        "raml-org",
+        "Raml Org",
+        "user@raml.org",
+        url("https://github.com/raml-org")
+      )
+    ),
+    licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+    publishMavenStyle := true,
     publishConfiguration ~= { config =>
       val newArts = config.artifacts.filterKeys(_.`type` != Artifact.SourceType)
       new PublishConfiguration(config.ivyFile,
@@ -43,9 +50,7 @@ object Common {
 
   def credentials(): Seq[Credentials] = {
     val cs =
-      Seq("PUBLIC_NEXUS_USER" -> "PUBLIC_NEXUS_PASS",
-          "NEXUS_USER"        -> "NEXUS_PASSWORD",
-          "NEXUS_USR"         -> "NEXUS_PSW")
+      Seq("SONATYPE_USERNAME" -> "SONATYPE_PASSWORD")
         .flatMap({
           case (user, password) =>
             for {
