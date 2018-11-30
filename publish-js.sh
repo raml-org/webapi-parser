@@ -2,8 +2,9 @@
 
 # NOTES:
 # - place this script on the root of your project
-# - this script will then work on the first build.sbt found anywhere on your project
-# - this script assumes your project version setting is a literal e.g.: `version in ThisBuild := "0.1-SNAPSHOT"`
+# - it will then work on the first build.sbt found anywhere on your project
+# - it assumes your project version setting is a literal e.g.: `version in ThisBuild := "0.1-SNAPSHOT"`
+# - it requires environment variable from .npmrc.template to be set
 
 # Exit on unset variables or if any of the following commands returns non-zero
 #set -eu
@@ -25,15 +26,18 @@ fi
 echo "Build.sbt version: $PROJECT_VERSION"
 echo "Is snapshot: $IS_SNAPSHOT"
 
-echo "Running fullOpt"
+echo "Running fullOptJS"
 sbt webapiJS/fullOptJS
-echo "Finished fullOpt"
+echo "Finished fullOptJS"
 
 echo "Running buildjs script"
 ./build-scripts/buildjs.sh
 echo "Finished buildjs script"
 
 cd js/module
+
+# Copy NPM auth credentials
+cp .npmrc.template $HOME/.npmrc
 
 if $IS_SNAPSHOT; then
     LATEST_SNAPSHOT=`npm v webapi-parser dist-tags.snapshot`
@@ -59,8 +63,6 @@ if $IS_SNAPSHOT; then
     echo "Finished snapshot publish"
     echo "Add 'beta' tag to snapshot"
 
-    # NEW_VERSION=`npm view webapi-parser@snapshot version`
-    # Extract version from package.json because npm doesn't refresh as fast as we need it to.
     NEW_VERSION=`node -p "require('./package.json').version"`
 
     echo "To version: $NEW_VERSION"
