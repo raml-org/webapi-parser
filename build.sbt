@@ -16,7 +16,6 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   resolvers ++= List(ivyLocal, Resolver.mavenLocal),
   resolvers += "jitpack" at "https://jitpack.io",
   aggregate in assembly := false,
-  useGpg := true,
   pgpPassphrase := sys.env.get("GPG_PASSPHRASE").map(_.toArray),
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(

@@ -13,7 +13,7 @@ object Common {
 
   val publish: Seq[Def.Setting[_]] = Seq(
     // For local publish testing
-    // publishTo := Some(Resolver.file("file", new File("~/localMaven"))
+    // publishTo := Some(Resolver.file("file", new File("/home/post/localMaven"))),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
       if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
