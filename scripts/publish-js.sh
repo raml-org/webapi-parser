@@ -27,7 +27,7 @@ echo "Build.sbt version: $PROJECT_VERSION"
 echo "Is snapshot: $IS_SNAPSHOT"
 
 echo "Running fullOptJS"
-sbt webapiJS/fastOptJS
+sbt webapiJS/fullOptJS
 echo "Finished fullOptJS"
 
 echo "Running buildjs script"
