@@ -1,8 +1,8 @@
-# `webapi-parser` examples
+## About
 
-This project aims to provide some usage examples to learn how to use `webapi-parser`.
+This code aims to provide some usage examples to learn how to use `webapi-parser` in Java projects.
 
-## Java Examples
+## How to run
 
 When testing against locally built `.jar`, first build it with `sbt assembleFatJar` in `webapi-parser` root and copy it to `examples/java/libs`.
 
@@ -17,17 +17,3 @@ In the route `examples/java/src/main/java` of the project you will find examples
 ```sh
 $ ./gradlew run
 ```
-
-## JavaScript Examples
-
-In the route `examples/js` are the examples of usage from JS code.
-
-### Example
-
-Each file contains example of parsing, generation, validation and/or resolving of different WebApi formats.
-
-#### Usage
-
-1. Run `cd examples/js` from the root of the project;
-2. Run `npm install webapi-parser`;
-3. Run desired script with `node <script_name>.js`. E.g. `node raml10-string.js`;
