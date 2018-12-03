@@ -84,7 +84,7 @@ val buildJS = TaskKey[Unit](
 
 buildJS := {
   val _ = (fullOptJS in Compile in webapiJS).value
-  "./build-scripts/buildjs.sh".!
+  "./scripts/buildjs.sh".!
 }
 
 // Assemble .jar containing all dependencies. Can be used as local jar dependency in

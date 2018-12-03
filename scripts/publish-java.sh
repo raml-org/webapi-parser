@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# NOTES:
+# - call this script from the root of your project
+
 echo "Generating JavaDocs"
 sbt generateJavadocs
 

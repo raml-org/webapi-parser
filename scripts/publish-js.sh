@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # NOTES:
-# - place this script on the root of your project
+# - call this script from the root of your project
 # - it will then work on the first build.sbt found anywhere on your project
 # - it assumes your project version setting is a literal e.g.: `version in ThisBuild := "0.1-SNAPSHOT"`
 # - it requires environment variable from .npmrc.template to be set
@@ -31,7 +31,7 @@ sbt webapiJS/fullOptJS
 echo "Finished fullOptJS"
 
 echo "Running buildjs script"
-./build-scripts/buildjs.sh
+./buildjs.sh
 echo "Finished buildjs script"
 
 cd js/module

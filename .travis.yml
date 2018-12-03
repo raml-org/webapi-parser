@@ -6,14 +6,14 @@ before_install:
 deploy:
     -
         provider: script
-        script: bash publish-js.sh
+        script: bash scripts/publish-js.sh
         skip_cleanup: true
         on:
             tags: true
             branch: master
     -
         provider: script
-        script: bash publish-java.sh
+        script: bash scripts/publish-java.sh
         skip_cleanup: true
         on:
             tags: true
