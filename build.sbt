@@ -12,7 +12,7 @@ publish := {}
 jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv()
 
 val settings = Common.settings ++ Common.publish ++ Seq(
-  organization := "com.github.amlorg",
+  organization := "org.raml",
   resolvers ++= List(ivyLocal, Resolver.mavenLocal),
   resolvers += "jitpack" at "https://jitpack.io",
   aggregate in assembly := false,
@@ -49,7 +49,7 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   .configs(Javadoc)
   .settings(javadocSettings: _*)
   .jvmSettings(
-    libraryDependencies += "org.scala-js"           %% "scalajs-stubs"          % scalaJSVersion % "provided",
+    libraryDependencies += "org.scala-js" %% "scalajs-stubs" % scalaJSVersion % "provided",
     aggregate in assembly := true,
     test in assembly := {},
     assemblyOutputPath in assembly := file(s"./webapi-parser-${version.value}.jar"),

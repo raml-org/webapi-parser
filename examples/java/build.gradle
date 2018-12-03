@@ -38,7 +38,7 @@ dependencies {
 
     // Depend on Maven-published lib
     // Uncomment when "webapi-parser" is published
-    // compile group: 'com.github.amlorg', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
+    // compile group: 'org.raml', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
 }
 
 task valkyrTest {
