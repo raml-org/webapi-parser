@@ -61,8 +61,6 @@ Maven example:
 </repositories>
 ```
 
-NOTE: you may use the `-SNAPSHOT` versions of the JVM artifacts at your own risk since those snapshot versions may contain breaking changes.
-
 To use locally built "fat" jar, copy it to your `libs` directory and depend on it like so
 
 ```groovy
