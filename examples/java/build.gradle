@@ -34,11 +34,10 @@ buildscript {
 
 dependencies {
     // Depend on locally built .jar file
-    compile files('libs/webapi-parser-0.0.1.jar')
+    // compile files('libs/webapi-parser-0.0.1.jar')
 
     // Depend on Maven-published lib
-    // Uncomment when "webapi-parser" is published
-    // compile group: 'org.raml', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
+    compile group: 'org.raml', name: 'webapi-parser_2.12', version: '0.0.1', configuration: 'compile'
 }
 
 task valkyrTest {
