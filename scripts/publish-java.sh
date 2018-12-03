@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # NOTES:
-# - call this script from the root of your project
+# - call this script from the root of webapi-parser project
 
 echo "Generating JavaDocs"
 sbt generateJavadocs
