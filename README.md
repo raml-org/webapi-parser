@@ -42,6 +42,14 @@ Maven example:
 
 NOTE: you may use the `-SNAPSHOT` versions of the JVM artifacts at your own risk since those snapshot versions may contain breaking changes.
 
+To use locally built "fat" jar, copy it to your `libs` directory and depend on it like so
+
+```gradle
+dependencies {
+    compile files('libs/webapi-parser-0.0.1.jar')
+}
+```
+
 Check [Java examples directory](examples/java/) for more usage examples.
 
 
