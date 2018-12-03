@@ -28,6 +28,16 @@ Gradle example:
 dependencies {
     compile 'org.raml:webapi-parser_2.12:x.y.z'
 }
+...
+repositories {
+    maven {
+        url "https://repository-master.mulesoft.org/nexus/content/repositories/releases"
+    }
+    maven {
+        url "https://jitpack.io"
+    }
+    mavenCentral()
+}
 ```
 
 Maven example:
@@ -36,17 +46,28 @@ Maven example:
 <dependency>
     <groupId>org.raml</groupId>
     <artifactId>webapi-parser_2.12</artifactId>
-    <version>x.y.z</version>
+    <version>X.Y.Z</version>
 </dependency>
+...
+<repositories>
+    <repository>
+        <id>MuleSoftReleases</id>
+        <url>https://repository-master.mulesoft.org/nexus/content/repositories/releases</url>
+    </repository>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
 ```
 
 NOTE: you may use the `-SNAPSHOT` versions of the JVM artifacts at your own risk since those snapshot versions may contain breaking changes.
 
 To use locally built "fat" jar, copy it to your `libs` directory and depend on it like so
 
-```gradle
+```groovy
 dependencies {
-    compile files('libs/webapi-parser-0.0.1.jar')
+    compile files('libs/webapi-parser-X.Y.Z.jar')
 }
 ```
 
