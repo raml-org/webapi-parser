@@ -4,7 +4,13 @@ This code aims to provide some usage examples to learn how to use `webapi-parser
 ## Installation
 Please follow `webapi-parser` [Java installation instructions](../../README.md#java).
 
-When testing against locally built `.jar`, copy it to [libs folder](libs).
+When testing against locally built ("fat") `.jar`, copy it to [libs folder](libs) and specify it as dependency in `build.gradle` like so
+
+```gradle
+dependencies {
+    compile files('libs/webapi-parser-0.0.1.jar')
+}
+```
 
 Build project and install dependencies:
 
