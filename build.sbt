@@ -11,9 +11,13 @@ publish := {}
 
 jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv()
 
+val muleNexus = "https://repository-master.mulesoft.org/nexus/content/repositories"
+
 val settings = Common.settings ++ Common.publish ++ Seq(
   organization := "org.raml",
   resolvers ++= List(ivyLocal, Resolver.mavenLocal),
+  resolvers += "MuleSoftSnapshots" at s"$muleNexus/snapshots",
+  resolvers += "MuleSoftReleases" at s"$muleNexus/releases",
   resolvers += "jitpack" at "https://jitpack.io",
   aggregate in assembly := false,
   pgpPassphrase := sys.env.get("GPG_PASSPHRASE").map(_.toArray),
