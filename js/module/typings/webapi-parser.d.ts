@@ -11,7 +11,7 @@ declare module "webapi-parser" {
 
             static generateString(model: amf.model.document.BaseUnit): Promise<string>
 
-            static validate(model: amf.model.document.BaseUnit): Promise<amf.validate.ValidationReport>
+            static validate(model: amf.model.document.BaseUnit): Promise<amf.client.validate.ValidationReport>
 
             static resolve(model: amf.model.document.BaseUnit): Promise<amf.model.document.BaseUnit>
         }
@@ -23,7 +23,7 @@ declare module "webapi-parser" {
 
             static generateString(model: amf.model.document.BaseUnit): Promise<string>
 
-            static validate(model: amf.model.document.BaseUnit): Promise<amf.validate.ValidationReport>
+            static validate(model: amf.model.document.BaseUnit): Promise<amf.client.validate.ValidationReport>
 
             static resolve(model: amf.model.document.BaseUnit): Promise<amf.model.document.BaseUnit>
         }
@@ -35,7 +35,7 @@ declare module "webapi-parser" {
 
             static generateString(model: amf.model.document.BaseUnit): Promise<string>
 
-            static validate(model: amf.model.document.BaseUnit): Promise<amf.validate.ValidationReport>
+            static validate(model: amf.model.document.BaseUnit): Promise<amf.client.validate.ValidationReport>
 
             static resolve(model: amf.model.document.BaseUnit): Promise<amf.model.document.BaseUnit>
 
@@ -49,7 +49,7 @@ declare module "webapi-parser" {
 
             static generateString(model: amf.model.document.BaseUnit): Promise<string>
 
-            static validate(model: amf.model.document.BaseUnit): Promise<amf.validate.ValidationReport>
+            static validate(model: amf.model.document.BaseUnit): Promise<amf.client.validate.ValidationReport>
 
             static resolve(model: amf.model.document.BaseUnit): Promise<amf.model.document.BaseUnit>
         }
