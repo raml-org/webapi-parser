@@ -14,7 +14,7 @@
 #     dependencies from typedoc generation;
 
 mkdir -p docs/java
-mkdir -p docs/js/tmp_module
+mkdir -p docs/js/tmp_module/node_modules
 
 
 # Java Docs
@@ -29,6 +29,7 @@ cp ./js/module/typings/webapi-parser.d.ts ./docs/js/tmp_module/webapi-parser.d.t
 
 cd ./docs/js/tmp_module
 
+npm init -y
 npm install -g typedoc@0.13.0
 npm install amf-client-js
 
