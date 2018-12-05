@@ -23,9 +23,8 @@ const ramlStr = `
 `
 
 async function main () {
+  console.log('Input:\n', ramlStr)
   const model = await wap.raml10.parse(ramlStr)
-  const report = await wap.raml10.validate(model)
-  console.log('Validation errors:\n', report.results)
 
   // Modify content
   const age = model.declares[0].properties[2]

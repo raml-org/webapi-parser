@@ -1,7 +1,7 @@
 const wap = require('webapi-parser').WebApiParser
 
 const oas20Str = `
-  swagger: '2.0'
+  openapi: '2.0'
   info:
     title: API with Types
     version: ''
@@ -40,9 +40,8 @@ const oas20Str = `
 `
 
 async function main () {
+  console.log('Input:\n', oas20Str)
   const model = await wap.oas20.parseYaml(oas20Str)
-  const report = await wap.oas20.validate(model)
-  console.log('Validation errors:\n', report.results)
 
   // Modify content
   const age = model.declares[0].properties[2]
