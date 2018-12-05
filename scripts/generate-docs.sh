@@ -13,32 +13,29 @@
 #     it's currently only possible to include or exclude ALL
 #     dependencies from typedoc generation;
 
-PROJROOT="$(cd "$(dirname "$0")/.." && pwd)"
-TMPMODULE="${PROJROOT}/docs/js/tmp_module"
-
-mkdir -p $PROJROOT/docs/java
-mkdir -p $TMPMODULE
+mkdir -p docs/java
+mkdir -p docs/js/tmp_module
 
 
-# # Java Docs
+# Java Docs
 echo "Generating Java docs"
 sbt generateJavadocs
-cp -r $PROJROOT/jvm/target/scala-2.12/genjavadoc-api/* $PROJROOT/docs/java
+cp -r ./jvm/target/scala-2.12/genjavadoc-api/* ./docs/java
 
 
 # JS Docs
 echo "Generating JS docs"
-cp $PROJROOT/js/module/typings/webapi-parser.d.ts $PROJROOT/docs/js/tmp_module/webapi-parser.d.ts
+cp ./js/module/typings/webapi-parser.d.ts ./docs/js/tmp_module/webapi-parser.d.ts
 
-cd $TMPMODULE
+cd ./docs/js/tmp_module
 
 npm install -g typedoc@0.13.0
 npm install amf-client-js
 
-mkdir -p $TMPMODULE/node_modules/@types/amf-client-js/
-cp $TMPMODULE/node_modules/amf-client-js/typings/amf-client-js.d.ts $TMPMODULE/node_modules/@types/amf-client-js/amf-client-js.d.ts
-typedoc --out $TMPMODULE/gendocs $TMPMODULE/webapi-parser.d.ts --includeDeclarations --mode file --ignoreCompilerErrors
+mkdir -p ./node_modules/@types/amf-client-js/
+cp ./node_modules/amf-client-js/typings/amf-client-js.d.ts ./node_modules/@types/amf-client-js/amf-client-js.d.ts
+typedoc --out ./gendocs ./webapi-parser.d.ts --includeDeclarations --mode file --ignoreCompilerErrors
 
 cd ..
-cp -r $TMPMODULE/gendocs/* .
-rm -rf $TMPMODULE
+cp -r ./tmp_module/gendocs/* ./
+rm -rf ./tmp_module
