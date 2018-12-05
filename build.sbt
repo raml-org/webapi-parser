@@ -34,6 +34,7 @@ lazy val javadocSettings = inConfig(Javadoc)(Defaults.configSettings) ++ Seq(
   scalaVersion := "2.12.6",
   addCompilerPlugin("com.typesafe.genjavadoc" %% "genjavadoc-plugin" % "0.11" cross CrossVersion.full),
   scalacOptions += s"-P:genjavadoc:out=${target.value}/java",
+  scalacOptions += s"-P:genjavadoc:suppressSynthetic=true",
   packageDoc in Compile := (packageDoc in Javadoc).value,
   sources in Javadoc :=
     (target.value / "java" ** "*.java").get ++
@@ -96,10 +97,4 @@ buildJS := {
 addCommandAlias(
   "assembleFatJar",
   "; clean; webapiJVM/assembly"
-)
-
-// Generate Java source from Scala source and javadocs for them. Uses "genjavadoc".
-addCommandAlias(
-  "generateJavadocs",
-  "; webapiJVM/genjavadoc:doc; webapiJVM/packageDoc"
 )

@@ -3,8 +3,7 @@
 # NOTES:
 # - call this script from the root of webapi-parser project
 
-echo "Generating JavaDocs"
-sbt generateJavadocs
+./scripts/generate-java-docs.sh
 
 echo "Packaging artifact"
 sbt webapiJVM/package

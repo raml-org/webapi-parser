@@ -2,7 +2,6 @@
 
 # Generates:
 #   - JS API docs (/webapi-parser/docs/js)
-#   - Java API docs (/webapi-parser/docs/java)
 #   - AMF Model docs (/webapi-parser/docs/js)
 #
 # NOTES:
@@ -13,15 +12,7 @@
 #     it's currently only possible to include or exclude ALL
 #     dependencies from typedoc generation;
 
-mkdir -p docs/java
 mkdir -p docs/js/tmp_module/node_modules
-
-
-# Java Docs
-echo "Generating Java docs"
-sbt generateJavadocs
-cp -r ./jvm/target/scala-2.12/genjavadoc-api/* ./docs/java
-
 
 # JS Docs
 echo "Generating JS docs"
