@@ -26,7 +26,13 @@ npm install amf-client-js
 
 mkdir -p ./node_modules/@types/amf-client-js/
 cp ./node_modules/amf-client-js/typings/amf-client-js.d.ts ./node_modules/@types/amf-client-js/amf-client-js.d.ts
-typedoc --out ./gendocs ./webapi-parser.d.ts --includeDeclarations --mode file --ignoreCompilerErrors
+typedoc --out ./gendocs ./webapi-parser.d.ts \
+        --includeDeclarations \
+        --mode file \
+        --ignoreCompilerErrors \
+        --readme none \
+        --theme minimal \
+        --name "webapi-parser"
 
 cd ..
 cp -r ./tmp_module/gendocs/* ./
