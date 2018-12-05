@@ -85,4 +85,4 @@ generated.raml
 generated.json
 
 # Generated docs
-./docs
+docs/
