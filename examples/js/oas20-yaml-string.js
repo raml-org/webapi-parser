@@ -47,6 +47,7 @@ async function main () {
   const age = model.declares[0].properties[2]
   age.range.withMinimum(18)
   age.range.withMaximum(120)
+  model.encodes.endPoints[0].withParameters([])
 
   const generated = await wap.oas20.generateString(model)
   console.log('Generated:\n', generated)

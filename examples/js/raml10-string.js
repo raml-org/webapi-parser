@@ -28,8 +28,10 @@ async function main () {
 
   // Modify content
   const age = model.declares[0].properties[2]
-  age.range.withMinimum(18)
   age.range.withMaximum(120)
+  const post = model.encodes.endPoints[0].withOperation('post')
+  const resp = post.withResponse('200')
+  resp.withDescription('POST 200 response')
 
   const generated = await wap.raml10.generateString(model)
   console.log('Generated:\n', generated)

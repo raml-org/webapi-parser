@@ -22,6 +22,7 @@ async function main () {
   // Modify content
   const perPage = resolved.encodes.endPoints[0].operations[0].request.queryParameters[1]
   perPage.schema.withMaximum(100)
+  resolved.encodes.withDescription('My new magic api')
 
   const generated = await wap.raml08.generateString(model)
   console.log('Generated:\n', generated)

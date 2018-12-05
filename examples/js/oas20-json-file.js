@@ -9,6 +9,7 @@ async function main () {
   const age = model.declares[0].properties[2]
   age.range.withMinimum(18)
   age.range.withMaximum(120)
+  model.encodes.withContentType(['application/json+ld'])
 
   const outPath = path.join(__dirname, './generated.json')
   console.log('Generating file to:', outPath)

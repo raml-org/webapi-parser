@@ -9,6 +9,9 @@ async function main () {
   // Modify content
   const perPage = resolved.encodes.endPoints[0].operations[0].request.queryParameters[1]
   perPage.schema.withMaximum(100)
+  const endpoint = resolved.encodes.withEndPoint('/documents')
+  endpoint.withOperation('get')
+  endpoint.operations[0].withName('getdocs')
 
   const outPath = path.join(__dirname, './generated.raml')
   console.log('Generating file to:', outPath)

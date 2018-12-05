@@ -8,7 +8,7 @@ async function main () {
   // Modify content
   const age = model.declares[0].properties[2]
   age.range.withMinimum(18)
-  age.range.withMaximum(120)
+  model.encodes.withServer('127.0.0.1/api/{version}')
 
   const outPath = path.join(__dirname, './generated.raml')
   console.log('Generating file to:', outPath)
