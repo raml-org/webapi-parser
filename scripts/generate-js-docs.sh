@@ -20,7 +20,6 @@
 
 mkdir -p docs/js/tmp_module/node_modules
 
-# JS Docs
 echo "Generating JS docs"
 cp ./js/module/typings/webapi-parser.d.ts ./docs/js/tmp_module/webapi-parser.d.ts
 
