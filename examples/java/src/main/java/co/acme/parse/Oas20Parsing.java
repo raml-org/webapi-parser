@@ -3,8 +3,12 @@ package co.acme.parse;
 import webapi.Oas20;
 import amf.client.model.document.BaseUnit;
 import amf.client.model.document.Document;
+import amf.client.model.domain.WebApi;
+import amf.client.model.domain.Operation;
+import amf.client.model.domain.EndPoint;
 
 import java.util.concurrent.ExecutionException;
+import java.util.Arrays;
 
 public class Oas20Parsing {
 
@@ -13,6 +17,7 @@ public class Oas20Parsing {
     System.out.println("Parsed Oas20 JSON file. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 
+  /* Parses string and modifies API via AMF model */
   public static void parseString() throws InterruptedException, ExecutionException {
     String inp ="{\n" +
                 "  \"openapi\": \"2.0\",\n" +
@@ -23,8 +28,15 @@ public class Oas20Parsing {
                 "  \"host\": \"acme-banking.com\"" +
                 "}";
     System.out.println("Input Oas20 JSON string:\n" + inp);
-    final BaseUnit result = Oas20.parse(inp).get();
-    System.out.println("Output Oas20 JSON string:\n" + result.raw().get());
+    Document doc = (Document) Oas20.parse(inp).get();
+
+    // Modify model
+    WebApi api = (WebApi) doc.encodes();
+    api.withAccepts(Arrays.asList("application/json"));
+    api.withContentType(Arrays.asList("application/json+ld"));
+
+    String output = Oas20.generateString(doc).get();
+    System.out.println("Generated Oas20 JSON string:\n" + output);
   }
 
   public static void parseYamlFile() throws InterruptedException, ExecutionException {
@@ -32,13 +44,23 @@ public class Oas20Parsing {
     System.out.println("Parsed Oas20 YAML file. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 
+  /* Parses string and modifies API via AMF model */
   public static void parseYamlString() throws InterruptedException, ExecutionException {
     String oasYaml = "openapi: '2.0'\n" +
         "info:\n" +
           "title: API with Types\n" +
           "version: ''";
     System.out.println("Input Oas20 YAML string:\n" + oasYaml);
-    final BaseUnit result = Oas20.parseYaml(oasYaml).get();
-    System.out.println("Output Oas20 YAML string:\n" + result.raw().get());
+    Document doc = (Document) Oas20.parseYaml(oasYaml).get();
+
+    // Modify model
+    WebApi api = (WebApi) doc.encodes();
+    EndPoint edp = api.withEndPoint("/books");
+    Operation getBooks = edp.withOperation("get");
+    getBooks.withName("getBooks");
+    getBooks.withResponse("200");
+
+    String output = Oas20.generateString(doc).get();
+    System.out.println("Generated Oas20 JSON string:\n" + output);
   }
 }
