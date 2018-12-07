@@ -14,34 +14,35 @@ public class AmfGraphParsing {
   }
 
   public static void parseString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = AmfGraph.parse(
-            "[\n" +
-                    "  {\n" +
-                    "    \"@id\": \"\",\n" +
-                    "    \"@type\": [\n" +
-                    "      \"http://raml.org/vocabularies/document#Document\",\n" +
-                    "      \"http://raml.org/vocabularies/document#Fragment\",\n" +
-                    "      \"http://raml.org/vocabularies/document#Module\",\n" +
-                    "      \"http://raml.org/vocabularies/document#Unit\"\n" +
-                    "    ],\n" +
-                    "    \"http://raml.org/vocabularies/document#encodes\": [\n" +
-                    "      {\n" +
-                    "        \"@id\": \"#/web-api\",\n" +
-                    "        \"@type\": [\n" +
-                    "          \"http://schema.org/WebAPI\",\n" +
-                    "          \"http://raml.org/vocabularies/document#DomainElement\"\n" +
-                    "        ],\n" +
-                    "        \"http://schema.org/name\": [\n" +
-                    "          {\n" +
-                    "            \"@value\": \"ACME Banking HTTP API\"\n" +
-                    "          }\n" +
-                    "        ],\n" +
-                    "        \"http://raml.org/vocabularies/http#host\": [\n" +
-                    "          {\n" +
-                    "            \"@value\": \"acme-banking.com\"\n" +
-                    "          }\n" +
-                    "        ]" +
-                    "}]}]").get();
-    System.out.println("Parsed AMF Graph string. Expected unit encoding webapi: " + ((Document) result).encodes());
+    String inp ="[\n" +
+                "  {\n" +
+                "    \"@id\": \"\",\n" +
+                "    \"@type\": [\n" +
+                "      \"http://raml.org/vocabularies/document#Document\",\n" +
+                "      \"http://raml.org/vocabularies/document#Fragment\",\n" +
+                "      \"http://raml.org/vocabularies/document#Module\",\n" +
+                "      \"http://raml.org/vocabularies/document#Unit\"\n" +
+                "    ],\n" +
+                "    \"http://raml.org/vocabularies/document#encodes\": [\n" +
+                "      {\n" +
+                "        \"@id\": \"#/web-api\",\n" +
+                "        \"@type\": [\n" +
+                "          \"http://schema.org/WebAPI\",\n" +
+                "          \"http://raml.org/vocabularies/document#DomainElement\"\n" +
+                "        ],\n" +
+                "        \"http://schema.org/name\": [\n" +
+                "          {\n" +
+                "            \"@value\": \"ACME Banking HTTP API\"\n" +
+                "          }\n" +
+                "        ],\n" +
+                "        \"http://raml.org/vocabularies/http#host\": [\n" +
+                "          {\n" +
+                "            \"@value\": \"acme-banking.com\"\n" +
+                "          }\n" +
+                "        ]" +
+                "}]}]";
+    System.out.println("Input AMF Graph string:\n" + inp);
+    final BaseUnit result = AmfGraph.parse(inp).get();
+    System.out.println("Output AMF Graph string:\n" + result.raw().get());
   }
 }

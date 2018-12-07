@@ -14,16 +14,17 @@ public class Oas20Parsing {
   }
 
   public static void parseString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Oas20.parse(
-            "{\n" +
-            "  \"openapi\": \"2.0\",\n" +
-            "  \"info\": {\n" +
-            "    \"title\": \"ACME Banking HTTP API\",\n" +
-            "    \"version\": \"1.0\"\n" +
-            "  },\n" +
-            "  \"host\": \"acme-banking.com\"" +
-            "}").get();
-    System.out.println("Parsed Oas20 JSON string. Expected unit encoding webapi: " + ((Document) result).encodes());
+    String inp ="{\n" +
+                "  \"openapi\": \"2.0\",\n" +
+                "  \"info\": {\n" +
+                "    \"title\": \"ACME Banking HTTP API\",\n" +
+                "    \"version\": \"1.0\"\n" +
+                "  },\n" +
+                "  \"host\": \"acme-banking.com\"" +
+                "}";
+    System.out.println("Input Oas20 JSON string:\n" + inp);
+    final BaseUnit result = Oas20.parse(inp).get();
+    System.out.println("Output Oas20 JSON string:\n" + result.raw().get());
   }
 
   public static void parseYamlFile() throws InterruptedException, ExecutionException {
@@ -36,7 +37,8 @@ public class Oas20Parsing {
         "info:\n" +
           "title: API with Types\n" +
           "version: ''";
+    System.out.println("Input Oas20 YAML string:\n" + oasYaml);
     final BaseUnit result = Oas20.parseYaml(oasYaml).get();
-    System.out.println("Parsed Oas20 YAML string. Expected unit encoding webapi: " + ((Document) result).encodes());
+    System.out.println("Output Oas20 YAML string:\n" + result.raw().get());
   }
 }

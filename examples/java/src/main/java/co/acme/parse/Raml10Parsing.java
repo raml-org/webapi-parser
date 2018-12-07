@@ -14,11 +14,12 @@ public class Raml10Parsing {
   }
 
   public static void parseString() throws InterruptedException, ExecutionException {
-    final BaseUnit result = Raml10.parse(
-            "#%RAML 1.0\n" +
-            "\n" +
-            "title: ACME Banking HTTP API\n" +
-            "version: 1.0").get();
-    System.out.println("Parsed Raml10 string. Expected unit encoding webapi: " + ((Document) result).encodes());
+    String inp ="#%RAML 1.0\n" +
+                "\n" +
+                "title: ACME Banking HTTP API\n" +
+                "version: 1.0";
+    System.out.println("Input Raml10 string:\n" + inp);
+    final BaseUnit result = Raml10.parse(inp).get();
+    System.out.println("Output Raml10 string:\n" + result.raw().get());
   }
 }
