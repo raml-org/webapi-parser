@@ -1,6 +1,12 @@
 # webapi-parser
 API Spec parser based on AMF. Supports OAS 2.0, and RAML 0.8, 1.0.
 
+## API documentation
+[JavaScript API](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html)
+
+[Java API](https://raml-org.github.io/webapi-parser/java/index.html)
+
+[AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
 ## Installation
 
