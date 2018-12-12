@@ -16,10 +16,9 @@ class Raml10Test extends AsyncFunSuite with Matchers {
 
   override implicit val executionContext: ExecutionContext = ExecutionContext.Implicits.global
 
-  private val raml10Str: String =
+  private val strInp: String =
     """#%RAML 1.0
       |title: API with Types
-      |version: 1.2.3
       |types:
       |  User:
       |    type: object
@@ -40,15 +39,14 @@ class Raml10Test extends AsyncFunSuite with Matchers {
 
   test("Test RAML 1.0 string parsing") {
     for {
-      unit <- Raml10.parse(raml10Str).asInternal
+      unit <- Raml10.parse(strInp).asInternal
     } yield {
       val bu: BaseUnit = unit
       val doc = bu.asInstanceOf[Document]
       val api = doc.encodes.asInstanceOf[WebApi]
-      val endPoints = api.endPoints
-      assert(endPoints.size == 1)
-      assert(doc.declares.size == 1)
-      assert(api.version.value == "1.2.3")
+      doc.declares should have size 1
+      api.endPoints should have size 1
+      api.name.value() should be("API with Types")
     }
   }
 }
