@@ -7,13 +7,8 @@ import amf.client.convert.CoreClientConverters._
 import org.scalatest.{AsyncFunSuite, Matchers, Assertion}
 import org.scalatest.Assertions._
 
-import scala.concurrent.ExecutionContext
-import scala.io.Source
 
-
-class Raml10Test extends AsyncFunSuite with Matchers {
-
-  override implicit val executionContext: ExecutionContext = ExecutionContext.Implicits.global
+class Raml10Test extends AsyncFunSuite with Matchers with WaitingFileReader {
 
   private val validFilePath     = "file://shared/src/test/resources/raml/api-with-types.raml"
   private val invalidFilePath   = "file://shared/src/test/resources/raml/invalid-examples.raml"
@@ -60,7 +55,7 @@ class Raml10Test extends AsyncFunSuite with Matchers {
       unit <- Raml10.parse(apiString).asInternal
       _ <- Raml10.generateFile(unit, s"file://${generatedFilePath}").asInternal
     } yield {
-      val genStr = Source.fromFile(generatedFilePath).getLines.mkString
+      val genStr = waitAndRead(generatedFilePath)
       genStr should include ("#%RAML 1.0")
       genStr should include ("/users/{id}:")
     }

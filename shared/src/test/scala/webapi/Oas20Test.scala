@@ -7,13 +7,8 @@ import amf.client.convert.CoreClientConverters._
 import org.scalatest.{AsyncFunSuite, Matchers, Assertion}
 import org.scalatest.Assertions._
 
-import scala.concurrent.ExecutionContext
-import scala.io.Source
 
-
-class Oas20Test extends AsyncFunSuite with Matchers {
-
-  override implicit val executionContext: ExecutionContext = ExecutionContext.Implicits.global
+class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
 
   private val validFilePath     = "file://shared/src/test/resources/oas/api-with-types.json"
   private val validFilePathYaml = "file://shared/src/test/resources/oas/api-with-types.yaml"
@@ -114,7 +109,7 @@ class Oas20Test extends AsyncFunSuite with Matchers {
       unit <- Oas20.parse(apiString).asInternal
       _ <- Oas20.generateFile(unit, s"file://${generatedFilePath}").asInternal
     } yield {
-      val genStr = Source.fromFile(generatedFilePath).getLines.mkString
+      val genStr = waitAndRead(generatedFilePath)
       genStr should include ("definitions")
       genStr should include ("/users/{id}")
     }

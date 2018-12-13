@@ -7,13 +7,10 @@ import amf.client.convert.CoreClientConverters._
 import org.scalatest.{AsyncFunSuite, Matchers, Assertion}
 import org.scalatest.Assertions._
 
-import scala.concurrent.ExecutionContext
 import scala.io.Source
 
 
-class AmfGraphTest extends AsyncFunSuite with Matchers {
-
-  override implicit val executionContext: ExecutionContext = ExecutionContext.Implicits.global
+class AmfGraphTest extends AsyncFunSuite with Matchers with WaitingFileReader {
 
   private val validFilePath     = "shared/src/test/resources/amf-graph/api-with-types.json"
   private val invalidFilePath   = "file://shared/src/test/resources/amf-graph/api-with-types-invalid.json"
@@ -41,7 +38,7 @@ class AmfGraphTest extends AsyncFunSuite with Matchers {
       unit <- AmfGraph.parse(apiString).asInternal
       _ <- AmfGraph.generateFile(unit, s"file://${generatedFilePath}").asInternal
     } yield {
-      val genStr = Source.fromFile(generatedFilePath).getLines.mkString
+      val genStr = waitAndRead(generatedFilePath)
       genStr should include ("document#Document")
       genStr should include ("/users/{id}")
     }
