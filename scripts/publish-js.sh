@@ -27,7 +27,9 @@ echo "Build.sbt version: $PROJECT_VERSION"
 echo "Is snapshot: $IS_SNAPSHOT"
 
 echo "Running tests"
-sbt webapiJS/test
+# JVM tests are run intentionally because there's no JS-specific
+# code and thus no JS-specific tests.
+sbt webapiJVM/test
 
 echo "Running fullOptJS"
 sbt webapiJS/fullOptJS
