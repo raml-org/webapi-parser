@@ -1,5 +1,4 @@
-## About
-This code provides some examples of how to use `webapi-parser` in Java projects.
+This folder provides examples of how to use `webapi-parser` in Java projects.
 
 ## Installation
 See [Java installation instructions](../../README.md#java).
