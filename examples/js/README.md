@@ -1,14 +1,11 @@
 ## About
-This code aims to provide some usage examples to learn how to use `webapi-parser` in JS projects.
-
-Each file contains example of parsing, generation, validation and/or resolving of different WebApi formats.
+This folder provides some examples of how to use `webapi-parser` in JavaScript projects. Those examples showcase: parsing, generation, validation and/or resolving of different WebApi formats.
 
 ## Installation
-Please follow `webapi-parser` [JS installation instructions](../../README.md#js).
+See [JavaScript installation instructions](../../README.md#javascript).
 
 ## How to run
-Run desired script with `node <script_name>.js`. E.g.
-
+Run any script with `node <script_name>.js`. E.g.
 ```sh
 $ node raml10-string.js
 ```

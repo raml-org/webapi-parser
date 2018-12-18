@@ -1,35 +1,38 @@
 # webapi-parser
-API Spec parser based on AMF. Supports OAS 2.0, and RAML 0.8, 1.0.
+API Spec parser based on [AMF](https://github.com/aml-org/amf). Currently supports RAML 0.8, 1.0 and OAS 2.0. 
 
-## API documentation
-[JavaScript API](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html)
+This project is a thin wrapper that exposes API Spec-related capabilities from [AMF](https://github.com/aml-org/amf). It is written in Scala and offered in two versions: [JavaScript](#javascript) and [Java](#java).
 
-[Java API](https://raml-org.github.io/webapi-parser/java/index.html)
+## JavaScript
 
-[AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
+### Documentation
+* [JavaScript API](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html)
+* [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
-## Installation
-
-### JS
-Install npm package with
+### Installation
+Install the npm package:
 
 ```sh
 $ npm install webapi-parser
 ```
 
-Start using it with
-
+and then require/reference as follows:
 ```js
 const wap = require('webapi-parser').WebApiParser
 ```
 
-Check [JS examples directory](examples/js/) for more usage examples.
+You can check the [JavaScript examples directory](examples/js/) for some usage examples.
 
-### Java
-To use, specify `webapi-parser` dependency.
+## Java
 
-Gradle example:
+### Documentation
+* [Java API](https://raml-org.github.io/webapi-parser/java/index.html)
+* [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
+### Installation
+To use, you'll need to specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
+
+Gradle:
 ```groovy
 dependencies {
     compile 'org.raml:webapi-parser_2.12:x.y.z'
@@ -46,8 +49,7 @@ repositories {
 }
 ```
 
-Maven example:
-
+Maven:
 ```xml
 <dependency>
     <groupId>org.raml</groupId>
@@ -67,39 +69,7 @@ Maven example:
 </repositories>
 ```
 
-To use locally built "fat" jar, copy it to your `libs` directory and depend on it like so
+You can check the [Java examples directory](examples/java/) for some usage examples.
 
-```groovy
-dependencies {
-    compile files('libs/webapi-parser-X.Y.Z.jar')
-}
-```
-
-Check [Java examples directory](examples/java/) for more usage examples.
-
-
-## Generate artifacts directly from cloned repository
-
-### Requirements
-* Scala 2.12.2
-* sbt 0.13.15
-
-### Generate JS artifact
-To generate JS artifact to `./js/module/webapi-parser.js` run
-
-```sh
-sbt buildJS
-```
-
-### Generate Java artifact
-To generate regular (not "fat") `.jar` run
-
-```sh
-sbt package
-```
-
-To generate "fat" `.jar` to `./webapi-parser-X.Y.Z.jar` run
-
-```sh
-sbt assembleFatJar
-```
+---
+If you wish to contribute to this project, see our [Contribution Guidelines](./CONTRIBUTING.md).

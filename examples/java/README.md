@@ -1,11 +1,10 @@
 ## About
-This code aims to provide some usage examples to learn how to use `webapi-parser` in Java projects.
+This code provides some examples of how to use `webapi-parser` in Java projects.
 
 ## Installation
-Please follow `webapi-parser` [Java installation instructions](../../README.md#java).
+See [Java installation instructions](../../README.md#java).
 
 Build project and install dependencies:
-
 ```sh
 $ ./gradlew build
 ```
