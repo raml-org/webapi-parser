@@ -1,0 +1,66 @@
+#%RAML 1.0
+title: Navigation example API
+description: Still Navigation example API
+documentation:
+ - title: Home
+   content: Welcome to Navigation example API
+version: 1
+protocols: [https]
+baseUri: https://api.foobarbaz.com/{version}
+
+annotationTypes:
+  experimental: boolean
+
+securitySchemes:
+  oauth_1_0:
+    description: OAuth 1.0 is still supported
+    type: OAuth 1.0
+    settings:
+      requestTokenUri: https://api.foobarbaz.com/1/oauth/request_token
+      authorizationUri: https://www.foobarbaz.com/1/oauth/authorize
+      tokenCredentialsUri: https://api.foobarbaz.com/1/oauth/access_token
+
+resourceTypes:
+  pageableCollection:
+    get:
+      queryParameters:
+        page:
+          type: integer
+          required: true
+
+traits:
+  traceable:
+    headers:
+      X-Tracker:
+        description: A code to track API calls end to end
+        pattern: ^\w{16}$
+        example: abcdefghijklmnop
+
+types:
+  User:
+    type: object
+    properties:
+      firstName: string
+      lastName:  string
+      age:
+        type: integer
+        minimum: 0
+        maximum: 125
+
+securedBy: [oauth_1_0]
+
+/users:
+  type: pageableCollection
+  get:
+    response:
+      200:
+        body:
+          application/json:
+            type: User[]
+  /{id}:
+    (experimental): true
+    post:
+      is: [ traceable ]
+      body:
+        application/json:
+          type: User
