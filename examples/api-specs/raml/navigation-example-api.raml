@@ -21,12 +21,11 @@ securitySchemes:
       tokenCredentialsUri: https://api.foobarbaz.com/1/oauth/access_token
 
 resourceTypes:
-  pageableCollection:
-    get:
+  postable:
+    post:
       queryParameters:
-        page:
-          type: integer
-          required: true
+        csrf:
+          type: string
 
 traits:
   traceable:
@@ -50,17 +49,17 @@ types:
 securedBy: [oauth_1_0]
 
 /users:
-  type: pageableCollection
-  get:
-    response:
-      200:
-        body:
-          application/json:
-            type: User[]
+  type: postable
+  post:
+    is: [ traceable ]
+    body:
+      application/json:
+        type: User
   /{id}:
     (experimental): true
-    post:
-      is: [ traceable ]
-      body:
-        application/json:
-          type: User
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: User
