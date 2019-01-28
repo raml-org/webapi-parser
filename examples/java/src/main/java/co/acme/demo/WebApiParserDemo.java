@@ -12,7 +12,7 @@ import co.acme.validate.Raml10Validation;
 import co.acme.validate.Raml08Validation;
 import co.acme.validate.Oas20Validation;
 import co.acme.validate.AmfGraphValidation;
-import co.acme.model.Raml10Builder;
+import co.acme.model.Raml10Building;
 
 import java.util.concurrent.ExecutionException;
 
