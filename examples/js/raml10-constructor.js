@@ -29,21 +29,25 @@ async function main () {
   const getUsers200Resp = getUsers.withResponse('200')
   const getUsers200Payload = getUsers200Resp.withPayload('application/json')
   const getUsers200Schema = getUsers200Payload.withObjectSchema('schema')
-  getUsers200Schema.withClosed(false)
+  getUsers200Schema
+    .withName('Users')
+    .withClosed(false)
 
-  // const userName = getUsers200Schema.withProperty('username')
-  // const userNameScalar = new domain.ScalarShape()
-  //   .withDataType('http://www.w3.org/2001/XMLSchema#string')
-  // userName.withMinCount(1)
-  //   .withPath('http://a.ml/vocabularies/data#name')
-  //   .withNode(userNameScalar)
+  const userNameScalar = new domain.ScalarShape()
+    .withDataType('http://www.w3.org/2001/XMLSchema#string')
+  const userName = getUsers200Schema
+    .withProperty('username')
+    .withPath("http://a.ml/vocabularies/data#name")
+    .withMinCount(1)
+    .withRange(userNameScalar)
 
-  // const userEmail = getUsers200Schema.withProperty('email')
-  // const userEmailScalar = new domain.ScalarShape()
-  //   .withDataType('http://www.w3.org/2001/XMLSchema#string')
-  // userEmail.withMinCount(1)
-  //   .withPath('http://a.ml/vocabularies/data#email')
-  //   .withNode(userEmailScalar)
+  const userEmailScalar = new domain.ScalarShape()
+    .withDataType('http://www.w3.org/2001/XMLSchema#string')
+  const userEmail = getUsers200Schema
+    .withProperty('email')
+    .withMinCount(1)
+    .withPath('http://a.ml/vocabularies/data#email')
+    .withRange(userEmailScalar)
 
   const user = api.withEndPoint('/user/{id}')
   user.withName('User endpoint').withDescription('Get user')

@@ -52,13 +52,22 @@ public class Raml10Building {
     getUsers200Payload.withMediaType("application/json");
     final NodeShape getUsers200Schema = getUsers200Payload.withObjectSchema("schema");
     getUsers200Schema.withClosed(false);
+
     final ScalarShape userNameSchema = new ScalarShape();
     userNameSchema.withDataType("http://www.w3.org/2001/XMLSchema#string");
-    // final PropertyShape userName = getUsers200Schema.withProperty("username");
-    // userName
-    //   .withMinCount(1)
-    //   .withPath("http://a.ml/vocabularies/data#name")
-    //   .withNode(userNameSchema);
+    final PropertyShape userName = getUsers200Schema.withProperty("username");
+    userName
+      .withMinCount(1)
+      .withPath("http://a.ml/vocabularies/data#name")
+      .withRange(userNameSchema);
+
+    final ScalarShape userEmailSchema = new ScalarShape();
+    userEmailSchema.withDataType("http://www.w3.org/2001/XMLSchema#string");
+    final PropertyShape userEmail = getUsers200Schema.withProperty("email");
+    userEmail
+      .withMinCount(1)
+      .withPath("http://a.ml/vocabularies/data#email")
+      .withRange(userEmailSchema);
 
     final EndPoint user = api.withEndPoint("/users/{id}");
     user
