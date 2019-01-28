@@ -15,9 +15,7 @@ async function main () {
   api.withServer('foorg.bar/{version}')
 
   const users = api.withEndPoint('/users')
-  users.withPath('/users')
-    .withName('Users endpoint')
-    .withDescription('Lists users')
+  users.withName('Users endpoint').withDescription('Lists users')
 
   const getUsers = users.withOperation('get')
   getUsers.withName('GET Users')
@@ -48,9 +46,7 @@ async function main () {
   //   .withNode(userEmailScalar)
 
   const user = api.withEndPoint('/user/{id}')
-  user.withPath('/users/{id}')
-    .withName('User endpoint')
-    .withDescription('Get user')
+  user.withName('User endpoint').withDescription('Get user')
 
   const model = new webapi.model.document.Document(api)
   const generated = await wap.raml10.generateString(model)
