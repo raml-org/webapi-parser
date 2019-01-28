@@ -3,75 +3,7 @@ const wap = webapi.WebApiParser
 const domain = webapi.model.domain
 
 async function main () {
-  const server = new domain.Server()
-    .withUrl('foorg.bar/{version}')
-
-  // GET /users 200
-  const userEmailScalar = new domain.ScalarShape()
-    .withDataType('http://www.w3.org/2001/XMLSchema#string')
-
-  const userEmail = new domain.PropertyShape()
-    .withMinCount(1)
-    .withPath('http://a.ml/vocabularies/data#email')
-    .withNode(userEmailScalar)
-
-  const userNameScalar = new domain.ScalarShape()
-    .withDataType('http://www.w3.org/2001/XMLSchema#string')
-
-  const userName = new domain.PropertyShape()
-    .withMinCount(1)
-    .withPath('http://a.ml/vocabularies/data#name')
-    .withNode(userNameScalar)
-
-  const getUsers200Schema = new domain.NodeShape()
-    .withClosed(false)
-    /*
-      TODO:
-      Adding properties is broken for some reason. May be possible to
-      rework with domain.Payload.withObjectSchema() but that's broken
-      in AMF as well.
-    */
-    // .withProperties([userName, userEmail])
-
-  const getUsers200Payload = new domain.Payload()
-    .withMediaType('application/json')
-    .withSchema(getUsers200Schema)
-
-  const getUsers200Resp = new domain.Response()
-    .withStatusCode('200')
-    .withPayloads([getUsers200Payload])
-
-  // GET /users 500
-  const getUsers500Schema = new domain.ScalarShape()
-    .withDisplayName('500ErrorMessage')
-    .withDataType('http://www.w3.org/2001/XMLSchema#string')
-
-  const getUsers500Payload = new domain.Payload()
-    .withMediaType('text/plain')
-    .withSchema(getUsers500Schema)
-
-  const getUsers500Resp = new domain.Response()
-    .withStatusCode('500')
-    .withPayloads([getUsers500Payload])
-
-  // GET /users
-  const getUsers = new domain.Operation()
-    .withMethod('get')
-    .withName('GET Users')
-    .withResponses([getUsers500Resp, getUsers200Resp])
-
-  // /users
-  const users = new domain.EndPoint()
-    .withPath('/users')
-    .withName('Users endpoint')
-    .withDescription('Lists users')
-    .withOperations([getUsers])
-
-  // /users/{id}
-  const user = new domain.EndPoint()
-    .withPath('/users/{id}')
-    .withName('User endpoint')
-    .withDescription('Get user')
+  await wap.init()
 
   const api = new domain.WebApi()
     .withName('Foo org API')
@@ -80,10 +12,47 @@ async function main () {
     .withContentType(['application/json'])
     .withAccepts(['application/json'])
     .withVersion('1.1')
-    .withServers([server])
-    .withEndPoints([users, user])
+  api.withServer('foorg.bar/{version}')
 
-  const model = new webapi.model.document.Document().withEncodes(api)
+  const users = api.withEndPoint('/users')
+  users.withPath('/users')
+    .withName('Users endpoint')
+    .withDescription('Lists users')
+
+  const getUsers = users.withOperation('get')
+  getUsers.withName('GET Users')
+
+  const getUsers500Resp = getUsers.withResponse('500')
+  const getUsers500Payload = getUsers500Resp.withPayload('text/plain')
+  const getUsers500Schema = getUsers500Payload.withScalarSchema(
+    '500ErrorMessage')
+  getUsers500Schema.withDataType('http://www.w3.org/2001/XMLSchema#string')
+
+  const getUsers200Resp = getUsers.withResponse('200')
+  const getUsers200Payload = getUsers200Resp.withPayload('application/json')
+  const getUsers200Schema = getUsers200Payload.withObjectSchema('schema')
+  getUsers200Schema.withClosed(false)
+
+  // const userName = getUsers200Schema.withProperty('username')
+  // const userNameScalar = new domain.ScalarShape()
+  //   .withDataType('http://www.w3.org/2001/XMLSchema#string')
+  // userName.withMinCount(1)
+  //   .withPath('http://a.ml/vocabularies/data#name')
+  //   .withNode(userNameScalar)
+
+  // const userEmail = getUsers200Schema.withProperty('email')
+  // const userEmailScalar = new domain.ScalarShape()
+  //   .withDataType('http://www.w3.org/2001/XMLSchema#string')
+  // userEmail.withMinCount(1)
+  //   .withPath('http://a.ml/vocabularies/data#email')
+  //   .withNode(userEmailScalar)
+
+  const user = api.withEndPoint('/user/{id}')
+  user.withPath('/users/{id}')
+    .withName('User endpoint')
+    .withDescription('Get user')
+
+  const model = new webapi.model.document.Document(api)
   const generated = await wap.raml10.generateString(model)
   console.log('Generated from constructed:\n', generated)
 }

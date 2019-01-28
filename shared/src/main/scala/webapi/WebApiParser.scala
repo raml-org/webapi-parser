@@ -22,6 +22,7 @@ object WebApiParser {
   var initialized: Boolean = false
 
   /** Initializes necessary plugins */
+  @JSExportTopLevel("WebApiParser.init")
   def init(): ClientFuture[Unit] = {
     if(initialized) {
       val emptyFuture: Future[Unit] = Future {}
