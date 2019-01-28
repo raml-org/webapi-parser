@@ -33,7 +33,7 @@ object Common {
         url("https://github.com/raml-org")
       )
     ),
-    licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+    licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0")),
     publishMavenStyle := true,
     publishConfiguration ~= { config =>
       val newArts = config.artifacts.filterKeys(_.`type` != Artifact.SourceType)
