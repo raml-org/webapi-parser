@@ -63,7 +63,7 @@ async function main () {
     'Second property name:',
     postUsersType.properties[1].name.value())
   console.log(
-    'Second property name:',
+    'Second property value:',
     postUsersType.properties[1].range.dataType.value())
 
   // Endpoint /users/{id}
@@ -74,7 +74,7 @@ async function main () {
     'First annotation name:',
     user.customDomainProperties[0].name.value())
   console.log(
-    'First annotation value:',
+    'First annotation type:',
     user.customDomainProperties[0].extension.value)
 
   // GET /users/{id}
@@ -90,7 +90,7 @@ async function main () {
     'First property name:',
     getUserType.properties[0].name.value())
   console.log(
-    'First property name:',
+    'First property type:',
     getUserType.properties[0].range.dataType.value())
 
   // Annotation 'experimental'

@@ -13,6 +13,7 @@ import co.acme.validate.Raml08Validation;
 import co.acme.validate.Oas20Validation;
 import co.acme.validate.AmfGraphValidation;
 import co.acme.model.Raml10Building;
+import co.acme.model.Raml10Navigation;
 
 import java.util.concurrent.ExecutionException;
 
@@ -50,5 +51,6 @@ public class WebApiParserDemo {
     AmfGraphValidation.validate();
 
     Raml10Building.buildApi();
+    Raml10Navigation.navigateApi();
   }
 }
