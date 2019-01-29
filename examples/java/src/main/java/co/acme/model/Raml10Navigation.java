@@ -111,12 +111,8 @@ public class Raml10Navigation {
         );
     }
 
-    // TODO
-    // ScalarShape age = (ScalarShape) userType.properties().get(2).range();
-    // Double minAge = age.minimum().value();
-    // Double maxAge = age.maximum().value();
-    // System.out.println("Age from " + minAge + " to " + maxAge);
-
+    ScalarShape age = (ScalarShape) userType.properties().get(2).range();
+    System.out.println("Age from " + age.minimum().value() + " to " + age.maximum().value());
 
     // ResourceType 'postable'
     ResourceType postable = (ResourceType) model.declares().get(2);
