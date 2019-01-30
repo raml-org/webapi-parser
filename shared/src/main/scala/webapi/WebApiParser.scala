@@ -17,11 +17,15 @@ import scala.scalajs.js.annotation._
 import ExecutionContext.Implicits.global
 
 
-/** Utility object meant for internal use */
+/** Utility object that hosts initialization logic. */
 object WebApiParser {
   var initialized: Boolean = false
 
-  /** Initializes necessary plugins */
+  /**
+    * Initializes necessary plugins. Is automatically run once on other
+    * methods' calls. Must be called explicitly when constructing API
+    * by hand.
+    */
   @JSExportTopLevel("WebApiParser.init")
   def init(): ClientFuture[Unit] = {
     if(initialized) {
