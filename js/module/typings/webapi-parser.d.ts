@@ -3,6 +3,8 @@ import {model, client} from 'amf-client-js';
 declare module "webapi-parser" {
     namespace WebApiParser {
 
+        export function init(): Promise<void>
+
         export class raml10 {
             static parse(urlOrContent: string): Promise<model.document.BaseUnit>
 
