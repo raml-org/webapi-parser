@@ -83,4 +83,5 @@ examples/*/generated.raml
 examples/*/generated.json
 
 # Generated docs
-docs/
+docs/js/
+docs/java/
