@@ -9,7 +9,7 @@ Please refer to [complete examples](#complete-examples) for more advanced use ca
 To get started let's import all necessary modules and parse [a RAML 1.0 API document](https://github.com/raml-org/webapi-parser/blob/master/examples/api-specs/raml/navigation-example-api.raml):
 
 ```js
-//js
+// js
 const path = require('path')
 const wap = require('webapi-parser').WebApiParser
 
@@ -45,7 +45,7 @@ public class Raml10Navigation {
 Now we can access encoded API root properties, endpoints, methods, responses, etc.:
 
 ```js
-//js
+// js
 async function main () {
   ...
   const api = model.encodes
@@ -102,7 +102,7 @@ public class Raml10Navigation {
 It's also possible to access data defined in document root like Data Types, annotations, security schemes, etc. and their properties:
 
 ```js
-//js
+// js
 async function main () {
   ...
   // Annotation 'experimental'
