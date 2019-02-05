@@ -1,13 +1,10 @@
 package co.acme.model;
 
-import webapi.WebApiParser;
 import webapi.Raml10;
 import amf.client.model.document.Document;
 import amf.client.model.domain.*;
 
-import java.util.Collections;
 import java.util.concurrent.ExecutionException;
-import java.util.Arrays;
 
 public class Raml10Navigation {
   public static void navigateApi() throws InterruptedException, ExecutionException {
