@@ -1,11 +1,16 @@
+/**
+ * Example of navigating RAML 1.0 API document.
+ */
 const path = require('path')
 const wap = require('webapi-parser').WebApiParser
 
 async function main () {
+  // Parse the RAML 1.0 file
   const inPath = path.join(
     __dirname, '../api-specs/raml/navigation-example-api.raml')
   const model = await wap.raml10.parse(`file://${inPath}`)
 
+  // Access RAML 1.0 API
   const api = model.encodes
 
   // API root properties
@@ -53,6 +58,7 @@ async function main () {
       .properties['X-Tracker']
       .properties.description.value)
 
+  // POST /users request payload
   const postUsersReq = postUsers.request.payloads[0]
   console.log('Request media type:', postUsersReq.mediaType.value())
 

@@ -102,7 +102,7 @@ async function main () {
     .withSchemes(['http', 'https'])
   const users = api.withEndPoint('/users')
   const postUsers = users.withOperation('post')
-  const user = api.withEndPoint('/user/{id}')
+  const user = api.withEndPoint('/users/{id}')
   const getUser = user.withOperation('get')
   ...
 }
