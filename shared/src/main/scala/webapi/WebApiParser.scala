@@ -22,9 +22,9 @@ object WebApiParser {
   var initialized: Boolean = false
 
   /**
-    * Initializes necessary plugins. Is automatically run once on other
-    * methods' calls. Must be called explicitly when constructing API
-    * by hand.
+    * Initializes necessary plugins. Is automatically run when
+    * syntax-specific methods are called. Must be called explicitly
+    * when constructing API by hand.
     */
   @JSExportTopLevel("WebApiParser.init")
   def init(): ClientFuture[Unit] = {
