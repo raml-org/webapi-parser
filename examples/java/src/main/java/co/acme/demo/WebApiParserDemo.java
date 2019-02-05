@@ -17,6 +17,7 @@ import co.acme.model.Raml10Navigation;
 
 import java.util.concurrent.ExecutionException;
 
+// Runs all the example classes
 public class WebApiParserDemo {
   public static void main(String[] args) throws ExecutionException, InterruptedException {
     Raml10Parsing.parseString();
