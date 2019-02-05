@@ -1,13 +1,15 @@
-# API Construction
-
+# API construction
 Using `webapi-parser` it is possible to construct an API in all supported formats by hand. These construction methods can also be used to edit a parsed document.
 
-## Quick Start
-Please refer to [complete examples](#complete-examples) for more advanced use cases and [AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) for an API construction methods.
+Below is a simplified example of constructing RAML 1.0 API.
 
+Please refer to [complete examples](#complete-examples) for more advanced use cases and [AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) for API construction methods.
+
+## Quick start
 To get started we need to import all necessary modules and initialize `WebApiParser` like so:
 
 ```js
+// js
 const webapi = require('webapi-parser')
 const wap = webapi.WebApiParser
 const domain = webapi.model.domain
@@ -21,6 +23,7 @@ main()
 ```
 
 ```java
+// java
 package co.acme.model;
 
 import webapi.WebApiParser;
@@ -41,6 +44,7 @@ public class Raml10Building {
 Then to start constructing an API we have to create an instance of `WebApi` which will eventually be added to an instance of `Document`:
 
 ```js
+// js
 async function main () {
   ...
   const api = new domain.WebApi()
@@ -50,7 +54,7 @@ async function main () {
 ```
 
 ```java
-...
+// java
 public class Raml10Building {
   public static void buildApi() throws InterruptedException, ExecutionException {
     ...
@@ -65,6 +69,7 @@ Now we can start adding more elements to our API like endpoints, methods, respon
 
 First lets specify API title and protocols:
 ```js
+// js
 async function main () {
   ...
   const api = new domain.WebApi()
@@ -75,6 +80,7 @@ async function main () {
 ```
 
 ```java
+// java
 public class Raml10Building {
   public static void buildApi() throws InterruptedException, ExecutionException {
     ...
@@ -88,6 +94,7 @@ public class Raml10Building {
 
 Next let's add an few endpoints with methods:
 ```js
+// js
 async function main () {
   ...
   const api = new domain.WebApi()
@@ -102,6 +109,7 @@ async function main () {
 ```
 
 ```java
+// java
 public class Raml10Building {
   public static void buildApi() throws InterruptedException, ExecutionException {
     ...
@@ -122,6 +130,7 @@ Starting from here we can add more endpoints, request/response bodies, headers, 
 In the end, the API document we constructed can be used with `webapi-parser` functions that accept [AMF Model instance](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html). E.g. to generate RAML 1.0 string we could do:
 
 ```js
+// js
 async function main () {
   ...
   const generated = await wap.raml10.generateString(model)
@@ -130,6 +139,7 @@ async function main () {
 ```
 
 ```java
+// java
 ...
 import webapi.Raml10;
 

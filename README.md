@@ -3,11 +3,15 @@ API Spec parser based on [AMF](https://github.com/aml-org/amf). Currently suppor
 
 This project is a thin wrapper that exposes API Spec-related capabilities from [AMF](https://github.com/aml-org/amf). It is written in Scala and offered in two versions: [JavaScript](#javascript) and [Java](#java).
 
+## Documentation
+* [AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
+* [API construction](https://raml-org.github.io/webapi-parser/common/api-construction.html)
+* [AMF Model navigation](https://raml-org.github.io/webapi-parser/common/model-navigation.html)
+
 ## JavaScript
 
 ### Documentation
 * [JavaScript API](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html)
-* [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
 ### Installation
 Install the npm package:
@@ -27,7 +31,6 @@ You can check the [JavaScript examples directory](https://github.com/raml-org/we
 
 ### Documentation
 * [Java API](https://raml-org.github.io/webapi-parser/java/index.html)
-* [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
 ### Installation
 To use, you'll need to specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
