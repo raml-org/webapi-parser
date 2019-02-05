@@ -49,7 +49,7 @@ async function main () {
     .withPath('http://a.ml/vocabularies/data#email')
     .withRange(userEmailScalar)
 
-  const user = api.withEndPoint('/user/{id}')
+  const user = api.withEndPoint('/users/{id}')
   user.withName('User endpoint').withDescription('Get user')
 
   const model = new webapi.model.document.Document(api)
