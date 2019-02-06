@@ -4,7 +4,7 @@
 const wap = require('webapi-parser').WebApiParser
 
 const oas20Str = `
-  openapi: '2.0'
+  swagger: '2.0'
   info:
     title: API with Types
     version: ''

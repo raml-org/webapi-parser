@@ -24,7 +24,7 @@ public class Oas20Parsing {
   // Example of parsing and modifying OAS 2.0 JSON string
   public static void parseString() throws InterruptedException, ExecutionException {
     String inp ="{\n" +
-                "  \"openapi\": \"2.0\",\n" +
+                "  \"swagger\": \"2.0\",\n" +
                 "  \"info\": {\n" +
                 "    \"title\": \"ACME Banking HTTP API\",\n" +
                 "    \"version\": \"1.0\"\n" +
@@ -61,7 +61,7 @@ public class Oas20Parsing {
 
   // Example of parsing and modifying OAS 2.0 YAML string
   public static void parseYamlString() throws InterruptedException, ExecutionException {
-    String oasYaml = "openapi: '2.0'\n" +
+    String oasYaml = "swagger: '2.0'\n" +
         "info:\n" +
           "title: API with Types\n" +
           "version: ''";
