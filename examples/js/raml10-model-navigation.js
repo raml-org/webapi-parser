@@ -5,7 +5,7 @@ const path = require('path')
 const wap = require('webapi-parser').WebApiParser
 
 async function main () {
-  // Parse the RAML 1.0 file
+  // Parse RAML 1.0 file
   const inPath = path.join(
     __dirname, '../api-specs/raml/navigation-example-api.raml')
   const model = await wap.raml10.parse(`file://${inPath}`)

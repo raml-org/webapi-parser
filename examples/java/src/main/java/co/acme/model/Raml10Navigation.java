@@ -7,10 +7,14 @@ import amf.client.model.domain.*;
 import java.util.concurrent.ExecutionException;
 
 public class Raml10Navigation {
+
+  // Example of navigating RAML 1.0 API document.
   public static void navigateApi() throws InterruptedException, ExecutionException {
+    // Parse RAML 1.0 file
     String inp = "file://../api-specs/raml/navigation-example-api.raml";
     Document model = (Document) Raml10.parse(inp).get();
 
+    // Access RAML 1.0 API
     WebApi api = (WebApi) model.encodes();
 
     // API root properties
@@ -24,11 +28,11 @@ public class Raml10Navigation {
 
     // Access security scheme from root
     System.out.println(
-        "First security scheme name: " +
-        api.security().get(0).scheme().name().value());
+      "First security scheme name: " +
+      api.security().get(0).scheme().name().value());
     System.out.println(
-        "First security scheme description: " +
-        api.security().get(0).scheme().description().value());
+      "First security scheme description: " +
+      api.security().get(0).scheme().description().value());
 
     // Endpoint /users
     EndPoint users = (EndPoint) api.endPoints().get(0);
@@ -57,6 +61,7 @@ public class Raml10Navigation {
     ScalarNode trHeaderDesc = (ScalarNode) trXTracker.properties().get("description");
     System.out.println("Trait header desc: " + trHeaderDesc.value());
 
+    // POST /users request payload
     Payload postUsersReq = (Payload) ((Request) postUsers.request()).payloads().get(0);
     System.out.println("Request media type: " + postUsersReq.mediaType().value());
 
@@ -65,19 +70,19 @@ public class Raml10Navigation {
     System.out.println("Type name: " + postUsersType.name().value());
     System.out.println("Second property name: " + postUsersType.properties().get(1).name().value());
     System.out.println(
-        "Second property type: " +
-        ((ScalarShape) postUsersType.properties().get(1).range()).dataType());
+      "Second property type: " +
+      ((ScalarShape) postUsersType.properties().get(1).range()).dataType());
 
     // Endpoint /users/{id}
     EndPoint user = (EndPoint) api.endPoints().get(1);
     System.out.println("Path: " + user.path().value());
     System.out.println("Relative path: " + user.relativePath());
     System.out.println(
-        "First annotation name: " +
-        user.customDomainProperties().get(0).name().value());
+      "First annotation name: " +
+      user.customDomainProperties().get(0).name().value());
     System.out.println(
-        "First annotation type: " +
-        ((ScalarNode) user.customDomainProperties().get(0).extension()).value());
+      "First annotation type: " +
+      ((ScalarNode) user.customDomainProperties().get(0).extension()).value());
 
     // GET /users/{id}
     Operation getUser = (Operation) user.operations().get(0);
@@ -90,8 +95,8 @@ public class Raml10Navigation {
     System.out.println("Type name: " + getUsersType.name().value());
     System.out.println("First property name: " + getUsersType.properties().get(0).name().value());
     System.out.println(
-        "First property type: " +
-        ((ScalarShape) postUsersType.properties().get(0).range()).dataType());
+      "First property type: " +
+      ((ScalarShape) postUsersType.properties().get(0).range()).dataType());
 
     // Annotation 'experimental'
     CustomDomainProperty annotation = (CustomDomainProperty) model.declares().get(0);
@@ -102,12 +107,11 @@ public class Raml10Navigation {
     NodeShape userType = (NodeShape) model.declares().get(1);
     System.out.println("User type properties:");
     for (int i = 0; i < userType.properties().size(); i++) {
-        System.out.println(
-            userType.properties().get(i).name().value() + ": " +
-            ((ScalarShape) userType.properties().get(i).range()).dataType()
-        );
+      System.out.println(
+        userType.properties().get(i).name().value() + ": " +
+        ((ScalarShape) userType.properties().get(i).range()).dataType()
+      );
     }
-
     ScalarShape age = (ScalarShape) userType.properties().get(2).range();
     System.out.println("Age from " + age.minimum().value() + " to " + age.maximum().value());
 

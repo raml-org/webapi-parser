@@ -8,11 +8,16 @@ import java.util.concurrent.ExecutionException;
 
 public class AmfGraphParsing {
 
+  // Example of parsing AMF Graph file
   public static void parseFile() throws InterruptedException, ExecutionException {
+    // Parse the file
     final BaseUnit result = AmfGraph.parse("file://../api-specs/amf-graph/api-with-types.json").get();
+
+    // Log parsed model API
     System.out.println("Parsed AMF Graph file. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 
+  // Example of parsing AMF Graph string
   public static void parseString() throws InterruptedException, ExecutionException {
     String inp ="[\n" +
                 "  {\n" +
@@ -42,7 +47,11 @@ public class AmfGraphParsing {
                 "        ]" +
                 "}]}]";
     System.out.println("Input AMF Graph string:\n" + inp);
+
+    // Parse the string
     final BaseUnit result = AmfGraph.parse(inp).get();
+
+    // Extract raw input from parsed model and log it
     System.out.println("Output AMF Graph string:\n" + result.raw().get());
   }
 }
