@@ -16,6 +16,7 @@
 mkdir -p docs/java
 
 echo "Generating Java docs"
+sbt clean
 sbt webapiJVM/genjavadoc:doc
 rm ./jvm/target/java/webapi/*$.java
 sbt webapiJVM/packageDoc
