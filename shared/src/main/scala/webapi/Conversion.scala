@@ -25,13 +25,28 @@ object Conversion {
     (for {
       model <- Raml10.parse(ramlInp).asInternal
     } yield {
-      toJsonSchemaInternal(model)
+      // TODO:
+      // 0. typesMap = composeRamlTypesMap(model)
+      // 1. For each name from typeNames (composes convertedTypes):
+      //    * typeNode = find name in typesMap
+      //    * convertSingleRamlType(name, typeNode)
+      // 2. composeJsonSchema(convertedTypes)
     }).asClient
   }
 
-  def toJsonSchemaInternal(model: BaseUnit, typeNames: String*): String = {
-    val schema = "TODO"
-    schema
+  def composeRamlTypesMap(model: BaseUnit): TODO_TYPES_MAP = {
+    // TODO:
+    // 1. Handle API doc
+    // 2. Handle Library
+    // 3. Handle DataType
+  }
+
+  def convertSingleRamlType(typeName: String, typeNode: TODO_TYPE_2): String = {
+    // TODO: Convert single RAML type to json schema
+  }
+
+  def composeJsonSchema(convertedTypes: String[]): String = {
+    // TODO: Compose single json schema document from array of converted types
   }
 
   // @JSExport
