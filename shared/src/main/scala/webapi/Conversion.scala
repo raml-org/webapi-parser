@@ -21,12 +21,19 @@ import ExecutionContext.Implicits.global
 object Conversion {
 
   @JSExport
-  def toJsonSchema(ramlInp: String, typeNames: String*): String = {
-
+  def toJsonSchema(ramlInp: String, typeNames: String*): ClientFuture[String] = {
+    (for {
+      model <- Raml10.parse(ramlInp).asInternal
+    } yield {
+      toJsonSchemaInternal(model)
+    }).asClient
   }
 
-  @JSExport
-  def toRamlDt(jsonSchemaInp: String, typeNames: String*): String = {
-
+  def toJsonSchemaInternal(model: BaseUnit, typeNames: String*): String = {
+    val schema = "TODO"
+    schema
   }
+
+  // @JSExport
+  // def toRamlDt(jsonSchemaInp: String, typeNames: String*): ClientFuture[String] = {}
 }
