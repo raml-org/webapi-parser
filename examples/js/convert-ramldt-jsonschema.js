@@ -2,6 +2,7 @@
  * Example of converting one and two RAML DataTypes to JSON Schema
  */
 const conversion = require('webapi-parser').Conversion
+const path = require('path')
 
 const ramlApi = `
   #%RAML 1.0
@@ -37,24 +38,29 @@ const ramlDataType = `
 `
 
 async function main () {
-  // Convert single type (defined first)
+  // Convert single type from RAML API string
   const user = await conversion.toJsonSchema(ramlApi, 'User')
-  console.log('User from API:', user)
+  console.log('User from API string:', user)
 
-  // Convert single type (defined second)
+  // Convert single type from RAML Library string
   const book = await conversion.toJsonSchema(ramlLibrary, 'Book')
-  console.log('Book from Library:', book)
+  console.log('Book from Library string:', book)
 
-  // Convert single type from DataType fragment
+  // Convert single type from DataType fragment string
   const dt = await conversion.toJsonSchema(ramlDataType, 'AnyName')
-  console.log('Single type from DataType fragment:', dt)
+  console.log('Single type from DataType fragment string:', dt)
 
-  // Try to convert inexisting type
+  // Try to convert inexisting type from RAML API string
   try {
     const inexisting = await conversion.toJsonSchema(ramlApi, 'FooBar')
   } catch (e) {
     console.log(`Tried to convert inexisting type from API: ${e.toString()}\n`)
   }
+
+  // Convert single type from RAML API file
+  const inPath = path.join(__dirname, '../api-specs/raml/api-with-types.raml')
+  const user2 = await conversion.toJsonSchema(`file://${inPath}`, 'User')
+  console.log('User from API file:', user2)
 }
 
 main()
