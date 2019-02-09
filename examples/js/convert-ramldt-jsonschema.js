@@ -3,7 +3,7 @@
  */
 const conversion = require('webapi-parser').Conversion
 
-const ramlStr = `
+const ramlApi = `
   #%RAML 1.0
   title: API with Types
   types:
@@ -15,26 +15,46 @@ const ramlStr = `
     User:
       type: object
       properties:
-        firstName: string
-        lastName:  string
-        age:
-          type: integer
-          minimum: 0
-          maximum: 99
+        username: string
+`
+
+const ramlLibrary = `
+  #%RAML 1.0 Library
+  types:
+    Book:
+      type: object
+      properties:
+        title: string
+        author: string
+`
+
+const ramlDataType = `
+  #%RAML 1.0 DataType
+  type: object
+  properties:
+    title: string
+    author: string
 `
 
 async function main () {
   // Convert single type (defined first)
-  const book = await conversion.toJsonSchema(ramlStr, 'Book')
-  console.log('Book converted:', book)
+  const user = await conversion.toJsonSchema(ramlApi, 'User')
+  console.log('User from API:', user)
 
   // Convert single type (defined second)
-  const user = await conversion.toJsonSchema(ramlStr, 'User')
-  console.log('User converted:', user)
+  const book = await conversion.toJsonSchema(ramlLibrary, 'Book')
+  console.log('Book from Library:', book)
+
+  // Convert single type from DataType fragment
+  const dt = await conversion.toJsonSchema(ramlDataType, 'AnyName')
+  console.log('Single type from DataType fragment:', dt)
 
   // Try to convert inexisting type
-  const inexisting = await conversion.toJsonSchema(ramlStr, 'FooBar')
-  console.log('Inexisting type converted:', inexisting)
+  try {
+    const inexisting = await conversion.toJsonSchema(ramlApi, 'FooBar')
+  } catch (e) {
+    console.log(`Tried to convert inexisting type from API: ${e.toString()}\n`)
+  }
 }
 
 main()
