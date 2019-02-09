@@ -19,7 +19,7 @@ import collection.mutable.Map
 object Conversion {
 
   /** Converts type from RAML 1.0 input to JSON Schema.
-    * Supported input docs: RAML API spec, RAML Library, Raml DataType.
+    * Supported input docs are: RAML API spec, RAML Library, RAML DataType.
     *
     * @param ramlInp RAML 1.0 file url/path or content string.
     * @param typeName Name of type to be converted.
