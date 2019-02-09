@@ -31,6 +31,7 @@ object Conversion {
       //    * typeNode = find name in typesMap
       //    * convertSingleRamlType(name, typeNode)
       // 2. composeJsonSchema(convertedTypes)
+
     }).asClient
   }
 
