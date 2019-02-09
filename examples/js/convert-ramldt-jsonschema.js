@@ -32,13 +32,9 @@ async function main () {
   const user = await conversion.toJsonSchema(ramlStr, 'User')
   console.log('User converted:', user)
 
-  // Convert two types
-  const userAndBook = await conversion.toJsonSchema(ramlStr, 'User', 'Book')
-  console.log('User and Book converted:', userAndBook)
-
-  // Try to convert inexisting types
-  const inexisting = await conversion.toJsonSchema(ramlStr, 'FooBar', 'Book')
-  console.log('Inexisting types converted:', inexisting)
+  // Try to convert inexisting type
+  const inexisting = await conversion.toJsonSchema(ramlStr, 'FooBar')
+  console.log('Inexisting type converted:', inexisting)
 }
 
 main()

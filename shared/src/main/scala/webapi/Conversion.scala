@@ -21,17 +21,14 @@ import ExecutionContext.Implicits.global
 object Conversion {
 
   @JSExport
-  def toJsonSchema(ramlInp: String, typeNames: String*): ClientFuture[String] = {
+  def toJsonSchema(ramlInp: String, typeName: String): ClientFuture[String] = {
     (for {
       model <- Raml10.parse(ramlInp).asInternal
     } yield {
       // TODO:
       // 0. typesMap = composeRamlTypesMap(model)
-      // 1. For each name from typeNames (composes convertedTypes):
-      //    * typeNode = find name in typesMap
-      //    * convertSingleRamlType(name, typeNode)
-      // 2. composeJsonSchema(convertedTypes)
-
+      // 1. typeNode = find name in typesMap
+      // 2. return convertSingleRamlType(name, typeNode)
     }).asClient
   }
 
@@ -46,10 +43,4 @@ object Conversion {
     // TODO: Convert single RAML type to json schema
   }
 
-  def composeJsonSchema(convertedTypes: String[]): String = {
-    // TODO: Compose single json schema document from array of converted types
-  }
-
-  // @JSExport
-  // def toRamlDt(jsonSchemaInp: String, typeNames: String*): ClientFuture[String] = {}
 }

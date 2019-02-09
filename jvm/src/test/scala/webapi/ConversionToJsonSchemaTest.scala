@@ -12,11 +12,6 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
     """#%RAML 1.0
       |title: API with Types
       |types:
-      |  Book:
-      |    type: object
-      |    properties:
-      |      title: string
-      |      author: string
       |  User:
       |    type: object
       |    properties:
@@ -25,7 +20,12 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
       |      age:
       |        type: integer
       |        minimum: 0
-      |        maximum: 99""".stripMargin
+      |        maximum: 99
+      |  Book:
+      |    type: object
+      |    properties:
+      |      title: string
+      |      author: string""".stripMargin
 
   private val ramlLibrary: String =
     """#%RAML 1.0 Library
@@ -70,50 +70,8 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
   private val jsonSchemaBook: String =
     """{
       |  "$schema": "http://json-schema.org/draft-04/schema#",
+      |  "$ref": "#/definitions/Book",
       |  "definitions": {
-      |    "Book": {
-      |      "type": "object",
-      |      "required": [
-      |        "title",
-      |        "author"
-      |      ],
-      |      "properties": {
-      |        "title": {
-      |          "type": "string"
-      |        },
-      |        "author": {
-      |          "type": "string"
-      |        }
-      |      }
-      |    }
-      |  }
-      |}""".stripMargin.replaceAll("\\s", "")
-
-  private val jsonSchemaUserBook: String =
-    """{
-      |  "$schema": "http://json-schema.org/draft-04/schema#",
-      |  "definitions": {
-      |    "User": {
-      |      "type": "object",
-      |      "required": [
-      |        "firstName",
-      |        "lastName",
-      |        "age"
-      |      ],
-      |      "properties": {
-      |        "firstName": {
-      |          "type": "string"
-      |        },
-      |        "lastName": {
-      |          "type": "string"
-      |        },
-      |        "age": {
-      |          "type": "integer",
-      |          "minimum": 0,
-      |          "maximum": 99
-      |        }
-      |      }
-      |    },
       |    "Book": {
       |      "type": "object",
       |      "required": [
@@ -140,27 +98,11 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
     }
   }
 
-  test("Two types from API document") {
-    for {
-      converted <- Conversion.toJsonSchema(ramlApi, "User", "Book").asInternal
-    } yield {
-      converted.replaceAll("\\s", "") should be (jsonSchemaUserBook)
-    }
-  }
-
   test("Single type from Library") {
     for {
       converted <- Conversion.toJsonSchema(ramlLibrary, "Book").asInternal
     } yield {
       converted.replaceAll("\\s", "") should be (jsonSchemaBook)
-    }
-  }
-
-  test("Two types from Library") {
-    for {
-      converted <- Conversion.toJsonSchema(ramlLibrary, "User", "Book").asInternal
-    } yield {
-      converted.replaceAll("\\s", "") should be (jsonSchemaUserBook)
     }
   }
 
@@ -185,14 +127,6 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
       converted <- Conversion.toJsonSchema(ramlApi, "InexistingType").asInternal
     } yield {
       converted.replaceAll("\\s", "") should be (jsonSchemaNoTypes)
-    }
-  }
-
-  test("Skip inexisting types when converting multiple types") {
-    for {
-      converted <- Conversion.toJsonSchema(ramlApi, "InexistingType", "Book").asInternal
-    } yield {
-      converted.replaceAll("\\s", "") should be (jsonSchemaBook)
     }
   }
 }
