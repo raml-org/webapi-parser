@@ -61,18 +61,35 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
       |  title: string
       |  author: string""".stripMargin
 
-  private val jsonSchemaNoTypes: String =
-    """{
-      |  "$schema": "http://json-schema.org/draft-04/schema#",
-      |  "definitions": {}
-      |}""".stripMargin.replaceAll("\\s", "")
-
   private val jsonSchemaBook: String =
     """{
       |  "$schema": "http://json-schema.org/draft-04/schema#",
       |  "$ref": "#/definitions/Book",
       |  "definitions": {
       |    "Book": {
+      |      "type": "object",
+      |      "required": [
+      |        "title",
+      |        "author"
+      |      ],
+      |      "properties": {
+      |        "title": {
+      |          "type": "string"
+      |        },
+      |        "author": {
+      |          "type": "string"
+      |        }
+      |      }
+      |    }
+      |  }
+      |}""".stripMargin.replaceAll("\\s", "")
+
+  private val jsonSchemaFromDataType: String =
+    """{
+      |  "$schema": "http://json-schema.org/draft-04/schema#",
+      |  "$ref": "#/definitions/type",
+      |  "definitions": {
+      |    "type": {
       |      "type": "object",
       |      "required": [
       |        "title",
@@ -118,15 +135,16 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
     for {
       converted <- Conversion.toJsonSchema(ramlDataType, "Book").asInternal
     } yield {
-      converted.replaceAll("\\s", "") should be (jsonSchemaBook)
+      converted.replaceAll("\\s", "") should be (jsonSchemaFromDataType)
     }
   }
 
   test("Skip inexisting types when converting one type") {
-    for {
-      converted <- Conversion.toJsonSchema(ramlApi, "InexistingType").asInternal
-    } yield {
-      converted.replaceAll("\\s", "") should be (jsonSchemaNoTypes)
+    val futureEx = recoverToExceptionIf[Exception] {
+      Conversion.toJsonSchema(ramlApi, "Foo").asInternal
+    }
+    futureEx map {
+      ex => assert(ex.getMessage == "Type with name 'Foo' does not exist")
     }
   }
 }

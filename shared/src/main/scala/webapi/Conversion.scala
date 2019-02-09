@@ -1,20 +1,17 @@
 package webapi
 
-import amf.{Core, MessageStyles, ProfileNames}
-import amf.plugins.document.{WebApi}
-import amf.plugins.document.webapi.validation.PayloadValidatorPlugin
-import amf.plugins.features.AMFValidation
 import amf.client.parse._
 import amf.client.render._
-import amf.client.resolve._
-import amf.client.model.document.{BaseUnit}
-import amf.core.model.document.{BaseUnit => InternalBaseUnit}
-import amf.client.validate.ValidationReport
+import amf.client.model.document.{BaseUnit, Document, DataType}
+import amf.client.model.document.{Module => Library}
+import amf.client.model.domain.{NodeShape => DomainNodeShape}
+import amf.plugins.domain.shapes.models.NodeShape
 import amf.client.convert.CoreClientConverters._
 
 import scala.concurrent._
 import scala.scalajs.js.annotation._
 import ExecutionContext.Implicits.global
+import collection.mutable.Map
 
 
 @JSExportTopLevel("Conversion")
@@ -25,22 +22,55 @@ object Conversion {
     (for {
       model <- Raml10.parse(ramlInp).asInternal
     } yield {
-      // TODO:
-      // 0. typesMap = composeRamlTypesMap(model)
-      // 1. typeNode = find name in typesMap
-      // 2. return convertSingleRamlType(name, typeNode)
+      val typesJsonMap = composeTypesJsonMap(model, typeName)
+      pickMatchingJson(typeName, typesJsonMap)
     }).asClient
   }
 
-  def composeRamlTypesMap(model: BaseUnit): TODO_TYPES_MAP = {
-    // TODO:
-    // 1. Handle API doc
-    // 2. Handle Library
-    // 3. Handle DataType
+  // Composes map of {type1Name -> type1Json, ...}
+  def composeTypesJsonMap(model: BaseUnit, typeName: String): Map[String, String] = {
+    model match {
+      case lib: Library => composeRamlTypesMapLibrary(lib, typeName)
+      case dt: DataType => composeRamlTypesMapDataType(dt, typeName)
+      case doc: Document => composeRamlTypesMapDocument(doc, typeName)
+    }
   }
 
-  def convertSingleRamlType(typeName: String, typeNode: TODO_TYPE_2): String = {
-    // TODO: Convert single RAML type to json schema
+  // Composes map of typeName->typeJson from RAML API
+  def composeRamlTypesMapDocument(model: Document, typeName: String): Map[String, String] = {
+    var tm = Map[String, String]()
+    model.declares.asInternal foreach {
+      domainEl => {
+        var shape = domainEl.asInstanceOf[NodeShape]
+        tm += (shape.name.value() -> shape.toJsonSchema)
+      }
+    }
+    tm
   }
 
+  // Composes map of typeName->typeJson from RAML Library
+  def composeRamlTypesMapLibrary(model: Library, typeName: String): Map[String, String] = {
+    var tm = Map[String, String]()
+    model.declares.asInternal foreach {
+      domainEl => {
+        var shape = domainEl.asInstanceOf[NodeShape]
+        tm += (shape.name.value() -> shape.toJsonSchema)
+      }
+    }
+    tm
+  }
+
+  // Composes map of typeName->typeJson from RAML DataType
+  def composeRamlTypesMapDataType(model: DataType, typeName: String): Map[String, String] = {
+    var shape = model.encodes.asInstanceOf[DomainNodeShape]
+    Map[String, String](typeName -> shape.toJsonSchema)
+  }
+
+  // Picks JSON string for a type with matching name
+  def pickMatchingJson(typeName: String, typesJsonMap: Map[String, String]): String = {
+    typesJsonMap.get(typeName) match {
+      case Some(typeJson) => typeJson
+      case None => throw new Exception(s"Type with name '$typeName' does not exist")
+    }
+  }
 }
