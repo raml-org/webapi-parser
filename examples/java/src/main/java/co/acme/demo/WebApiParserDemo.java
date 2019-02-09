@@ -49,6 +49,7 @@ public class WebApiParserDemo {
     Oas20Validation.validate();
     AmfGraphValidation.validate();
 
+    RamlDtToJsonSchema.convertFromApiFile();
     RamlDtToJsonSchema.convertFromApi();
     RamlDtToJsonSchema.convertFromLibrary();
     RamlDtToJsonSchema.convertFromDataType();

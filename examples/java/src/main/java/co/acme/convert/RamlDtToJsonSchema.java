@@ -6,7 +6,14 @@ import java.util.concurrent.ExecutionException;
 
 public class RamlDtToJsonSchema {
 
-  // Example of converting single RAML Data Type from RAML 1.0 API
+  // Example of converting single RAML Data Type from RAML 1.0 API file
+  public static void convertFromApiFile() throws InterruptedException, ExecutionException {
+    String inp = "file://../api-specs/raml/api-with-types.raml";
+    String converted = Conversion.toJsonSchema(inp, "User").get();
+    System.out.println("Converted to JSON Schema:\n" + converted);
+  }
+
+  // Example of converting single RAML Data Type from RAML 1.0 API string
   public static void convertFromApi() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0\n" +
                 "title: API with Types\n" +
@@ -25,7 +32,7 @@ public class RamlDtToJsonSchema {
     System.out.println("Converted to JSON Schema:\n" + converted);
   }
 
-  // Example of converting single RAML Data Type from RAML 1.0 Library
+  // Example of converting single RAML Data Type from RAML 1.0 Library string
   public static void convertFromLibrary() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0 Library\n" +
                 "types:\n" +
@@ -39,7 +46,7 @@ public class RamlDtToJsonSchema {
     System.out.println("Converted to JSON Schema:\n" + converted);
   }
 
-  // Example of converting single RAML Data Type from RAML 1.0 DataType Fragment
+  // Example of converting single RAML Data Type from RAML 1.0 DataType Fragment string
   public static void convertFromDataType() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0 DataType\n" +
                 "type: object\n" +
