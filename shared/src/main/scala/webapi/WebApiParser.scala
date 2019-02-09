@@ -19,7 +19,7 @@ import ExecutionContext.Implicits.global
 
 /** Utility object meant for internal use */
 object WebApiParser {
-  var initialized: Boolean = false
+  private var initialized: Boolean = false
 
   /** Initializes necessary plugins */
   def init(): ClientFuture[Unit] = {

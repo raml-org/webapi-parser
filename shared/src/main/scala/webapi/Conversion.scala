@@ -14,9 +14,17 @@ import ExecutionContext.Implicits.global
 import collection.mutable.Map
 
 
+/** Provides RAML DT <> JSON Schema conversion utils */
 @JSExportTopLevel("Conversion")
 object Conversion {
 
+  /** Converts type from RAML 1.0 input to JSON Schema.
+    * Supported input docs: RAML API spec, RAML Library, Raml DataType.
+    *
+    * @param ramlInp RAML 1.0 file url/path or content string.
+    * @param typeName Name of type to be converted.
+    * @return Converted type as JSON Schema string.
+    */
   @JSExport
   def toJsonSchema(ramlInp: String, typeName: String): ClientFuture[String] = {
     (for {
@@ -28,7 +36,7 @@ object Conversion {
   }
 
   // Composes map of {type1Name -> type1Json, ...}
-  def composeTypesJsonMap(model: BaseUnit, typeName: String): Map[String, String] = {
+  private def composeTypesJsonMap(model: BaseUnit, typeName: String): Map[String, String] = {
     model match {
       case lib: Library => composeRamlTypesMapLibrary(lib, typeName)
       case dt: DataType => composeRamlTypesMapDataType(dt, typeName)
@@ -37,7 +45,7 @@ object Conversion {
   }
 
   // Composes map of typeName->typeJson from RAML API
-  def composeRamlTypesMapDocument(model: Document, typeName: String): Map[String, String] = {
+  private def composeRamlTypesMapDocument(model: Document, typeName: String): Map[String, String] = {
     var tm = Map[String, String]()
     model.declares.asInternal foreach {
       domainEl => {
@@ -49,7 +57,7 @@ object Conversion {
   }
 
   // Composes map of typeName->typeJson from RAML Library
-  def composeRamlTypesMapLibrary(model: Library, typeName: String): Map[String, String] = {
+  private def composeRamlTypesMapLibrary(model: Library, typeName: String): Map[String, String] = {
     var tm = Map[String, String]()
     model.declares.asInternal foreach {
       domainEl => {
@@ -61,13 +69,13 @@ object Conversion {
   }
 
   // Composes map of typeName->typeJson from RAML DataType
-  def composeRamlTypesMapDataType(model: DataType, typeName: String): Map[String, String] = {
+  private def composeRamlTypesMapDataType(model: DataType, typeName: String): Map[String, String] = {
     var shape = model.encodes.asInstanceOf[DomainNodeShape]
     Map[String, String](typeName -> shape.toJsonSchema)
   }
 
   // Picks JSON string for a type with matching name
-  def pickMatchingJson(typeName: String, typesJsonMap: Map[String, String]): String = {
+  private def pickMatchingJson(typeName: String, typesJsonMap: Map[String, String]): String = {
     typesJsonMap.get(typeName) match {
       case Some(typeJson) => typeJson
       case None => throw new Exception(s"Type with name '$typeName' does not exist")
