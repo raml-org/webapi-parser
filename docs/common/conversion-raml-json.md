@@ -9,6 +9,8 @@ To convert RAML Data Type to JSON Schema simply use `Conversion.toJsonSchema` me
 
 Provide file path or content as the first argument and name of the type to be converted as the second argument. Second argument is optional when converting single type from RAML 1.0 DataType Fragment.
 
+Output is the JSON Schema string of converted type.
+
 ```js
 // js
 const conversion = require('webapi-parser').Conversion
