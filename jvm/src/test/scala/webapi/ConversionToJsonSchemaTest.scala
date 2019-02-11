@@ -139,7 +139,7 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
     }
   }
 
-  test("Skip inexisting types when converting one type") {
+  test("Error when trying to convert inexisting type") {
     val futureEx = recoverToExceptionIf[Exception] {
       Conversion.toJsonSchema(ramlApi, "Foo").asInternal
     }
