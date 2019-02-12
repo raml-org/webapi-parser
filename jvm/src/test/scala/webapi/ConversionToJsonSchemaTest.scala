@@ -8,7 +8,7 @@ import org.scalatest.Assertions._
 
 class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
 
-  private val ramlDocPath = "file://shared/src/test/resources/raml/api-uses-lib.raml"
+  private val ramlDocPath = "file://shared/src/test/resources/raml/lib-uses-lib.raml"
 
   private val ramlApi: String =
     """#%RAML 1.0
@@ -150,7 +150,7 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
     }
   }
 
-  test("Single type from API document file that uses library") {
+  test("Single type from API Library file that uses library") {
     for {
       converted <- Conversion.toJsonSchema(ramlDocPath, "Book").asInternal
     } yield {

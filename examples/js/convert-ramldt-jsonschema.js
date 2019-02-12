@@ -57,8 +57,8 @@ async function main () {
     console.log(`Tried to convert inexisting type from API: ${e.toString()}\n`)
   }
 
-  // Convert single type from RAML API file
-  const inPath = path.join(__dirname, '../api-specs/raml/api-uses-lib.raml')
+  // Convert single type from RAML Library file with `uses`
+  const inPath = path.join(__dirname, '../api-specs/raml/lib-uses-lib.raml')
   const book2 = await conversion.toJsonSchema(`file://${inPath}`, 'Book')
   console.log('Book from API file:', book2)
 }

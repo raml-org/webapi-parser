@@ -6,9 +6,9 @@ import java.util.concurrent.ExecutionException;
 
 public class RamlDtToJsonSchema {
 
-  // Example of converting single RAML Data Type from RAML 1.0 API file
+  // Example of converting single RAML Data Type from RAML 1.0 Library file with `uses`
   public static void convertFromApiFile() throws InterruptedException, ExecutionException {
-    String inp = "file://../api-specs/raml/api-uses-lib.raml";
+    String inp = "file://../api-specs/raml/lib-uses-lib.raml";
     String converted = Conversion.toJsonSchema(inp, "Book").get();
     System.out.println("Converted to JSON Schema:\n" + converted);
   }
