@@ -8,6 +8,8 @@ import org.scalatest.Assertions._
 
 class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
 
+  private val ramlDocPath = "file://shared/src/test/resources/raml/api-uses-lib.raml"
+
   private val ramlApi: String =
     """#%RAML 1.0
       |title: API with Types
@@ -145,6 +147,14 @@ class ConversionToJsonSchemaTest extends AsyncFunSuite with Matchers {
     }
     futureEx map {
       ex => assert(ex.getMessage == "Type with name 'Foo' does not exist")
+    }
+  }
+
+  test("Single type from API document file that uses library") {
+    for {
+      converted <- Conversion.toJsonSchema(ramlDocPath, "Book").asInternal
+    } yield {
+      converted.replaceAll("\\s", "") should be (jsonSchemaBook)
     }
   }
 }

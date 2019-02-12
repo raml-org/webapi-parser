@@ -58,9 +58,9 @@ async function main () {
   }
 
   // Convert single type from RAML API file
-  const inPath = path.join(__dirname, '../api-specs/raml/api-with-types.raml')
-  const user2 = await conversion.toJsonSchema(`file://${inPath}`, 'User')
-  console.log('User from API file:', user2)
+  const inPath = path.join(__dirname, '../api-specs/raml/api-uses-lib.raml')
+  const book2 = await conversion.toJsonSchema(`file://${inPath}`, 'Book')
+  console.log('Book from API file:', book2)
 }
 
 main()

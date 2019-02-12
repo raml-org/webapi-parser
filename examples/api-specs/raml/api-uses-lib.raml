@@ -1,0 +1,11 @@
+#%RAML 1.0
+title: Test API
+
+uses:
+  lib :  ./lib.raml
+
+types:
+  Book:
+    type: lib.Authored
+    properties:
+      title: string

@@ -8,8 +8,8 @@ public class RamlDtToJsonSchema {
 
   // Example of converting single RAML Data Type from RAML 1.0 API file
   public static void convertFromApiFile() throws InterruptedException, ExecutionException {
-    String inp = "file://../api-specs/raml/api-with-types.raml";
-    String converted = Conversion.toJsonSchema(inp, "User").get();
+    String inp = "file://../api-specs/raml/api-uses-lib.raml";
+    String converted = Conversion.toJsonSchema(inp, "Book").get();
     System.out.println("Converted to JSON Schema:\n" + converted);
   }
 
