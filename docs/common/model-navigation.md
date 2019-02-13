@@ -145,6 +145,10 @@ public class Raml10Navigation {
 }
 ```
 
+Note that it's also possible to use AMF Model utility methods to get data from it. Please refer to [complete examples](#complete-examples) for more details.
+
 ## Complete examples
 * [JavaScript example](https://github.com/raml-org/webapi-parser/blob/master/examples/js/raml10-model-navigation.js)
 * [Java example](https://github.com/raml-org/webapi-parser/blob/master/examples/java/src/main/java/co/acme/model/Raml10Navigation.java)
+* [Utility methods example (JS)](https://github.com/raml-org/webapi-parser/blob/master/examples/js/raml10-utility-methods.js)
+* [Utility methods example (Java)](https://github.com/raml-org/webapi-parser/blob/master/examples/java/src/main/java/co/acme/model/Raml10UtilityMethods.java)
