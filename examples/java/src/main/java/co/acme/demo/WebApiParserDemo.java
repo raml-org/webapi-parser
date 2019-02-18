@@ -12,6 +12,7 @@ import co.acme.validate.Raml10Validation;
 import co.acme.validate.Raml08Validation;
 import co.acme.validate.Oas20Validation;
 import co.acme.validate.AmfGraphValidation;
+import co.acme.convert.RamlDtToJsonSchema;
 
 import java.util.concurrent.ExecutionException;
 
@@ -47,5 +48,11 @@ public class WebApiParserDemo {
     Raml08Validation.validate();
     Oas20Validation.validate();
     AmfGraphValidation.validate();
+
+    RamlDtToJsonSchema.convertFromApiFile();
+    RamlDtToJsonSchema.convertFromApi();
+    RamlDtToJsonSchema.convertFromLibrary();
+    RamlDtToJsonSchema.convertFromDataType();
+    RamlDtToJsonSchema.convertInexisting();
   }
 }
