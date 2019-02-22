@@ -2,7 +2,6 @@
  * Example of converting JSON Schema to RAML Data Type using AMF Model
  */
 const wap = require('webapi-parser').WebApiParser
-const path = require('path')
 
 const oasDocument = `
   {
@@ -20,20 +19,19 @@ const oasDocument = `
     "paths": {
       "/pets/{petId}": {
         "get": {
-          "summary": "Info for a specific pet",
-          "operationId": "showPetById",
-          "tags": ["pets"],
-          "parameters": [{
-            "name": "petId",
-            "in": "path",
-            "required": true,
-            "description": "The id of the pet to retrieve",
-            "type": "string"
-          }],
           "responses": {
             "200": {
               "description": "Expected response to a valid request",
               "schema": {"$ref": "#/definitions/Pet"}
+            }
+          }
+        }
+      },
+      "/pets/{petId}/owner": {
+        "get": {
+          "responses": {
+            "200": {
+              "schema": {"$ref": "#/definitions/Owner"}
             }
           }
         }
@@ -47,6 +45,13 @@ const oasDocument = `
           "name": {"type": "string"},
           "tag": {"type": "string"}
         }
+      },
+      "Owner": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "pet": {"$ref": "#/definitions/Pet"}
+        }
       }
     }
   }
@@ -57,17 +62,30 @@ async function main () {
   const model = await wap.oas20.parse(oasDocument)
 
   // Convert type from "definitions".
-  // Type can be picked using utility functions
+  // Type can be picked using utility functions.
   console.log(
-    'RAML Data type from definitions using util:\n',
+    'RAML Data Type from definitions using util:\n',
     model.findById(
       'http://a.ml/amf/default_document#/declarations/types/Pet'
     ).toRamlDatatype)
 
   // Type can also be picked by index.
   console.log(
-    'RAML Data type from definitions by index:\n',
+    'RAML Data Type from definitions by index:\n',
     model.declares[0].toRamlDatatype)
+
+  // To properly convert type with references, model needs to be
+  // resolved first.
+  const resolved = await wap.oas20.resolve(model)
+  console.log(
+    'RAML Data Type (with references) from resolved document:\n',
+    resolved
+      .encodes
+      .endPoints[1]
+      .operations[0]
+      .responses[0]
+      .payloads[0]
+      .schema.toRamlDatatype)
 }
 
 main()
