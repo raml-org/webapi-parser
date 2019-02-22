@@ -15,12 +15,12 @@ async function main () {
   // Type can be picked using utility functions.
   console.log(
     'RAML Data Type from definitions using util:\n',
-    model.findById(`${docPath}#/declarations/types/Pet`).toJsonSchema)
+    model.findById(`${docPath}#/declarations/types/Pet`).toRamlDatatype)
 
   // Type can also be picked by index.
   console.log(
     'RAML Data Type from definitions by index:\n',
-    model.declares[0].toJsonSchema)
+    model.declares[0].toRamlDatatype)
 
   // To properly convert type with references, model needs to be
   // resolved first.
@@ -33,7 +33,7 @@ async function main () {
       .operations[0]
       .responses[0]
       .payloads[0]
-      .schema.toJsonSchema)
+      .schema.toRamlDatatype)
 }
 
 main()
