@@ -23,7 +23,7 @@ public class JsonSchemaToRamlDt {
     // Type can also be picked by index.
     NodeShape pet2 = (NodeShape) doc.declares().get(0);
     System.out.println(
-      "JSON from API root by index:\n" +
+      "RAML Data Type from definitions by index:\n" +
       pet2.toRamlDatatype());
 
     // To properly convert type with references, model needs to be
