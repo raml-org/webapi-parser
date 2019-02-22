@@ -18,13 +18,13 @@ public class JsonSchemaToRamlDt {
       docPath + "#/declarations/types/Pet").get();
     System.out.println(
       "RAML Data Type from definitions using util:\n" +
-      pet.toJsonSchema());
+      pet.toRamlDatatype());
 
     // Type can also be picked by index.
     NodeShape pet2 = (NodeShape) doc.declares().get(0);
     System.out.println(
       "JSON from API root by index:\n" +
-      pet2.toJsonSchema());
+      pet2.toRamlDatatype());
 
     // To properly convert type with references, model needs to be
     // resolved first.
@@ -36,6 +36,6 @@ public class JsonSchemaToRamlDt {
     NodeShape owner = (NodeShape) getOwnerPayload.schema();
     System.out.println(
       "RAML Data Type (with references) from resolved document:\n" +
-      owner.toJsonSchema());
+      owner.toRamlDatatype());
   }
 }
