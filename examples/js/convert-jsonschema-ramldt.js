@@ -4,7 +4,7 @@
 const wap = require('webapi-parser').WebApiParser
 const path = require('path')
 
-const schema = `
+const oasDocument = `
   {
     "swagger": "2.0",
     "info": {
@@ -54,7 +54,7 @@ const schema = `
 
 async function main () {
   // Parse an API document string
-  const model = await wap.oas20.parse(schema)
+  const model = await wap.oas20.parse(oasDocument)
 
   // Convert type from "definitions".
   // Type can be picked using utility functions
