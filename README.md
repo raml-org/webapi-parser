@@ -5,6 +5,7 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 
 ## Documentation
 * [RAML Data Type -> JSON Schema conversion](https://raml-org.github.io/webapi-parser/common/conversion-raml-json)
+* [JSON Schema -> RAML Data Type conversion](https://raml-org.github.io/webapi-parser/common/conversion-json-raml)
 
 ## JavaScript
 

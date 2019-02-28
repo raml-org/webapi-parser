@@ -1,13 +1,13 @@
-# RAML Data Type -> JSON Schema conversion
+# JSON Schema -> RAML Data Type conversion
 Using `webapi-parser` and [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) it is possible to convert JSON Schema from OAS 2.0 (or another) document to RAML Data Type included in RAML 1.0 Library.
 
 Please refer to [complete examples](#complete-examples) for more advanced use cases.
 
 ## Quick start
 
-We are going to use [OAS 2.0 Pet Store API](https://github.com/raml-org/webapi-parser/blob/master/examples/api-specs/oas/pet-store-api.json) in following examples.
+We are going to use [OAS 2.0 Pet Store API](https://github.com/raml-org/webapi-parser/blob/master/examples/api-specs/oas/pet-store-api.json) in the following examples.
 
-To convert JSON Schema to RAML Data Type, parse the document of your choice, reach data type using AMF Model and call its `.toRamlDatatype()` method (or property in JS case). Output of the methods is RAML 1.0 Library string containing converted type.
+To convert JSON Schema to RAML Data Type, parse the document of your choice, reach data type using AMF Model and call its `.toRamlDatatype()` method (or property in JS case). Output of the method is RAML 1.0 Library string containing converted type.
 
 ```js
 // js
