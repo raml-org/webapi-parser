@@ -16,7 +16,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
   private val generatedFilePath = s"${System.getProperty("java.io.tmpdir")}/generated-oas20.json"
   private val apiString: String =
     """{
-      |"openapi": "2.0",
+      |"swagger": "2.0",
       |"info": {"title": "API with Types", "version": ""},
       |"definitions": {
       |  "User": {
@@ -51,7 +51,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |}
       |}""".stripMargin
   private val apiStringYaml: String =
-    """openapi: '2.0'
+    """swagger: '2.0'
       |info:
       |  title: API with Types
       |  version: ''

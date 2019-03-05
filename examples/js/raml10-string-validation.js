@@ -1,3 +1,6 @@
+/**
+ * Example of RAML 1.0 string parsing and validation.
+ */
 const wap = require('webapi-parser').WebApiParser
 
 const invalidRaml = `
@@ -34,8 +37,13 @@ const invalidRaml = `
 `
 
 async function main () {
+  // Parse invalid RAML 1.0 string
   const model = await wap.raml10.parse(invalidRaml)
+
+  // Validate parser model and get validation results
   const report = await wap.raml10.validate(model)
+
+  // Log validation results
   console.log('Validation errors:\n', report.results)
 }
 
