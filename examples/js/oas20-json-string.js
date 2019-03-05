@@ -1,8 +1,11 @@
+/**
+ * Example of parsing and generating OAS 2.0 JSON strings.
+ */
 const wap = require('webapi-parser').WebApiParser
 
 const oas20Str = `
   {
-    "openapi": "2.0",
+    "swagger": "2.0",
     "info": {"title": "API with Types", "version": ""},
     "definitions": {
       "User": {
@@ -39,15 +42,23 @@ const oas20Str = `
 `
 
 async function main () {
+  // Parse OAS 2.0 JSON string
   console.log('Input:\n', oas20Str)
   const model = await wap.oas20.parse(oas20Str)
 
-  // Modify content
+  // Get User.age property
   const age = model.declares[0].properties[2]
+
+  // Set age minimum to 18
   age.range.withMinimum(18)
+
+  // Set age maximum to 120
   age.range.withMaximum(120)
+
+  // Set API version to 5.0.3
   model.encodes.withVersion('5.0.3')
 
+  // Generate OAS 2.0 JSON string
   const generated = await wap.oas20.generateString(model)
   console.log('Generated:\n', generated)
 }

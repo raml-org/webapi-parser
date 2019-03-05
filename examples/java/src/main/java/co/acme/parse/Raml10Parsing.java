@@ -9,25 +9,36 @@ import java.util.concurrent.ExecutionException;
 
 public class Raml10Parsing {
 
+  // Example of parsing RAML 1.0 file
   public static void parseFile() throws InterruptedException, ExecutionException {
+    // Parse the file
     final BaseUnit result = Raml10.parse("file://../api-specs/raml/api-with-types.raml").get();
+
+    // Log parsed model API
     System.out.println("Parsed Raml10 file. Expected unit encoding webapi: " + ((Document) result).encodes());
   }
 
-  /* Parses string and modifies API via AMF model */
+  // Example of parsing RAML 1.0 file
   public static void parseString() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0\n" +
                 "\n" +
                 "title: ACME Banking HTTP API\n" +
                 "version: 1.0";
     System.out.println("Input Raml10 string:\n" + inp);
+
+    // Parse the string
     Document doc = (Document) Raml10.parse(inp).get();
 
-    // Modify model
+    // Get parsed model API instance
     WebApi api = (WebApi) doc.encodes();
+
+    // Set API version
     api.withVersion("3.7");
+
+    // Set API description
     api.withDescription("Very nice api");
 
+    // Generate RAML 1.0 string from updated model and log it
     String output = Raml10.generateString(doc).get();
     System.out.println("Generated Raml10 string:\n" + output);
   }
