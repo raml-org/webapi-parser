@@ -4,6 +4,9 @@ API Spec parser based on [AMF](https://github.com/aml-org/amf). Currently suppor
 This project is a thin wrapper that exposes API Spec-related capabilities from [AMF](https://github.com/aml-org/amf). It is written in Scala and offered in two versions: [JavaScript](#javascript) and [Java](#java).
 
 ## Documentation
+* [AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
+* [API construction](https://raml-org.github.io/webapi-parser/common/api-construction)
+* [AMF Model navigation](https://raml-org.github.io/webapi-parser/common/model-navigation)
 * [RAML Data Type -> JSON Schema conversion](https://raml-org.github.io/webapi-parser/common/conversion-raml-json)
 * [JSON Schema -> RAML Data Type conversion](https://raml-org.github.io/webapi-parser/common/conversion-json-raml)
 
@@ -11,7 +14,6 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 
 ### Documentation
 * [JavaScript API](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html)
-* [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
 ### Installation
 Install the npm package:
@@ -25,13 +27,12 @@ and then require/reference as follows:
 const wap = require('webapi-parser').WebApiParser
 ```
 
-You can check the [JavaScript examples directory](examples/js/) for some usage examples.
+You can check the [JavaScript examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/js/) for some usage examples.
 
 ## Java
 
 ### Documentation
 * [Java API](https://raml-org.github.io/webapi-parser/java/index.html)
-* [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 
 ### Installation
 To use, you'll need to specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
@@ -73,7 +74,7 @@ Maven:
 </repositories>
 ```
 
-You can check the [Java examples directory](examples/java/) for some usage examples.
+You can check the [Java examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/java/) for some usage examples.
 
 ---
-If you wish to contribute to this project, see our [Contribution Guidelines](./CONTRIBUTING.md).
+If you wish to contribute to this project, see our [Contribution Guidelines](https://github.com/raml-org/webapi-parser/tree/master/CONTRIBUTING.md).

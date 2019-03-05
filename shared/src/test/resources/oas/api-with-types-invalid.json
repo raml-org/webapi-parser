@@ -1,5 +1,5 @@
 {
-  "openapi": "2.0",
+  "swagger": "2.0",
   "info": {"title": "API with Types", "version": ""},
   "definitions": {
     "User": {
@@ -33,7 +33,7 @@
         "type": "string",
         "in": "path",
         "name": "id",
-        "required": true
+        "required": yes
       }]
     }
   }

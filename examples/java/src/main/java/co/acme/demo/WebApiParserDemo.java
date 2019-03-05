@@ -12,13 +12,18 @@ import co.acme.validate.Raml10Validation;
 import co.acme.validate.Raml08Validation;
 import co.acme.validate.Oas20Validation;
 import co.acme.validate.AmfGraphValidation;
+import co.acme.model.Raml10Building;
+import co.acme.model.Raml10Navigation;
+import co.acme.model.Raml10UtilityMethods;
 import co.acme.convert.RamlDtToJsonSchema;
 import co.acme.convert.JsonSchemaToRamlDt;
 
 import java.util.concurrent.ExecutionException;
+import java.io.UnsupportedEncodingException;
 
+// Runs all the example classes
 public class WebApiParserDemo {
-  public static void main(String[] args) throws ExecutionException, InterruptedException {
+  public static void main(String[] args) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
     Raml10Parsing.parseString();
     Raml10Parsing.parseFile();
 
@@ -49,6 +54,10 @@ public class WebApiParserDemo {
     Raml08Validation.validate();
     Oas20Validation.validate();
     AmfGraphValidation.validate();
+
+    Raml10Building.buildApi();
+    Raml10Navigation.navigateApi();
+    Raml10UtilityMethods.navigateApi();
 
     RamlDtToJsonSchema.convertFromApi();
     RamlDtToJsonSchema.convertFromLibrary();
