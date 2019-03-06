@@ -7,6 +7,7 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 * [AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html)
 * [API construction](https://raml-org.github.io/webapi-parser/common/api-construction)
 * [AMF Model navigation](https://raml-org.github.io/webapi-parser/common/model-navigation)
+* [RAML Data Type -> JSON Schema conversion](https://raml-org.github.io/webapi-parser/common/conversion-raml-json)
 
 ## JavaScript
 

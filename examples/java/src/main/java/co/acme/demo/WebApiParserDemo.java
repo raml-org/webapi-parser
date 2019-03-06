@@ -15,6 +15,7 @@ import co.acme.validate.AmfGraphValidation;
 import co.acme.model.Raml10Building;
 import co.acme.model.Raml10Navigation;
 import co.acme.model.Raml10UtilityMethods;
+import co.acme.convert.RamlDtToJsonSchema;
 
 import java.util.concurrent.ExecutionException;
 import java.io.UnsupportedEncodingException;
@@ -56,5 +57,9 @@ public class WebApiParserDemo {
     Raml10Building.buildApi();
     Raml10Navigation.navigateApi();
     Raml10UtilityMethods.navigateApi();
+
+    RamlDtToJsonSchema.convertFromApi();
+    RamlDtToJsonSchema.convertFromLibrary();
+    RamlDtToJsonSchema.convertFromDataType();
   }
 }
