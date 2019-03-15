@@ -20,7 +20,7 @@ trait BaseUnit extends AmfBaseUnit {
 }
 
 @JSExportAll
-class Document() extends AmfDocument() with BaseUnit {
+class Document(_internal: InternalDocument) extends AmfDocument(_internal) with BaseUnit {
 
 }
 
