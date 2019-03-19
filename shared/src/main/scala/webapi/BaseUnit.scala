@@ -8,29 +8,25 @@ import amf.client.model.document.{
 import amf.client.model.domain.{NodeShape, DomainElement}
 import amf.client.convert.CoreClientConverters._
 import amf.core.model.document.{Document => InternalDocument}
+import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 
 import scala.scalajs.js.annotation._
 
 
 @JSExportAll
 trait BaseUnit extends AmfBaseUnit {
+  // override val _internal: InternalBaseUnit
+
   def getDeclarationByName(name: String): String = {
     name + " foobar"
   }
 }
 
 @JSExportAll
-class Document(_internal: InternalDocument) extends AmfDocument(_internal) with BaseUnit {
+class Document(val _internal: AmfDocument) extends BaseUnit {
+  @JSExportTopLevel("webapi.model.document.Document")
+  def this() = this(new AmfDocument())
 
+  @JSExportTopLevel("webapi.model.document.Document")
+  def this(encoding: DomainElement) = this(new AmfDocument().withEncodes(encoding))
 }
-
-
-// @JSExportAll
-// class Document(private[amf] val _internal: InternalDocument) extends BaseUnit with EncodesModel with DeclaresModel {
-
-//   @JSExportTopLevel("webapi.model.document.Document")
-//   def this() = this(InternalDocument())
-
-//   @JSExportTopLevel("webapi.model.document.Document")
-//   def this(encoding: DomainElement) = this(InternalDocument().withEncodes(encoding))
-// }

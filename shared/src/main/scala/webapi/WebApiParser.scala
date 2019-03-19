@@ -7,11 +7,13 @@ import amf.plugins.features.AMFValidation
 import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
-import amf.client.model.document.{BaseUnit => AmfBaseUnit}
+import amf.client.model.document.{
+  BaseUnit => AmfBaseUnit,
+  Document => AmfDocument
+}
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 import amf.client.validate.ValidationReport
 import amf.client.convert.CoreClientConverters._
-
 
 import scala.concurrent._
 import scala.scalajs.js.annotation._
@@ -64,14 +66,18 @@ object Raml10 {
     * @param urlOrContent File url/path or content string to be parsed.
     * @return Parsed AMF Model (future).
     */
-  def parse(urlOrContent: String): ClientFuture[AmfBaseUnit] = {
-    WebApiParser.chainAfterInit(() => {
+  def parse(urlOrContent: String): ClientFuture[Document] = {
+    val prom = WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new Raml10Parser().parseFileAsync(urlOrContent).asInternal
       } else {
         new Raml10Parser().parseStringAsync(urlOrContent).asInternal
       }
-    }).asClient
+    })
+    val prom2 = prom map { mdl =>
+      new Document(mdl.asInstanceOf[AmfDocument])
+    }
+    prom2.asInstanceOf[ClientFuture[Document]]
   }
 
   /** Generates file with RAML 1.0 content.
