@@ -9,7 +9,8 @@ import amf.client.model.domain.{NodeShape, DomainElement}
 import amf.client.convert.{
   CoreBaseConverter,
   CoreBaseClientConverter,
-  BidirectionalMatcher
+  BidirectionalMatcher,
+  BaseUnitConverter
 }
 import amf.core.model.document.{
   Document => InternalDocument,
@@ -22,6 +23,8 @@ import scala.scalajs.js.annotation._
 
 @JSExportAll
 trait BaseUnit extends AmfBaseUnit {
+  override private[webapi] val _internal: InternalBaseUnit
+
   def getDeclarationByName(name: String): String = {
     name + " foobar"
   }
@@ -31,20 +34,27 @@ trait BaseUnit extends AmfBaseUnit {
 class Document(override val _internal: InternalDocument) extends AmfDocument(_internal) with BaseUnit
 
 
-trait WebApiBaseUnitConverter extends PlatformSecrets {
-  implicit object WebApiBaseUnitMatcher extends BidirectionalMatcher[BaseUnit, BaseUnit] {
-    override def asInternal(from: BaseUnit): BaseUnit = from
-    override def asClient(from: BaseUnit): BaseUnit = from
+trait WebapiBaseUnitConverter extends PlatformSecrets {
+
+  implicit object WebapiBaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, BaseUnit] {
+    // webapi.BaseUnit -> amf.core.model.document.BaseUnit
+    override def asInternal(from: BaseUnit): InternalBaseUnit = from._internal
+
+    // amf.core.model.document.BaseUnit -> webapi.BaseUnit
+    override def asClient(from: InternalBaseUnit): BaseUnit = {
+      from match {
+        case d: InternalDocument => (new Document(d)).asInstanceOf[BaseUnit]
+        case a: AmfDocument => (new Document(a.asInstanceOf[InternalDocument])).asInstanceOf[BaseUnit]
+      }
+    }
   }
+
+  implicit object BaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, AmfBaseUnit] {
+    // amf.client.model.document.BaseUnit -> amf.core.model.document.BaseUnit
+    override def asInternal(from: AmfBaseUnit): InternalBaseUnit = from._internal
+  }
+
 }
 
-trait WebApiDocumentConverter extends PlatformSecrets {
-  implicit object WebApiDocumentMatcher extends BidirectionalMatcher[Document, Document] {
-    override def asInternal(from: Document): Document = from
-    override def asClient(from: Document): Document = from
-  }
-}
-
-object WebapiCoreClientConverters extends CoreBaseConverter with CoreBaseClientConverter
-                                                            with WebApiBaseUnitConverter
-                                                            with WebApiDocumentConverter
+object WebapiClientConverters extends CoreBaseConverter with CoreBaseClientConverter
+                                                        with WebapiBaseUnitConverter

@@ -1,6 +1,6 @@
 package webapi
 
-import webapi.WebapiCoreClientConverters._
+import webapi.WebapiClientConverters._
 import amf.{Core, MessageStyles, ProfileNames}
 import amf.plugins.document.{WebApi}
 import amf.plugins.document.webapi.validation.PayloadValidatorPlugin
@@ -70,17 +70,13 @@ object Raml10 {
     * @return Parsed AMF Model (future).
     */
   def parse(urlOrContent: String): ClientFuture[BaseUnit] = {
-    val modelProm = WebApiParser.chainAfterInit(() => {
+    WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new Raml10Parser().parseFileAsync(urlOrContent).asInternal
       } else {
         new Raml10Parser().parseStringAsync(urlOrContent).asInternal
       }
-    })
-    val docProm = modelProm map { model =>
-      (new Document(model.asInstanceOf[InternalDocument])).asInstanceOf[BaseUnit]
-    }
-    docProm.asClient
+    }).asClient
   }
 
   /** Generates file with RAML 1.0 content.
