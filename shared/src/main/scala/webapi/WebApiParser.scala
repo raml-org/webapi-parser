@@ -1,5 +1,6 @@
 package webapi
 
+import webapi.WebapiCoreClientConverters._
 import amf.{Core, MessageStyles, ProfileNames}
 import amf.plugins.document.{WebApi}
 import amf.plugins.document.webapi.validation.PayloadValidatorPlugin
@@ -16,7 +17,6 @@ import amf.core.model.document.{
   Document => InternalDocument
 }
 import amf.client.validate.ValidationReport
-import amf.client.convert.CoreClientConverters._
 
 import scala.concurrent._
 import scala.scalajs.js.annotation._
@@ -80,7 +80,7 @@ object Raml10 {
     val docProm = modelProm map { model =>
       new Document(model.asInstanceOf[InternalDocument])
     }
-    docProm.asInstanceOf[ClientFuture[Document]]
+    docProm.asClient
   }
 
   /** Generates file with RAML 1.0 content.
