@@ -69,7 +69,7 @@ object Raml10 {
     * @param urlOrContent File url/path or content string to be parsed.
     * @return Parsed AMF Model (future).
     */
-  def parse(urlOrContent: String): ClientFuture[Document] = {
+  def parse(urlOrContent: String): ClientFuture[BaseUnit] = {
     val modelProm = WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new Raml10Parser().parseFileAsync(urlOrContent).asInternal
@@ -78,7 +78,7 @@ object Raml10 {
       }
     })
     val docProm = modelProm map { model =>
-      new Document(model.asInstanceOf[InternalDocument])
+      (new Document(model.asInstanceOf[InternalDocument])).asInstanceOf[BaseUnit]
     }
     docProm.asClient
   }
