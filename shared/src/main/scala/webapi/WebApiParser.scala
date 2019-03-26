@@ -8,7 +8,7 @@ import amf.plugins.features.AMFValidation
 import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
-import amf.client.model.document.{BaseUnit
+import amf.client.model.document.{BaseUnit}
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 import amf.client.validate.ValidationReport
 
