@@ -1,9 +1,8 @@
 package webapi
 
 import amf.client.model.document.{
-  EncodesModel, DeclaresModel,
-  BaseUnit => AmfBaseUnit,
-  Document => AmfDocument
+  EncodesModel, DeclaresModel, BaseUnit,
+  Document
 }
 import amf.client.model.domain.{NodeShape, DomainElement}
 import amf.client.convert.{
@@ -22,7 +21,7 @@ import scala.scalajs.js.annotation._
 
 
 @JSExportAll
-trait BaseUnit extends AmfBaseUnit {
+trait WebapiBaseUnit extends BaseUnit {
   override private[webapi] val _internal: InternalBaseUnit
 
   def getDeclarationByName(name: String): String = {
@@ -31,27 +30,27 @@ trait BaseUnit extends AmfBaseUnit {
 }
 
 @JSExportAll
-class Document(override val _internal: InternalDocument) extends AmfDocument(_internal) with BaseUnit
+class WebapiDocument(override val _internal: InternalDocument) extends Document(_internal) with WebapiBaseUnit
 
 
 trait WebapiBaseUnitConverter extends PlatformSecrets {
 
-  implicit object WebapiBaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, BaseUnit] {
+  implicit object WebapiBaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, WebapiBaseUnit] {
     // webapi.BaseUnit -> amf.core.model.document.BaseUnit
-    override def asInternal(from: BaseUnit): InternalBaseUnit = from._internal
+    override def asInternal(from: WebapiBaseUnit): InternalBaseUnit = from._internal
 
     // amf.core.model.document.BaseUnit -> webapi.BaseUnit
-    override def asClient(from: InternalBaseUnit): BaseUnit = {
+    override def asClient(from: InternalBaseUnit): WebapiBaseUnit = {
       from match {
-        case d: InternalDocument => (new Document(d)).asInstanceOf[BaseUnit]
-        case a: AmfDocument => (new Document(a.asInstanceOf[InternalDocument])).asInstanceOf[BaseUnit]
+        case d: InternalDocument => (new WebapiDocument(d)).asInstanceOf[WebapiBaseUnit]
+        case a: Document => (new WebapiDocument(a.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
       }
     }
   }
 
-  implicit object BaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, AmfBaseUnit] {
+  implicit object BaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, BaseUnit] {
     // amf.client.model.document.BaseUnit -> amf.core.model.document.BaseUnit
-    override def asInternal(from: AmfBaseUnit): InternalBaseUnit = from._internal
+    override def asInternal(from: BaseUnit): InternalBaseUnit = from.asInstanceOf[InternalBaseUnit]
   }
 
 }
