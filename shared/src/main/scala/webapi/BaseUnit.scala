@@ -14,7 +14,7 @@ import ExecutionContext.Implicits.global
 
 
 @JSExportAll
-trait WebapiBaseUnit extends BaseUnit {
+trait WebApiBaseUnit extends BaseUnit {
   override val _internal: InternalBaseUnit
 
   def getDeclarationByName(name: String): String = {
@@ -23,29 +23,26 @@ trait WebapiBaseUnit extends BaseUnit {
 }
 
 @JSExportAll
-class WebapiDocument(override val _internal: InternalDocument) extends Document(_internal) with WebapiBaseUnit
+class WebApiDocument(override val _internal: InternalDocument) extends Document(_internal) with WebApiBaseUnit
 
 
-object WebapiClientConverters extends CoreBaseClientConverter {
-  implicit object WebApiBaseUnitMatcher extends BidirectionalMatcher[WebapiBaseUnit, WebapiBaseUnit] {
-    override def asInternal(from: WebapiBaseUnit): WebapiBaseUnit = from
-    override def asClient(from: WebapiBaseUnit): WebapiBaseUnit = from
+object WebApiClientConverters extends CoreBaseClientConverter {
+  implicit object WebApiBaseUnitMatcher extends BidirectionalMatcher[WebApiBaseUnit, WebApiBaseUnit] {
+    override def asInternal(from: WebApiBaseUnit): WebApiBaseUnit = from
+    override def asClient(from: WebApiBaseUnit): WebApiBaseUnit = from
   }
 
-  implicit def ClientBaseUnit2WebapiBaseUnit(bu: ClientFuture[BaseUnit]): ClientFuture[WebapiBaseUnit] = {
+  implicit def ClientBaseUnit2WebApiBaseUnit(bu: ClientFuture[BaseUnit]): ClientFuture[WebApiBaseUnit] = {
     (bu.asInternal map { model =>
-      (new WebapiDocument(model.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
+      model match {
+        case doc: InternalDocument => (new WebApiDocument(doc)).asInstanceOf[WebApiBaseUnit]
+      }
     }).asClient
   }
 
-  implicit def WebapiBaseUnit2ClientBaseUnit(bu: ClientFuture[WebapiBaseUnit]): ClientFuture[BaseUnit] = {
+  implicit def WebApiBaseUnit2ClientBaseUnit(bu: ClientFuture[WebApiBaseUnit]): ClientFuture[BaseUnit] = {
     (bu.asInternal map { model =>
       model.asInstanceOf[InternalBaseUnit]
     }).asClient
   }
 }
-
-// from match {
-//   case d: InternalDocument => (new WebapiDocument(d)).asInstanceOf[WebapiBaseUnit]
-//   case a: Document => (new WebapiDocument(a.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
-// }
