@@ -113,7 +113,7 @@ object Raml10 {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+  def resolve(model: BaseUnit): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new Raml10Resolver().resolve(model)
@@ -133,7 +133,7 @@ object Raml08 {
     * @param urlOrContent File url/path or content string.
     * @return Parsed AMF Model (future).
     */
-  def parse(urlOrContent: String): ClientFuture[BaseUnit] = {
+  def parse(urlOrContent: String): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new Raml08Parser().parseFileAsync(urlOrContent).asInternal
@@ -183,7 +183,7 @@ object Raml08 {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+  def resolve(model: BaseUnit): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new Raml08Resolver().resolve(model)
@@ -203,7 +203,7 @@ object Oas20 {
     * @param urlOrContent File url/path or content string.
     * @return Parsed AMF Model (future).
     */
-  def parse(urlOrContent: String): ClientFuture[BaseUnit] = {
+  def parse(urlOrContent: String): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new Oas20Parser().parseFileAsync(urlOrContent).asInternal
@@ -253,7 +253,7 @@ object Oas20 {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+  def resolve(model: BaseUnit): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new Oas20Resolver().resolve(model)
@@ -267,7 +267,7 @@ object Oas20 {
     * @param urlOrContent File url/path or content string.
     * @return Parsed AMF Model (future).
     */
-  def parseYaml(urlOrContent: String): ClientFuture[BaseUnit] = {
+  def parseYaml(urlOrContent: String): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new Oas20YamlParser().parseFileAsync(urlOrContent).asInternal
@@ -288,7 +288,7 @@ object AmfGraph {
     * @param urlOrContent File url/path or content string.
     * @return Parsed AMF Model (future).
     */
-  def parse(urlOrContent: String): ClientFuture[BaseUnit] = {
+  def parse(urlOrContent: String): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       if(WebApiParser.isPath(urlOrContent)) {
         new AmfGraphParser().parseFileAsync(urlOrContent).asInternal
@@ -338,7 +338,7 @@ object AmfGraph {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[BaseUnit] = {
+  def resolve(model: BaseUnit): ClientFuture[WebapiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new AmfGraphResolver().resolve(model)

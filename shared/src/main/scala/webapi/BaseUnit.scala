@@ -1,23 +1,16 @@
 package webapi
 
-import amf.client.model.document.{
-  EncodesModel, DeclaresModel, BaseUnit,
-  Document
-}
-import amf.client.model.domain.{NodeShape, DomainElement}
-import amf.client.convert.{
-  CoreBaseConverter,
-  CoreBaseClientConverter,
-  BidirectionalMatcher,
-  ClientInternalMatcher
-}
+import amf.client.model.document.{BaseUnit, Document}
+import amf.client.convert.{CoreBaseClientConverter, BidirectionalMatcher}
 import amf.core.model.document.{
   Document => InternalDocument,
   BaseUnit => InternalBaseUnit
 }
-import amf.core.unsafe.PlatformSecrets
 
 import scala.scalajs.js.annotation._
+import scala.concurrent._
+import scala.language.implicitConversions
+import ExecutionContext.Implicits.global
 
 
 @JSExportAll
@@ -33,32 +26,26 @@ trait WebapiBaseUnit extends BaseUnit {
 class WebapiDocument(override val _internal: InternalDocument) extends Document(_internal) with WebapiBaseUnit
 
 
-trait WebapiBaseUnitConverter extends PlatformSecrets {
-
-  implicit object WebapiBaseUnitMatcher extends BidirectionalMatcher[InternalBaseUnit, WebapiBaseUnit] {
-    // webapi.BaseUnit -> amf.core.model.document.BaseUnit
-    override def asInternal(from: WebapiBaseUnit): InternalBaseUnit = from._internal
-
-    // amf.core.model.document.BaseUnit -> webapi.BaseUnit
-    override def asClient(from: InternalBaseUnit): WebapiBaseUnit = {
-      (new WebapiDocument(from.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
-      // from match {
-      //   case d: InternalDocument => (new WebapiDocument(d)).asInstanceOf[WebapiBaseUnit]
-      //   case a: Document => (new WebapiDocument(a.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
-      // }
-    }
+object WebapiClientConverters extends CoreBaseClientConverter {
+  implicit object WebApiBaseUnitMatcher extends BidirectionalMatcher[WebapiBaseUnit, WebapiBaseUnit] {
+    override def asInternal(from: WebapiBaseUnit): WebapiBaseUnit = from
+    override def asClient(from: WebapiBaseUnit): WebapiBaseUnit = from
   }
 
-}
-
-trait WapBaseUnitConverter extends PlatformSecrets {
-
-  implicit object BaseUnitMatcher extends ClientInternalMatcher[BaseUnit, InternalBaseUnit] {
-    // amf.client.model.document.BaseUnit -> amf.core.model.document.BaseUnit
-    override def asInternal(from: BaseUnit): InternalBaseUnit = from.asInstanceOf[InternalBaseUnit]
+  implicit def ClientBaseUnit2WebapiBaseUnit(bu: ClientFuture[BaseUnit]): ClientFuture[WebapiBaseUnit] = {
+    (bu.asInternal map { model =>
+      (new WebapiDocument(model.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
+    }).asClient
   }
 
+  implicit def WebapiBaseUnit2ClientBaseUnit(bu: ClientFuture[WebapiBaseUnit]): ClientFuture[BaseUnit] = {
+    (bu.asInternal map { model =>
+      model.asInstanceOf[InternalBaseUnit]
+    }).asClient
+  }
 }
 
-object WebapiClientConverters extends CoreBaseClientConverter with WebapiBaseUnitConverter
-                                                              with WapBaseUnitConverter
+// from match {
+//   case d: InternalDocument => (new WebapiDocument(d)).asInstanceOf[WebapiBaseUnit]
+//   case a: Document => (new WebapiDocument(a.asInstanceOf[InternalDocument])).asInstanceOf[WebapiBaseUnit]
+// }
