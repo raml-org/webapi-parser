@@ -41,6 +41,7 @@ import amf.plugins.document.webapi.model.{
   SecuritySchemeFragment => InternalSecuritySchemeFragment
 }
 import amf.client.model.domain.{DomainElement, NodeShape}
+import amf.plugins.domain.shapes.models.{NodeShape => InternalNodeShape}
 
 import scala.scalajs.js.annotation._
 import collection.mutable.Map
@@ -63,7 +64,10 @@ trait WebApiBaseUnit extends BaseUnit {
     val elements: ClientList[DomainElement] = findByType("http://www.w3.org/ns/shacl#NodeShape")
     elements.asInternal foreach {
       element => {
-        var shape = element.asInstanceOf[NodeShape]
+        var shape = element match {
+          case nsh: NodeShape         => nsh
+          case ins: InternalNodeShape => new NodeShape(ins)
+        }
         nodesMap += (shape.name.value() -> shape)
       }
     }
