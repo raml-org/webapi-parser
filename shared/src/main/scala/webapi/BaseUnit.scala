@@ -1,5 +1,7 @@
 package webapi
 
+import webapi.WebApiClientConverters._
+
 import amf.client.model.document.{
   BaseUnit,
   Document,
@@ -38,8 +40,10 @@ import amf.plugins.document.webapi.model.{
   AnnotationTypeDeclarationFragment => InternalAnnotationTypeDeclaration,
   SecuritySchemeFragment => InternalSecuritySchemeFragment
 }
+import amf.client.model.domain.{DomainElement, NodeShape}
 
 import scala.scalajs.js.annotation._
+import collection.mutable.Map
 
 
 /**
@@ -52,10 +56,21 @@ trait WebApiBaseUnit extends BaseUnit {
   /** Gets declaration by name.
     *
     * @param name String name of declaration to look for.
-    * @return Found declaration as NodeShape (future).
+    * @return Found declaration as NodeShape.
     */
-  def getDeclarationByName(name: String): String = {
-    name + " foobar"
+  def getDeclarationByName(name: String): NodeShape = {
+    var nodesMap = Map[String, NodeShape]()
+    val elements: ClientList[DomainElement] = findByType("http://www.w3.org/ns/shacl#NodeShape")
+    elements.asInternal foreach {
+      element => {
+        var shape = element.asInstanceOf[NodeShape]
+        nodesMap += (shape.name.value() -> shape)
+      }
+    }
+    nodesMap.get(name) match {
+      case Some(declaration) => declaration
+      case None => throw new Exception(s"Declaration with name '$name' not found")
+    }
   }
 }
 
