@@ -1,8 +1,8 @@
 package webapi
 
-import amf.client.model.document.{Document, BaseUnit}
+import webapi.WebApiClientConverters._
+
 import amf.client.model.domain.{WebApi}
-import amf.client.convert.CoreClientConverters._
 
 import org.scalatest.{AsyncFunSuite, Matchers, Assertion}
 import org.scalatest.Assertions._
@@ -93,8 +93,8 @@ class Raml10Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  def assertApiParsed (unit: BaseUnit): Assertion = {
-    val doc = unit.asInstanceOf[Document]
+  def assertApiParsed (unit: WebApiBaseUnit): Assertion = {
+    val doc = unit.asInstanceOf[WebApiDocument]
     val api = doc.encodes.asInstanceOf[WebApi]
     doc.declares should have size 1
     api.endPoints should have size 1
