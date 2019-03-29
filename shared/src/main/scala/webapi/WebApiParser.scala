@@ -9,7 +9,6 @@ import amf.plugins.features.AMFValidation
 import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
-import amf.client.model.document.BaseUnit
 import amf.client.validate.ValidationReport
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 
@@ -79,7 +78,7 @@ object Raml10 {
     * @param model Parsed AMF Model to generate content from.
     * @param url Path to the generated file.
     */
-  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+  def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
       new Raml10Renderer().generateFile(model, url).asInternal
     }).asClient
@@ -90,7 +89,7 @@ object Raml10 {
     * @param model Parsed AMF Model to generate content from.
     * @return Generated string (future).
     */
-  def generateString(model: BaseUnit): ClientFuture[String] = {
+  def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
       new Raml10Renderer().generateString(model).asInternal
     }).asClient
@@ -101,7 +100,7 @@ object Raml10 {
     * @param model Parsed AMF Model to be validated.
     * @return Validation report (future).
     */
-  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+  def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
     WebApiParser.chainAfterInit(() => {
       Core.validate(model, ProfileNames.RAML10, MessageStyles.RAML).asInternal
     }).asClient
@@ -114,7 +113,7 @@ object Raml10 {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new Raml10Resolver().resolve(model)
@@ -149,7 +148,7 @@ object Raml08 {
     * @param model Parsed AMF Model to generate content from.
     * @param url Path to the generated file.
     */
-  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+  def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
       new Raml08Renderer().generateFile(model, url).asInternal
     }).asClient
@@ -160,7 +159,7 @@ object Raml08 {
     * @param model Parsed AMF Model to generate content from.
     * @return Generated string (future).
     */
-  def generateString(model: BaseUnit): ClientFuture[String] = {
+  def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
       new Raml08Renderer().generateString(model).asInternal
     }).asClient
@@ -171,7 +170,7 @@ object Raml08 {
     * @param model Parsed AMF Model to be validated.
     * @return Validation report (future).
     */
-  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+  def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
     WebApiParser.chainAfterInit(() => {
       Core.validate(model, ProfileNames.RAML08, MessageStyles.RAML).asInternal
     }).asClient
@@ -184,7 +183,7 @@ object Raml08 {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new Raml08Resolver().resolve(model)
@@ -219,7 +218,7 @@ object Oas20 {
     * @param model Parsed AMF Model to generate content from.
     * @param url Path to the generated file.
     */
-  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+  def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
       new Oas20Renderer().generateFile(model, url).asInternal
     }).asClient
@@ -230,7 +229,7 @@ object Oas20 {
     * @param model Parsed AMF Model to generate content from.
     * @return Generated string (future).
     */
-  def generateString(model: BaseUnit): ClientFuture[String] = {
+  def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
       new Oas20Renderer().generateString(model).asInternal
     }).asClient
@@ -241,7 +240,7 @@ object Oas20 {
     * @param model Parsed AMF Model to be validated.
     * @return Validation report (future).
     */
-  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+  def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
     WebApiParser.chainAfterInit(() => {
       Core.validate(model, ProfileNames.OAS20, MessageStyles.OAS).asInternal
     }).asClient
@@ -254,7 +253,7 @@ object Oas20 {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new Oas20Resolver().resolve(model)
@@ -304,7 +303,7 @@ object AmfGraph {
     * @param model Parsed AMF Model to generate content from.
     * @param url Path to the generated file.
     */
-  def generateFile(model: BaseUnit, url: String): ClientFuture[Unit] = {
+  def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
       new AmfGraphRenderer().generateFile(model, url).asInternal
     }).asClient
@@ -315,7 +314,7 @@ object AmfGraph {
     * @param model Parsed AMF Model to generate content from.
     * @return Generated string (future).
     */
-  def generateString(model: BaseUnit): ClientFuture[String] = {
+  def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
       new AmfGraphRenderer().generateString(model).asInternal
     }).asClient
@@ -326,7 +325,7 @@ object AmfGraph {
     * @param model Parsed AMF Model to be validated.
     * @return Validation report (future).
     */
-  def validate(model: BaseUnit): ClientFuture[ValidationReport] = {
+  def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
     WebApiParser.chainAfterInit(() => {
       Core.validate(model, ProfileNames.AMF, MessageStyles.AMF).asInternal
     }).asClient
@@ -339,7 +338,7 @@ object AmfGraph {
     * @param model Parsed AMF Model to be resolved.
     * @return Resolved parsed AMF model (future).
     */
-  def resolve(model: BaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         val resolved: InternalBaseUnit = new AmfGraphResolver().resolve(model)
