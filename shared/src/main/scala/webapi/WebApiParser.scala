@@ -61,7 +61,7 @@ object Raml10 {
   /** Parses RAML 1.0 content from string or url.
     *
     * @param urlOrContent File url/path or content string to be parsed.
-    * @return Parsed AMF Model (future).
+    * @return Parsed WebApi Model (future).
     */
   def parse(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -75,7 +75,7 @@ object Raml10 {
 
   /** Generates file with RAML 1.0 content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @param url Path to the generated file.
     */
   def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
@@ -86,7 +86,7 @@ object Raml10 {
 
   /** Generates string with RAML 1.0 content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @return Generated string (future).
     */
   def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
@@ -97,7 +97,7 @@ object Raml10 {
 
   /** Validates parsed RAML 1.0 model.
     *
-    * @param model Parsed AMF Model to be validated.
+    * @param model Parsed WebApi Model to be validated.
     * @return Validation report (future).
     */
   def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
@@ -110,8 +110,8 @@ object Raml10 {
     *
     * Resolution process includes resolving references to all types, libraries, etc.
     *
-    * @param model Parsed AMF Model to be resolved.
-    * @return Resolved parsed AMF model (future).
+    * @param model Parsed WebApi Model to be resolved.
+    * @return Resolved parsed WebApi Model (future).
     */
   def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -131,7 +131,7 @@ object Raml08 {
   /** Parses RAML 0.8 content from string or url.
     *
     * @param urlOrContent File url/path or content string.
-    * @return Parsed AMF Model (future).
+    * @return Parsed WebApi Model (future).
     */
   def parse(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -145,7 +145,7 @@ object Raml08 {
 
   /** Generates file with RAML 0.8 content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @param url Path to the generated file.
     */
   def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
@@ -156,7 +156,7 @@ object Raml08 {
 
   /** Generates string with RAML 0.8 content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @return Generated string (future).
     */
   def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
@@ -167,7 +167,7 @@ object Raml08 {
 
   /** Validates parsed RAML 0.8 model.
     *
-    * @param model Parsed AMF Model to be validated.
+    * @param model Parsed WebApi Model to be validated.
     * @return Validation report (future).
     */
   def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
@@ -180,8 +180,8 @@ object Raml08 {
     *
     * Resolution process includes resolving references to all types, libraries, etc.
     *
-    * @param model Parsed AMF Model to be resolved.
-    * @return Resolved parsed AMF model (future).
+    * @param model Parsed WebApi Model to be resolved.
+    * @return Resolved parsed WebApi Model (future).
     */
   def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -201,7 +201,7 @@ object Oas20 {
   /** Parses OAS 2.0 JSON content from string or url.
     *
     * @param urlOrContent File url/path or content string.
-    * @return Parsed AMF Model (future).
+    * @return Parsed WebApi Model (future).
     */
   def parse(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -215,7 +215,7 @@ object Oas20 {
 
   /** Generates file with OAS 2.0 JSON content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @param url Path to the generated file.
     */
   def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
@@ -226,7 +226,7 @@ object Oas20 {
 
   /** Generates string with OAS 2.0 JSON content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @return Generated string (future).
     */
   def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
@@ -237,7 +237,7 @@ object Oas20 {
 
   /** Validates parsed OAS 2.0 model.
     *
-    * @param model Parsed AMF Model to be validated.
+    * @param model Parsed WebApi Model to be validated.
     * @return Validation report (future).
     */
   def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
@@ -250,8 +250,8 @@ object Oas20 {
     *
     * Resolution process includes resolving references to all types, libraries, etc.
     *
-    * @param model Parsed AMF Model to be resolved.
-    * @return Resolved parsed AMF model (future).
+    * @param model Parsed WebApi Model to be resolved.
+    * @return Resolved parsed WebApi Model (future).
     */
   def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -265,7 +265,7 @@ object Oas20 {
   /** Parses OAS 2.0 YAML content from string or url.
     *
     * @param urlOrContent File url/path or content string.
-    * @return Parsed AMF Model (future).
+    * @return Parsed WebApi Model (future).
     */
   def parseYaml(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -286,7 +286,7 @@ object AmfGraph {
   /** Parses AMF Graph content from string or url.
     *
     * @param urlOrContent File url/path or content string.
-    * @return Parsed AMF Model (future).
+    * @return Parsed WebApi Model (future).
     */
   def parse(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
@@ -300,7 +300,7 @@ object AmfGraph {
 
   /** Generates file with AMF Graph content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @param url Path to the generated file.
     */
   def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
@@ -311,7 +311,7 @@ object AmfGraph {
 
   /** Generates string with AMF Graph content.
     *
-    * @param model Parsed AMF Model to generate content from.
+    * @param model Parsed WebApi Model to generate content from.
     * @return Generated string (future).
     */
   def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
@@ -322,7 +322,7 @@ object AmfGraph {
 
   /** Validates parsed AMF Graph model.
     *
-    * @param model Parsed AMF Model to be validated.
+    * @param model Parsed WebApi Model to be validated.
     * @return Validation report (future).
     */
   def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
@@ -335,8 +335,8 @@ object AmfGraph {
     *
     * Resolution process includes resolving references to all types, libraries, etc.
     *
-    * @param model Parsed AMF Model to be resolved.
-    * @return Resolved parsed AMF model (future).
+    * @param model Parsed WebApi Model to be resolved.
+    * @return Resolved parsed WebApi Model (future).
     */
   def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {

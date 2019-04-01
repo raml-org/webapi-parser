@@ -48,7 +48,7 @@ import collection.mutable.Map
 
 
 /**
-  * Custom BaseUnit sub-trait which implements utility methods.
+  * Custom BaseUnit subclass which implements utility methods.
   */
 @JSExportAll
 trait WebApiBaseUnit extends BaseUnit {

@@ -1,11 +1,11 @@
 # RAML Data Type -> JSON Schema conversion
-Using `webapi-parser` and [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) it is possible to convert RAML 1.0 Data Type from RAML 1.0 API, RAML 1.0 Library or RAML 1.0 DataType Fragment to corresponding JSON Schema.
+Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) it is possible to convert RAML 1.0 Data Type from RAML 1.0 API, RAML 1.0 Library or RAML 1.0 DataType Fragment to corresponding JSON Schema.
 
 Please refer to [complete examples](#complete-examples) for more advanced use cases.
 
 ## Quick start
 
-To convert RAML Data Type to JSON Schema, parse RAML document, reach data type using AMF Model and call its `.toJsonSchema()` method. Output of the methods is JSON Schema string of converted type.
+To convert RAML Data Type to JSON Schema, parse RAML document, reach data type using WebApi Model and call its `.toJsonSchema()` method. Output of the methods is JSON Schema string of converted type.
 
 ```js
 // js
