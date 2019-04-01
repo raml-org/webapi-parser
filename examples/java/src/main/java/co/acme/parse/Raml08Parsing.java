@@ -1,8 +1,8 @@
 package co.acme.parse;
 
 import webapi.Raml08;
-import amf.client.model.document.BaseUnit;
-import amf.client.model.document.Document;
+import webapi.WebApiBaseUnit;
+import webapi.WebApiDocument;
 import amf.client.model.domain.WebApi;
 import amf.client.model.domain.EndPoint;
 
@@ -13,10 +13,10 @@ public class Raml08Parsing {
   // Example of parsing RAML 0.8 file
   public static void parseFile() throws InterruptedException, ExecutionException {
     // Parse the file
-    final BaseUnit result = Raml08.parse("file://../api-specs/raml/magic-api.raml").get();
+    final WebApiBaseUnit result = Raml08.parse("file://../api-specs/raml/magic-api.raml").get();
 
     // Log parsed model API
-    System.out.println("Parsed Raml08 file. Expected unit encoding webapi: " + ((Document) result).encodes());
+    System.out.println("Parsed Raml08 file. Expected unit encoding webapi: " + ((WebApiDocument) result).encodes());
   }
 
   // Example of parsing RAML 0.8 string
@@ -28,7 +28,7 @@ public class Raml08Parsing {
     System.out.println("Input Raml08 string:\n" + inp);
 
     // Parse the string
-    Document doc = (Document) Raml08.parse(inp).get();
+    WebApiDocument doc = (WebApiDocument) Raml08.parse(inp).get();
 
     // Get the API instance
     WebApi api = (WebApi) doc.encodes();

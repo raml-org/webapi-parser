@@ -1,7 +1,7 @@
 package co.acme.model;
 
 import webapi.Raml10;
-import amf.client.model.document.Document;
+import webapi.WebApiDocument;
 import amf.client.model.domain.*;
 
 import java.util.concurrent.ExecutionException;
@@ -16,7 +16,7 @@ public class Raml10UtilityMethods {
   public static void navigateApi() throws InterruptedException, ExecutionException, UnsupportedEncodingException {
     // Navigating RAML 1.0 file
     String docPath = "file://../api-specs/raml/navigation-example-api.raml";
-    Document model = (Document) Raml10.parse(docPath).get();
+    WebApiDocument model = (WebApiDocument) Raml10.parse(docPath).get();
 
     // Access RAML 1.0 API
     WebApi api = (WebApi) model.encodes();
@@ -54,7 +54,7 @@ public class Raml10UtilityMethods {
                     "types:\n" +
                     "  User:\n" +
                     "    type: object";
-        Document stringModel = (Document) Raml10.parse(ramlStr).get();
+    WebApiDocument stringModel = (WebApiDocument) Raml10.parse(ramlStr).get();
 
     // The only difference from "working with files" is that ID strings
     // should include default AML document path instead of a file system

@@ -2,7 +2,7 @@ package co.acme.model;
 
 import webapi.WebApiParser;
 import webapi.Raml10;
-import amf.client.model.document.Document;
+import webapi.WebApiDocument;
 import amf.client.model.domain.*;
 
 import java.util.Collections;
@@ -97,7 +97,7 @@ public class Raml10Building {
       .withDescription("Get user");
 
     // Create document with the constructed API
-    Document model = new Document(api);
+    WebApiDocument model = new WebApiDocument(api);
 
     // Generate RAML 1.0 string from the document
     final String generated = Raml10.generateString(model).get();
