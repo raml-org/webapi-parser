@@ -73,7 +73,7 @@ object WebApiClientConverters extends CoreBaseClientConverter {
     */
   implicit def WebApiBaseUnit2ClientBaseUnit(bu: ClientFuture[WebApiBaseUnit]): ClientFuture[BaseUnit] = {
     (bu.asInternal map { model =>
-      model.asInstanceOf[InternalBaseUnit]
+      model._internal
     }).asClient
   }
 }
