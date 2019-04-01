@@ -14,7 +14,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
   test("Get declaration from resolved RAML 1.0 Document") {
     for {
       model <- Raml10.parse("file://shared/src/test/resources/raml/api-with-types.raml").asInternal
-      resolved <- Raml10.resolve(model)
+      resolved <- Raml10.resolve(model).asInternal
     } yield {
       assertDeclaration(resolved, "User")
     }
@@ -63,7 +63,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
     }
   }
 
-  test("Get declaration from RAML 1.0 Document") {
+  test("Get declaration from OAS 2.0 Document") {
     for {
       model <- Oas20.parse("file://shared/src/test/resources/oas/api-with-types.json").asInternal
     } yield {
