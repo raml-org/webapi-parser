@@ -9,7 +9,7 @@ public class Raml10Generation {
 
   // Example of generating RAML 1.0 file
   public static void generateFile() throws InterruptedException, ExecutionException {
-    // Parse RAML 1.0 file to get AMF Model
+    // Parse RAML 1.0 file to get WebApi Model
     final BaseUnit result = Raml10.parse("file://../api-specs/raml/api-with-types.raml").get();
 
     // Resolve parsed model (optional)
@@ -23,7 +23,7 @@ public class Raml10Generation {
 
   // Example of generating RAML 1.0 string
   public static void generateString() throws InterruptedException, ExecutionException {
-    // Parse RAML 1.0 file to get AMF Model
+    // Parse RAML 1.0 file to get WebApi Model
     final BaseUnit result = Raml10.parse("file://../api-specs/raml/api-with-types.raml").get();
 
     // Generate RAML 1.0 string

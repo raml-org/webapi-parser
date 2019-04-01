@@ -89,27 +89,27 @@ declare module "webapi-parser" {
       /** Parses RAML 1.0 content from string or url.
        *
        * @param urlOrContent File url/path or content string to be parsed.
-       * @return Parsed AMF Model.
+       * @return Parsed WebApi Model.
        */
       static parse(urlOrContent: string): Promise<WebApiBaseUnit>
 
       /** Generates file with RAML 1.0 content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @param url Path to the generated file.
        */
       static generateFile(model: WebApiBaseUnit, url: string): Promise<void>
 
       /** Generates string with RAML 1.0 content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @return Generated string.
        */
       static generateString(model: WebApiBaseUnit): Promise<string>
 
       /** Validates parsed RAML 1.0 model.
        *
-       * @param model Parsed AMF Model to be validated.
+       * @param model Parsed WebApi Model to be validated.
        * @return Validation report.
        */
       static validate(model: WebApiBaseUnit): Promise<client.validate.ValidationReport>
@@ -118,8 +118,8 @@ declare module "webapi-parser" {
        *
        * Resolution process includes resolving references to all types, libraries, etc.
        *
-       * @param model Parsed AMF Model to be resolved.
-       * @return Resolved parsed AMF model.
+       * @param model Parsed WebApi Model to be resolved.
+       * @return Resolved parsed WebApi Model.
        */
       static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
     }
@@ -130,27 +130,27 @@ declare module "webapi-parser" {
       /** Parses RAML 0.8 content from string or url.
        *
        * @param urlOrContent File url/path or content string.
-       * @return Parsed AMF Model.
+       * @return Parsed WebApi Model.
        */
       static parse(urlOrContent: string): Promise<WebApiBaseUnit>
 
       /** Generates file with RAML 0.8 content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @param url Path to the generated file.
        */
       static generateFile(model: WebApiBaseUnit, url: string): Promise<void>
 
       /** Generates string with RAML 0.8 content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @return Generated string.
        */
       static generateString(model: WebApiBaseUnit): Promise<string>
 
       /** Validates parsed RAML 0.8 model.
        *
-       * @param model Parsed AMF Model to be validated.
+       * @param model Parsed WebApi Model to be validated.
        * @return Validation report.
        */
       static validate(model: WebApiBaseUnit): Promise<client.validate.ValidationReport>
@@ -159,8 +159,8 @@ declare module "webapi-parser" {
        *
        * Resolution process includes resolving references to all types, libraries, etc.
        *
-       * @param model Parsed AMF Model to be resolved.
-       * @return Resolved parsed AMF model.
+       * @param model Parsed WebApi Model to be resolved.
+       * @return Resolved parsed WebApi Model.
        */
       static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
     }
@@ -171,27 +171,27 @@ declare module "webapi-parser" {
       /** Parses OAS 2.0 JSON content from string or url.
        *
        * @param urlOrContent File url/path or content string.
-       * @return Parsed AMF Model.
+       * @return Parsed WebApi Model.
        */
       static parse(urlOrContent: string): Promise<WebApiBaseUnit>
 
       /** Generates file with OAS 2.0 JSON content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @param url Path to the generated file.
        */
       static generateFile(model: WebApiBaseUnit, url: string): Promise<void>
 
       /** Generates string with OAS 2.0 JSON content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @return Generated string.
        */
       static generateString(model: WebApiBaseUnit): Promise<string>
 
       /** Validates parsed OAS 2.0 model.
        *
-       * @param model Parsed AMF Model to be validated.
+       * @param model Parsed WebApi Model to be validated.
        * @return Validation report.
        */
       static validate(model: WebApiBaseUnit): Promise<client.validate.ValidationReport>
@@ -200,15 +200,15 @@ declare module "webapi-parser" {
        *
        * Resolution process includes resolving references to all types, libraries, etc.
        *
-       * @param model Parsed AMF Model to be resolved.
-       * @return Resolved parsed AMF model.
+       * @param model Parsed WebApi Model to be resolved.
+       * @return Resolved parsed WebApi Model.
        */
       static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
 
       /** Parses OAS 2.0 YAML content from string or url.
        *
        * @param urlOrContent File url/path or content string.
-       * @return Parsed AMF Model.
+       * @return Parsed WebApi Model.
        */
       static parseYaml(urlOrContent: string): Promise<WebApiBaseUnit>
     }
@@ -219,27 +219,27 @@ declare module "webapi-parser" {
       /** Parses AMF Graph content from string or url.
        *
        * @param urlOrContent File url/path or content string.
-       * @return Parsed AMF Model.
+       * @return Parsed WebApi Model.
        */
       static parse(urlOrContent: string): Promise<WebApiBaseUnit>
 
       /** Generates file with AMF Graph content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @param url Path to the generated file.
        */
       static generateFile(model: WebApiBaseUnit, url: string): Promise<void>
 
       /** Generates string with AMF Graph content.
        *
-       * @param model Parsed AMF Model to generate content from.
+       * @param model Parsed WebApi Model to generate content from.
        * @return Generated string.
        */
       static generateString(model: WebApiBaseUnit): Promise<string>
 
       /** Validates parsed AMF Graph model.
        *
-       * @param model Parsed AMF Model to be validated.
+       * @param model Parsed WebApi Model to be validated.
        * @return Validation report.
        */
       static validate(model: WebApiBaseUnit): Promise<client.validate.ValidationReport>
@@ -248,8 +248,8 @@ declare module "webapi-parser" {
        *
        * Resolution process includes resolving references to all types, libraries, etc.
        *
-       * @param model Parsed AMF Model to be resolved.
-       * @return Resolved parsed AMF model.
+       * @param model Parsed WebApi Model to be resolved.
+       * @return Resolved parsed WebApi Model.
        */
       static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
     }

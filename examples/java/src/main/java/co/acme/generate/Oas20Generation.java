@@ -9,7 +9,7 @@ public class Oas20Generation {
 
   // Example of generating OAS 2.0 file
   public static void generateFile() throws InterruptedException, ExecutionException {
-    // Parse OAS 2.0 file to get AMF Model
+    // Parse OAS 2.0 file to get WebApi Model
     final BaseUnit result = Oas20.parse("file://../api-specs/oas/api-with-types.json").get();
 
     // Resolve parsed model (optional)
@@ -24,7 +24,7 @@ public class Oas20Generation {
 
   // Example of generating OAS 2.0 string
   public static void generateString() throws InterruptedException, ExecutionException {
-    // Parse OAS 2.0 file to get AMF Model
+    // Parse OAS 2.0 file to get WebApi Model
     final BaseUnit result = Oas20.parse("file://../api-specs/oas/api-with-types.json").get();
 
     // Generate OAS 2.0 string
