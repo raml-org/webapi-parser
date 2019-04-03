@@ -32,7 +32,7 @@ async function main () {
   // Convert type from root. Type can be picked using utility functions
   console.log(
     'JSON from API root using util:\n',
-    apiModel.findById(`${docPath}#/declarations/types/User`).toJsonSchema)
+    apiModel.getDeclarationByName('User').toJsonSchema)
   // Type can also be picked by index.
   console.log(
     'JSON from API root by index:\n', apiModel.declares[0].toJsonSchema)
@@ -53,8 +53,7 @@ async function main () {
   // Convert type from root. Type can be picked using utility functions
   console.log(
     'JSON from Library root using util:\n',
-    libModel.findById('http://a.ml/amf/default_document#/declarations/types/Book'
-      ).toJsonSchema)
+    libModel.getDeclarationByName('Book').toJsonSchema)
   // Type can also be picked by index.
   console.log(
     'JSON from Library root by index:\n', libModel.declares[0].toJsonSchema)

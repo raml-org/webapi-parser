@@ -35,8 +35,7 @@ public class RamlDtToJsonSchema {
     WebApiDocument doc = (WebApiDocument) Raml10.parse(inp).get();
 
     // Convert type from root. Type can be picked using utility functions
-    NodeShape user = (NodeShape) doc.findById(
-      "http://a.ml/amf/default_document#/declarations/types/User").get();
+    NodeShape user = (NodeShape) doc.getDeclarationByName("User");
     System.out.println("JSON from API root using util:\n" + user.toJsonSchema());
 
     // Type can also be picked by index.
@@ -67,8 +66,7 @@ public class RamlDtToJsonSchema {
                 "      author: string\n";
     WebApiModule doc = (WebApiModule) Raml10.parse(inp).get();
     // Convert type from root. Type can be picked using utility functions
-    NodeShape book = (NodeShape) doc.findById(
-      "http://a.ml/amf/default_document#/declarations/types/Book").get();
+    NodeShape book = (NodeShape) doc.getDeclarationByName("Book");
     System.out.println("JSON from Library root using util:\n" + book.toJsonSchema());
 
     // Type can also be picked by index.

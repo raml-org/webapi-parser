@@ -2,6 +2,7 @@ package co.acme.model;
 
 import webapi.Raml10;
 import webapi.WebApiDocument;
+import webapi.WebApiDataType;
 import amf.client.model.domain.*;
 
 import java.util.concurrent.ExecutionException;
@@ -24,44 +25,24 @@ public class Raml10UtilityMethods {
     // Get all types (both defined in root and in endpoints)
     List<DomainElement> allTypes = model.findByType("http://www.w3.org/ns/shacl#NodeShape");
 
-    // Get type defined in root
-    // An ID to get type from root will look like:
-    // file:///somewhere/api-specs/raml/api-with-types.raml#/declarations/types/User
-    NodeShape userInRoot = (NodeShape) model.findById(
-      docPath + "#/declarations/types/User").get();
+    // Get type defined in root by name
+    NodeShape userInRoot = (NodeShape) model.getDeclarationByName("User");
+    System.out.println(userInRoot.toJsonSchema());
     ScalarShape age = (ScalarShape) userInRoot.properties().get(2).range();
     System.out.println("Age from " + age.minimum().value() + " to " + age.maximum().value());
 
-    // Get type reference in /users/{id} response schema.
-    // Note that values from RAML must be url-encoded to be used by
-    // utility functions
-    String endpoint = URLEncoder.encode("/users/{id}", "UTF-8");
-    String ct = URLEncoder.encode("application/json", "UTF-8");
-    NodeShape userRefFromEndpoint = (NodeShape)  model.findById(
-      docPath +  "#/web-api/end-points/" + endpoint +
-      "/get/200/" + ct + "/schema").get();
-
-    // Get type which is referenced by `userRefFromEndpoint`
-    NodeShape userInEndpoint = (NodeShape) userRefFromEndpoint
-      .inherits().get(0).linkTarget().get();
-    System.out.println(userInEndpoint.id() == userInRoot.id());
-
-
-    // Navigating RAML 1.0 string
-    String ramlStr ="#%RAML 1.0\n" +
+    // Navigating RAML 1.0 DataType string
+    String ramlStr ="#%RAML 1.0 DataType\n" +
                     "\n" +
-                    "title: ACME Banking HTTP API\n" +
-                    "types:\n" +
-                    "  User:\n" +
-                    "    type: object";
-    WebApiDocument stringModel = (WebApiDocument) Raml10.parse(ramlStr).get();
+                    "type: object\n" +
+                    "properties:\n" +
+                    "  firstName: string\n" +
+                    "  lastName:  string";
+    WebApiDataType stringModel = (WebApiDataType) Raml10.parse(ramlStr).get();
 
-    // The only difference from "working with files" is that ID strings
-    // should include default AML document path instead of a file system
-    // path. An ID to get type from root would look like:
-    // http://a.ml/amf/default_document#/declarations/types/User
-    String strDocPath = "http://a.ml/amf/default_document";
-    NodeShape userInStringRoot = (NodeShape) stringModel.findById(
-      strDocPath + "#/declarations/types/User").get();
+    // Get type defined in root by name. Types without explicit name have a
+    // special name "type"
+    NodeShape userInStringRoot = (NodeShape) stringModel.getDeclarationByName("type");
+    System.out.println(userInStringRoot.toJsonSchema());
   }
 }

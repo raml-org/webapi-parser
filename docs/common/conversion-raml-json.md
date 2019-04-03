@@ -24,8 +24,7 @@ const ramlLibrary = `
 async function main () {
   const libModel = await wap.raml10.parse(ramlLibrary)
   // Convert type from root. Type can be picked using utility functions
-  const id = 'http://a.ml/amf/default_document#/declarations/types/Book'
-  console.log(libModel.findById(id).toJsonSchema)
+  console.log(libModel.getDeclarationByName('Book').toJsonSchema)
   // Type can also be picked by index.
   console.log(libModel.declares[0].toJsonSchema)
 }
@@ -54,8 +53,7 @@ public class RamlToJsonSchema {
                 "      author: string\n";
     Module doc = (Module) Raml10.parse(inp).get();
     // Convert type from root. Type can be picked using utility functions
-    String id = "http://a.ml/amf/default_document#/declarations/types/Book";
-    NodeShape book = (NodeShape) doc.findById(id).get();
+    NodeShape book = (NodeShape) doc.getDeclarationByName("Book").get();
     System.out.println(book.toJsonSchema());
 
     // Type can also be picked by index.
