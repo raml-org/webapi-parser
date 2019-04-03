@@ -71,8 +71,8 @@ trait WebApiBaseUnit extends BaseUnit {
           case nsh: NodeShape         => nsh
           case ins: InternalNodeShape => new NodeShape(ins)
         }
-        // Do not include references. Include only types defined in root.
-        if(!(shape.isLink) && shape.inherits.asInternal.length == 0) {
+        // Do not include references
+        if(!(shape.isLink) && !(nodesMap.contains(shape.name.value()))) {
           nodesMap += (shape.name.value() -> shape)
         }
       }
