@@ -29,13 +29,13 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
   test("Get declaration from RAML 1.0 Library") {
     getAndAssertRamlDeclaration(
       "file://shared/src/test/resources/raml/fragments/library.raml",
-      "Person")
+      "Admin")
   }
 
   test("Get declaration from RAML 1.0 Extension") {
     getAndAssertRamlDeclaration(
       "file://shared/src/test/resources/raml/fragments/extension.raml",
-      "Person")
+      "Admin")
   }
 
   test("Get declaration from RAML 1.0 Overlay") {
