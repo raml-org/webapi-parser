@@ -40,7 +40,10 @@ import amf.plugins.document.webapi.model.{
   AnnotationTypeDeclarationFragment => InternalAnnotationTypeDeclaration,
   SecuritySchemeFragment => InternalSecuritySchemeFragment
 }
-import amf.client.model.domain.{ArrayNode, ObjectNode, ScalarNode, DomainElement, NodeShape}
+import amf.client.model.domain.{
+  ArrayNode, ObjectNode, ScalarNode, DomainElement,
+  NodeShape, DataNode
+}
 import amf.plugins.domain.shapes.models.{NodeShape => InternalNodeShape}
 
 import scala.scalajs.js.annotation._
@@ -221,13 +224,16 @@ class WebApiPayloadFragment(override val _internal: InternalPayloadFragment)
     extends PayloadFragment(_internal) with WebApiBaseUnit {
 
   @JSExportTopLevel("webapi.WebApiPayloadFragment")
-  def this(scalar: ScalarNode, mediaType: String) = this(InternalPayloadFragment(scalar._internal, mediaType))
+  def this(scalar: ScalarNode, mediaType: String) = this(
+    InternalPayloadFragment(scalar.asInstanceOf[DataNode], mediaType))
 
   @JSExportTopLevel("webapi.WebApiPayloadFragment")
-  def this(obj: ObjectNode, mediaType: String) = this(InternalPayloadFragment(obj._internal, mediaType))
+  def this(obj: ObjectNode, mediaType: String) = this(
+    InternalPayloadFragment(obj.asInstanceOf[DataNode], mediaType))
 
   @JSExportTopLevel("webapi.WebApiPayloadFragment")
-  def this(arr: ArrayNode, mediaType: String) = this(InternalPayloadFragment(arr._internal, mediaType))
+  def this(arr: ArrayNode, mediaType: String) = this(
+    InternalPayloadFragment(arr.asInstanceOf[DataNode], mediaType))
 }
 
 

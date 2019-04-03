@@ -34,7 +34,7 @@ public class WebApiParserDemo {
     Oas20Parsing.parseYamlString();
     Oas20Parsing.parseYamlFile();
 
-    // AmfGraphParsing.parseString();
+    AmfGraphParsing.parseString();
     AmfGraphParsing.parseFile();
 
     Raml10Generation.generateString();
