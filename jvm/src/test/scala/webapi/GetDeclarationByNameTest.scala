@@ -83,5 +83,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
     val declaration = model.getDeclarationByName(declarationName)
     declaration shouldBe a [NodeShape]
     declaration.name.value() should be (declarationName)
+    assert(!(declaration.isLink))
+    assert(declaration.inherits.asInternal.length == 0)
   }
 }
