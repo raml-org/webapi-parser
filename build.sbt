@@ -24,8 +24,8 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "org.scalatest"     %%% "scalatest"       % "3.0.5" % "test",
-    "com.github.amlorg" %%% "amf-webapi"      % "3.1.8",
-    "com.github.amlorg" %%% "amf-validation"  % "3.1.8"
+    "com.github.amlorg" %%% "amf-webapi"      % "3.1.10",
+    "com.github.amlorg" %%% "amf-validation"  % "3.1.10"
   )
 )
 
@@ -76,7 +76,7 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   )
   .jsSettings(
     scalaJSModuleKind := ModuleKind.CommonJSModule,
-    artifactPath in (Compile, fastOptJS) := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
+    artifactPath in (Compile, fullOptJS) := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
   )
 
 lazy val webapiJVM = webapi.jvm.in(file("./jvm"))
@@ -89,7 +89,7 @@ val buildJS = TaskKey[Unit](
   "Build npm module")
 
 buildJS := {
-  val _ = (fastOptJS in Compile in webapiJS).value
+  val _ = (fullOptJS in Compile in webapiJS).value
   "./scripts/buildjs.sh".!
 }
 
