@@ -1,7 +1,7 @@
 package co.acme.model;
 
 import webapi.Raml10;
-import amf.client.model.document.Document;
+import webapi.WebApiDocument;
 import amf.client.model.domain.*;
 
 import java.util.concurrent.ExecutionException;
@@ -12,7 +12,7 @@ public class Raml10Navigation {
   public static void navigateApi() throws InterruptedException, ExecutionException {
     // Parse RAML 1.0 file
     String inp = "file://../api-specs/raml/navigation-example-api.raml";
-    Document model = (Document) Raml10.parse(inp).get();
+    WebApiDocument model = (WebApiDocument) Raml10.parse(inp).get();
 
     // Access RAML 1.0 API
     WebApi api = (WebApi) model.encodes();

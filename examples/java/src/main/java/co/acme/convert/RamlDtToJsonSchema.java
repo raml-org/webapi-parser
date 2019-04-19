@@ -1,6 +1,9 @@
 package co.acme.convert;
 
 import webapi.Raml10;
+import webapi.WebApiDocument;
+import webapi.WebApiModule;
+import webapi.WebApiDataType;
 import amf.client.model.document.*;
 import amf.client.model.domain.*;
 
@@ -29,11 +32,10 @@ public class RamlDtToJsonSchema {
                 "        body:\n" +
                 "          application/json:\n" +
                 "            type: User";
-    Document doc = (Document) Raml10.parse(inp).get();
+    WebApiDocument doc = (WebApiDocument) Raml10.parse(inp).get();
 
     // Convert type from root. Type can be picked using utility functions
-    NodeShape user = (NodeShape) doc.findById(
-      "http://a.ml/amf/default_document#/declarations/types/User").get();
+    NodeShape user = (NodeShape) doc.getDeclarationByName("User");
     System.out.println("JSON from API root using util:\n" + user.toJsonSchema());
 
     // Type can also be picked by index.
@@ -44,7 +46,7 @@ public class RamlDtToJsonSchema {
     // resolved first.
     // Note we are picking first payload of first response of first
     // method etc here.
-    Document resolved = (Document) Raml10.resolve(doc).get();
+    WebApiDocument resolved = (WebApiDocument) Raml10.resolve(doc).get();
     WebApi api = (WebApi) resolved.encodes();
     EndPoint users = (EndPoint) api.endPoints().get(0);
     Operation getUsers = (Operation) users.operations().get(0);
@@ -62,10 +64,9 @@ public class RamlDtToJsonSchema {
                 "    properties:\n" +
                 "      title: string\n" +
                 "      author: string\n";
-    Module doc = (Module) Raml10.parse(inp).get();
+    WebApiModule doc = (WebApiModule) Raml10.parse(inp).get();
     // Convert type from root. Type can be picked using utility functions
-    NodeShape book = (NodeShape) doc.findById(
-      "http://a.ml/amf/default_document#/declarations/types/Book").get();
+    NodeShape book = (NodeShape) doc.getDeclarationByName("Book");
     System.out.println("JSON from Library root using util:\n" + book.toJsonSchema());
 
     // Type can also be picked by index.
@@ -80,7 +81,7 @@ public class RamlDtToJsonSchema {
                 "properties:\n" +
                 "  title: string\n" +
                 "  author: string\n";
-    DataType doc = (DataType) Raml10.parse(inp).get();
+    WebApiDataType doc = (WebApiDataType) Raml10.parse(inp).get();
     NodeShape book = (NodeShape) doc.encodes();
     System.out.println("JSON from DataType:\n" + book.toJsonSchema());
   }

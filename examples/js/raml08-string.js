@@ -22,7 +22,7 @@ async function main () {
   // Parse RAML 0.8 string
   const model = await wap.raml08.parse(ramlStr)
 
-  // Resolve parsed AMF Model (optional)
+  // Resolve parsed WebApi Model (optional)
   const resolved = await wap.raml08.resolve(model)
 
   // Get first endpoint GET method request query parameter 'per_page'
