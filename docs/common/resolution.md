@@ -2,12 +2,12 @@
 This document describes `webapi-parser` process called "resolution". This process is performed by syntax-specific `.resolve()` methods of all supported API syntaxes (RAML, OAS, AMF Graph).
 
 ## Input and Output
-Input to `.resolve()` is an [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) either not resolved or already resolved (nothing happens in this case).
+Input to `.resolve()` is an [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) either not resolved or already resolved (nothing happens in this case).
 
-Output is a resolved(/flat/explicit) AMF Model with all the references replaced by definitions.
+Output is a resolved(/flat/explicit) WebApi Model with all the references replaced by definitions.
 
 ## Resolved model
-A resolved AMF Model has the following properties:
+A resolved WebApi Model has the following properties:
 
 * All type expressions have been expanded
 * All type names have been replaced by their expanded forms

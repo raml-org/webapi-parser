@@ -1,9 +1,9 @@
-# AMF Model navigation
+# WebApi Model navigation
 Using `webapi-parser` it is possible to navigate parsed document and extract data like response codes, titles, descriptions, data types, etc., from it.
 
 Below is a simplified example of navigating RAML 1.0 API.
 
-Please refer to [complete examples](#complete-examples) for more advanced use cases and [AMF Model API](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) for AMF Model navigation and data extraction methods.
+Please refer to [complete examples](#complete-examples) for more advanced use cases and [WebApi Model API](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) for WebApi Model navigation and data extraction methods.
 
 ## Quick start
 To get started let's import all necessary modules and parse [a RAML 1.0 API document](https://github.com/raml-org/webapi-parser/blob/master/examples/api-specs/raml/navigation-example-api.raml):
@@ -145,7 +145,7 @@ public class Raml10Navigation {
 }
 ```
 
-Note that it's also possible to use AMF Model utility methods to get data from it. Please refer to [complete examples](#complete-examples) for more details.
+Note that it's also possible to use WebApi Model utility methods to get data from it. Please refer to [complete examples](#complete-examples) for more details.
 
 ## Complete examples
 * [JavaScript example](https://github.com/raml-org/webapi-parser/blob/master/examples/js/raml10-model-navigation.js)

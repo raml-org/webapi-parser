@@ -1,11 +1,11 @@
 # RAML Data Type -> JSON Schema conversion
-Using `webapi-parser` and [AMF Model](https://raml-org.github.io/webapi-parser/js/classes/_amf_client_js_.model.document.baseunit.html) it is possible to convert RAML 1.0 Data Type from RAML 1.0 API, RAML 1.0 Library or RAML 1.0 DataType Fragment to corresponding JSON Schema.
+Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) it is possible to convert RAML 1.0 Data Type from RAML 1.0 API, RAML 1.0 Library or RAML 1.0 DataType Fragment to corresponding JSON Schema.
 
 Please refer to [complete examples](#complete-examples) for more advanced use cases.
 
 ## Quick start
 
-To convert RAML Data Type to JSON Schema, parse RAML document, reach data type using AMF Model and call its `.toJsonSchema()` method (or property in JS case). Output of the method is JSON Schema string of converted type.
+To convert RAML Data Type to JSON Schema, parse RAML document, reach data type using WebApi Model and call its `.toJsonSchema()` method (or property in JS case). Output of the methods is JSON Schema string of converted type.
 
 ```js
 // js
@@ -24,8 +24,7 @@ const ramlLibrary = `
 async function main () {
   const libModel = await wap.raml10.parse(ramlLibrary)
   // Convert type from root. Type can be picked using utility functions
-  const id = 'http://a.ml/amf/default_document#/declarations/types/Book'
-  console.log(libModel.findById(id).toJsonSchema)
+  console.log(libModel.getDeclarationByName('Book').toJsonSchema)
   // Type can also be picked by index.
   console.log(libModel.declares[0].toJsonSchema)
 }
@@ -54,8 +53,7 @@ public class RamlToJsonSchema {
                 "      author: string\n";
     Module doc = (Module) Raml10.parse(inp).get();
     // Convert type from root. Type can be picked using utility functions
-    String id = "http://a.ml/amf/default_document#/declarations/types/Book";
-    NodeShape book = (NodeShape) doc.findById(id).get();
+    NodeShape book = (NodeShape) doc.getDeclarationByName("Book").get();
     System.out.println(book.toJsonSchema());
 
     // Type can also be picked by index.
