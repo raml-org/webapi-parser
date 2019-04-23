@@ -1,5 +1,5 @@
 /**
- * Example of converting RAML DataTypes to JSON Schema using AMF Model
+ * Example of converting RAML DataTypes to JSON Schema using WebApi Model
  */
 const wap = require('webapi-parser').WebApiParser
 const path = require('path')
