@@ -5,7 +5,7 @@ Please refer to [complete examples](#complete-examples) for more advanced use ca
 
 ## Quick start
 
-To convert RAML Data Type to JSON Schema, parse RAML document, reach data type using WebApi Model and call its `.toJsonSchema()` method. Output of the methods is JSON Schema string of converted type.
+To convert RAML Data Type to JSON Schema, parse RAML document, reach data type using WebApi Model and call its `.toJsonSchema()` method (or property in JS case). Output of the methods is JSON Schema string of converted type.
 
 ```js
 // js
