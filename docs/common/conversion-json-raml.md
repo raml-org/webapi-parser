@@ -1,5 +1,5 @@
 # JSON Schema -> RAML Data Type conversion
-Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) it is possible to convert JSON Schema from JSON Schema, OAS 2.0 (or another) document to RAML Data Type included in RAML 1.0 Library.
+Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html), it is possible to convert JSON Schemas to RAML Datatypes.
 
 Please refer to [complete examples](#complete-examples) for more advanced use cases.
 
