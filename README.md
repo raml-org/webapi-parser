@@ -5,8 +5,9 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 
 ## Documentation
 * [WebApi Model API](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html)
-* [API construction](https://raml-org.github.io/webapi-parser/common/api-construction)
+* [WebApi Model Resolution](https://raml-org.github.io/webapi-parser/common/resolution)
 * [WebApi Model navigation](https://raml-org.github.io/webapi-parser/common/model-navigation)
+* [API construction](https://raml-org.github.io/webapi-parser/common/api-construction)
 * [RAML Data Type -> JSON Schema conversion](https://raml-org.github.io/webapi-parser/common/conversion-raml-json)
 * [JSON Schema -> RAML Data Type conversion](https://raml-org.github.io/webapi-parser/common/conversion-json-raml)
 
