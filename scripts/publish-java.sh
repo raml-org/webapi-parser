@@ -5,9 +5,6 @@
 
 ./scripts/generate-java-docs.sh
 
-echo "Running tests"
-sbt webapiJVM/test
-
 echo "Packaging artifact"
 sbt webapiJVM/package
 

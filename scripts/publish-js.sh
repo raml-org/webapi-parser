@@ -18,18 +18,13 @@ PROJECT_VERSION=`find '.' -name "build.sbt" |
     sed 's/.*"\(.*\)".*/\1/' 2> /dev/null`
 
 if [[ ${PROJECT_VERSION} == *-SNAPSHOT ]]; then
-    IS_SNAPSHOT=true
+    IS_BETA=true
 else
-    IS_SNAPSHOT=false
+    IS_BETA=false
 fi
 
 echo "Build.sbt version: $PROJECT_VERSION"
-echo "Is snapshot: $IS_SNAPSHOT"
-
-echo "Running tests"
-# JVM tests are run intentionally because there's no JS-specific
-# code and thus no JS-specific tests.
-sbt webapiJVM/test
+echo "Is beta: $IS_BETA"
 
 echo "Running fullOptJS"
 sbt webapiJS/fullOptJS
@@ -44,26 +39,21 @@ cd js/module
 # Copy NPM auth credentials
 cp .npmrc.template $HOME/.npmrc
 
-if $IS_SNAPSHOT; then
-    LATEST_SNAPSHOT=`npm v webapi-parser dist-tags.snapshot`
+if $IS_BETA; then
+    LATEST_BETA=`npm v webapi-parser dist-tags.beta`
 
-    echo "Repo latest snapshot: $LATEST_SNAPSHOT"
+    echo "Latest published beta is: $LATEST_BETA"
 
-    if [[ $LATEST_SNAPSHOT == ${PROJECT_VERSION}* ]]; then
-        echo "Just add one prerelease"
-        npm version ${LATEST_SNAPSHOT} --force --no-git-tag-version
-        npm version prerelease --force --no-git-tag-version
-
-        echo "Publish one more snapshot"
+    if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
+        PRERELEASE_VERSION=${LATEST_BETA}
     else
-        echo "Start prerelease from scratch"
-        npm version ${PROJECT_VERSION} --force --no-git-tag-version
-        npm version prerelease --force --no-git-tag-version
-
-        echo "Publish new snapshot"
+        PRERELEASE_VERSION=${PROJECT_VERSION}
     fi
 
-    npm publish --tag snapshot
+    npm version ${PRERELEASE_VERSION} --force --no-git-tag-version
+    npm version prerelease --preid=beta --force --no-git-tag-version
+
+    npm publish --tag beta
 
     echo "Finished snapshot publish"
     echo "Add 'beta' tag to snapshot"
@@ -75,6 +65,7 @@ if $IS_SNAPSHOT; then
     npm dist-tag add webapi-parser@${NEW_VERSION} beta
 else
     LATEST_RELEASE=`npm v webapi-parser dist-tags.latest`
+
     if [[ $PROJECT_VERSION != $LATEST_RELEASE ]]; then
         echo "New release $PROJECT_VERSION"
         npm version ${PROJECT_VERSION} --force --no-git-tag-version
@@ -85,12 +76,6 @@ else
     fi
 
     npm publish
-
-    echo "Finished latest publish"
-    echo "Add 'release' tag to latest"
-
-    npm dist-tag add webapi-parser@${PROJECT_VERSION} release
-
 fi
 
 # Reset package.json so that the new version is not pushed
