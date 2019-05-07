@@ -11,17 +11,16 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 | ---- | ---------- | ---- | 
 | **Installation** | [NPM](#javascript) | [Gradle/Maven](#java) |
 | **Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) | 
-| **Object-oriented interface** | [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | 
+| **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | 
 | **Package** | [![NPMJS](https://img.shields.io/static/v1.svg?style=flat&logo=npm&label=%20&labelColor=white&color=CB3837&message=NPMJS)](https://) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://) | 
 
 
-## Quickstart guides
-* [Resolving an API Spec](https://raml-org.github.io/webapi-parser/common/resolution)
-* [Navigating an API Spec](https://raml-org.github.io/webapi-parser/common/model-navigation)
-* [Constructing an API Spec](https://raml-org.github.io/webapi-parser/common/api-construction)
-* Translating/converting API Spec formats:
-  * [RAML Data Type -> JSON Schema conversion](https://raml-org.github.io/webapi-parser/common/conversion-raml-json)
-  * [JSON Schema -> RAML Data Type conversion](https://raml-org.github.io/webapi-parser/common/conversion-json-raml)
+## Examples
+* [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving)
+* [Navigating a "WebApi" Model](https://raml-org.github.io/webapi-parser/navigating)
+* [Constructing a "WebApi" Model](https://raml-org.github.io/webapi-parser/constructing)
+* [Translating RAML DataTypes to JSON Schemas](https://raml-org.github.io/webapi-parser/translating-raml-json)
+* [Translating JSON Schemas to RAML DataTypes](https://raml-org.github.io/webapi-parser/translating-json-raml)
 
 ## Installation
 
@@ -32,15 +31,15 @@ Install the npm package:
 $ npm install webapi-parser
 ```
 
-and then require/reference as follows:
+and require/reference as follows:
 ```js
 const wap = require('webapi-parser').WebApiParser
 ```
 
-You can check the [JavaScript examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/js/) for some usage examples.
+See the [JavaScript examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/js/) for some usage examples.
 
 ### Java
-To use, you'll need to specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
+Specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
 
 Gradle:
 ```groovy
@@ -79,7 +78,7 @@ Maven:
 </repositories>
 ```
 
-You can check the [Java examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/java/) for some usage examples.
+See the [Java examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/java/) for some usage examples.
 
 ---
-If you wish to contribute to this project, see our [Contribution Guidelines](https://github.com/raml-org/webapi-parser/tree/master/CONTRIBUTING.md).
+If you wish to contribute to this project, please review our [Contribution Guidelines](https://github.com/raml-org/webapi-parser/tree/master/CONTRIBUTING.md).

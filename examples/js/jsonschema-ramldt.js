@@ -1,5 +1,5 @@
 /**
- * Example of converting JSON Schema to RAML Data Type using WebApi Model.
+ * Example of translating a JSON Schema to a RAML DataType using WebApi Model
  */
 const wap = require('webapi-parser').WebApiParser
 const path = require('path')
@@ -25,16 +25,15 @@ async function main () {
     }
   }
 
-  // Parse an API document string
+  // Parsing an OAS 2.0 string
   const model = await wap.oas20.parse(JSON.stringify(parsedSchema))
-
-  // Convert type from "definitions".
-  // Type can be picked using utility functions.
+  
+  // Type can be accessed using utility function `model.getDeclarationByName()`
   console.log(
     'RAML Data Type from definitions using util:\n',
     model.getDeclarationByName('User').toRamlDatatype)
-
-  // Type can also be picked by index.
+  
+  // Type can also be accessed by index
   console.log(
     'RAML Data Type from definitions by index:\n',
     model.declares[0].toRamlDatatype)

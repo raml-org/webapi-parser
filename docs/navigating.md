@@ -1,4 +1,4 @@
-# WebApi Model navigation
+# Navigating a "WebApi" Model
 Using `webapi-parser` it is possible to navigate parsed document and extract data like response codes, titles, descriptions, data types, etc., from it.
 
 Below is a simplified example of navigating RAML 1.0 API.

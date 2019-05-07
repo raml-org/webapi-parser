@@ -1,4 +1,4 @@
-package co.acme.convert;
+package co.acme.translate;
 
 import webapi.Oas20;
 import webapi.WebApiDocument;
@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 public class JsonSchemaToRamlDt {
 
-  // Example of converting single JSON Schema to RAML Data Type
+  // Example of translating a standalone JSON Schema to a RAML Data Type
   public static void convertFromApi() throws InterruptedException, ExecutionException {
     String jsonSchema = "{\n" +
                   "\"$schema\": \"http://json-schema.org/draft-04/schema\",\n" +
@@ -26,13 +26,13 @@ public class JsonSchemaToRamlDt {
       jsonSchema);
     WebApiDocument doc = (WebApiDocument) Oas20.parse(oasDoc).get();
 
-    // Convert type from root. Type can be picked using utility functions
+    // Type can be accessed using the utility function `getDeclarationByName()`
     NodeShape user1 = (NodeShape) doc.getDeclarationByName("User");
     System.out.println(
       "RAML Data Type from definitions using util:\n" +
       user1.toRamlDatatype());
 
-    // Type can also be picked by index.
+    // Type can also be accessed by index
     NodeShape user2 = (NodeShape) doc.declares().get(0);
     System.out.println(
       "RAML Data Type from definitions by index:\n" +

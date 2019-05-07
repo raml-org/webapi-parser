@@ -1,4 +1,4 @@
-package co.acme.convert;
+package co.acme.translate;
 
 import webapi.Raml10;
 import webapi.WebApiDocument;
@@ -11,8 +11,8 @@ import java.util.concurrent.ExecutionException;
 
 public class RamlDtToJsonSchema {
 
-  // Example of converting single RAML Data Type from RAML 1.0 API Document string
-  public static void convertFromApi() throws InterruptedException, ExecutionException {
+  // Example of translating a single RAML DataType from a RAML 1.0 API Document string
+  public static void translateFromApi() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0\n" +
                 "title: API with Types\n" +
                 "types:\n" +
@@ -34,19 +34,17 @@ public class RamlDtToJsonSchema {
                 "            type: User";
     WebApiDocument doc = (WebApiDocument) Raml10.parse(inp).get();
 
-    // Convert type from root. Type can be picked using utility functions
+    // Type can be accessed using the utility function `getDeclarationByName()`
     NodeShape user = (NodeShape) doc.getDeclarationByName("User");
     System.out.println("JSON from API root using util:\n" + user.toJsonSchema());
 
-    // Type can also be picked by index.
+    // Type can also be accessed by index.
     NodeShape user2 = (NodeShape) doc.declares().get(0);
     System.out.println("JSON from API root by index:\n" + user2.toJsonSchema());
 
-    // To convert type referenced in response payload, model needs to be
-    // resolved first.
-    // Note we are picking first payload of first response of first
-    // method etc here.
+    // To translate types referenced in a response payload, the model needs to be resolved first
     WebApiDocument resolved = (WebApiDocument) Raml10.resolve(doc).get();
+    // Note that the .get(0) below correspond to the 1st payload of the 1st response of the 1st method, etc..
     WebApi api = (WebApi) resolved.encodes();
     EndPoint users = (EndPoint) api.endPoints().get(0);
     Operation getUsers = (Operation) users.operations().get(0);
@@ -55,8 +53,8 @@ public class RamlDtToJsonSchema {
     System.out.println("JSON from resolved API:\n" + user3.toJsonSchema());
   }
 
-  // Example of converting single RAML Data Type from RAML 1.0 Library string
-  public static void convertFromLibrary() throws InterruptedException, ExecutionException {
+  // Example of translating a RAML DataType contained im a RAML 1.0 Library string
+  public static void translateFromLibrary() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0 Library\n" +
                 "types:\n" +
                 "  Book:\n" +
@@ -65,17 +63,17 @@ public class RamlDtToJsonSchema {
                 "      title: string\n" +
                 "      author: string\n";
     WebApiModule doc = (WebApiModule) Raml10.parse(inp).get();
-    // Convert type from root. Type can be picked using utility functions
+    // Type can be accessed using utility function `getDeclarationByName()`
     NodeShape book = (NodeShape) doc.getDeclarationByName("Book");
     System.out.println("JSON from Library root using util:\n" + book.toJsonSchema());
 
-    // Type can also be picked by index.
+    // Type can also be accessed by index
     NodeShape book2 = (NodeShape) doc.declares().get(0);
     System.out.println("JSON from Library root by index:\n" + book2.toJsonSchema());
   }
 
-  // Example of converting single RAML Data Type from RAML 1.0 DataType Fragment string
-  public static void convertFromDataType() throws InterruptedException, ExecutionException {
+  // Example of translating a RAML DataType contained in a RAML 1.0 DataType string
+  public static void translateFromDataType() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0 DataType\n" +
                 "type: object\n" +
                 "properties:\n" +

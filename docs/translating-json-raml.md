@@ -1,13 +1,10 @@
-# JSON Schema -> RAML Data Type conversion
-Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html), it is possible to convert JSON Schemas to RAML Datatypes.
+# Translating JSON Schemas to RAML DataTypes
+Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html), it is possible to translate JSON Schemas to RAML Datatypes.
 
-Please refer to [complete examples](#complete-examples) for more advanced use cases.
+You can take a look at the [complete examples](#complete-examples) for more advanced use-cases.
 
 ## Quick start
-
-To convert JSON Schema to RAML Data Type, parse the document of your choice, reach data type using WebApi Model and call its `.toRamlDatatype()` method (or property in JS case). Output of the method is RAML 1.0 Library string containing converted type.
-
-To convert plain JSON Schema string to RAML DataType it has to be wrapped in a OAS 2.0 document.
+To translate a JSON Schema to a RAML DataType, you can parse a JSON containing one or more JSON Schemas, then select the data type/schema using the [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) and call its `.toRamlDatatype()` method (or property in JavaScript). The output of the method is a RAML 1.0 Library string containing the translated type. Note that the JSON Schema must be wrapped in an OAS 2.0 document.
 
 ```js
 // js
@@ -38,8 +35,7 @@ async function main () {
   // Parse an API document string
   const model = await wap.oas20.parse(JSON.stringify(parsedSchema))
 
-  // Convert type from "definitions".
-  // Type can be picked using utility functions.
+  // Type can be selected using the utility function `getDeclarationByName()`
   console.log(
     'RAML Data Type from definitions using util:\n',
     model.getDeclarationByName('User').toRamlDatatype)
@@ -50,7 +46,7 @@ main()
 
 ```java
 // java
-package co.acme.convert;
+package co.acme.translate;
 
 import webapi.Oas20;
 import webapi.WebApiDocument;
@@ -60,7 +56,7 @@ import amf.client.model.domain.*;
 import java.util.concurrent.ExecutionException;
 
 public class JsonSchemaToRamlDt {
-  public static void convertFromApi() throws InterruptedException, ExecutionException {
+  public static void translateFromApi() throws InterruptedException, ExecutionException {
     String jsonSchema = "{\n" +
                   "\"$schema\": \"http://json-schema.org/draft-04/schema\",\n" +
                   "\"type\": \"object\",\n" +
@@ -76,7 +72,7 @@ public class JsonSchemaToRamlDt {
       jsonSchema);
     WebApiDocument doc = (WebApiDocument) Oas20.parse(oasDoc).get();
 
-    // Convert type from root. Type can be picked using utility functions
+    // Type can be selected using the utility function `getDeclarationByName()`
     NodeShape user1 = (NodeShape) doc.getDeclarationByName("User");
     System.out.println(
       "RAML Data Type from definitions using util:\n" +
@@ -86,5 +82,5 @@ public class JsonSchemaToRamlDt {
 ```
 
 ## Complete examples
-* [JavaScript example](https://github.com/raml-org/webapi-parser/blob/master/examples/js/convert-jsonschema-ramldt.js)
-* [Java example](https://github.com/raml-org/webapi-parser/blob/master/examples/java/src/main/java/co/acme/convert/JsonSchemaToRamlDt.java)
+* [JavaScript example](https://github.com/raml-org/webapi-parser/blob/master/examples/js/jsonschema-ramldt.js)
+* [Java example](https://github.com/raml-org/webapi-parser/blob/master/examples/java/src/main/java/co/acme/translate/JsonSchemaToRamlDt.java)
