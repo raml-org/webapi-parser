@@ -45,13 +45,14 @@ if $IS_BETA; then
 
     echo "Latest published beta is: $LATEST_BETA"
 
-    if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
-        PRERELEASE_VERSION=${LATEST_BETA}
-    else
-        PRERELEASE_VERSION=${PROJECT_VERSION}
-    fi
+    # if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
+    #     PRERELEASE_VERSION=${LATEST_BETA}
+    # else
+    #     PRERELEASE_VERSION=${PROJECT_VERSION}
+    # fi
 
-    npm version ${PRERELEASE_VERSION} --force --no-git-tag-version
+    # npm version ${PRERELEASE_VERSION} --force --no-git-tag-version
+    npm version ${PROJECT_VERSION} --force --no-git-tag-version
     npm version prerelease --preid=beta --force --no-git-tag-version
 
     npm publish --tag beta
