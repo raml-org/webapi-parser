@@ -42,17 +42,6 @@ echo "always-auth=true" > .npmrc
 echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> .npmrc
 
 if $IS_BETA; then
-    LATEST_BETA=`npm v webapi-parser dist-tags.beta`
-
-    echo "Latest published beta is: $LATEST_BETA"
-
-    # if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
-    #     PRERELEASE_VERSION=${LATEST_BETA}
-    # else
-    #     PRERELEASE_VERSION=${PROJECT_VERSION}
-    # fi
-
-    # npm version ${PRERELEASE_VERSION} --force --no-git-tag-version
     npm version ${PROJECT_VERSION} --force --no-git-tag-version
     npm version prerelease --preid=beta --force --no-git-tag-version
 
@@ -61,15 +50,15 @@ if $IS_BETA; then
 else
     LATEST_RELEASE=`npm v webapi-parser dist-tags.latest`
 
-    if [[ $PROJECT_VERSION != $LATEST_RELEASE ]]; then
-        echo "New release $PROJECT_VERSION"
-        npm version ${PROJECT_VERSION} --force --no-git-tag-version
-
-        echo "Publish new release"
-    else
+    if [[ $PROJECT_VERSION == $LATEST_RELEASE ]]; then
         echo "Latest release is already $PROJECT_VERSION"
+        exit 1
     fi
 
+    echo "New release $PROJECT_VERSION"
+    npm version ${PROJECT_VERSION} --force --no-git-tag-version
+
+    echo "Publish new release"
     npm publish
 fi
 
