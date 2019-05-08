@@ -37,8 +37,9 @@ echo "Finished buildjs script"
 
 cd js/module
 
-# Copy NPM auth credentials
-cp .npmrc.template $HOME/.npmrc
+# Create per-project NPM config file with credentials
+echo "always-auth=true" > .npmrc
+echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> .npmrc
 
 if $IS_BETA; then
     LATEST_BETA=`npm v webapi-parser dist-tags.beta`

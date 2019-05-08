@@ -1,2 +1,0 @@
-always-auth=true
-//registry.npmjs.org/:_authToken=${NPM_API_TOKEN}
