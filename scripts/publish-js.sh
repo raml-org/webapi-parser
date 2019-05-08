@@ -53,7 +53,12 @@ if $IS_BETA; then
         PRERELEASE_NUM="0"
     fi
 
-    npm version "${PROJECT_VERSION}-beta.${PRERELEASE_NUM}" --force --no-git-tag-version
+    PROJECT_VERSION="${PROJECT_VERSION}-beta.${PRERELEASE_NUM}"
+
+    echo "New beta release $PROJECT_VERSION"
+    npm version ${PROJECT_VERSION} --force --no-git-tag-version
+
+    echo "Publish new beta release"
     npm publish --tag beta
 
 else
