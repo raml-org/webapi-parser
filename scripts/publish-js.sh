@@ -42,9 +42,18 @@ echo "always-auth=true" > .npmrc
 echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> .npmrc
 
 if $IS_BETA; then
-    npm version ${PROJECT_VERSION} --force --no-git-tag-version
-    npm version prerelease --preid=beta --force --no-git-tag-version
+    LATEST_BETA=`npm v webapi-parser dist-tags.beta`
 
+    if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
+        # Assume beta versions are numbered like 1.1.1-beta.7
+        parts=(${LATEST_BETA//./ })
+        OLD_PRERELEASE_NUM=${arrFoo[-1]}
+        PRERELEASE_VERSION=$(($OLD_PRERELEASE_NUM + 1))
+    else
+        PRERELEASE_NUM="0"
+    fi
+
+    npm version "${PROJECT_VERSION}-beta.${PRERELEASE_NUM}" --force --no-git-tag-version
     npm publish --tag beta
 
 else
