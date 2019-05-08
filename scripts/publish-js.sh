@@ -19,6 +19,7 @@ PROJECT_VERSION=`find '.' -name "build.sbt" |
 
 if [[ ${PROJECT_VERSION} == *-SNAPSHOT ]]; then
     IS_BETA=true
+    PROJECT_VERSION=${PROJECT_VERSION%"-SNAPSHOT"}
 else
     IS_BETA=false
 fi
@@ -55,14 +56,6 @@ if $IS_BETA; then
 
     npm publish --tag beta
 
-    echo "Finished snapshot publish"
-    echo "Add 'beta' tag to snapshot"
-
-    NEW_VERSION=`node -p "require('./package.json').version"`
-
-    echo "To version: $NEW_VERSION"
-
-    npm dist-tag add webapi-parser@${NEW_VERSION} beta
 else
     LATEST_RELEASE=`npm v webapi-parser dist-tags.latest`
 
