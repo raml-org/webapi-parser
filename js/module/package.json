@@ -1,6 +1,6 @@
 {
   "name": "webapi-parser",
-  "version": "0.0.5-beta.0",
+  "version": "0.0.1",
   "description": "WebApi Parser",
   "main": "webapi-parser.js",
   "author": "MuleSoft",

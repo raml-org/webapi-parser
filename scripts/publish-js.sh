@@ -47,7 +47,7 @@ if $IS_BETA; then
     if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
         # Assume beta versions are numbered like 1.1.1-beta.7
         parts=(${LATEST_BETA//./ })
-        OLD_PRERELEASE_NUM=${arrFoo[-1]}
+        OLD_PRERELEASE_NUM=${parts[-1]}
         PRERELEASE_VERSION=$(($OLD_PRERELEASE_NUM + 1))
     else
         PRERELEASE_NUM="0"
