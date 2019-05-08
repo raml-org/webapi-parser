@@ -7,7 +7,7 @@
 # - it requires environment variable from .npmrc.template to be set
 
 # Exit on unset variables or if any of the following commands returns non-zero
-#set -eu
+set -eu
 
 # Find the first build.sbt in the path tree of this script,
 # find the version line and extract the content within double quotes
