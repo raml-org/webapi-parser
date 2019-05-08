@@ -6,6 +6,8 @@ scala:
 # before_install:
 #     - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
 #     - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
+script: "sbt clean coverage test"
+after_success: "sbt webapiJVM/coverageReport coveralls"
 deploy:
     -
         provider: script
