@@ -1,6 +1,7 @@
 # `webapi-parser`
 
 [![Build status](https://img.shields.io/travis/raml-org/webapi-parser.svg?style=flat)](https://travis-ci.org/raml-org/webapi-parser)
+[![Coverage Status](https://coveralls.io/repos/github/raml-org/webapi-parser/badge.svg?branch=master)](https://coveralls.io/github/raml-org/webapi-parser?branch=master)
 
 API Spec parser based on [AMF](https://github.com/aml-org/amf). Currently supports RAML 0.8, 1.0 and OAS 2.0.
 
