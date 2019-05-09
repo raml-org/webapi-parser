@@ -44,8 +44,8 @@ echo "//registry.npmjs.org/:_authToken=\${NPM_API_TOKEN}" >> .npmrc
 if $IS_BETA; then
     LATEST_BETA=`npm v webapi-parser dist-tags.beta`
 
-    # If beta was previously published, parse it's number and
-    # increment by 1. Otherwise make new beta
+    # If beta was previously published, parse its number and
+    # increment it by 1. Otherwise make new beta
     # release "*-beta.0".
     # Assume beta versions are numbered like 1.1.1-beta.7
     if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
