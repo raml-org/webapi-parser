@@ -1,3 +1,4 @@
+warnings_are_errors: false
 language: scala
 scala:
    - 2.12.6
