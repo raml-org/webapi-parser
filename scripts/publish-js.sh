@@ -51,7 +51,7 @@ if $IS_BETA; then
     if [[ $LATEST_BETA == ${PROJECT_VERSION}* ]]; then
         parts=(${LATEST_BETA//./ })
         OLD_PRERELEASE_NUM=${parts[-1]}
-        PRERELEASE_VERSION=$(($OLD_PRERELEASE_NUM + 1))
+        PRERELEASE_NUM=$(($OLD_PRERELEASE_NUM + 1))
     else
         PRERELEASE_NUM="0"
     fi
