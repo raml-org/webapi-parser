@@ -79,9 +79,6 @@ else
     npm publish
 fi
 
-# Push package json with a new version
-git add package.json
-git commit -m "Bump version in package.json to $PROJECT_VERSION"
-git push
+git checkout package.json
 
 cd ../..
