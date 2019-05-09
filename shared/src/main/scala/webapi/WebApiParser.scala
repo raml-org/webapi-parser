@@ -40,7 +40,11 @@ object WebApiParser {
     }
   }
 
-  /** Returns true if input represents path to local or remote file */
+  /** Returns true if input represents path to local or remote file
+    *
+    * @param inp Path to be tested.
+    * @return Boolean indicating if input represents a path.
+    */
   def isPath(inp: String): Boolean = {
     (inp.startsWith("http://") || inp.startsWith("https://") || inp.startsWith("file:"))
   }
