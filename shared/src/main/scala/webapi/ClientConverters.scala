@@ -29,10 +29,10 @@ import scala.language.implicitConversions
 import ExecutionContext.Implicits.global
 
 
-/** WebApiBaseUnit <-> BaseUnit implicit converters. */
+/** WebApiBaseUnit to (and back) BaseUnit implicit converters. */
 object WebApiClientConverters extends CoreBaseClientConverter {
   /**
-    * Converts WebApiBaseUnit <-> WebApiBaseUnit wrapped in ClientFuture.
+    * Converts WebApiBaseUnit to (and back) WebApiBaseUnit wrapped in ClientFuture.
     * Just to make AMF implicit converters wrap/unwrap WebApiBaseUnit in/from
     * ClientFuture.
     */
@@ -42,9 +42,12 @@ object WebApiClientConverters extends CoreBaseClientConverter {
   }
 
   /**
-    * Converts BaseUnit -> WebApiBaseUnit wrapped in ClientFuture.
+    * Converts BaseUnit to WebApiBaseUnit wrapped in ClientFuture.
     * First converts to concrete implementation and wraps in custom WebApi model class.
     * Then outputs model as custom trait type.
+    *
+    * @param bu BaseUnit to be converted.
+    * @return Result of the conversion.
     */
   implicit def ClientBaseUnit2WebApiBaseUnit(bu: ClientFuture[BaseUnit]): ClientFuture[WebApiBaseUnit] = {
     (bu.asInternal map { model =>
@@ -69,7 +72,10 @@ object WebApiClientConverters extends CoreBaseClientConverter {
   }
 
   /**
-    * Converts WebApiBaseUnit -> BaseUnit wrapped in ClientFuture.
+    * Converts WebApiBaseUnit to BaseUnit wrapped in ClientFuture.
+    *
+    * @param bu WebApiBaseUnit to be converted.
+    * @return Result of the conversion.
     */
   implicit def WebApiBaseUnit2ClientBaseUnit(bu: ClientFuture[WebApiBaseUnit]): ClientFuture[BaseUnit] = {
     (bu.asInternal map { model =>
