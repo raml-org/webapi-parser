@@ -15,6 +15,10 @@
 
 mkdir -p docs/java
 
+echo "Cleaning environment and compiling Java classes"
+sbt clean
+sbt webapiJVM/compile
+
 echo "Generating Java docs"
 sbt webapiJVM/genjavadoc:doc
 rm ./jvm/target/java/webapi/*$.java
