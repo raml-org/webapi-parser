@@ -2,11 +2,11 @@ warnings_are_errors: false
 language: scala
 scala:
    - 2.12.6
-# env:
-#     - GPG_EXECUTABLE=gpg
-# before_install:
-#     - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
-#     - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
+env:
+    - GPG_EXECUTABLE=gpg
+before_install:
+    - if [ ! -z "$GPG_SECRET_KEYS" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
+    - if [ ! -z "$GPG_OWNERTRUST" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
 script:
     - sbt clean coverage test webapiJVM/coverageReport &&
       sbt coverageAggregate
