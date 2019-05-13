@@ -24,8 +24,8 @@ PROJECT_VERSION=`find '.' -name "build.sbt" |
 
 # If the project version has "SNAPSHOT" suffix, the project will be
 # published to the snapshot repository of Sonatype, and we cannot use
-# sonatypeRelease command.
+# sonatypeRelease (and sonatypeReleaseAll) command.
 if ! [[ ${PROJECT_VERSION} == *-SNAPSHOT ]]; then
     echo "Promoting the release to be ready for synching to Maven Central"
-    sbt sonatypeRelease
+    sbt sonatypeReleaseAll
 fi
