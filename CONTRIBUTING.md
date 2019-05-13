@@ -8,7 +8,7 @@ To contribute source code to this repository, please read our [Contributor Agree
 
 ### Requirements
 * Scala 2.12.2
-* sbt 0.13.15
+* sbt 1.2.8
 
 ### Generate artifacts
 To generate JavaScript artifact (generated at `./js/module/webapi-parser.js`), run:

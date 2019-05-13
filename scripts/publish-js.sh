@@ -13,7 +13,7 @@ set -eu
 # find the version line and extract the content within double quotes
 PROJECT_VERSION=`find '.' -name "build.sbt" |
     head -n1 |
-    xargs grep '[ \t]*version in ThisBuild :=' |
+    xargs grep '[ \t]*ThisBuild / version :=' |
     head -n1 |
     sed 's/.*"\(.*\)".*/\1/' 2> /dev/null`
 
