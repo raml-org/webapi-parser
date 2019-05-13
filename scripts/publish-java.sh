@@ -12,7 +12,7 @@ echo "Packaging artifact"
 sbt webapiJVM/package
 
 echo "Uploading artifact to Sonatype staging"
-sbt publishSigned
+sbt webapiJVM/publishSigned
 
 echo "Promoting the release to be ready for synching to Maven Central"
 sbt sonatypeRelease
