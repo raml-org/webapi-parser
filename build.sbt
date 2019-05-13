@@ -20,6 +20,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   resolvers += "MuleSoftReleases" at s"$muleNexus/releases",
   resolvers += "jitpack" at "https://jitpack.io",
   assembly / aggregate := false,
+  Compile / publishArtifact := true,
   pgpPassphrase := sys.env.get("GPG_PASSPHRASE").map(_.toArray),
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
