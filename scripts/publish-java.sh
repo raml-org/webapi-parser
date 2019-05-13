@@ -27,5 +27,5 @@ PROJECT_VERSION=`find '.' -name "build.sbt" |
 # sonatypeRelease (and sonatypeReleaseAll) command.
 if ! [[ ${PROJECT_VERSION} == *-SNAPSHOT ]]; then
     echo "Promoting the release to be ready for synching to Maven Central"
-    sbt sonatypeReleaseAll
+    sbt sonatypeRelease
 fi
