@@ -69,7 +69,7 @@ else
 
     if [[ $PROJECT_VERSION == $LATEST_RELEASE ]]; then
         echo "Latest release is already $PROJECT_VERSION"
-        exit 1
+        exit 0
     fi
 
     echo "New release $PROJECT_VERSION"
