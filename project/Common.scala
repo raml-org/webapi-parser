@@ -5,8 +5,8 @@ object Common {
 
   val settings: Seq[Def.Setting[_]] = Seq(
     scalaVersion := "2.12.6",
-    parallelExecution in Test := false,
-    fork in Test := false,
+    Test / parallelExecution := false,
+    Test / fork := false,
     scalacOptions ++= Seq("-unchecked" /*, "-feature", "-deprecation", "-Xfatal-warnings" */ ),
     scalacOptions ++= Seq("-encoding", "utf-8")
   )
@@ -35,15 +35,8 @@ object Common {
     ),
     licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0")),
     publishMavenStyle := true,
-    publishConfiguration ~= { config =>
-      val newArts = config.artifacts.filterKeys(_.`type` != Artifact.SourceType)
-      new PublishConfiguration(config.ivyFile,
-                               config.resolverName,
-                               newArts,
-                               config.checksums,
-                               config.logging,
-                               overwrite = true)
-    }
+    Compile / packageSrc / publishArtifact := false,
+    publishConfiguration := publishConfiguration.value.withOverwrite(true)
   )
 
   def credentials(): Seq[Credentials] = {

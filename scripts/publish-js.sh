@@ -3,7 +3,7 @@
 # NOTES:
 # - call this script from the root of webapi-parser project
 # - it will then work on the first build.sbt found anywhere in the project path
-# - it assumes project version setting is a literal e.g.: `version in ThisBuild := "0.1-SNAPSHOT"`
+# - it assumes project version setting is a literal e.g.: `ThisBuild / version := "0.1-SNAPSHOT"`
 # - it requires environment variable from .npmrc.template to be set
 
 # Exit on unset variables or if any of the following commands returns non-zero

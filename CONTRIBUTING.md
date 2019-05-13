@@ -13,7 +13,7 @@ To contribute source code to this repository, please read our [Contributor Agree
 ### Generate artifacts
 To generate JavaScript artifact (generated at `./js/module/webapi-parser.js`), run:
 ```sh
-sbt buildJS
+sbt webapiJS/fullOptJS && ./scripts/buildjs.sh
 ```
 
 To generate regular (not "fat") `.jar`, run:
