@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 public class JsonSchemaToRamlDt {
 
   // Example of translating a standalone JSON Schema to a RAML Data Type
-  public static void convertFromApi() throws InterruptedException, ExecutionException {
+  public static void translateFromApi() throws InterruptedException, ExecutionException {
     String jsonSchema = "{\n" +
                   "\"$schema\": \"http://json-schema.org/draft-04/schema\",\n" +
                   "\"type\": \"object\",\n" +
