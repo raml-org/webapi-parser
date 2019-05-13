@@ -21,6 +21,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   resolvers += "jitpack" at "https://jitpack.io",
   assembly / aggregate := false,
   Compile / publishArtifact := true,
+  updateOptions := updateOptions.value.withGigahorse(false),
   pgpPassphrase := sys.env.get("GPG_PASSPHRASE").map(_.toArray),
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
