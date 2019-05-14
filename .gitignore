@@ -85,3 +85,5 @@ examples/*/generated.raml
 examples/*/generated.json
 
 /js/module/.npmrc
+
+!/docs/js/classes
