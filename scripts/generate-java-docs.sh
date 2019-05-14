@@ -22,4 +22,4 @@ sbt webapiJVM/genjavadoc:doc
 rm ./jvm/target/java/webapi/*$.java
 rm ./jvm/target/java/webapi/*Test.java
 sbt webapiJVM/packageDoc
-cp -r ./jvm/target/scala-2.12/genjavadoc-api/* ./docs/java
+cp -r ./jvm/target/genjavadoc-api/* ./docs/java

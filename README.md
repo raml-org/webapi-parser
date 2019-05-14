@@ -12,7 +12,7 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 | ---- | ---------- | ---- |
 | **Installation** | [NPM](#javascript) | [Gradle/Maven](#java) |
 | **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) |
-| **Package** | [![NPMJS](https://img.shields.io/npm/v/webapi-parser.svg?style=flat)](https://www.npmjs.com/package/webapi-parser) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://search.maven.org/artifact/org.raml/webapi-parser_2.12/) |
+| **Package** | [![NPMJS](https://img.shields.io/npm/v/webapi-parser.svg?style=flat)](https://www.npmjs.com/package/webapi-parser) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://search.maven.org/artifact/org.raml/webapi-parser/) |
 | **Examples** | [JavaScript examples](./examples/js/README.md) | [Java examples](./examples/java/README.md) |
 | **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) |
 
@@ -46,7 +46,7 @@ Specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack reposi
 Gradle:
 ```groovy
 dependencies {
-    compile 'org.raml:webapi-parser_2.12:x.y.z'
+    compile 'org.raml:webapi-parser:x.y.z'
 }
 ...
 repositories {
@@ -64,7 +64,7 @@ Maven:
 ```xml
 <dependency>
     <groupId>org.raml</groupId>
-    <artifactId>webapi-parser_2.12</artifactId>
+    <artifactId>webapi-parser</artifactId>
     <version>X.Y.Z</version>
 </dependency>
 ...
