@@ -1,5 +1,6 @@
 import sbt.Keys.{scalacOptions, _}
 import sbt.{Def, _}
+import xerial.sbt.Sonatype.autoImport.sonatypeProfileName
 
 object Common {
 
@@ -13,6 +14,7 @@ object Common {
   )
 
   val publish: Seq[Def.Setting[_]] = Seq(
+    sonatypeProfileName := "org.raml",
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
       if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
