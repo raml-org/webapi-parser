@@ -19,7 +19,7 @@ developers := List(
   Developer(
     "raml-org",
     "Raml Org",
-    "user@raml.org",
+    "info@raml.org",
     url("https://github.com/raml-org")
   )
 )
