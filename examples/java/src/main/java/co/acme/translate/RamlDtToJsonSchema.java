@@ -4,7 +4,6 @@ import webapi.Raml10;
 import webapi.WebApiDocument;
 import webapi.WebApiModule;
 import webapi.WebApiDataType;
-import amf.client.model.document.*;
 import amf.client.model.domain.*;
 
 import java.util.concurrent.ExecutionException;

@@ -40,13 +40,13 @@ main()
 package co.acme.translate;
 
 import webapi.Raml10;
-import amf.client.model.document.*;
+import webapi.WebApiModule;
 import amf.client.model.domain.*;
 
 import java.util.concurrent.ExecutionException;
 
 public class RamlToJsonSchema {
-  public static void translateFromApi() throws InterruptedException, ExecutionException {
+  public static void translateFromLibrary() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0 Library\n" +
                 "types:\n" +
                 "  Book:\n" +
@@ -54,7 +54,7 @@ public class RamlToJsonSchema {
                 "    properties:\n" +
                 "      title: string\n" +
                 "      author: string\n";
-    Module doc = (Module) Raml10.parse(inp).get();
+    WebApiModule doc = (WebApiModule) Raml10.parse(inp).get();
     // Type can be selected using the utility function `getDeclarationByName()`
     NodeShape book = (NodeShape) doc.getDeclarationByName("Book").get();
     System.out.println(book.toJsonSchema());

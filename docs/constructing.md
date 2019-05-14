@@ -30,7 +30,7 @@ main()
 package co.acme.model;
 
 import webapi.WebApiParser;
-import amf.client.model.document.Document;
+import webapi.WebApiDocument;
 import amf.client.model.domain.*;
 
 import java.util.concurrent.ExecutionException;
@@ -63,7 +63,7 @@ public class Raml10Building {
     ...
     final WebApi api = new WebApi();
     ...
-    Document model = new Document(api);
+    WebApiDocument model = new WebApiDocument(api);
   }
 }
 ```
