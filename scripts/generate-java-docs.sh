@@ -9,9 +9,7 @@
 #
 # To publish these docs to gh-pages branch:
 #   1. Run this script;
-#   2. Replace directory "java" in the "gh-pages" branch root
-#      with generated "docs/java" directory;
-#   3. Commit and push;
+#   2. Commit and push;
 
 mkdir -p docs/java
 

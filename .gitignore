@@ -84,8 +84,4 @@ webapi-parser-*.jar
 examples/*/generated.raml
 examples/*/generated.json
 
-# Generated docs
-docs/js/
-docs/java/
-
 /js/module/.npmrc
