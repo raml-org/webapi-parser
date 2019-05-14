@@ -65,10 +65,10 @@ if $IS_BETA; then
     npm publish --tag beta
 
 else
-    LATEST_RELEASE=`npm v webapi-parser dist-tags.latest`
+    EXISTING_RELEASE=`npm view webapi-parser@$PROJECT_VERSION version`
 
-    if [[ $PROJECT_VERSION == $LATEST_RELEASE ]]; then
-        echo "Latest release is already $PROJECT_VERSION"
+    if ! [[ $EXISTING_RELEASE == "" ]]; then
+        echo "Release $PROJECT_VERSION already exists"
         exit 0
     fi
 
