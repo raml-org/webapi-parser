@@ -8,6 +8,7 @@ publishMavenStyle := true
 licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
 
 // Where is the source code hosted
+import xerial.sbt.Sonatype._
 homepage := Some(url("https://github.com/raml-org/webapi-parser"))
 scmInfo := Some(
   ScmInfo(
