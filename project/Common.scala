@@ -19,23 +19,6 @@ object Common {
       else Some("releases" at nexus + "service/local/staging/deploy/maven2")
     },
     // POM settings for Sonatype
-    homepage := Some(url("https://github.com/raml-org/webapi-parser")),
-    scmInfo := Some(
-      ScmInfo(
-        url("https://github.com/raml-org/webapi-parser"),
-        "scm:git@github.com:raml-org/webapi-parser.git"
-      )
-    ),
-    developers := List(
-      Developer(
-        "raml-org",
-        "Raml Org",
-        "info@raml.org",
-        url("https://github.com/raml-org")
-      )
-    ),
-    licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0")),
-    publishMavenStyle := true,
     publishConfiguration := publishConfiguration.value.withOverwrite(true)
   )
 
