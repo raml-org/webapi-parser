@@ -8,13 +8,13 @@ API Spec parser based on [AMF](https://github.com/aml-org/amf). Currently suppor
 This project is a thin wrapper that exposes API Spec-related capabilities from [AMF](https://github.com/aml-org/amf). It is written in Scala and offered in two versions: [JavaScript](#javascript) and [Java](#java).
 
 ## 📃 Documentation
-|      | JavaScript | Java | 
-| ---- | ---------- | ---- | 
+|      | JavaScript | Java |
+| ---- | ---------- | ---- |
 | **Installation** | [NPM](#javascript) | [Gradle/Maven](#java) |
-| **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | 
-| **Package** | [![NPMJS](https://img.shields.io/npm/v/webapi-parser.svg?style=flat)](https://www.npmjs.com/package/webapi-parser) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://search.maven.org/artifact/org.raml/webapi-parser_2.12/) | 
+| **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) |
+| **Package** | [![NPMJS](https://img.shields.io/npm/v/webapi-parser.svg?style=flat)](https://www.npmjs.com/package/webapi-parser) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://search.maven.org/artifact/org.raml/webapi-parser_2.12/) |
 | **Examples** | [JavaScript examples](./examples/js/README.md) | [Java examples](./examples/java/README.md) |
-| **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) | 
+| **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) |
 
 ## 📦 Examples
 * [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving)
@@ -76,6 +76,31 @@ Maven:
     <repository>
         <id>jitpack.io</id>
         <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+
+To install snapshot versions set additional Sonatype snapshots repository.
+
+Gradle:
+```groovy
+...
+repositories {
+    ...
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
+}
+```
+
+Maven:
+```xml
+...
+<repositories>
+    ...
+    <repository>
+        <id>SonatypeSnapshots</id>
+        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
 </repositories>
 ```
