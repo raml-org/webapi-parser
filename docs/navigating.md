@@ -1,3 +1,6 @@
+---
+---
+
 # Navigating a "WebApi" Model
 Using `webapi-parser` it is possible to navigate parsed document and extract data like response codes, titles, descriptions, data types, etc., from it.
 

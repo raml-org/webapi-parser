@@ -1,3 +1,6 @@
+---
+---
+
 # Translating JSON Schemas to RAML DataTypes
 Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html), it is possible to translate JSON Schemas to RAML Datatypes.
 
