@@ -9,6 +9,8 @@
 # Exit on unset variables or if any of the following commands returns non-zero
 set -eu
 
+./scripts/validate-git-tag.sh
+
 # Find the first build.sbt in the path tree of this script,
 # find the version line and extract the content within double quotes
 PROJECT_VERSION=`find '.' -name "build.sbt" |

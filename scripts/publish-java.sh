@@ -6,6 +6,7 @@
 # Exit on unset variables or if any of the following commands returns non-zero
 set -eu
 
+./scripts/validate-git-tag.sh
 ./scripts/generate-java-docs.sh
 
 echo "Packaging artifact"
