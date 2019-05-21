@@ -2,7 +2,7 @@
 ---
 
 # Resolving a "WebApi" Model
-This document describes `webapi-parser` process called "resolution". This process is performed by syntax-specific `.resolve()` methods of all supported API syntaxes (RAML, OAS, AMF Graph).
+This document describes `webapi-parser` process called "resolution". This process is performed by syntax-specific `.resolve()` methods of all supported API syntaxes (RAML, OAS, AMF Graph). Resolving produces a "flat" document/model with all the references replaced by redundant copies of an actual data.
 
 ## Input and Output
 Input to `.resolve()` is an [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) either not resolved or already resolved (nothing happens in this case).
