@@ -6,10 +6,6 @@
 #
 # NOTES:
 #   - Call this script from the root of webapi-parser project;
-#
-# To publish these docs to gh-pages branch:
-#   1. Run this script;
-#   2. Commit and push;
 
 mkdir -p docs/java
 

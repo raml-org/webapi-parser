@@ -2,7 +2,7 @@
 
 # Generates:
 #   - JS API docs (/webapi-parser/docs/js)
-#   - AMF Model docs (/webapi-parser/docs/js)
+#   - WebApi Model docs (/webapi-parser/docs/js)
 #
 # NOTES:
 #   - Call this script from the root of webapi-parser project;
@@ -11,10 +11,6 @@
 #   - Because of this issue: https://github.com/TypeStrong/typedoc/issues/319
 #     it's currently only possible to include or exclude ALL
 #     dependencies from typedoc generation;
-#
-# To publish these docs to gh-pages branch:
-#   1. Run this script;
-#   2. Commit and push;
 
 mkdir -p docs/js/tmp_module/node_modules
 
