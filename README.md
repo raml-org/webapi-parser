@@ -13,7 +13,7 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 | **Installation** | [NPM](#javascript) | [Gradle/Maven](#java) |
 | **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) |
 | **Package** | [![NPMJS](https://img.shields.io/npm/v/webapi-parser.svg?style=flat)](https://www.npmjs.com/package/webapi-parser) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://search.maven.org/artifact/org.raml/webapi-parser/) |
-| **Examples** | [JavaScript examples](https://github.com/raml-org/webapi-parser/tree/master/examples/js/README.md) | [Java examples](https://github.com/raml-org/webapi-parser/tree/master/examples/java/README.md) |
+| **Examples** | [JavaScript examples](./examples/js/README.md) | [Java examples](./examples/java/README.md) |
 | **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) |
 
 ## 📦 Examples
@@ -22,7 +22,7 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 * [Constructing a "WebApi" Model](https://raml-org.github.io/webapi-parser/constructing.html)
 * [Translating RAML DataTypes to JSON Schemas](https://raml-org.github.io/webapi-parser/translating-raml-json.html)
 * [Translating JSON Schemas to RAML DataTypes](https://raml-org.github.io/webapi-parser/translating-json-raml.html)
-* [More examples](https://github.com/raml-org/webapi-parser/tree/master/examples)
+* [More examples](examples)
 
 ## 🛠 Installation
 
@@ -38,7 +38,7 @@ and require/reference as follows:
 const wap = require('webapi-parser').WebApiParser
 ```
 
-Usage examples are located in the [examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/js/README.md).
+Usage examples are located in the [examples directory](examples/js/README.md).
 
 ### Java
 Specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
@@ -105,7 +105,7 @@ Maven:
 </repositories>
 ```
 
-Usage examples are located in the [examples directory](https://github.com/raml-org/webapi-parser/tree/master/examples/java/README.md).
+Usage examples are located in the [examples directory](examples/java/README.md).
 
 ---
-If you wish to contribute to this project, please review our [Contribution Guidelines](https://github.com/raml-org/webapi-parser/tree/master/CONTRIBUTING.md).
+If you wish to contribute to this project, please review our [Contribution Guidelines](./CONTRIBUTING.md).

@@ -21,9 +21,6 @@
 
 cd docs
 
-# Copy repo README.md
-cp ../README.md .
-
 # Install gitbook
 npm init -y
 npm install gitbook-cli

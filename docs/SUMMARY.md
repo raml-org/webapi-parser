@@ -1,6 +1,6 @@
-# Summary
+# Examples
 
-* [Overview](README.md)
+* [Summary](SUMMARY.md)
 * [Resolving a "WebApi" Model](resolving.md)
 * [Navigating a "WebApi" Model](navigating.md)
 * [Constructing a "WebApi" Model](constructing.md)
