@@ -105,7 +105,7 @@ Maven:
 </repositories>
 ```
 
-Usage examples are located in the [examples directory](examples/java/README.md).
+Usage examples are located in the [examples directory](./examples/java/README.md).
 
 ---
 If you wish to contribute to this project, please review our [Contribution Guidelines](./CONTRIBUTING.md).
