@@ -17,12 +17,12 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 | **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) |
 
 ## 📦 Examples
-* [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving)
-* [Navigating a "WebApi" Model](https://raml-org.github.io/webapi-parser/navigating)
-* [Constructing a "WebApi" Model](https://raml-org.github.io/webapi-parser/constructing)
-* [Translating RAML DataTypes to JSON Schemas](https://raml-org.github.io/webapi-parser/translating-raml-json)
-* [Translating JSON Schemas to RAML DataTypes](https://raml-org.github.io/webapi-parser/translating-json-raml)
-* [More examples](./examples/)
+* [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving.html)
+* [Navigating a "WebApi" Model](https://raml-org.github.io/webapi-parser/navigating.html)
+* [Constructing a "WebApi" Model](https://raml-org.github.io/webapi-parser/constructing.html)
+* [Translating RAML DataTypes to JSON Schemas](https://raml-org.github.io/webapi-parser/translating-raml-json.html)
+* [Translating JSON Schemas to RAML DataTypes](https://raml-org.github.io/webapi-parser/translating-json-raml.html)
+* [More examples](./examples)
 
 ## 🛠 Installation
 
@@ -108,4 +108,4 @@ Maven:
 Usage examples are located in the [examples directory](./examples/java/README.md).
 
 ---
-If you wish to contribute to this project, please review our [Contribution Guidelines](https://github.com/raml-org/webapi-parser/tree/master/CONTRIBUTING.md).
+If you wish to contribute to this project, please review our [Contribution Guidelines](./CONTRIBUTING.md).

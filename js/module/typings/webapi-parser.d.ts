@@ -13,61 +13,111 @@ declare module "webapi-parser" {
     getDeclarationByName(name: string): model.domain.NodeShape
   }
 
+  abstract class WebApiBaseUnitWithDeclaresModel extends WebApiBaseUnit implements model.document.DeclaresModel {
+    /* DeclaresModel methods */
+    declares: model.domain.DomainElement[]
+
+    withDeclaredElement(declared: model.domain.DomainElement): this
+
+    withDeclares(declares: model.domain.DomainElement[]): this
+  }
+
+  abstract class WebApiBaseUnitWithEncodesModel extends WebApiBaseUnit implements model.document.EncodesModel {
+    /* EncodesModel methods */
+    encodes: model.domain.DomainElement
+
+    withEncodes(enocdes: model.domain.DomainElement): this
+  }
+
+  abstract class WebApiBaseUnitWithDeclaresModelAndEncodesModel extends WebApiBaseUnit implements model.document.DeclaresModel, model.document.EncodesModel {
+    /* DeclaresModel methods */
+    declares: model.domain.DomainElement[]
+
+    withDeclaredElement(declared: model.domain.DomainElement): this
+
+    withDeclares(declares: model.domain.DomainElement[]): this
+
+    /* EncodesModel methods */
+    encodes: model.domain.DomainElement
+
+    withEncodes(enocdes: model.domain.DomainElement): this
+  }
+
   namespace webapi {
     /** Subclass of Document inheriting WebApiBaseUnit utility methods. */
-    export class WebApiDocument extends WebApiBaseUnit {
+    export class WebApiDocument extends WebApiBaseUnitWithDeclaresModelAndEncodesModel {
     }
 
     /** Subclass of Module inheriting WebApiBaseUnit utility methods. */
-    export class WebApiModule extends WebApiBaseUnit {
+    export class WebApiModule extends WebApiBaseUnitWithDeclaresModel {
     }
 
     /** Subclass of ExternalFragment inheriting WebApiBaseUnit utility methods. */
-    export class WebApiExternalFragment extends WebApiBaseUnit {
+    export class WebApiExternalFragment extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of Extension inheriting WebApiBaseUnit utility methods. */
-    export class WebApiExtension extends WebApiBaseUnit {
+    export class WebApiExtension extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of Overlay inheriting WebApiBaseUnit utility methods. */
-    export class WebApiOverlay extends WebApiBaseUnit {
+    export class WebApiOverlay extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of DocumentationItem inheriting WebApiBaseUnit utility methods. */
-    export class WebApiDocumentationItem extends WebApiBaseUnit {
+    export class WebApiDocumentationItem extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of DataType inheriting WebApiBaseUnit utility methods. */
-    export class WebApiDataType extends WebApiBaseUnit {
+    export class WebApiDataType extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of NamedExample inheriting WebApiBaseUnit utility methods. */
-    export class WebApiNamedExample extends WebApiBaseUnit {
+    export class WebApiNamedExample extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of ResourceTypeFragment inheriting WebApiBaseUnit utility methods. */
-    export class WebApiResourceTypeFragment extends WebApiBaseUnit {
+    export class WebApiResourceTypeFragment extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of TraitFragment inheriting WebApiBaseUnit utility methods. */
-    export class WebApiTraitFragment extends WebApiBaseUnit {
+    export class WebApiTraitFragment extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of AnnotationTypeDeclaration inheriting WebApiBaseUnit utility methods. */
-    export class WebApiAnnotationTypeDeclaration extends WebApiBaseUnit {
+    export class WebApiAnnotationTypeDeclaration extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of SecuritySchemeFragment inheriting WebApiBaseUnit utility methods. */
-    export class WebApiSecuritySchemeFragment extends WebApiBaseUnit {
+    export class WebApiSecuritySchemeFragment extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of PayloadFragment inheriting WebApiBaseUnit utility methods. */
-    export class WebApiPayloadFragment extends WebApiBaseUnit {
+    export class WebApiPayloadFragment extends WebApiBaseUnitWithEncodesModel {
     }
 
     /** Subclass of Vocabulary inheriting WebApiBaseUnit utility methods. */
     export class WebApiVocabulary extends WebApiBaseUnit {
+      name: model.StrField
+      description: model.StrField
+
+      base: model.StrField
+      imports: model.domain.VocabularyReference[]
+      externals: model.domain.External[]
+
+      withName(name: string): WebApiVocabulary
+
+      withBase(base: string): WebApiVocabulary
+
+      withExternals(externals: model.domain.External[]): WebApiVocabulary
+
+      withImports(vocabularies: model.domain.VocabularyReference[]): WebApiVocabulary
+
+      objectPropertyTerms(): model.domain.ObjectPropertyTerm[]
+
+      datatypePropertyTerms(): model.domain.DatatypePropertyTerm[]
+
+      classTerms(): model.domain.ClassTerm[]
     }
   }
 
