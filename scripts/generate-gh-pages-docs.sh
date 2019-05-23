@@ -24,8 +24,13 @@ cd docs
 # Copy repo README.md
 cp ../README.md .
 
-# Install gitbook and build docs
+# Install gitbook
+npm init -y
 npm install gitbook-cli
+mkdir -p ./node_modules/gitbook-cli/.gitbook
+export GITBOOK_DIR="./node_modules/gitbook-cli/.gitbook"
+
+# Build docs
 ./node_modules/gitbook-cli/bin/gitbook.js build
 
 # Remove unnecessary duplicate folders

@@ -88,4 +88,5 @@ examples/*/generated.json
 
 !/docs/js/classes
 docs/**/package-lock.json
+docs/package.json
 docs/README.md
