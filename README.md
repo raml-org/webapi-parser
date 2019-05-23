@@ -22,7 +22,7 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 * [Constructing a "WebApi" Model](https://raml-org.github.io/webapi-parser/constructing.html)
 * [Translating RAML DataTypes to JSON Schemas](https://raml-org.github.io/webapi-parser/translating-raml-json.html)
 * [Translating JSON Schemas to RAML DataTypes](https://raml-org.github.io/webapi-parser/translating-json-raml.html)
-* [More examples](examples)
+* [More examples](./examples)
 
 ## 🛠 Installation
 
@@ -38,7 +38,7 @@ and require/reference as follows:
 const wap = require('webapi-parser').WebApiParser
 ```
 
-Usage examples are located in the [examples directory](examples/js/README.md).
+Usage examples are located in the [examples directory](./examples/js/README.md).
 
 ### Java
 Specify `webapi-parser` as a dependency and set both MuleSoft and Jitpack repositories.
