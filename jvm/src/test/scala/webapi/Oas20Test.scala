@@ -13,7 +13,8 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
   private val validFilePath     = "file://shared/src/test/resources/oas/api-with-types.json"
   private val validFilePathYaml = "file://shared/src/test/resources/oas/api-with-types.yaml"
   private val invalidFilePath   = "file://shared/src/test/resources/oas/api-with-types-invalid.json"
-  private val generatedFilePath = s"${System.getProperty("java.io.tmpdir")}/generated-oas20.json"
+  private val generatedJsonFilePath = s"${System.getProperty("java.io.tmpdir")}/generated-oas20.json"
+  private val generatedYamlFilePath = s"${System.getProperty("java.io.tmpdir")}/generated-oas20.yaml"
   private val apiString: String =
     """{
       |"swagger": "2.0",
@@ -88,7 +89,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |      name: id
       |      required: true""".stripMargin
 
-  test("String parsing") {
+  test("JSON string parsing") {
     for {
       unit <- Oas20.parse(apiString).asInternal
     } yield {
@@ -96,7 +97,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("File parsing") {
+  test("JSON file parsing") {
     for {
       unit <- Oas20.parse(validFilePath).asInternal
     } yield {
@@ -104,18 +105,18 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("File generation") {
+  test("JSON file generation") {
     for {
       unit <- Oas20.parse(apiString).asInternal
-      _ <- Oas20.generateFile(unit, s"file://${generatedFilePath}").asInternal
+      _ <- Oas20.generateFile(unit, s"file://${generatedJsonFilePath}").asInternal
     } yield {
-      val genStr = waitAndRead(generatedFilePath)
+      val genStr = waitAndRead(generatedJsonFilePath)
       genStr should include ("definitions")
       genStr should include ("/users/{id}")
     }
   }
 
-  test("String generation") {
+  test("JSON string generation") {
     for {
       unit <- Oas20.parse(apiString).asInternal
       genStr <- Oas20.generateString(unit).asInternal
@@ -160,6 +161,27 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       unit <- Oas20.parseYaml(validFilePathYaml).asInternal
     } yield {
       assertApiParsed(unit)
+    }
+  }
+
+  test("YAML file generation") {
+    for {
+      unit <- Oas20.parseYaml(apiStringYaml).asInternal
+      _ <- Oas20.generateYamlFile(unit, s"file://${generatedYamlFilePath}").asInternal
+    } yield {
+      val genStr = waitAndRead(generatedYamlFilePath)
+      genStr should include ("title: API with Types")
+      genStr should include ("/users/{id}:")
+    }
+  }
+
+  test("YAML string generation") {
+    for {
+      unit <- Oas20.parseYaml(apiStringYaml).asInternal
+      genStr <- Oas20.generateYamlString(unit).asInternal
+    } yield {
+      genStr should include ("title: API with Types")
+      genStr should include ("/users/{id}:")
     }
   }
 
