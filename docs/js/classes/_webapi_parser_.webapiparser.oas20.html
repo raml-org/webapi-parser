@@ -922,6 +922,12 @@ img { max-width: 100%; }
 					<a href="_webapi_parser_.webapiparser.oas20.html#generatestring" class="tsd-kind-icon">generate<wbr>String</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a href="_webapi_parser_.webapiparser.oas20.html#generateyamlfile" class="tsd-kind-icon">generate<wbr>Yaml<wbr>File</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a href="_webapi_parser_.webapiparser.oas20.html#generateyamlstring" class="tsd-kind-icon">generate<wbr>Yaml<wbr>String</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 					<a href="_webapi_parser_.webapiparser.oas20.html#parse" class="tsd-kind-icon">parse</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
@@ -972,6 +978,8 @@ img { max-width: 100%; }
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#generatefile" class="tsd-kind-icon">generate<wbr>File</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#generatestring" class="tsd-kind-icon">generate<wbr>String</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#generateyamlfile" class="tsd-kind-icon">generate<wbr>Yaml<wbr>File</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#generateyamlstring" class="tsd-kind-icon">generate<wbr>Yaml<wbr>String</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#parse" class="tsd-kind-icon">parse</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#parseyaml" class="tsd-kind-icon">parse<wbr>Yaml</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_webapi_parser_.webapiparser.oas20.html#resolve" class="tsd-kind-icon">resolve</a></li>
@@ -993,7 +1001,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in projects/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:233</li>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:233</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1030,12 +1038,81 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in projects/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:240</li>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:240</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Generates string with OAS 2.0 JSON content.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>model: <a href="_webapi_parser_.webapibaseunit.html" class="tsd-signature-type">WebApiBaseUnit</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Parsed WebApi Model to generate content from.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="../interfaces/promise.html" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						<p>Generated string.</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+				<a name="generateyamlfile" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> generate<wbr>Yaml<wbr>File</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<li class="tsd-signature tsd-kind-icon">generate<wbr>Yaml<wbr>File<span class="tsd-signature-symbol">(</span>model<span class="tsd-signature-symbol">: </span><a href="_webapi_parser_.webapibaseunit.html" class="tsd-signature-type">WebApiBaseUnit</a>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/promise.html" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:270</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Generates file with OAS 2.0 YAML content.</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>model: <a href="_webapi_parser_.webapibaseunit.html" class="tsd-signature-type">WebApiBaseUnit</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Parsed WebApi Model to generate content from.</p>
+								</div>
+							</li>
+							<li>
+								<h5>url: <span class="tsd-signature-type">string</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Path to the generated file.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="../interfaces/promise.html" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+				<a name="generateyamlstring" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagStatic">Static</span> generate<wbr>Yaml<wbr>String</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<li class="tsd-signature tsd-kind-icon">generate<wbr>Yaml<wbr>String<span class="tsd-signature-symbol">(</span>model<span class="tsd-signature-symbol">: </span><a href="_webapi_parser_.webapibaseunit.html" class="tsd-signature-type">WebApiBaseUnit</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/promise.html" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:277</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Generates string with OAS 2.0 YAML content.</p>
 							</div>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1062,7 +1139,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in projects/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:226</li>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:226</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1094,7 +1171,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in projects/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:263</li>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:263</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1126,7 +1203,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in projects/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:256</li>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:256</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1159,7 +1236,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in projects/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:247</li>
+								<li>Defined in Code/webapi-parser/docs/js/tmp_module/webapi-parser.d.ts:247</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
