@@ -10,6 +10,7 @@ import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
 import amf.client.validate.ValidationReport
+import amf.core.remote.{Oas20 => RemoteOas20}
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 
 import scala.concurrent._
@@ -278,6 +279,28 @@ object Oas20 {
       } else {
         new Oas20YamlParser().parseStringAsync(urlOrContent).asInternal
       }
+    }).asClient
+  }
+
+  /** Generates string with OAS 2.0 YAML content.
+    *
+    * @param model Parsed WebApi Model to generate content from.
+    * @return Generated string (future).
+    */
+  def generateYamlString(model: WebApiBaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new Renderer(RemoteOas20.name, "application/yaml").generateString(model).asInternal
+    }).asClient
+  }
+
+  /** Generates file with OAS 2.0 YAML content.
+    *
+    * @param model Parsed WebApi Model to generate content from.
+    * @param url Path to the generated file.
+    */
+  def generateYamlFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Renderer(RemoteOas20.name, "application/yaml").generateFile(model, url).asInternal
     }).asClient
   }
 }

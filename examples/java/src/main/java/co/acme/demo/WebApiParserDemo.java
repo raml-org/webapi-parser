@@ -46,6 +46,8 @@ public class WebApiParserDemo {
 
     Oas20Generation.generateString();
     Oas20Generation.generateFile();
+    Oas20Generation.generateYamlString();
+    Oas20Generation.generateYamlFile();
 
     AmfGraphGeneration.generateString();
     AmfGraphGeneration.generateFile();

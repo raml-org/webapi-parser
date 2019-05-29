@@ -261,6 +261,20 @@ declare module "webapi-parser" {
        * @return Parsed WebApi Model.
        */
       static parseYaml(urlOrContent: string): Promise<WebApiBaseUnit>
+
+      /** Generates file with OAS 2.0 YAML content.
+       *
+       * @param model Parsed WebApi Model to generate content from.
+       * @param url Path to the generated file.
+       */
+      static generateYamlFile(model: WebApiBaseUnit, url: string): Promise<void>
+
+      /** Generates string with OAS 2.0 YAML content.
+       *
+       * @param model Parsed WebApi Model to generate content from.
+       * @return Generated string.
+       */
+      static generateYamlString(model: WebApiBaseUnit): Promise<string>
     }
 
     /** Provides methods for AMF Graph processing */
