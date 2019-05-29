@@ -1,5 +1,5 @@
 /**
- * Example of parsing OAS 2.0 YAML and generating OAS 2.0 JSON strings.
+ * Example of parsing OAS 2.0 YAML and generating OAS 2.0 YAML strings.
  */
 const wap = require('webapi-parser').WebApiParser
 
@@ -59,8 +59,8 @@ async function main () {
   // Remove first endpoint 'parameters'
   model.encodes.endPoints[0].withParameters([])
 
-  // Generate OAS 2.0 JSON string
-  const generated = await wap.oas20.generateString(model)
+  // Generate OAS 2.0 YAML string
+  const generated = await wap.oas20.generateYamlString(model)
   console.log('Generated:\n', generated)
 }
 

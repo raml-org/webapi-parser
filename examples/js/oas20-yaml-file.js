@@ -1,5 +1,5 @@
 /**
- * Example of parsing OAS 2.0 YAML and generating OAS 2.0 JSON files.
+ * Example of parsing OAS 2.0 YAML and generating OAS 2.0 YAML files.
  */
 const wap = require('webapi-parser').WebApiParser
 const path = require('path')
@@ -21,11 +21,11 @@ async function main () {
   // Set first endpoint path to /clients/{id}
   model.encodes.endPoints[0].withPath('/clients/{id}')
 
-  const outPath = path.join(__dirname, './generated.json')
+  const outPath = path.join(__dirname, './generated.yaml')
   console.log('Generating file to:', outPath)
 
-  // Generate OAS 2.0 JSON file
-  await wap.oas20.generateFile(model, `file://${outPath}`)
+  // Generate OAS 2.0 YAML file
+  await wap.oas20.generateYamlFile(model, `file://${outPath}`)
 }
 
 main()
