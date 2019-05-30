@@ -5,7 +5,7 @@ val ivyLocal = Resolver.file("ivy", file(Path.userHome.absolutePath + "/.ivy2/lo
 
 name := "webapi-parser"
 
-ThisBuild / version := "0.1.0-beta"
+ThisBuild / version := "0.1.0"
 
 publish := {}
 
@@ -27,8 +27,8 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "org.scalatest"     %%% "scalatest"       % "3.0.5" % "test",
-    "com.github.amlorg" %%% "amf-webapi"      % "3.1.10",
-    "com.github.amlorg" %%% "amf-validation"  % "3.1.10"
+    "com.github.amlorg" %%% "amf-webapi"      % "3.2.1",
+    "com.github.amlorg" %%% "amf-validation"  % "3.2.1"
   )
 )
 
@@ -36,7 +36,7 @@ lazy val Javadoc = config("genjavadoc") extend Compile
 
 lazy val javadocSettings = inConfig(Javadoc)(Defaults.configSettings) ++ Seq(
   scalaVersion := "2.12.6",
-  addCompilerPlugin("com.typesafe.genjavadoc" %% "genjavadoc-plugin" % "0.11" cross CrossVersion.full),
+  addCompilerPlugin("com.typesafe.genjavadoc" %% "genjavadoc-plugin" % "0.13" cross CrossVersion.full),
   scalacOptions += s"-P:genjavadoc:out=${target.value}/java",
   scalacOptions += s"-P:genjavadoc:suppressSynthetic=true",
   Compile / packageDoc := (Javadoc/ packageDoc).value,
