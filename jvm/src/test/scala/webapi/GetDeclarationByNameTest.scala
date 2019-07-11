@@ -2,50 +2,53 @@ package webapi
 
 import webapi.WebApiClientConverters._
 
-import amf.client.model.domain.NodeShape
+import amf.client.model.domain.{
+  NodeShape, UnionShape, ArrayShape, MatrixShape
+}
 
 import scala.concurrent.Future
+import scala.reflect.ClassTag
 import org.scalatest.{AsyncFunSuite, Matchers, Assertion}
 import org.scalatest.Assertions._
 
 
 class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
 
+  private val apiWithTypesRaml     = "file://shared/src/test/resources/raml/api-with-types.raml"
+  private val library              = "file://shared/src/test/resources/raml/fragments/library.raml"
+  private val exprLibrary          = "file://shared/src/test/resources/raml/fragments/library-with-expressions.raml"
+
   test("Get declaration from resolved RAML 1.0 Document") {
     for {
-      model <- Raml10.parse("file://shared/src/test/resources/raml/api-with-types.raml").asInternal
+      model <- Raml10.parse(apiWithTypesRaml).asInternal
       resolved <- Raml10.resolve(model).asInternal
     } yield {
-      assertDeclaration(resolved, "User")
+      assertDeclaration[NodeShape](resolved, "User")
     }
   }
 
   test("Get declaration from RAML 1.0 Document") {
-    getAndAssertRamlDeclaration(
-      "file://shared/src/test/resources/raml/api-with-types.raml",
-      "User")
+    getAndAssertRamlDeclaration[NodeShape](apiWithTypesRaml, "User")
   }
 
   test("Get declaration from RAML 1.0 Library") {
-    getAndAssertRamlDeclaration(
-      "file://shared/src/test/resources/raml/fragments/library.raml",
-      "Admin")
+    getAndAssertRamlDeclaration[NodeShape](library, "Admin")
   }
 
   test("Get declaration from RAML 1.0 Extension") {
-    getAndAssertRamlDeclaration(
+    getAndAssertRamlDeclaration[NodeShape](
       "file://shared/src/test/resources/raml/fragments/extension.raml",
       "Admin")
   }
 
   test("Get declaration from RAML 1.0 Overlay") {
-    getAndAssertRamlDeclaration(
+    getAndAssertRamlDeclaration[NodeShape](
       "file://shared/src/test/resources/raml/fragments/overlay.raml",
       "Person")
   }
 
   test("Get declaration from RAML 1.0 DataType") {
-    getAndAssertRamlDeclaration(
+    getAndAssertRamlDeclaration[NodeShape](
       "file://shared/src/test/resources/raml/fragments/datatype.raml",
       "type")
   }
@@ -53,7 +56,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
   test("Error when trying to get inexisting declaration from RAML 1.0") {
     val futureEx = recoverToExceptionIf[Exception] {
       for {
-        model <- Raml10.parse("file://shared/src/test/resources/raml/fragments/library.raml").asInternal
+        model <- Raml10.parse(library).asInternal
       } yield {
         model.getDeclarationByName("FooBarBaz")
       }
@@ -67,21 +70,45 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
     for {
       model <- Oas20.parse("file://shared/src/test/resources/oas/api-with-types.json").asInternal
     } yield {
-      assertDeclaration(model, "User")
+      assertDeclaration[NodeShape](model, "User")
     }
   }
 
-  def getAndAssertRamlDeclaration (filePath: String, declarationName: String): Future[Assertion] = {
+  test("Get type defined as Union of previously defined types ") {
+    getAndAssertRamlDeclaration[UnionShape](exprLibrary, "CatDogUnion")
+  }
+
+  test("Get type defined as Multiple Inheritance of previously defined types ") {
+    getAndAssertRamlDeclaration[NodeShape](exprLibrary, "CatDogMultiInheritance")
+  }
+
+  test("Get type defined as Array of previously defined types ") {
+    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "CatArray")
+  }
+
+  test("Get type defined as Union Array of previously defined types ") {
+    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "CatDogUnionArray")
+  }
+
+  test("Get type defined as Array of strings ") {
+    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "stringArray")
+  }
+
+  test("Get type defined as Matrix of strings ") {
+    getAndAssertRamlDeclaration[MatrixShape](exprLibrary, "stringMatrix")
+  }
+
+  def getAndAssertRamlDeclaration[T:ClassTag] (filePath: String, declarationName: String): Future[Assertion] = {
     for {
       model <- Raml10.parse(filePath).asInternal
     } yield {
-      assertDeclaration(model, declarationName)
+      assertDeclaration[T](model, declarationName)
     }
   }
 
-  def assertDeclaration (model: WebApiBaseUnit, declarationName: String): Assertion = {
+  def assertDeclaration[T:ClassTag] (model: WebApiBaseUnit, declarationName: String): Assertion = {
     val declaration = model.getDeclarationByName(declarationName)
-    declaration shouldBe a [NodeShape]
+    declaration shouldBe a [T]
     declaration.name.value() should be (declarationName)
     assert(!(declaration.isLink))
   }

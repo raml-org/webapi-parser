@@ -1,0 +1,17 @@
+#%RAML 1.0 Library
+
+types:
+  Cat:
+    type: object
+    properties:
+      name: string
+  Dog:
+    type: object
+    properties:
+      breed: string
+  CatDogUnion: Cat | Dog
+  CatDogMultiInheritance: [Cat, Dog]
+  CatArray: Cat[]
+  CatDogUnionArray: (Cat | Dog)[]
+  stringArray: string[]
+  stringMatrix: string[][]
