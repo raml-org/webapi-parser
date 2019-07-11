@@ -41,13 +41,19 @@ import amf.plugins.document.webapi.model.{
   SecuritySchemeFragment => InternalSecuritySchemeFragment
 }
 import amf.client.model.domain.{
-  ArrayNode, ObjectNode, ScalarNode, DomainElement,
-  NodeShape, DataNode
+  ArrayNode, ObjectNode, ScalarNode, DataNode, DomainElement,
+  AnyShape, NodeShape, UnionShape, ArrayShape, MatrixShape
 }
-import amf.plugins.domain.shapes.models.{NodeShape => InternalNodeShape}
+import amf.plugins.domain.shapes.models.{
+  NodeShape => InternalNodeShape,
+  UnionShape => InternalUnionShape,
+  ArrayShape => InternalArrayShape,
+  MatrixShape => InternalMatrixShape
+}
 
 import scala.scalajs.js.annotation._
 import collection.mutable.Map
+import util.control.Breaks._
 
 
 /**
@@ -63,23 +69,26 @@ trait WebApiBaseUnit extends BaseUnit {
     * @return Found declaration as NodeShape.
     */
   def getDeclarationByName(name: String): NodeShape = {
-    var nodesMap = Map[String, NodeShape]()
-    val elements: ClientList[DomainElement] = findByType("http://www.w3.org/ns/shacl#NodeShape")
+    var nodesMap = Map[String, AnyShape]()
+    val elements: ClientList[DomainElement] = findByType("http://a.ml/vocabularies/shapes#Shape")
     elements.asInternal foreach {
       element => {
-        var shape = element match {
-          case nsh: NodeShape         => nsh
-          case ins: InternalNodeShape => new NodeShape(ins)
-        }
-        // Do not include references. Relies on root type declarations being
-        // at the start of the findByType() results list.
-        if(!(shape.isLink) && !(nodesMap.contains(shape.name.value()))) {
-          nodesMap += (shape.name.value() -> shape)
+        breakable {
+          var shape = element match {
+            // case nsh: NodeShape         => nsh  // Why did I need this?
+            case ins: InternalNodeShape => new NodeShape(ins)
+            case _                      => break
+          }
+          // Do not include references. Relies on root type declarations being
+          // at the start of the findByType() results list.
+          if(!(shape.isLink) && !(nodesMap.contains(shape.name.value()))) {
+            nodesMap += (shape.name.value() -> shape)
+          }
         }
       }
     }
     nodesMap.get(name) match {
-      case Some(declaration) => declaration
+      case Some(declaration) => declaration.asInstanceOf[NodeShape]
       case None => throw new Exception(s"Declaration with name '$name' not found")
     }
   }
