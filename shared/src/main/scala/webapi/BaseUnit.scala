@@ -42,7 +42,7 @@ import amf.plugins.document.webapi.model.{
 }
 import amf.client.model.domain.{
   ArrayNode, ObjectNode, ScalarNode, DataNode, DomainElement,
-  AnyShape, NodeShape, UnionShape, ArrayShape, MatrixShape
+  Shape, AnyShape, NodeShape, UnionShape, ArrayShape, MatrixShape
 }
 import amf.plugins.domain.shapes.models.{
   NodeShape => InternalNodeShape,
@@ -68,7 +68,7 @@ trait WebApiBaseUnit extends BaseUnit {
     * @param name String name of declaration to look for.
     * @return Found declaration as NodeShape.
     */
-  def getDeclarationByName(name: String): NodeShape = {
+  def getDeclarationByName(name: String): AnyShape = {
     var nodesMap = Map[String, AnyShape]()
     val elements: ClientList[DomainElement] = findByType("http://a.ml/vocabularies/shapes#Shape")
     elements.asInternal foreach {
@@ -76,8 +76,14 @@ trait WebApiBaseUnit extends BaseUnit {
         breakable {
           var shape = element match {
             // case nsh: NodeShape         => nsh  // Why did I need this?
-            case ins: InternalNodeShape => new NodeShape(ins)
-            case _                      => break
+            case ins: InternalNodeShape   => new NodeShape(ins)
+            case ius: InternalUnionShape  => new UnionShape(ius)
+              // TODO: Next line fails to catch MatrixShape because it extends
+              // InternalArrayShape instead of InternalMatrixShape.
+              // Maybe rework to match client shapes insted of internal.
+            case ims: InternalMatrixShape => new MatrixShape(ims.toArrayShape)
+            case ias: InternalArrayShape  => new ArrayShape(ias)
+            case _                        => break
           }
           // Do not include references. Relies on root type declarations being
           // at the start of the findByType() results list.
@@ -88,7 +94,7 @@ trait WebApiBaseUnit extends BaseUnit {
       }
     }
     nodesMap.get(name) match {
-      case Some(declaration) => declaration.asInstanceOf[NodeShape]
+      case Some(declaration) => declaration
       case None => throw new Exception(s"Declaration with name '$name' not found")
     }
   }

@@ -74,27 +74,27 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
     }
   }
 
-  test("Get type defined as Union of previously defined types ") {
+  test("Get type defined as type expression: Union") {
     getAndAssertRamlDeclaration[UnionShape](exprLibrary, "CatDogUnion")
   }
 
-  test("Get type defined as Multiple Inheritance of previously defined types ") {
+  test("Get type defined as type expression: Multiple Inheritance") {
     getAndAssertRamlDeclaration[NodeShape](exprLibrary, "CatDogMultiInheritance")
   }
 
-  test("Get type defined as Array of previously defined types ") {
+  test("Get type defined as type expression: Array") {
     getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "CatArray")
   }
 
-  test("Get type defined as Union Array of previously defined types ") {
+  test("Get type defined as type expression: Union Array") {
     getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "CatDogUnionArray")
   }
 
-  test("Get type defined as Array of strings ") {
+  test("Get type defined as type expression: Array of strings") {
     getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "stringArray")
   }
 
-  test("Get type defined as Matrix of strings ") {
+  test("Get type defined as type expression: Matrix of strings") {
     getAndAssertRamlDeclaration[MatrixShape](exprLibrary, "stringMatrix")
   }
 
