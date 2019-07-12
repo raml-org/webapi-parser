@@ -56,7 +56,7 @@ public class RamlToJsonSchema {
                 "      author: string\n";
     WebApiModule doc = (WebApiModule) Raml10.parse(inp).get();
     // Type can be selected using the utility function `getDeclarationByName()`
-    NodeShape book = (NodeShape) doc.getDeclarationByName("Book").get();
+    AnyShape book = (AnyShape) doc.getDeclarationByName("Book").get();
     System.out.println(book.toJsonSchema());
 
     // Type can also be selected by index

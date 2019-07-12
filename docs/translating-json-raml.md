@@ -76,7 +76,7 @@ public class JsonSchemaToRamlDt {
     WebApiDocument doc = (WebApiDocument) Oas20.parse(oasDoc).get();
 
     // Type can be selected using the utility function `getDeclarationByName()`
-    NodeShape user1 = (NodeShape) doc.getDeclarationByName("User");
+    AnyShape user1 = (AnyShape) doc.getDeclarationByName("User");
     System.out.println(
       "RAML Data Type from definitions using util:\n" +
       user1.toRamlDatatype());
