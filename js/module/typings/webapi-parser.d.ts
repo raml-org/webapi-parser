@@ -10,7 +10,7 @@ declare module "webapi-parser" {
      * @param name String name of declaration to look for.
      * @return Found declaration as NodeShape.
      */
-    getDeclarationByName(name: string): model.domain.NodeShape
+    getDeclarationByName(name: string): model.domain.AnyShape
   }
 
   abstract class WebApiBaseUnitWithDeclaresModel extends WebApiBaseUnit implements model.document.DeclaresModel {
