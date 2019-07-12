@@ -65,7 +65,7 @@ trait WebApiBaseUnit extends BaseUnit {
   /** Gets declaration by name.
     *
     * @param name String name of declaration to look for.
-    * @return Found declaration as NodeShape.
+    * @return Found declaration as AnyShape.
     */
   def getDeclarationByName(name: String): AnyShape = {
     var nodesMap = Map[String, AnyShape]()
