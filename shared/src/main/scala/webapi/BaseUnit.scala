@@ -42,10 +42,13 @@ import amf.plugins.document.webapi.model.{
 }
 import amf.client.model.domain.{
   ArrayNode, ObjectNode, ScalarNode, DataNode, DomainElement,
-  AnyShape, NodeShape, UnionShape, ArrayShape, MatrixShape
+  AnyShape, NodeShape, UnionShape, ArrayShape
 }
-import amf.core.model.domain.{DomainElement => InternalDomainElement}
-import scala.collection.mutable.ListBuffer
+import amf.plugins.domain.shapes.models.{
+  NodeShape => InternalNodeShape,
+  UnionShape => InternalUnionShape,
+  ArrayShape => InternalArrayShape
+}
 
 import scala.scalajs.js.annotation._
 import collection.mutable.Map
@@ -67,19 +70,15 @@ trait WebApiBaseUnit extends BaseUnit {
   def getDeclarationByName(name: String): AnyShape = {
     var nodesMap = Map[String, AnyShape]()
     val elements: ClientList[DomainElement] = findByType("http://a.ml/vocabularies/shapes#Shape")
-    var convElements = new ListBuffer[DomainElement]()
+
     elements.asInternal foreach {
-      el => { convElements += el }
-    }
-    convElements foreach {
       element => {
         breakable {
           var shape = element match {
-            case nsh: NodeShape   => nsh
-            case ius: UnionShape  => ius
-            case ims: MatrixShape => ims
-            case ias: ArrayShape  => ias
-            case _                => break
+            case nsh: InternalNodeShape   => new NodeShape(nsh)
+            case ius: InternalUnionShape  => new UnionShape(ius)
+            case ias: InternalArrayShape  => new ArrayShape(ias)
+            case _                        => break
           }
           // Do not include references. Relies on root type declarations being
           // at the start of the findByType() results list.

@@ -3,7 +3,7 @@ package webapi
 import webapi.WebApiClientConverters._
 
 import amf.client.model.domain.{
-  NodeShape, UnionShape, ArrayShape, MatrixShape
+  NodeShape, UnionShape, ArrayShape
 }
 
 import scala.concurrent.Future
@@ -95,7 +95,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
   }
 
   test("Get type defined as type expression: Matrix of strings") {
-    getAndAssertRamlDeclaration[MatrixShape](exprLibrary, "stringMatrix")
+    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "stringMatrix")
   }
 
   def getAndAssertRamlDeclaration[T:ClassTag] (filePath: String, declarationName: String): Future[Assertion] = {
