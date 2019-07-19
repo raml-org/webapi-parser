@@ -3,7 +3,8 @@ package webapi
 import webapi.WebApiClientConverters._
 
 import amf.client.model.domain.{
-  NodeShape, UnionShape, ArrayShape
+  NodeShape, UnionShape, ArrayShape, AnyShape,
+  NilShape, FileShape, ScalarShape, SchemaShape
 }
 
 import scala.concurrent.Future
@@ -16,7 +17,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
 
   private val apiWithTypesRaml     = "file://shared/src/test/resources/raml/api-with-types.raml"
   private val library              = "file://shared/src/test/resources/raml/fragments/library.raml"
-  private val exprLibrary          = "file://shared/src/test/resources/raml/fragments/library-with-expressions.raml"
+  private val complexLib          = "file://shared/src/test/resources/raml/fragments/complex-library.raml"
 
   test("Get declaration from resolved RAML 1.0 Document") {
     for {
@@ -75,27 +76,79 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
   }
 
   test("Get type defined as type expression: Union") {
-    getAndAssertRamlDeclaration[UnionShape](exprLibrary, "CatDogUnion")
+    getAndAssertRamlDeclaration[UnionShape](complexLib, "CatDogUnion")
   }
 
   test("Get type defined as type expression: Multiple Inheritance") {
-    getAndAssertRamlDeclaration[NodeShape](exprLibrary, "CatDogMultiInheritance")
+    getAndAssertRamlDeclaration[NodeShape](complexLib, "CatDogMultiInheritance")
   }
 
   test("Get type defined as type expression: Array") {
-    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "CatArray")
+    getAndAssertRamlDeclaration[ArrayShape](complexLib, "CatArray")
   }
 
   test("Get type defined as type expression: Union Array") {
-    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "CatDogUnionArray")
+    getAndAssertRamlDeclaration[ArrayShape](complexLib, "CatDogUnionArray")
   }
 
   test("Get type defined as type expression: Array of strings") {
-    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "stringArray")
+    getAndAssertRamlDeclaration[ArrayShape](complexLib, "stringArray")
   }
 
   test("Get type defined as type expression: Matrix of strings") {
-    getAndAssertRamlDeclaration[ArrayShape](exprLibrary, "stringMatrix")
+    getAndAssertRamlDeclaration[ArrayShape](complexLib, "stringMatrix")
+  }
+
+  test("Get type that inherits type: any") {
+    getAndAssertRamlDeclaration[AnyShape](complexLib, "anyCat")
+  }
+
+  test("Get type that inherits type: string") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatName")
+  }
+
+  test("Get type that inherits type: number") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatAgeNum")
+  }
+
+  test("Get type that inherits type: integer") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatAgeInt")
+  }
+
+  test("Get type that inherits type: boolean") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatIsCool")
+  }
+
+  test("Get type that inherits type: date-only") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatBirthDateOnly")
+  }
+
+  test("Get type that inherits type: time-only") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatBirthTimeOnly")
+  }
+
+  test("Get type that inherits type: datetime-only") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatBirthDatetimeOnly")
+  }
+
+  test("Get type that inherits type: datetime") {
+    getAndAssertRamlDeclaration[ScalarShape](complexLib, "CatBirthDatetime")
+  }
+
+  test("Get type that inherits type: file") {
+    getAndAssertRamlDeclaration[FileShape](complexLib, "CatPhoto")
+  }
+
+  test("Get type that inherits type: nil") {
+    getAndAssertRamlDeclaration[NilShape](complexLib, "CatosaurusNil")
+  }
+
+  test("Get type that includes json schema") {
+    getAndAssertRamlDeclaration[SchemaShape](complexLib, "CatInJson")
+  }
+
+  test("Get type that includes xml schema") {
+    getAndAssertRamlDeclaration[SchemaShape](complexLib, "CatInXml")
   }
 
   def getAndAssertRamlDeclaration[T:ClassTag] (filePath: String, declarationName: String): Future[Assertion] = {
