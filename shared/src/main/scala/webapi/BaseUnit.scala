@@ -41,13 +41,24 @@ import amf.plugins.document.webapi.model.{
   SecuritySchemeFragment => InternalSecuritySchemeFragment
 }
 import amf.client.model.domain.{
-  ArrayNode, ObjectNode, ScalarNode, DomainElement,
-  NodeShape, DataNode
+  ArrayNode, ObjectNode, ScalarNode, DataNode, DomainElement,
+  AnyShape, NodeShape, UnionShape, ArrayShape,
+  NilShape, FileShape, ScalarShape, SchemaShape
 }
-import amf.plugins.domain.shapes.models.{NodeShape => InternalNodeShape}
+import amf.plugins.domain.shapes.models.{
+  NodeShape => InternalNodeShape,
+  UnionShape => InternalUnionShape,
+  ArrayShape => InternalArrayShape,
+  AnyShape => InternalAnyShape,
+  NilShape => InternalNilShape,
+  FileShape => InternalFileShape,
+  ScalarShape => InternalScalarShape,
+  SchemaShape => InternalSchemaShape
+}
 
 import scala.scalajs.js.annotation._
 import collection.mutable.Map
+import util.control.Breaks._
 
 
 /**
@@ -60,21 +71,31 @@ trait WebApiBaseUnit extends BaseUnit {
   /** Gets declaration by name.
     *
     * @param name String name of declaration to look for.
-    * @return Found declaration as NodeShape.
+    * @return Found declaration as AnyShape.
     */
-  def getDeclarationByName(name: String): NodeShape = {
-    var nodesMap = Map[String, NodeShape]()
-    val elements: ClientList[DomainElement] = findByType("http://www.w3.org/ns/shacl#NodeShape")
+  def getDeclarationByName(name: String): AnyShape = {
+    var nodesMap = Map[String, AnyShape]()
+    val elements: ClientList[DomainElement] = findByType("http://a.ml/vocabularies/shapes#Shape")
+
     elements.asInternal foreach {
       element => {
-        var shape = element match {
-          case nsh: NodeShape         => nsh
-          case ins: InternalNodeShape => new NodeShape(ins)
-        }
-        // Do not include references. Relies on root type declarations being
-        // at the start of the findByType() results list.
-        if(!(shape.isLink) && !(nodesMap.contains(shape.name.value()))) {
-          nodesMap += (shape.name.value() -> shape)
+        breakable {
+          var shape = element match {
+            case nos: InternalNodeShape   => new NodeShape(nos)
+            case uns: InternalUnionShape  => new UnionShape(uns)
+            case ars: InternalArrayShape  => new ArrayShape(ars)
+            case nis: InternalNilShape    => new NilShape(nis)
+            case fis: InternalFileShape   => new FileShape(fis)
+            case scs: InternalScalarShape => new ScalarShape(scs)
+            case shs: InternalSchemaShape => new SchemaShape(shs)
+            case ans: InternalAnyShape    => new AnyShape(ans)
+            case _                        => break
+          }
+          // Do not include references. Relies on root type declarations being
+          // at the start of the findByType() results list.
+          if(!(shape.isLink) && !(nodesMap.contains(shape.name.value()))) {
+            nodesMap += (shape.name.value() -> shape)
+          }
         }
       }
     }

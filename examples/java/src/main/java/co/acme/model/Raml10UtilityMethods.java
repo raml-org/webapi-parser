@@ -26,9 +26,10 @@ public class Raml10UtilityMethods {
     List<DomainElement> allTypes = model.findByType("http://www.w3.org/ns/shacl#NodeShape");
 
     // Get type defined in root by name
-    NodeShape userInRoot = (NodeShape) model.getDeclarationByName("User");
-    System.out.println(userInRoot.toJsonSchema());
-    ScalarShape age = (ScalarShape) userInRoot.properties().get(2).range();
+    AnyShape userInRoot = (AnyShape) model.getDeclarationByName("User");
+    NodeShape userInRootNode = (NodeShape) userInRoot;
+    System.out.println(userInRootNode.toJsonSchema());
+    ScalarShape age = (ScalarShape) userInRootNode.properties().get(2).range();
     System.out.println("Age from " + age.minimum().value() + " to " + age.maximum().value());
 
     // Navigating RAML 1.0 DataType string
@@ -42,7 +43,7 @@ public class Raml10UtilityMethods {
 
     // Get type defined in root by name. Types without explicit name have a
     // special name "type"
-    NodeShape userInStringRoot = (NodeShape) stringModel.getDeclarationByName("type");
+    AnyShape userInStringRoot = (AnyShape) stringModel.getDeclarationByName("type");
     System.out.println(userInStringRoot.toJsonSchema());
   }
 }
