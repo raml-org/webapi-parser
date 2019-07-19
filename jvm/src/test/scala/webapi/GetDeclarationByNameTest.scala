@@ -17,7 +17,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
 
   private val apiWithTypesRaml     = "file://shared/src/test/resources/raml/api-with-types.raml"
   private val library              = "file://shared/src/test/resources/raml/fragments/library.raml"
-  private val complexLib          = "file://shared/src/test/resources/raml/fragments/complex-library.raml"
+  private val complexLib          = "file://shared/src/test/resources/raml/complex-library.raml"
 
   test("Get declaration from resolved RAML 1.0 Document") {
     for {
@@ -144,11 +144,19 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
   }
 
   test("Get type that includes json schema") {
-    getAndAssertRamlDeclaration[SchemaShape](complexLib, "CatInJson")
+    getAndAssertRamlDeclaration[NodeShape](complexLib, "CatInJson")
+  }
+
+  test("Get type that includes json schema (using deprecated 'schema:')") {
+    getAndAssertRamlDeclaration[NodeShape](complexLib, "CatInJsonSchema")
   }
 
   test("Get type that includes xml schema") {
     getAndAssertRamlDeclaration[SchemaShape](complexLib, "CatInXml")
+  }
+
+  test("Get type that includes xml schema (using deprecated 'schema:')") {
+    getAndAssertRamlDeclaration[SchemaShape](complexLib, "CatInXmlSchema")
   }
 
   def getAndAssertRamlDeclaration[T:ClassTag] (filePath: String, declarationName: String): Future[Assertion] = {

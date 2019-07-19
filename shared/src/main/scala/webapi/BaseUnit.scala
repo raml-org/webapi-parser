@@ -42,12 +42,18 @@ import amf.plugins.document.webapi.model.{
 }
 import amf.client.model.domain.{
   ArrayNode, ObjectNode, ScalarNode, DataNode, DomainElement,
-  AnyShape, NodeShape, UnionShape, ArrayShape
+  AnyShape, NodeShape, UnionShape, ArrayShape,
+  NilShape, FileShape, ScalarShape, SchemaShape
 }
 import amf.plugins.domain.shapes.models.{
   NodeShape => InternalNodeShape,
   UnionShape => InternalUnionShape,
-  ArrayShape => InternalArrayShape
+  ArrayShape => InternalArrayShape,
+  AnyShape => InternalAnyShape,
+  NilShape => InternalNilShape,
+  FileShape => InternalFileShape,
+  ScalarShape => InternalScalarShape,
+  SchemaShape => InternalSchemaShape
 }
 
 import scala.scalajs.js.annotation._
@@ -75,9 +81,14 @@ trait WebApiBaseUnit extends BaseUnit {
       element => {
         breakable {
           var shape = element match {
-            case nsh: InternalNodeShape   => new NodeShape(nsh)
-            case ius: InternalUnionShape  => new UnionShape(ius)
-            case ias: InternalArrayShape  => new ArrayShape(ias)
+            case nos: InternalNodeShape   => new NodeShape(nos)
+            case uns: InternalUnionShape  => new UnionShape(uns)
+            case ars: InternalArrayShape  => new ArrayShape(ars)
+            case nis: InternalNilShape    => new NilShape(nis)
+            case fis: InternalFileShape   => new FileShape(fis)
+            case scs: InternalScalarShape => new ScalarShape(scs)
+            case shs: InternalSchemaShape => new SchemaShape(shs)
+            case ans: InternalAnyShape    => new AnyShape(ans)
             case _                        => break
           }
           // Do not include references. Relies on root type declarations being

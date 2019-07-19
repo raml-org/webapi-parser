@@ -24,9 +24,14 @@ types:
   CatBirthTimeOnly: time-only
   CatBirthDatetimeOnly: datetime-only
   CatBirthDatetime: datetime
-  CatPhoto: file
+  CatPhoto:
+    type: file
   CatosaurusNil: nil
   CatInJson:
     type: !include schemas/cat-schema.json
   CatInXml:
     type: !include schemas/cat-schema.xsd
+  CatInJsonSchema:
+    schema: !include schemas/cat-schema-2.json
+  CatInXmlSchema:
+    schema: !include schemas/cat-schema-2.xsd
