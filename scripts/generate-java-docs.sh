@@ -14,6 +14,7 @@ sbt clean
 sbt webapiJVM/compile
 
 echo "Generating Java docs"
+sed -i 's/GraphDomainConverter\$GraphDomainConverter\$/GraphDomainConverter\.GraphDomainConverter\$/g' ./jvm/target/java/webapi/*
 sbt webapiJVM/genjavadoc:doc
 rm ./jvm/target/java/webapi/*$.java
 rm ./jvm/target/java/webapi/*Test.java
