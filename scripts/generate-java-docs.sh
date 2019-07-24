@@ -14,7 +14,11 @@ sbt clean
 sbt webapiJVM/compile
 
 echo "Generating Java docs"
+
+# Fix strange scala classes declarations so genjavadoc doesn't complain.
 sed -i 's/GraphDomainConverter\$GraphDomainConverter\$/GraphDomainConverter\.GraphDomainConverter\$/g' ./jvm/target/java/webapi/*
+sed -i 's/static protected abstract/static protected/g' ./jvm/target/java/webapi/*
+
 sbt webapiJVM/genjavadoc:doc
 rm ./jvm/target/java/webapi/*$.java
 rm ./jvm/target/java/webapi/*Test.java
