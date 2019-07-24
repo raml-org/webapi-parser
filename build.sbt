@@ -22,6 +22,7 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   assembly / aggregate := false,
   Compile / publishArtifact := true,
   Test / publishArtifact := false,
+  useGpg := true,
   useGpgAgent := false,
   pgpPassphrase := sys.env.get("GPG_PASSPHRASE").map(_.toArray),
   credentials ++= Common.credentials(),
