@@ -1,16 +1,26 @@
 package webapi
 
 import webapi.WebApiClientConverters._
-
+import amf.client.model.domain.WebApi
+import amf.client.model.domain.{
+  WebApi, ArrayNode, ObjectNode, ScalarNode
+}
 import org.scalatest.{FunSuite, Matchers, Assertion}
 import org.scalatest.Assertions._
-
 
 class BaseUnitConstructorsTest extends FunSuite with Matchers {
 
   test("WebApiDocument empty constructor") {
     val model = new WebApiDocument()
     model shouldBe a [WebApiDocument]
+    model.encodes should be (null)
+  }
+
+  test("WebApiDocument constructed with WebApi") {
+    val api = new WebApi()
+    val model = new WebApiDocument(api)
+    model shouldBe a [WebApiDocument]
+    model.encodes shouldBe a [WebApi]
   }
 
   test("WebApiModule empty constructor") {
@@ -66,5 +76,31 @@ class BaseUnitConstructorsTest extends FunSuite with Matchers {
   test("WebApiVocabulary empty constructor") {
     val model = new WebApiVocabulary()
     model shouldBe a [WebApiVocabulary]
+  }
+
+  test("WebApiDataType empty constructor") {
+    val model = new WebApiDataType()
+    model shouldBe a [WebApiDataType]
+  }
+
+  test("WebApiPayloadFragment constructed with ScalarNode") {
+    val node = new ScalarNode()
+    val model = new WebApiPayloadFragment(node, "application/json")
+    model shouldBe a [WebApiPayloadFragment]
+    model.encodes shouldBe a [ScalarNode]
+  }
+
+  test("WebApiPayloadFragment constructed with ObjectNode") {
+    val node = new ObjectNode()
+    val model = new WebApiPayloadFragment(node, "application/json")
+    model shouldBe a [WebApiPayloadFragment]
+    model.encodes shouldBe a [ObjectNode]
+  }
+
+  test("WebApiPayloadFragment constructed with ArrayNode") {
+    val node = new ArrayNode()
+    val model = new WebApiPayloadFragment(node, "application/json")
+    model shouldBe a [WebApiPayloadFragment]
+    model.encodes shouldBe a [ArrayNode]
   }
 }
