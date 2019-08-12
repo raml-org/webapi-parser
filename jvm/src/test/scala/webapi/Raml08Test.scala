@@ -25,6 +25,41 @@ class Raml08Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |      page: integer
       |      per_page: integer""".stripMargin
 
+  private val apiStringWithRef: String =
+    """#%RAML 0.8
+      |title: API with Types
+      |/users/{id}:
+      |  get:
+      |    responses:
+      |      200:
+      |        body:
+      |          application/json:
+      |            schema: !include cat-schema.json""".stripMargin
+
+  test("String parsing with reference and basePath") {
+    for {
+      unit <- Raml08.parse(
+        apiStringWithRef,
+        "file://shared/src/test/resources/includes/").asInternal
+      resolved <- Raml08.resolve(unit).asInternal
+      genStr <- Raml08.generateString(resolved).asInternal
+    } yield {
+      genStr should not include ("!include")
+      genStr should include ("The cat's name")
+    }
+  }
+
+  test("String parsing with reference and no basePath") {
+    for {
+      unit <- Raml08.parse(apiStringWithRef).asInternal
+      resolved <- Raml08.resolve(unit).asInternal
+      genStr <- Raml08.generateString(resolved).asInternal
+    } yield {
+      genStr should not include ("!include")
+      genStr should not include ("The cat's name")
+    }
+  }
+
   test("String parsing") {
     for {
       unit <- Raml08.parse(apiString).asInternal

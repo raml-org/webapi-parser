@@ -1,0 +1,17 @@
+{
+  "$id": "https://example.com/cat.schema.json",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Cat",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The cat's name."
+    },
+    "age": {
+      "description": "Age in years which must be equal to or greater than zero.",
+      "type": "integer",
+      "minimum": 0
+    }
+  }
+}

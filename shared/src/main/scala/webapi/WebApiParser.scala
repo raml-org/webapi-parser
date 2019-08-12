@@ -78,6 +78,19 @@ object Raml10 {
     }).asClient
   }
 
+  /** Parses RAML 1.0 content from string with specific API doc base path.
+    * References from API doc are resolved relative to specified base path.
+    *
+    * @param content Content string to be parsed.
+    * @param basePath API doc location to use when parsing content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml10Parser().parseStringAsync(basePath, content).asInternal
+    }).asClient
+  }
+
   /** Generates file with RAML 1.0 content.
     *
     * @param model Parsed WebApi Model to generate content from.
@@ -145,6 +158,19 @@ object Raml08 {
       } else {
         new Raml08Parser().parseStringAsync(urlOrContent).asInternal
       }
+    }).asClient
+  }
+
+  /** Parses RAML 0.8 content from string with specific API doc base path.
+    * References from API doc are resolved relative to specified base path.
+    *
+    * @param content Content string to be parsed.
+    * @param basePath API doc location to use when parsing content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Raml08Parser().parseStringAsync(basePath, content).asInternal
     }).asClient
   }
 
@@ -218,6 +244,19 @@ object Oas20 {
     }).asClient
   }
 
+  /** Parses OAS 2.0 JSON content from string with specific API doc base path.
+    * References from API doc are resolved relative to specified base path.
+    *
+    * @param content Content string to be parsed.
+    * @param basePath API doc location to use when parsing content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20Parser().parseStringAsync(basePath, content).asInternal
+    }).asClient
+  }
+
   /** Generates file with OAS 2.0 JSON content.
     *
     * @param model Parsed WebApi Model to generate content from.
@@ -279,6 +318,19 @@ object Oas20 {
       } else {
         new Oas20YamlParser().parseStringAsync(urlOrContent).asInternal
       }
+    }).asClient
+  }
+
+  /** Parses OAS 2.0 YAML content from string with specific API doc base path.
+    * References from API doc are resolved relative to specified base path.
+    *
+    * @param content Content string to be parsed.
+    * @param basePath API doc location to use when parsing content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parseYaml(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas20YamlParser().parseStringAsync(basePath, content).asInternal
     }).asClient
   }
 
