@@ -377,6 +377,18 @@ object AmfGraph {
     }).asClient
   }
 
+  /** Parses AMF Graph content from string with specific API doc base path.
+    *
+    * @param content Content string to be parsed.
+    * @param basePath API doc location to use when parsing content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new AmfGraphParser().parseStringAsync(basePath, content).asInternal
+    }).asClient
+  }
+
   /** Generates file with AMF Graph content.
     *
     * @param model Parsed WebApi Model to generate content from.

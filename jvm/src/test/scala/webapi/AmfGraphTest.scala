@@ -22,6 +22,17 @@ class AmfGraphTest extends AsyncFunSuite with Matchers with WaitingFileReader {
       unit <- AmfGraph.parse(apiString).asInternal
     } yield {
       assertApiParsed(unit)
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("http://a.ml/amf/default_document")
+    }
+  }
+
+  test("String parsing with basePath") {
+    for {
+      unit <- AmfGraph.parse(apiString, "file://somewhere/something.jsonld").asInternal
+    } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("file://somewhere/something.jsonld")
     }
   }
 
