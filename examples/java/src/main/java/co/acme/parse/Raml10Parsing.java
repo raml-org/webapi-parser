@@ -18,7 +18,7 @@ public class Raml10Parsing {
     System.out.println("Parsed Raml10 file. Expected unit encoding webapi: " + ((WebApiDocument) result).encodes());
   }
 
-  // Example of parsing RAML 1.0 file
+  // Example of parsing RAML 1.0 string
   public static void parseString() throws InterruptedException, ExecutionException {
     String inp ="#%RAML 1.0\n" +
                 "\n" +
@@ -37,6 +37,30 @@ public class Raml10Parsing {
 
     // Set API description
     api.withDescription("Very nice api");
+
+    // Generate RAML 1.0 string from updated model and log it
+    String output = Raml10.generateString(doc).get();
+    System.out.println("Generated Raml10 string:\n" + output);
+  }
+
+  // Example of parsing RAML 1.0 string with location param
+  public static void parseStringWithLocation() throws InterruptedException, ExecutionException {
+    String inp = "#%RAML 1.0\n" +
+                 "title: API with Types\n" +
+                 "/users/{id}:\n" +
+                 "  get:\n" +
+                 "    responses:\n" +
+                 "      200:\n" +
+                 "        body:\n" +
+                 "          application/json:\n" +
+                 "            type: !include cat-schema.json";
+    String location = "file://../api-specs/includes/api.raml";
+    System.out.println("Input Raml10 string:\n" + inp);
+
+    // Parse the string
+    WebApiDocument doc = (WebApiDocument) Raml10.parse(inp, location).get();
+
+    System.out.println("Parsed content location:\n" + doc.location());
 
     // Generate RAML 1.0 string from updated model and log it
     String output = Raml10.generateString(doc).get();
