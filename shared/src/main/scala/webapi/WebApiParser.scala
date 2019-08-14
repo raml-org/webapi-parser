@@ -78,16 +78,16 @@ object Raml10 {
     }).asClient
   }
 
-  /** Parses RAML 1.0 content from string with specific API doc base path.
-    * References from API doc are resolved relative to specified base path.
+  /** Parses RAML 1.0 content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
-    * @param basePath API doc location to use when parsing content string.
+    * @param location Location to assign to a doc parsed from a content string.
+    *                 References are resolved relative to this location.
     * @return Parsed WebApi Model (future).
     */
-  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+  def parse(content: String, location: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Raml10Parser().parseStringAsync(basePath, content).asInternal
+      new Raml10Parser().parseStringAsync(location, content).asInternal
     }).asClient
   }
 
@@ -161,16 +161,16 @@ object Raml08 {
     }).asClient
   }
 
-  /** Parses RAML 0.8 content from string with specific API doc base path.
-    * References from API doc are resolved relative to specified base path.
+  /** Parses RAML 0.8 content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
-    * @param basePath API doc location to use when parsing content string.
+    * @param location Location to assign to a doc parsed from a content string.
+    *                 References are resolved relative to this location.
     * @return Parsed WebApi Model (future).
     */
-  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+  def parse(content: String, location: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Raml08Parser().parseStringAsync(basePath, content).asInternal
+      new Raml08Parser().parseStringAsync(location, content).asInternal
     }).asClient
   }
 
@@ -244,16 +244,16 @@ object Oas20 {
     }).asClient
   }
 
-  /** Parses OAS 2.0 JSON content from string with specific API doc base path.
-    * References from API doc are resolved relative to specified base path.
+  /** Parses OAS 2.0 JSON content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
-    * @param basePath API doc location to use when parsing content string.
+    * @param location Location to assign to a doc parsed from a content string.
+    *                 References are resolved relative to this location.
     * @return Parsed WebApi Model (future).
     */
-  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+  def parse(content: String, location: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas20Parser().parseStringAsync(basePath, content).asInternal
+      new Oas20Parser().parseStringAsync(location, content).asInternal
     }).asClient
   }
 
@@ -321,16 +321,16 @@ object Oas20 {
     }).asClient
   }
 
-  /** Parses OAS 2.0 YAML content from string with specific API doc base path.
-    * References from API doc are resolved relative to specified base path.
+  /** Parses OAS 2.0 YAML content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
-    * @param basePath API doc location to use when parsing content string.
+    * @param location Location to assign to a doc parsed from a content string.
+    *                 References are resolved relative to this location.
     * @return Parsed WebApi Model (future).
     */
-  def parseYaml(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+  def parseYaml(content: String, location: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas20YamlParser().parseStringAsync(basePath, content).asInternal
+      new Oas20YamlParser().parseStringAsync(location, content).asInternal
     }).asClient
   }
 
@@ -377,15 +377,16 @@ object AmfGraph {
     }).asClient
   }
 
-  /** Parses AMF Graph content from string with specific API doc base path.
+  /** Parses AMF Graph content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
-    * @param basePath API doc location to use when parsing content string.
+    * @param location Location to assign to a doc parsed from a content string.
+    *                 References are resolved relative to this location.
     * @return Parsed WebApi Model (future).
     */
-  def parse(content: String, basePath: String): ClientFuture[WebApiBaseUnit] = {
+  def parse(content: String, location: String): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
-      new AmfGraphParser().parseStringAsync(basePath, content).asInternal
+      new AmfGraphParser().parseStringAsync(location, content).asInternal
     }).asClient
   }
 

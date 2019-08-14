@@ -125,25 +125,29 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |            "$ref": "cat-schema.yaml"
       |      required: true""".stripMargin
 
-  test("JSON string parsing with reference and basePath") {
+  test("JSON string parsing with reference and location param") {
     for {
       unit <- Oas20.parse(
         apiStringWithRef,
-        "file://shared/src/test/resources/includes/").asInternal
+        "file://shared/src/test/resources/includes/api.json").asInternal
       resolved <- Oas20.resolve(unit).asInternal
       genStr <- Oas20.generateString(resolved).asInternal
     } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("file://shared/src/test/resources/includes/api.json")
       genStr should not include ("$ref")
       genStr should include ("The cat's name")
     }
   }
 
-  test("JSON string parsing with reference and no basePath") {
+  test("JSON string parsing with reference and no location param") {
     for {
       unit <- Oas20.parse(apiStringWithRef).asInternal
       resolved <- Oas20.resolve(unit).asInternal
       genStr <- Oas20.generateString(resolved).asInternal
     } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("http://a.ml/amf/default_document")
       genStr should not include ("$ref")
       genStr should not include ("The cat's name")
     }
@@ -208,25 +212,29 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("YAML string parsing with reference and basePath") {
+  test("YAML string parsing with reference and location param") {
     for {
       unit <- Oas20.parseYaml(
         apiStringWithRef,
-        "file://shared/src/test/resources/includes/").asInternal
+        "file://shared/src/test/resources/includes/api.yaml").asInternal
       resolved <- Oas20.resolve(unit).asInternal
       genStr <- Oas20.generateYamlString(resolved).asInternal
     } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("file://shared/src/test/resources/includes/api.yaml")
       genStr should not include ("$ref")
       genStr should include ("The cat's name")
     }
   }
 
-  test("YAML string parsing with reference and no basePath") {
+  test("YAML string parsing with reference and no location param") {
     for {
       unit <- Oas20.parseYaml(apiStringWithRef).asInternal
       resolved <- Oas20.resolve(unit).asInternal
       genStr <- Oas20.generateYamlString(resolved).asInternal
     } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("http://a.ml/amf/default_document")
       genStr should not include ("$ref")
       genStr should not include ("The cat's name")
     }

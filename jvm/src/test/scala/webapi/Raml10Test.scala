@@ -45,25 +45,29 @@ class Raml10Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |          application/json:
       |            type: !include cat-schema.json""".stripMargin
 
-  test("String parsing with reference and basePath") {
+  test("String parsing with reference and location param") {
     for {
       unit <- Raml10.parse(
         apiStringWithRef,
-        "file://shared/src/test/resources/includes/").asInternal
+        "file://shared/src/test/resources/includes/api.raml").asInternal
       resolved <- Raml10.resolve(unit).asInternal
       genStr <- Raml10.generateString(resolved).asInternal
     } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("file://shared/src/test/resources/includes/api.raml")
       genStr should not include ("!include")
       genStr should include ("The cat's name")
     }
   }
 
-  test("String parsing with reference and no basePath") {
+  test("String parsing with reference and no location param") {
     for {
       unit <- Raml10.parse(apiStringWithRef).asInternal
       resolved <- Raml10.resolve(unit).asInternal
       genStr <- Raml10.generateString(resolved).asInternal
     } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("http://a.ml/amf/default_document")
       genStr should not include ("!include")
       genStr should include ("type: any")
     }
