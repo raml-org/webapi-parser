@@ -134,7 +134,7 @@ public class Raml10Navigation {
     ...
     // Annotation 'experimental'
     CustomDomainProperty annotation = (CustomDomainProperty) model.declares().get(0);
-    System.out.println("Annotation type: " + ((ScalarShape) annotation.schema()).dataType());
+    System.out.println("Annotation type: " + ((ScalarShape) annotation.schema()).dataType().value());
 
     // Type 'User'
     NodeShape userType = (NodeShape) model.declares().get(1);
