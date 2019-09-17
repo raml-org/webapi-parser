@@ -16,14 +16,14 @@ after_success:
 deploy:
     -
         provider: script
-        script: travis_wait bash scripts/publish-js.sh
+        script: bash scripts/publish-js.sh
         skip_cleanup: true
         on:
             tags: true
             condition: $TRAVIS_TAG =~ ^v[0-9]\.[0-9]\.[0-9](-beta)?$
     -
         provider: script
-        script: travis_wait bash scripts/publish-java.sh
+        script: bash scripts/publish-java.sh
         skip_cleanup: true
         on:
             tags: true
