@@ -51,6 +51,25 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |  }
       |}
       |}""".stripMargin
+  private val apiStringWithRef: String =
+    """{
+      |"swagger": "2.0",
+      |"info": {"title": "API with Types", "version": ""},
+      |"paths": {
+      |  "/users/{id}": {
+      |    "get": {
+      |      "operationId": "GET_users-id",
+      |      "produces": ["application/json"],
+      |      "responses": {
+      |        "200": {
+      |          "description": "",
+      |          "schema": {"$ref": "cat-schema.json"}
+      |        }
+      |      }
+      |    }
+      |  }
+      |}
+      |}""".stripMargin
   private val apiStringYaml: String =
     """swagger: '2.0'
       |info:
@@ -88,6 +107,51 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |      in: path
       |      name: id
       |      required: true""".stripMargin
+  private val apiStringYamlWithRef: String =
+    """swagger: '2.0'
+      |info:
+      |  title: API with Types
+      |  version: ''
+      |paths:
+      |  "/users/{id}":
+      |    get:
+      |      operationId: GET_users-id
+      |      produces:
+      |      - application/json
+      |      responses:
+      |        '200':
+      |          description: ''
+      |          schema:
+      |            "$ref": "cat-schema.yaml"
+      |      required: true""".stripMargin
+
+  test("JSON string parsing with reference and baseUrl param") {
+    for {
+      unit <- Oas20.parse(
+        apiStringWithRef,
+        "file://shared/src/test/resources/includes/api.json").asInternal
+      resolved <- Oas20.resolve(unit).asInternal
+      genStr <- Oas20.generateString(resolved).asInternal
+    } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("file://shared/src/test/resources/includes/api.json")
+      genStr should not include ("$ref")
+      genStr should include ("The cat's name")
+    }
+  }
+
+  test("JSON string parsing with reference and no baseUrl param") {
+    for {
+      unit <- Oas20.parse(apiStringWithRef).asInternal
+      resolved <- Oas20.resolve(unit).asInternal
+      genStr <- Oas20.generateString(resolved).asInternal
+    } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("http://a.ml/amf/default_document")
+      genStr should not include ("$ref")
+      genStr should not include ("The cat's name")
+    }
+  }
 
   test("JSON string parsing") {
     for {
@@ -145,6 +209,34 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       genStr should not include ("$ref")
       genStr should include ("firstName")
       genStr should include ("schema")
+    }
+  }
+
+  test("YAML string parsing with reference and baseUrl param") {
+    for {
+      unit <- Oas20.parseYaml(
+        apiStringWithRef,
+        "file://shared/src/test/resources/includes/api.yaml").asInternal
+      resolved <- Oas20.resolve(unit).asInternal
+      genStr <- Oas20.generateYamlString(resolved).asInternal
+    } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("file://shared/src/test/resources/includes/api.yaml")
+      genStr should not include ("$ref")
+      genStr should include ("The cat's name")
+    }
+  }
+
+  test("YAML string parsing with reference and no baseUrl param") {
+    for {
+      unit <- Oas20.parseYaml(apiStringWithRef).asInternal
+      resolved <- Oas20.resolve(unit).asInternal
+      genStr <- Oas20.generateYamlString(resolved).asInternal
+    } yield {
+      val doc = unit.asInstanceOf[WebApiDocument]
+      doc.location should be ("http://a.ml/amf/default_document")
+      genStr should not include ("$ref")
+      genStr should not include ("The cat's name")
     }
   }
 

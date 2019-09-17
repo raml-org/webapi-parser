@@ -43,7 +43,7 @@ async function main () {
       .properties.post
       .properties.queryParameters
       .properties.csrf
-      .properties.type.value)
+      .properties.type.value.value())
 
   // POST /users
   const postUsers = users.operations[0]
@@ -56,7 +56,7 @@ async function main () {
     refTr
       .properties.headers
       .properties['X-Tracker']
-      .properties.description.value)
+      .properties.description.value.value())
 
   // POST /users request payload
   const postUsersReq = postUsers.request.payloads[0]
@@ -81,7 +81,10 @@ async function main () {
     user.customDomainProperties[0].name.value())
   console.log(
     'First annotation type:',
-    user.customDomainProperties[0].extension.value)
+    user.customDomainProperties[0].extension.dataType.value())
+  console.log(
+    'First annotation value:',
+    user.customDomainProperties[0].extension.value.value())
 
   // GET /users/{id}
   const getUser = user.operations[0]
@@ -123,7 +126,7 @@ async function main () {
       .properties.post
       .properties.queryParameters
       .properties.csrf
-      .properties.type.value)
+      .properties.type.value.value())
 
   // Trait 'traceable'
   const traceable = model.declares[3]
@@ -132,13 +135,13 @@ async function main () {
     .properties['X-Tracker']
   console.log(
     'Traceable header description:',
-    header.properties.description.value)
+    header.properties.description.value.value())
   console.log(
     'Traceable header pattern:',
-    header.properties.pattern.value)
+    header.properties.pattern.value.value())
   console.log(
     'Traceable header example:',
-    header.properties.example.value)
+    header.properties.example.value.value())
 
   // SecurityScheme oauth_1_0
   const oauth1 = model.declares[4]

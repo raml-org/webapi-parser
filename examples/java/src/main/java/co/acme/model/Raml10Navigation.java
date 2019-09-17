@@ -47,7 +47,7 @@ public class Raml10Navigation {
     ObjectNode csrfQParams = (ObjectNode) csrfGet.properties().get("queryParameters");
     ObjectNode csrfItself = (ObjectNode) csrfQParams.properties().get("csrf");
     ScalarNode csrfTypeProp = (ScalarNode) csrfItself.properties().get("type");
-    System.out.println("Page query param `csrf` type: " + csrfTypeProp.value());
+    System.out.println("Page query param `csrf` type: " + csrfTypeProp.value().value());
 
     // POST /users
     Operation postUsers = (Operation) users.operations().get(0);
@@ -59,7 +59,7 @@ public class Raml10Navigation {
     ObjectNode trHeaders = (ObjectNode) refTrait.properties().get("headers");
     ObjectNode trXTracker = (ObjectNode) trHeaders.properties().get("X-Tracker");
     ScalarNode trHeaderDesc = (ScalarNode) trXTracker.properties().get("description");
-    System.out.println("Trait header desc: " + trHeaderDesc.value());
+    System.out.println("Trait header desc: " + trHeaderDesc.value().value());
 
     // POST /users request payload
     Payload postUsersReq = (Payload) ((Request) postUsers.request()).payloads().get(0);
@@ -71,7 +71,7 @@ public class Raml10Navigation {
     System.out.println("Second property name: " + postUsersType.properties().get(1).name().value());
     System.out.println(
       "Second property type: " +
-      ((ScalarShape) postUsersType.properties().get(1).range()).dataType());
+      ((ScalarShape) postUsersType.properties().get(1).range()).dataType().value());
 
     // Endpoint /users/{id}
     EndPoint user = (EndPoint) api.endPoints().get(1);
@@ -82,7 +82,11 @@ public class Raml10Navigation {
       user.customDomainProperties().get(0).name().value());
     System.out.println(
       "First annotation type: " +
+      ((ScalarNode) user.customDomainProperties().get(0).extension()).dataType().value());
+    System.out.println(
+      "First annotation value: " +
       ((ScalarNode) user.customDomainProperties().get(0).extension()).value());
+
 
     // GET /users/{id}
     Operation getUser = (Operation) user.operations().get(0);
@@ -96,12 +100,12 @@ public class Raml10Navigation {
     System.out.println("First property name: " + getUsersType.properties().get(0).name().value());
     System.out.println(
       "First property type: " +
-      ((ScalarShape) postUsersType.properties().get(0).range()).dataType());
+      ((ScalarShape) postUsersType.properties().get(0).range()).dataType().value());
 
     // Annotation 'experimental'
     CustomDomainProperty annotation = (CustomDomainProperty) model.declares().get(0);
     System.out.println("Annotation name: " + annotation.name().value());
-    System.out.println("Annotation type: " + ((ScalarShape) annotation.schema()).dataType());
+    System.out.println("Annotation type: " + ((ScalarShape) annotation.schema()).dataType().value());
 
     // Type 'User'
     NodeShape userType = (NodeShape) model.declares().get(1);
@@ -109,7 +113,7 @@ public class Raml10Navigation {
     for (int i = 0; i < userType.properties().size(); i++) {
       System.out.println(
         userType.properties().get(i).name().value() + ": " +
-        ((ScalarShape) userType.properties().get(i).range()).dataType()
+        ((ScalarShape) userType.properties().get(i).range()).dataType().value()
       );
     }
     ScalarShape age = (ScalarShape) userType.properties().get(2).range();
@@ -122,7 +126,7 @@ public class Raml10Navigation {
     ObjectNode pgQparams = (ObjectNode) postableGet.properties().get("queryParameters");
     ObjectNode postableCsrtItself = (ObjectNode) pgQparams.properties().get("csrf");
     ScalarNode postableCsrfTypeProp = (ScalarNode) postableCsrtItself.properties().get("type");
-    System.out.println("Page query param `csrf` type: " + postableCsrfTypeProp.value());
+    System.out.println("Page query param `csrf` type: " + postableCsrfTypeProp.value().value());
 
     // Trait 'traceable'
     Trait traceable = (Trait) model.declares().get(3);
@@ -130,11 +134,11 @@ public class Raml10Navigation {
     ObjectNode traceHeaders = (ObjectNode) traceableNode.properties().get("headers");
     ObjectNode traceXTracker = (ObjectNode) traceHeaders.properties().get("X-Tracker");
     ScalarNode traceHeaderDesc = (ScalarNode) traceXTracker.properties().get("description");
-    System.out.println("Traceable header desc: " + traceHeaderDesc.value());
+    System.out.println("Traceable header desc: " + traceHeaderDesc.value().value());
     ScalarNode traceHeaderPattern = (ScalarNode) traceXTracker.properties().get("pattern");
-    System.out.println("Traceable header pattern: " + traceHeaderPattern.value());
+    System.out.println("Traceable header pattern: " + traceHeaderPattern.value().value());
     ScalarNode traceHeaderExample = (ScalarNode) traceXTracker.properties().get("example");
-    System.out.println("Traceable header example: " + traceHeaderExample.value());
+    System.out.println("Traceable header example: " + traceHeaderExample.value().value());
 
     // SecurityScheme oauth_1_0
     SecurityScheme oauth1 = (SecurityScheme) model.declares().get(4);

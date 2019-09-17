@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 // Runs all the example classes
 public class WebApiParserDemo {
   public static void main(String[] args) throws ExecutionException, InterruptedException, UnsupportedEncodingException {
+    Raml10Parsing.parseStringWithLocation();
     Raml10Parsing.parseString();
     Raml10Parsing.parseFile();
 
