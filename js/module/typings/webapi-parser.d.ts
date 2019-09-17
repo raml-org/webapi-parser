@@ -146,11 +146,11 @@ declare module "webapi-parser" {
       /** Parses RAML 1.0 content from string with a custom API Doc location.
        *
        * @param content Content string to be parsed.
-       * @param location Location to assign to a doc parsed from a content string.
-       *                 References are resolved relative to this location.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
        * @return Parsed WebApi Model (future).
        */
-      static parse(content: string, location: string): Promise<WebApiBaseUnit>
+      static parse(content: string, baseUrl: string): Promise<WebApiBaseUnit>
 
       /** Generates file with RAML 1.0 content.
        *
@@ -196,11 +196,11 @@ declare module "webapi-parser" {
       /** Parses RAML 0.8 content from string with a custom API Doc location.
        *
        * @param content Content string to be parsed.
-       * @param location Location to assign to a doc parsed from a content string.
-       *                 References are resolved relative to this location.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
        * @return Parsed WebApi Model (future).
        */
-      static parse(content: string, location: string): Promise<WebApiBaseUnit>
+      static parse(content: string, baseUrl: string): Promise<WebApiBaseUnit>
 
       /** Generates file with RAML 0.8 content.
        *
@@ -246,11 +246,11 @@ declare module "webapi-parser" {
       /** Parses OAS 2.0 JSON content from string with a custom API Doc location.
        *
        * @param content Content string to be parsed.
-       * @param location Location to assign to a doc parsed from a content string.
-       *                 References are resolved relative to this location.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
        * @return Parsed WebApi Model (future).
        */
-      static parse(content: string, location: string): Promise<WebApiBaseUnit>
+      static parse(content: string, baseUrl: string): Promise<WebApiBaseUnit>
 
       /** Generates file with OAS 2.0 JSON content.
        *
@@ -292,11 +292,11 @@ declare module "webapi-parser" {
       /** Parses OAS 2.0 YAML content from string with a custom API Doc location.
        *
        * @param content Content string to be parsed.
-       * @param location Location to assign to a doc parsed from a content string.
-       *                 References are resolved relative to this location.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
        * @return Parsed WebApi Model (future).
        */
-      static parseYaml(content: string, location: string): Promise<WebApiBaseUnit>
+      static parseYaml(content: string, baseUrl: string): Promise<WebApiBaseUnit>
 
       /** Generates file with OAS 2.0 YAML content.
        *
@@ -326,11 +326,11 @@ declare module "webapi-parser" {
       /** Parses AMF Graph content from string with a custom API Doc location.
        *
        * @param content Content string to be parsed.
-       * @param location Location to assign to a doc parsed from a content string.
-       *                 References are resolved relative to this location.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
        * @return Parsed WebApi Model (future).
        */
-      static parse(content: string, location: string): Promise<WebApiBaseUnit>
+      static parse(content: string, baseUrl: string): Promise<WebApiBaseUnit>
 
       /** Generates file with AMF Graph content.
        *

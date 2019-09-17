@@ -36,7 +36,7 @@ class Raml08Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |          application/json:
       |            schema: !include cat-schema.json""".stripMargin
 
-  test("String parsing with reference and location param") {
+  test("String parsing with reference and baseUrl param") {
     for {
       unit <- Raml08.parse(
         apiStringWithRef,
@@ -51,7 +51,7 @@ class Raml08Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("String parsing with reference and no location param") {
+  test("String parsing with reference and no baseUrl param") {
     for {
       unit <- Raml08.parse(apiStringWithRef).asInternal
       resolved <- Raml08.resolve(unit).asInternal

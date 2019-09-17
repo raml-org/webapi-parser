@@ -125,7 +125,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       |            "$ref": "cat-schema.yaml"
       |      required: true""".stripMargin
 
-  test("JSON string parsing with reference and location param") {
+  test("JSON string parsing with reference and baseUrl param") {
     for {
       unit <- Oas20.parse(
         apiStringWithRef,
@@ -140,7 +140,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("JSON string parsing with reference and no location param") {
+  test("JSON string parsing with reference and no baseUrl param") {
     for {
       unit <- Oas20.parse(apiStringWithRef).asInternal
       resolved <- Oas20.resolve(unit).asInternal
@@ -212,7 +212,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("YAML string parsing with reference and location param") {
+  test("YAML string parsing with reference and baseUrl param") {
     for {
       unit <- Oas20.parseYaml(
         apiStringWithRef,
@@ -227,7 +227,7 @@ class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("YAML string parsing with reference and no location param") {
+  test("YAML string parsing with reference and no baseUrl param") {
     for {
       unit <- Oas20.parseYaml(apiStringWithRef).asInternal
       resolved <- Oas20.resolve(unit).asInternal

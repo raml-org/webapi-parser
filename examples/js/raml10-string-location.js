@@ -21,9 +21,9 @@ async function main () {
   console.log('Input:\n', ramlStr)
   const fpath = path.resolve(
     __dirname,
-    '../api-specs/includes/api.raml')
-  const location = `file://${fpath}`
-  const model = await wap.raml10.parse(ramlStr, location)
+    '../api-specs/includes/')
+  const baseUrl = `file://${fpath}`
+  const model = await wap.raml10.parse(ramlStr, baseUrl)
   console.log('Model location:\n', model.location)
   const resolved = await wap.raml10.resolve(model)
 

@@ -54,11 +54,11 @@ public class Raml10Parsing {
                  "        body:\n" +
                  "          application/json:\n" +
                  "            type: !include cat-schema.json";
-    String location = "file://../api-specs/includes/api.raml";
+    String baseUrl = "file://../api-specs/includes/";
     System.out.println("Input Raml10 string:\n" + inp);
 
     // Parse the string
-    WebApiDocument doc = (WebApiDocument) Raml10.parse(inp, location).get();
+    WebApiDocument doc = (WebApiDocument) Raml10.parse(inp, baseUrl).get();
 
     System.out.println("Parsed content location:\n" + doc.location());
 

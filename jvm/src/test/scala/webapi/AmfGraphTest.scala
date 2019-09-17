@@ -27,7 +27,7 @@ class AmfGraphTest extends AsyncFunSuite with Matchers with WaitingFileReader {
     }
   }
 
-  test("String parsing with location param") {
+  test("String parsing with baseUrl param") {
     for {
       unit <- AmfGraph.parse(apiString, "file://somewhere/something.jsonld").asInternal
     } yield {
