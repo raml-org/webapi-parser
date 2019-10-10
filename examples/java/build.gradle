@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.raml:webapi-parser:0.3.0'
+    compile 'org.raml:webapi-parser:0.3.2'
 }
 
 task valkyrTest {

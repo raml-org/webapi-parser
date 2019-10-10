@@ -41,7 +41,7 @@
                 ],
                 "http://www.w3.org/ns/hydra/core#method":[
                   {
-                    "@value":"get"
+                    "@value": 123
                   }
                 ],
                 "http://www.w3.org/ns/hydra/core#returns":[
@@ -58,7 +58,7 @@
                     ],
                     "http://www.w3.org/ns/hydra/core#statusCode":[
                       {
-                        "@value":"123123123"
+                        "@value":"200"
                       }
                     ],
                     "http://a.ml/vocabularies/http#payload":[

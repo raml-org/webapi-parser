@@ -5,7 +5,7 @@ val ivyLocal = Resolver.file("ivy", file(Path.userHome.absolutePath + "/.ivy2/lo
 
 name := "webapi-parser"
 
-ThisBuild / version := "0.3.1"
+ThisBuild / version := "0.3.2"
 
 publish := {}
 
@@ -27,8 +27,8 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "org.scalatest"     %%% "scalatest"       % "3.0.5" % "test",
-    "com.github.amlorg" %%% "amf-webapi"      % "3.5.1",
-    "com.github.amlorg" %%% "amf-validation"  % "3.5.1"
+    "com.github.amlorg" %%% "amf-webapi"      % "3.5.4",
+    "com.github.amlorg" %%% "amf-validation"  % "3.5.4"
   )
 )
 
