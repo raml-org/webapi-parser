@@ -12,26 +12,28 @@
 #     it's currently only possible to include or exclude ALL
 #     dependencies from typedoc generation;
 
-mkdir -p docs/js/tmp_module/node_modules
-
 echo "Generating JS docs"
-cp ./js/module/typings/webapi-parser.d.ts ./docs/js/tmp_module/webapi-parser.d.ts
 
+npm install -g typedoc@0.15.0
+
+mkdir -p docs/js/tmp_module
 cd ./docs/js/tmp_module
 
-npm init -y
-npm install -g typedoc@0.13.0
-npm install amf-client-js
+echo "Merging AMF and webapi-parser declaration files"
+curl https://raw.githubusercontent.com/aml-org/amf/master/amf-client/js/typings/amf-client-js.d.ts -o amf.d.ts
+tail -n +2 ../../../js/module/typings/webapi-parser.d.ts > merged.d.ts
+echo '' >> merged.d.ts
+echo 'declare module "webapi-parser" {' >> merged.d.ts
+tail -n +2 amf.d.ts >> merged.d.ts
 
-mkdir -p ./node_modules/@types/amf-client-js/
-cp ./node_modules/amf-client-js/typings/amf-client-js.d.ts ./node_modules/@types/amf-client-js/amf-client-js.d.ts
-typedoc --out ./gendocs ./webapi-parser.d.ts \
+typedoc --out ./gendocs ./merged.d.ts \
         --includeDeclarations \
         --mode file \
         --ignoreCompilerErrors \
         --readme none \
         --theme minimal \
-        --name "webapi-parser"
+        --name "webapi-parser" \
+        --excludeExternals
 
 cd ..
 cp -r ./tmp_module/gendocs/* ./
