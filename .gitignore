@@ -76,6 +76,7 @@ classes
 # Ignore generated JS and .jar
 /js/module/webapi-parser.js
 /js/module/package-lock.json
+/js/module/README.md
 /examples/js/package-lock.json
 /examples/java/libs/*.jar
 webapi-parser-*.jar
