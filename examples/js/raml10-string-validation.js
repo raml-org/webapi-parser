@@ -44,7 +44,7 @@ async function main () {
   const report = await wap.raml10.validate(model)
 
   // Log validation results
-  console.log('Validation errors:\n', report.results)
+  console.log('Validation errors:', report.toString())
 }
 
 main()
