@@ -5,7 +5,7 @@ val ivyLocal = Resolver.file("ivy", file(Path.userHome.absolutePath + "/.ivy2/lo
 
 name := "webapi-parser"
 
-ThisBuild / version := "0.3.2"
+ThisBuild / version := "0.4.0"
 
 publish := {}
 
