@@ -82,7 +82,7 @@ class AmfGraphTest extends AsyncFunSuite with Matchers with WaitingFileReader {
       genStr <- AmfGraph.generateString(resolved).asInternal
     } yield {
       genStr should not include ("\"@value\":\"User\"")
-      genStr should include ("http#payload")
+      genStr should include ("apiContract#payload")
     }
   }
 

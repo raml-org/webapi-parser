@@ -30,37 +30,37 @@ public class AmfGraphParsing {
                 "  \"http://a.ml/vocabularies/document#encodes\": [{\n" +
                 "    \"@id\": \"http://a.ml/amf/default_document#/web-api\",\n" +
                 "    \"@type\": [\n" +
-                "      \"http://schema.org/WebAPI\",\n" +
+                "      \"http://a.ml/vocabularies/apiContract#WebAPI\",\n" +
                 "      \"http://a.ml/vocabularies/document#RootDomainElement\",\n" +
                 "      \"http://a.ml/vocabularies/document#DomainElement\"\n" +
                 "    ],\n" +
-                "    \"http://schema.org/name\": [{\"@value\": \"API with Types\"}],\n" +
-                "    \"http://a.ml/vocabularies/http#endpoint\": [{\n" +
+                "    \"http://a.ml/vocabularies/core#name\": [{\"@value\": \"API with Types\"}],\n" +
+                "    \"http://a.ml/vocabularies/apiContract#endpoint\": [{\n" +
                 "      \"@id\": \"http://a.ml/amf/default_document#/web-api/end-points//users/{id}\",\n" +
                 "      \"@type\": [\n" +
-                "        \"http://a.ml/vocabularies/http#EndPoint\",\n" +
+                "        \"http://a.ml/vocabularies/apiContract#EndPoint\",\n" +
                 "        \"http://a.ml/vocabularies/document#DomainElement\"\n" +
                 "      ],\n" +
-                "      \"http://a.ml/vocabularies/http#path\": [{\"@value\": \"/users/{id}\"}],\n" +
-                "      \"http://www.w3.org/ns/hydra/core#supportedOperation\": [{\n" +
+                "      \"http://a.ml/vocabularies/apiContract#path\": [{\"@value\": \"/users/{id}\"}],\n" +
+                "      \"http://a.ml/vocabularies/apiContract#supportedOperation\": [{\n" +
                 "        \"@id\": \"http://a.ml/amf/default_document#/web-api/end-points//users/{id}/get\",\n" +
                 "        \"@type\": [\n" +
-                "          \"http://www.w3.org/ns/hydra/core#Operation\",\n" +
+                "          \"http://a.ml/vocabularies/apiContract#Operation\",\n" +
                 "          \"http://a.ml/vocabularies/document#DomainElement\"\n" +
                 "        ],\n" +
-                "        \"http://www.w3.org/ns/hydra/core#method\": [{\"@value\": \"get\"}]\n" +
+                "        \"http://a.ml/vocabularies/apiContract#method\": [{\"@value\": \"get\"}]\n" +
                 "      }],\n" +
-                "      \"http://a.ml/vocabularies/http#parameter\": [{\n" +
+                "      \"http://a.ml/vocabularies/apiContract#parameter\": [{\n" +
                 "        \"@id\": \"http://a.ml/amf/default_document#/web-api/end-points//users/{id}/parameter/id\",\n" +
                 "        \"@type\": [\n" +
-                "          \"http://a.ml/vocabularies/http#Parameter\",\n" +
+                "          \"http://a.ml/vocabularies/apiContract#Parameter\",\n" +
                 "          \"http://a.ml/vocabularies/document#DomainElement\"\n" +
                 "        ],\n" +
-                "        \"http://schema.org/name\": [{\"@value\": \"id\"}],\n" +
-                "        \"http://a.ml/vocabularies/http#paramName\": [{\"@value\": \"id\"}],\n" +
-                "        \"http://www.w3.org/ns/hydra/core#required\": [{\"@value\": true}],\n" +
-                "        \"http://a.ml/vocabularies/http#binding\": [{\"@value\": \"path\"}],\n" +
-                "        \"http://a.ml/vocabularies/http#schema\": [{\n" +
+                "        \"http://a.ml/vocabularies/core#name\": [{\"@value\": \"id\"}],\n" +
+                "        \"http://a.ml/vocabularies/apiContract#paramName\": [{\"@value\": \"id\"}],\n" +
+                "        \"http://a.ml/vocabularies/apiContract#required\": [{\"@value\": true}],\n" +
+                "        \"http://a.ml/vocabularies/apiContract#binding\": [{\"@value\": \"path\"}],\n" +
+                "        \"http://a.ml/vocabularies/apiContract#schema\": [{\n" +
                 "          \"@id\": \"http://a.ml/amf/default_document#/web-api/end-points//users/{id}/parameter/id/scalar/id\",\n" +
                 "          \"@type\": [\n" +
                 "            \"http://a.ml/vocabularies/shapes#ScalarShape\",\n" +
