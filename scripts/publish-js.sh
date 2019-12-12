@@ -37,6 +37,7 @@ echo "Running buildjs script"
 ./scripts/buildjs.sh
 echo "Finished buildjs script"
 
+cp README.md js/module
 cd js/module
 
 # Create per-project NPM config file with credentials
