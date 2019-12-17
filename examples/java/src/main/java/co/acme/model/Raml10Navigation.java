@@ -29,10 +29,10 @@ public class Raml10Navigation {
     // Access security scheme from root
     System.out.println(
       "First security scheme name: " +
-      api.security().get(0).scheme().name().value());
+      api.security().get(0).schemes().get(0).scheme().name().value());
     System.out.println(
       "First security scheme description: " +
-      api.security().get(0).scheme().description().value());
+      api.security().get(0).schemes().get(0).scheme().description().value());
 
     // Endpoint /users
     EndPoint users = (EndPoint) api.endPoints().get(0);

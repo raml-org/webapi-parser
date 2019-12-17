@@ -79,7 +79,8 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   )
   .jsSettings(
     scalaJSModuleKind := ModuleKind.CommonJSModule,
-    Compile / fullOptJS / artifactPath := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
+    Compile / fullOptJS / artifactPath := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js",
+    scalacOptions += "-P:scalajs:suppressExportDeprecations"
   )
 
 lazy val webapiJVM = webapi.jvm.in(file("./jvm"))
