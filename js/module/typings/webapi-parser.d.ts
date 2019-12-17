@@ -313,6 +313,86 @@ declare module "webapi-parser" {
       static generateYamlString(model: WebApiBaseUnit): Promise<string>
     }
 
+    /** **BETA** Provides methods for OAS 3.0 processing */
+    export class oas30 {
+
+      /** **BETA** Parses OAS 3.0 JSON content from string or url.
+       *
+       * @param urlOrContent File url/path or content string.
+       * @return Parsed WebApi Model.
+       */
+      static parse(urlOrContent: string): Promise<WebApiBaseUnit>
+
+      /** **BETA** Parses OAS 3.0 JSON content from string with a custom API Doc location.
+       *
+       * @param content Content string to be parsed.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
+       * @return Parsed WebApi Model (future).
+       */
+      static parse(content: string, baseUrl: string): Promise<WebApiBaseUnit>
+
+      /** **BETA** Generates file with OAS 3.0 JSON content.
+       *
+       * @param model Parsed WebApi Model to generate content from.
+       * @param url Path to the generated file.
+       */
+      static generateFile(model: WebApiBaseUnit, url: string): Promise<void>
+
+      /** **BETA** Generates string with OAS 3.0 JSON content.
+       *
+       * @param model Parsed WebApi Model to generate content from.
+       * @return Generated string.
+       */
+      static generateString(model: WebApiBaseUnit): Promise<string>
+
+      /** **BETA** Validates parsed OAS 3.0 model.
+       *
+       * @param model Parsed WebApi Model to be validated.
+       * @return Validation report.
+       */
+      static validate(model: WebApiBaseUnit): Promise<client.validate.ValidationReport>
+
+      /** **BETA** Resolves parsed OAS 3.0 model.
+       *
+       * Resolution process includes resolving references to all types, libraries, etc.
+       *
+       * @param model Parsed WebApi Model to be resolved.
+       * @return Resolved parsed WebApi Model.
+       */
+      static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
+
+      /** **BETA** Parses OAS 3.0 YAML content from string or url.
+       *
+       * @param urlOrContent File url/path or content string.
+       * @return Parsed WebApi Model.
+       */
+      static parseYaml(urlOrContent: string): Promise<WebApiBaseUnit>
+
+      /** **BETA** Parses OAS 3.0 YAML content from string with a custom API Doc location.
+       *
+       * @param content Content string to be parsed.
+       * @param baseUrl Location to assign to a doc parsed from a content string.
+       *                References are resolved relative to this location.
+       * @return Parsed WebApi Model (future).
+       */
+      static parseYaml(content: string, baseUrl: string): Promise<WebApiBaseUnit>
+
+      /** **BETA** Generates file with OAS 3.0 YAML content.
+       *
+       * @param model Parsed WebApi Model to generate content from.
+       * @param url Path to the generated file.
+       */
+      static generateYamlFile(model: WebApiBaseUnit, url: string): Promise<void>
+
+      /** **BETA** Generates string with OAS 3.0 YAML content.
+       *
+       * @param model Parsed WebApi Model to generate content from.
+       * @return Generated string.
+       */
+      static generateYamlString(model: WebApiBaseUnit): Promise<string>
+    }
+
     /** Provides methods for AMF Graph processing */
     export class amfGraph {
 
