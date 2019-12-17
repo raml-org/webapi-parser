@@ -10,7 +10,10 @@ import amf.client.parse._
 import amf.client.render._
 import amf.client.resolve._
 import amf.client.validate.ValidationReport
-import amf.core.remote.{Oas20 => RemoteOas20}
+import amf.core.remote.{
+  Oas20 => RemoteOas20,
+  Oas30 => RemoteOas30,
+}
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 
 import scala.concurrent._
@@ -353,6 +356,139 @@ object Oas20 {
   def generateYamlFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
       new Renderer(RemoteOas20.name, "application/yaml").generateFile(model, url).asInternal
+    }).asClient
+  }
+}
+
+/** **BETA** Provides methods for OAS 3.0 processing */
+@JSExportAll
+@JSExportTopLevel("WebApiParser.oas30")
+object Oas30 {
+
+  /** **BETA** Parses OAS 3.0 JSON content from string or url.
+    *
+    * @param urlOrContent File url/path or content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parse(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      if(WebApiParser.isPath(urlOrContent)) {
+        new Oas30Parser().parseFileAsync(urlOrContent).asInternal
+      } else {
+        new Oas30Parser().parseStringAsync(urlOrContent).asInternal
+      }
+    }).asClient
+  }
+
+  /** **BETA** Parses OAS 3.0 JSON content from string with a custom API Doc location.
+    *
+    * @param content Content string to be parsed.
+    * @param baseUrl Location to assign to a doc parsed from a content string.
+    *                References are resolved relative to this location.
+    * @return Parsed WebApi Model (future).
+    */
+  def parse(content: String, baseUrl: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas30Parser().parseStringAsync(baseUrl, content).asInternal
+    }).asClient
+  }
+
+  /** **BETA** Generates file with OAS 3.0 JSON content.
+    *
+    * @param model Parsed WebApi Model to generate content from.
+    * @param url Path to the generated file.
+    */
+  def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas30Renderer().generateFile(model, url).asInternal
+    }).asClient
+  }
+
+  /** **BETA** Generates string with OAS 3.0 JSON content.
+    *
+    * @param model Parsed WebApi Model to generate content from.
+    * @return Generated string (future).
+    */
+  def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas30Renderer().generateString(model).asInternal
+    }).asClient
+  }
+
+  /** **BETA** Validates parsed OAS 3.0 model.
+    *
+    * @param model Parsed WebApi Model to be validated.
+    * @return Validation report (future).
+    */
+  def validate(model: WebApiBaseUnit): ClientFuture[ValidationReport] = {
+    WebApiParser.chainAfterInit(() => {
+      Core.validate(model, ProfileNames.OAS30, MessageStyles.OAS).asInternal
+    }).asClient
+  }
+
+  /** **BETA** Resolves parsed OAS 3.0 model.
+    *
+    * Resolution process includes resolving references to all types, libraries, etc.
+    *
+    * @param model Parsed WebApi Model to be resolved.
+    * @return Resolved parsed WebApi Model (future).
+    */
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      Future {
+        val resolved: InternalBaseUnit = new Oas30Resolver().resolve(model)
+        resolved
+      }
+    }).asClient
+  }
+
+  /** **BETA** Parses OAS 3.0 YAML content from string or url.
+    *
+    * @param urlOrContent File url/path or content string.
+    * @return Parsed WebApi Model (future).
+    */
+  def parseYaml(urlOrContent: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      if(WebApiParser.isPath(urlOrContent)) {
+        new Oas30YamlParser().parseFileAsync(urlOrContent).asInternal
+      } else {
+        new Oas30YamlParser().parseStringAsync(urlOrContent).asInternal
+      }
+    }).asClient
+  }
+
+  /** **BETA** Parses OAS 3.0 YAML content from string with a custom API Doc location.
+    *
+    * @param content Content string to be parsed.
+    * @param baseUrl Location to assign to a doc parsed from a content string.
+    *                References are resolved relative to this location.
+    * @return Parsed WebApi Model (future).
+    */
+  def parseYaml(content: String, baseUrl: String): ClientFuture[WebApiBaseUnit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Oas30YamlParser().parseStringAsync(baseUrl, content).asInternal
+    }).asClient
+  }
+
+  /** **BETA** Generates string with OAS 3.0 YAML content.
+    *
+    * @param model Parsed WebApi Model to generate content from.
+    * @return Generated string (future).
+    */
+  def generateYamlString(model: WebApiBaseUnit): ClientFuture[String] = {
+    WebApiParser.chainAfterInit(() => {
+      new Renderer(RemoteOas30.name, "application/yaml").generateString(model).asInternal
+    }).asClient
+  }
+
+  /** **BETA** Generates file with OAS 3.0 YAML content.
+    *
+    * @param model Parsed WebApi Model to generate content from.
+    * @param url Path to the generated file.
+    */
+  def generateYamlFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
+    WebApiParser.chainAfterInit(() => {
+      new Renderer(RemoteOas30.name, "application/yaml").generateFile(model, url).asInternal
     }).asClient
   }
 }
