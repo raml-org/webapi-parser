@@ -11,7 +11,7 @@ public class Oas20Validation {
   // Example of validating OAS 2.0 content parsed from a file
   public static void validate() throws InterruptedException, ExecutionException {
     // Parse invalid file
-    final WebApiBaseUnit result = Oas20.parse("file://../api-specs/oas/api-with-types-invalid.json").get();
+    final WebApiBaseUnit result = Oas20.parse("file://../api-specs/oas20/api-with-types-invalid.json").get();
 
     // Perform validation and get validation report
     final ValidationReport report = Oas20.validate(result).get();
