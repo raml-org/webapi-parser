@@ -12,7 +12,7 @@ import amf.client.resolve._
 import amf.client.validate.ValidationReport
 import amf.core.remote.{
   Oas20 => RemoteOas20,
-  Oas30 => RemoteOas30,
+  Oas30 => RemoteOas30
 }
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 
