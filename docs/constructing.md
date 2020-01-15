@@ -13,9 +13,8 @@ To get started we need to import all necessary modules and initialize `WebApiPar
 
 ```js
 // js
-const webapi = require('webapi-parser')
-const wap = webapi.WebApiParser
-const domain = webapi.model.domain
+const lib = require('webapi-parser')
+const wap = lib.WebApiParser
 
 async function main () {
   await wap.init()
@@ -50,9 +49,9 @@ Then to start constructing an API we have to create an instance of `WebApi` whic
 // js
 async function main () {
   ...
-  const api = new domain.WebApi()
+  const api = new lib.model.domain.WebApi()
   ...
-  const model = new webapi.model.document.Document(api)
+  const model = new lib.webapi.WebApiDocument().withEncodes(api)
 }
 ```
 
@@ -63,7 +62,8 @@ public class Raml10Building {
     ...
     final WebApi api = new WebApi();
     ...
-    WebApiDocument model = new WebApiDocument(api);
+    WebApiDocument model = new WebApiDocument();
+    model.withEncodes(api);
   }
 }
 ```
@@ -75,7 +75,7 @@ First lets specify API title and protocols:
 // js
 async function main () {
   ...
-  const api = new domain.WebApi()
+  const api = new lib.model.domain.WebApi()
     .withName('Foo org API')
     .withSchemes(['http', 'https'])
   ...
@@ -100,7 +100,7 @@ Next let's add an few endpoints with methods:
 // js
 async function main () {
   ...
-  const api = new domain.WebApi()
+  const api = new lib.model.domain.WebApi()
     .withName('Foo org API')
     .withSchemes(['http', 'https'])
   const users = api.withEndPoint('/users')

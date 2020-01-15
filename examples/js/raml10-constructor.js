@@ -1,9 +1,8 @@
 /**
  * Example of constructing RAML 1.0 API from scratch.
  */
-const webapi = require('webapi-parser')
-const wap = webapi.WebApiParser
-const domain = webapi.model.domain
+const lib = require('webapi-parser')
+const wap = lib.WebApiParser
 
 async function main () {
   // Init WebApiParser to set up necessary plugins
@@ -11,7 +10,7 @@ async function main () {
 
   // Create API instance with title, description, protocols, mediaType,
   // 'accepts' list and version
-  const api = new domain.WebApi()
+  const api = new lib.model.domain.WebApi()
     .withName('Foo org API')
     .withDescription('Describes Foo org API')
     .withSchemes(['http', 'https'])
@@ -52,7 +51,7 @@ async function main () {
     .withClosed(false)
 
   // Create required 'username' schema property of type 'string'
-  const userNameScalar = new domain.ScalarShape()
+  const userNameScalar = new lib.model.domain.ScalarShape()
     .withDataType('http://www.w3.org/2001/XMLSchema#string')
   const userName = getUsers200Schema
     .withProperty('username')
@@ -61,7 +60,7 @@ async function main () {
     .withRange(userNameScalar)
 
   // Create required 'email' schema property of type 'string'
-  const userEmailScalar = new domain.ScalarShape()
+  const userEmailScalar = new lib.model.domain.ScalarShape()
     .withDataType('http://www.w3.org/2001/XMLSchema#string')
   const userEmail = getUsers200Schema
     .withProperty('email')
@@ -74,7 +73,7 @@ async function main () {
   user.withName('User endpoint').withDescription('Get user')
 
   // Create document with the constructed API
-  const model = new webapi.model.document.Document(api)
+  const model = new lib.webapi.WebApiDocument().withEncodes(api)
 
   // Generate RAML 1.0 string from the document
   const generated = await wap.raml10.generateString(model)

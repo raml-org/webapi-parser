@@ -97,7 +97,8 @@ public class Raml10Building {
       .withDescription("Get user");
 
     // Create document with the constructed API
-    WebApiDocument model = new WebApiDocument(api);
+    WebApiDocument model = new WebApiDocument();
+    model.withEncodes(api);
 
     // Generate RAML 1.0 string from the document
     final String generated = Raml10.generateString(model).get();
