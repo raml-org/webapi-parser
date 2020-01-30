@@ -20,18 +20,17 @@ cp ./js/module/typings/webapi-parser.d.ts ./docs/js/tmp_module/webapi-parser.d.t
 cd ./docs/js/tmp_module
 
 npm init -y
-npm install -g typedoc@0.13.0
-npm install amf-client-js
+npm install -g typedoc@0.16.9
 
-mkdir -p ./node_modules/@types/amf-client-js/
-cp ./node_modules/amf-client-js/typings/amf-client-js.d.ts ./node_modules/@types/amf-client-js/amf-client-js.d.ts
-typedoc --out ./gendocs ./webapi-parser.d.ts \
+curl https://raw.githubusercontent.com/aml-org/amf/master/amf-client/js/typings/amf-client-js.d.ts -o amf-client-js.d.ts
+typedoc --out ./gendocs ./webapi-parser.d.ts ./amf-client-js.d.ts \
         --includeDeclarations \
         --mode file \
         --ignoreCompilerErrors \
         --readme none \
         --theme minimal \
-        --name "webapi-parser"
+        --name "webapi-parser" \
+        --excludeExternals
 
 cd ..
 cp -r ./tmp_module/gendocs/* ./
