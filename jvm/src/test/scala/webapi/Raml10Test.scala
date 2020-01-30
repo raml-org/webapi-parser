@@ -116,7 +116,7 @@ class Raml10Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       report <- Raml10.validate(unit).asInternal
     } yield {
       report.conforms should be (false)
-      report.results should have size 3
+      report.results should have size 2
     }
   }
 

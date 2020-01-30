@@ -23,10 +23,12 @@ async function main () {
   console.log('Base uri:', api.servers[0].url.value())
 
   // Access security scheme from root
-  console.log('First security scheme name:', api.security[0].name.value())
+  console.log(
+    'First security scheme name:',
+    api.security[0].schemes[0].name.value())
   console.log(
     'First security scheme description:',
-    api.security[0].scheme.description.value())
+    api.security[0].schemes[0].scheme.description.value())
 
   // Endpoint /users
   const users = api.endPoints[0]

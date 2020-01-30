@@ -69,7 +69,7 @@ class GetDeclarationByNameTest extends AsyncFunSuite with Matchers {
 
   test("Get declaration from OAS 2.0 Document") {
     for {
-      model <- Oas20.parse("file://shared/src/test/resources/oas/api-with-types.json").asInternal
+      model <- Oas20.parse("file://shared/src/test/resources/oas20/api-with-types.json").asInternal
     } yield {
       assertDeclaration[NodeShape](model, "User")
     }

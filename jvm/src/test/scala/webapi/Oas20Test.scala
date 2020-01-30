@@ -10,9 +10,9 @@ import org.scalatest.Assertions._
 
 class Oas20Test extends AsyncFunSuite with Matchers with WaitingFileReader {
 
-  private val validFilePath     = "file://shared/src/test/resources/oas/api-with-types.json"
-  private val validFilePathYaml = "file://shared/src/test/resources/oas/api-with-types.yaml"
-  private val invalidFilePath   = "file://shared/src/test/resources/oas/api-with-types-invalid.json"
+  private val validFilePath     = "file://shared/src/test/resources/oas20/api-with-types.json"
+  private val validFilePathYaml = "file://shared/src/test/resources/oas20/api-with-types.yaml"
+  private val invalidFilePath   = "file://shared/src/test/resources/oas20/api-with-types-invalid.json"
   private val generatedJsonFilePath = s"${System.getProperty("java.io.tmpdir")}/generated-oas20.json"
   private val generatedYamlFilePath = s"${System.getProperty("java.io.tmpdir")}/generated-oas20.yaml"
   private val apiString: String =

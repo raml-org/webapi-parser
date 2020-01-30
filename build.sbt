@@ -27,8 +27,8 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "org.scalatest"     %%% "scalatest"       % "3.0.5" % "test",
-    "com.github.amlorg" %%% "amf-webapi"      % "4.0.2",
-    "com.github.amlorg" %%% "amf-validation"  % "4.0.2"
+    "com.github.amlorg" %%% "amf-webapi"      % "4.0.3",
+    "com.github.amlorg" %%% "amf-validation"  % "4.0.3"
   )
 )
 
@@ -79,7 +79,8 @@ lazy val webapi = crossProject(JSPlatform, JVMPlatform)
   )
   .jsSettings(
     scalaJSModuleKind := ModuleKind.CommonJSModule,
-    Compile / fullOptJS / artifactPath := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js"
+    Compile / fullOptJS / artifactPath := baseDirectory.value / "target" / "artifact" / "webapi-parser-module.js",
+    scalacOptions += "-P:scalajs:suppressExportDeprecations"
   )
 
 lazy val webapiJVM = webapi.jvm.in(file("./jvm"))
