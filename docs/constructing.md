@@ -6,7 +6,7 @@ Using `webapi-parser` it is possible to construct an API in all supported format
 
 Below is a simplified example of constructing RAML 1.0 API.
 
-Please refer to [complete examples](#complete-examples) for more advanced use cases and [WebApi Model API](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) for API construction methods.
+Please refer to [complete examples](#complete-examples) for more advanced use cases and [WebApi Model API](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html) for API construction methods.
 
 ## Quick start
 To get started we need to import all necessary modules and initialize `WebApiParser` like so:
@@ -130,7 +130,7 @@ public class Raml10Building {
 
 Starting from here we can add more endpoints, request/response bodies, headers, etc. For that refer to complete examples.
 
-In the end, the API document we constructed can be used with `webapi-parser` functions that accept [WebApi Model instance](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html). E.g. to generate RAML 1.0 string we could do:
+In the end, the API document we constructed can be used with `webapi-parser` functions that accept [WebApi Model instance](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html). E.g. to generate RAML 1.0 string we could do:
 
 ```js
 // js

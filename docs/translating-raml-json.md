@@ -2,12 +2,12 @@
 ---
 
 # Translating RAML DataTypes to JSON Schemas
-Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html), it is possible to translate RAML 1.0 DataTypes contained inside RAML 1.0, RAML 1.0 Library and RAML 1.0 DataType documents to JSON Schemas.
+Using `webapi-parser` and [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html), it is possible to translate RAML 1.0 DataTypes contained inside RAML 1.0, RAML 1.0 Library and RAML 1.0 DataType documents to JSON Schemas.
 
 You can take a look at the [complete examples](#complete-examples) for more advanced use cases.
 
 ## Quick start
-To translate a RAML DataType to a JSON Schema, you can parse a RAML document, then select the data type using [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) and call its `.toJsonSchema()` method (or property in JavaScript). The output of the method is a JSON Schema string representating the original RAML DataType.
+To translate a RAML DataType to a JSON Schema, you can parse a RAML document, then select the data type using [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html) and call its `.toJsonSchema()` method (or property in JavaScript). The output of the method is a JSON Schema string representating the original RAML DataType.
 
 ```js
 // js

@@ -11,10 +11,10 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 |      | JavaScript | Java |
 | ---- | ---------- | ---- |
 | **Installation** | [NPM](#javascript) | [Gradle/Maven](#java) |
-| **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/_webapi_parser_.webapibaseunit.html) |
+| **Object-oriented interface** | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html) | ["WebApi" Model](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html) |
 | **Package** | [![NPMJS](https://img.shields.io/npm/v/webapi-parser.svg?style=flat)](https://www.npmjs.com/package/webapi-parser) | [![Maven Central](https://img.shields.io/static/v1.svg?style=flat&logo=java&label=%20&labelColor=white&labelColor=007396&color=007396&message=Maven%20Central)](https://search.maven.org/artifact/org.raml/webapi-parser/) |
 | **Examples** | [JavaScript examples](./examples/js/README.md) | [Java examples](./examples/java/README.md) |
-| **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/_webapi_parser_.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) |
+| **Developer Documentation** | [JavaScript Typedoc](https://raml-org.github.io/webapi-parser/js/modules/webapiparser.html) | [Javadocs](https://raml-org.github.io/webapi-parser/java/index.html) |
 
 ## 📦 Examples
 * [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving.html)
