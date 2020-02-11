@@ -7,8 +7,8 @@ Welcome!
 As you may already know RAML 0.8/1.0 JS parser `raml-1-parser` has been deprecated in favor of the new and better one - `webapi-parser`. This guide describes how to migrate an existing code from `raml-1-parser` to `webapi-parser`.
 
 Migration process consists of following steps:
-1. [Considering parsers differences](#understanding-parsers-differences)
-2. Installing the new parser (as described in respective [readme section](https://github.com/raml-org/webapi-parser/tree/develop#javascript))
+1. [Considering parsers differences](#considering-parsers-differences)
+2. Installing the new parser (as described in respective [readme section](https://github.com/raml-org/webapi-parser#javascript))
 3. [Migrating the code](#migrating-the-code)
 
 ## Considering parsers differences
@@ -127,7 +127,7 @@ node.expand()
 wap.raml10.resolve(model)
 ```
 
-For more details on navigating the new model, please see [Navigating a "WebApi" Model](navigating.md) tutorial.
+For more details on navigating the new model, please refer to [Navigating a "WebApi" Model](navigating.md) tutorial.
 
 
 ## Need Assistance?
