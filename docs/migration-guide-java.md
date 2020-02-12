@@ -20,12 +20,52 @@ There are few differences to consider when migrating to `webapi-parser`:
 ## Migrating the code
 Consider this code which uses `raml-java-parser`:
 ```java
+package co.acme.parse;
 
+import org.raml.v2.api.RamlModelBuilder;
+import org.raml.v2.api.RamlModelResult;
+import org.raml.v2.api.model.common.ValidationResult;
+import org.raml.v2.api.model.v10.api.Api;
+
+public class Raml10Parsing {
+  public static void parse() throws InterruptedException {
+    RamlModelResult ramlModelResult = new RamlModelBuilder().buildApi(input);
+    if (ramlModelResult.hasErrors()) {
+      for (ValidationResult validationResult : ramlModelResult.getValidationResults()) {
+        System.out.println(validationResult.getMessage());
+      }
+    } else {
+      Api api = ramlModelResult.getApiV10();
+    }
+  }
+}
 ```
 
 Here's how it can be reworked to use `webapi-parser`:
 ```java
+package co.acme.parse;
 
+import webapi.Raml10;
+import webapi.WebApiBaseUnit;
+import webapi.WebApiDocument;
+import amf.client.validate.ValidationReport;
+import amf.client.validate.ValidationResult;
+
+import java.util.concurrent.ExecutionException;
+
+public class Raml10Parsing {
+  public static void parse() throws InterruptedException, ExecutionException {
+    WebApiBaseUnit ramlModelResult = Raml10.parse(input).get();
+    ValidationReport validationReport = Raml10.validate(ramlModelResult).get();
+    if (!validationReport.conforms()) {
+      for (ValidationResult validationResult : validationReport.results()) {
+        System.out.println(validationResult.message());
+      }
+    } else {
+      WebApiDocument document = (WebApiDocument) ramlModelResult;
+    }
+  }
+}
 ```
 
 In the example above, namespace `webapi` contains namespaces for all the supported API Spec formats: `Raml10`. `Raml08`, `Oas20`, `Oas30`, `AmfGraph`, each having an identical interface (OAS namespaces have an extra few methods). The list of supported operations each format supports includes parsing, resolution(flattening), validation and string generation.
