@@ -77,12 +77,72 @@ This section lists migration examples of the most common `raml-java-parser` pars
 
 ### Parsers
 ```java
+import org.raml.v2.api.RamlModelBuilder;
+import webapi.Raml10;
 
+new RamlModelBuilder().buildApi(ramlFile);
+// Not supported
+
+new RamlModelBuilder().buildApi(reader, ramlLocation);
+// Not supported
+
+new RamlModelBuilder().buildApi(ramlLocation);
+Raml10.parse(ramlLocation).get();
+Raml08.parse(ramlLocation).get();
+
+new RamlModelBuilder().buildApi(content, ramlLocation);
+Raml10.parse(content, ramlLocation).get();
+Raml08.parse(content, ramlLocation).get();
 ```
 
 ### API Models
 ```java
+import org.raml.v2.api.RamlModelResult;
+import org.raml.v2.api.model.v10.api.Api;
+import webapi;
 
+Api oldModel = new RamlModelBuilder().buildApi(input).getApiV08();
+webapi.WebApiDocument newModel = (webapi.WebApiDocument) Raml08.parse(input).get();
+
+Api oldModel = new RamlModelBuilder().buildApi(input).getApiV10();
+webapi.WebApiDocument newModel = (webapi.WebApiDocument) Raml10.parse(input).get();
+
+RamlModelResult oldResult = new RamlModelBuilder().buildApi(input);
+webapi.WebApiBaseUnit newResult = (webapi.WebApiBaseUnit) Raml10.parse(input).get();
+
+oldResult.hasErrors();
+// Validation must be performed. See example above.
+
+oldResult.getValidationResults();
+// Validation must be performed. See example above.
+
+oldResult.getLibrary();
+(webapi.WebApiModule) newResult;
+
+oldResult.getTypeDeclaration();
+(webapi.WebApiDataType) newResult;
+
+oldResult.getTypeDeclaration();
+(webapi.WebApiDataType) newResult;
+
+oldResult.getSecurityScheme();
+(webapi.WebApiSecuritySchemeFragment) newResult;
+
+oldResult.getTrait();
+(webapi.WebApiTraitFragment) newResult;
+
+oldResult.getResourceType();
+(webapi.WebApiResourceTypeFragment) newResult;
+
+oldResult.getResourceType();
+(webapi.WebApiResourceTypeFragment) newResult;
+
+oldModel.resources();
+newModel.encodes().endPoints();
+// Note that webapi-parser resources are flat and occur in the order defined in the RAML doc.
+
+oldModel.resources().get(0).methods();
+newModel.encodes().endPoints().get(0).operations();
 ```
 
 For more details on navigating the new model, please refer to [Navigating a "WebApi" Model](navigating.md) tutorial.
