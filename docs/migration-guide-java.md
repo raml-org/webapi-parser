@@ -16,6 +16,7 @@ There are few differences to consider when migrating to `webapi-parser`:
 * In addition to RAML 0.8 and RAML 1.0 parsing it can also resolve (flatten) it and validate. The parser also supports a number of other API Spec formats: OAS 2.0, OAS 3.0, AMF JSON-LD;
 * `webapi-parser` provides only async/Promise-based API;
 * API of the model/object it produces on parsing is completely different from the one produced by `raml-java-parser`. You can research the new model API by following the link in the [assistance section](#need-assistance) below.
+* When using resource types, traits, data types and other means of reusing patterns, old parser used to "flatten" these abstractions into a parsed document, making it possible to navigate and inspect them after parsing. E.g. if a resource uses a resourceType which defines a `200` response you could navigate to that response from the resource via parsed model and inspect it immediately after parsing. To achieve this behaviour in the new parser one would have to parse AND perform a [model resolution](resolving.md).
 
 ## Migrating the code
 Consider this code which uses `raml-java-parser`:
