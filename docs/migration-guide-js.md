@@ -4,7 +4,7 @@
 # Migration guide (JS)
 Welcome!
 
-As you may already know RAML 0.8/1.0 JS parser `raml-1-parser` has been deprecated in favor of the new and better one - `webapi-parser`. This guide describes how to migrate an existing code from `raml-1-parser` to `webapi-parser`.
+As you may already know RAML 0.8/1.0 JS parser `raml-1-parser` has been deprecated in favor of `webapi-parser`. This guide describes how to migrate an existing code from `raml-1-parser` to `webapi-parser`.
 
 Migration process consists of following steps:
 1. [Considering parsers differences](#considering-parsers-differences)
@@ -58,31 +58,39 @@ const oldParser = require('raml-1-parser')
 const wp = require('webapi-parser')
 const wap = wp.WebApiParser
 
+// Load and parse RAML file
 const node = await oldParser.loadApi('/path/to/api.raml')
 const model = await wap.raml10.parse('file:///path/to/api.raml')
 // or
 // const model = wap.raml08.parse('file:///path/to/api.raml')
 
+// Convert fragment representing node to FragmentDeclaration instance
 oldParser.asFragment(node)
 // Not necessary. Webapi-parser parses fragments into different model types.
 
+// Check if the AST node represents fragment
 oldParser.isFragment(node)
 !(model instanceof wp.webapi.WebApiDocument)
 
+// Load and parse API file synchronously
 oldParser.loadApiSync('/path/to/api.raml')
 // Not supported
 
+// Load and parse RAML file asynchronously. May load both Api and Typed fragments.
 oldParser.loadRAML('/path/to/api.raml')
 wap.raml10.parse('file:///path/to/api.raml')
 wap.raml08.parse('file:///path/to/api.raml')
 
+// Load and parse RAML file synchronously. May load both Api and Typed fragments.
 oldParser.loadRAMLSync('/path/to/api.raml')
 // Not supported
 
+// Parse RAML content asynchronously. May load both Api and Typed fragments.
 oldParser.parseRAML('#%RAML 1.0\n...')
 wap.raml10.parse('#%RAML 1.0\n...')
 wap.raml08.parse('#%RAML 1.0\n...')
 
+// Parse RAML content synchronously. May load both Api and Typed fragments.
 oldParser.parseRAMLSync('#%RAML 1.0\n...')
 // Not supported
 ```
@@ -93,36 +101,46 @@ const oldParser = require('raml-1-parser')
 const wp = require('webapi-parser')
 const wap = wp.WebApiParser
 
+// Load and parse RAML file
 const node = await oldParser.loadApi('/path/to/api.raml')
 const model = await wap.raml10.parse('file:///path/to/api.raml')
 // or
 // const model = wap.raml08.parse('file:///path/to/api.raml')
 
+// Get API resources/endpoints
 node.resources()
 model.encodes.endPoints()
 // Note that webapi-parser resources are flat and occur in the order defined in the RAML doc.
 
+// Get methods of a first API resource
 node.resources()[0].methods()
 model.encodes.endPoints()[0].operations()
 
+// Get "annotationTypes" declarations
 node.annotationTypes()
 model.declares.filter(el -> el instanceof wp.model.domain.CustomDomainProperty)
 
+// Get "resourceTypes" declarations
 node.resourceTypes()
 model.declares.filter(el -> el instanceof wp.model.domain.ParametrizedResourceType)
 
+// Get "schemas" declarations
 node.schemas()
 model.declares.filter(el -> el instanceof wp.model.domain.SchemaShape)
 
+// Get "securitySchemes" declarations
 node.securitySchemes()
 model.declares.filter(el -> el instanceof wp.model.domain.SecurityScheme)
 
+// Get "traits" declarations
 node.traits()
 model.declares.filter(el -> el instanceof wp.model.domain.ParametrizedTrait)
 
+// Get "types" declarations
 node.types()
 model.declares.filter(el -> el instanceof wp.model.domain.AnyShape)
 
+// Expand (resolve) parsed API model
 node.expand()
 wap.raml10.resolve(model)
 ```

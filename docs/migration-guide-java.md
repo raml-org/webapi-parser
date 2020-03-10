@@ -4,7 +4,7 @@
 # Migration guide (Java)
 Welcome!
 
-As you may already know RAML 0.8/1.0 Java parser `raml-java-parser` has been deprecated in favor of the new and better one - `webapi-parser`. This guide describes how to migrate an existing code from `raml-java-parser` to `webapi-parser`.
+As you may already know RAML 0.8/1.0 Java parser `raml-java-parser` has been deprecated in favor of `webapi-parser`. This guide describes how to migrate an existing code from `raml-java-parser` to `webapi-parser`.
 
 Migration process consists of following steps:
 1. [Considering parsers differences](#considering-parsers-differences)
@@ -81,16 +81,21 @@ This section lists migration examples of the most common `raml-java-parser` pars
 import org.raml.v2.api.RamlModelBuilder;
 import webapi.Raml10;
 
+// Create a model from File instance
 new RamlModelBuilder().buildApi(ramlFile);
 // Not supported
 
+// Create a model from Reader instance and a RAML file location (String)
 new RamlModelBuilder().buildApi(reader, ramlLocation);
 // Not supported
 
+// Create a model by parsing a RAML file at a particular location
 new RamlModelBuilder().buildApi(ramlLocation);
 Raml10.parse(ramlLocation).get();
 Raml08.parse(ramlLocation).get();
 
+// Create a model by parsing RAML content string and assigning it a
+// custom location
 new RamlModelBuilder().buildApi(content, ramlLocation);
 Raml10.parse(content, ramlLocation).get();
 Raml08.parse(content, ramlLocation).get();
@@ -102,46 +107,52 @@ import org.raml.v2.api.RamlModelResult;
 import org.raml.v2.api.model.v10.api.Api;
 import webapi;
 
+// Extract 0.8 Api/WebApi instance from a parsed model
 Api oldModel = new RamlModelBuilder().buildApi(input).getApiV08();
 webapi.WebApiDocument newModel = (webapi.WebApiDocument) Raml08.parse(input).get();
 
+// Extract 1.0 Api/WebApi instance from a parsed model
 Api oldModel = new RamlModelBuilder().buildApi(input).getApiV10();
 webapi.WebApiDocument newModel = (webapi.WebApiDocument) Raml10.parse(input).get();
 
+// Parse RAML content or file path
 RamlModelResult oldResult = new RamlModelBuilder().buildApi(input);
 webapi.WebApiBaseUnit newResult = (webapi.WebApiBaseUnit) Raml10.parse(input).get();
 
+// Check if parsed model has errors
 oldResult.hasErrors();
 // Validation must be performed. See example above.
 
+// Get parsed model validation results
 oldResult.getValidationResults();
 // Validation must be performed. See example above.
 
+// Convert parsed model to a Library to use its specific interface
 oldResult.getLibrary();
 (webapi.WebApiModule) newResult;
 
+// Convert parsed model to a DataType fragment to use its specific interface
 oldResult.getTypeDeclaration();
 (webapi.WebApiDataType) newResult;
 
-oldResult.getTypeDeclaration();
-(webapi.WebApiDataType) newResult;
-
+// Convert parsed model to a SecurityScheme fragment to use its specific interface
 oldResult.getSecurityScheme();
 (webapi.WebApiSecuritySchemeFragment) newResult;
 
+// Convert parsed model to a Trait fragment to use its specific interface
 oldResult.getTrait();
 (webapi.WebApiTraitFragment) newResult;
 
+// Convert parsed model to a ResourceType fragment to use its specific interface
 oldResult.getResourceType();
 (webapi.WebApiResourceTypeFragment) newResult;
 
-oldResult.getResourceType();
-(webapi.WebApiResourceTypeFragment) newResult;
-
+// Get API resources/endpoints
 oldModel.resources();
 newModel.encodes().endPoints();
 // Note that webapi-parser resources are flat and occur in the order defined in the RAML doc.
 
+// Get methods of a first resource
 oldModel.resources().get(0).methods();
 newModel.encodes().endPoints().get(0).operations();
 ```
