@@ -22,6 +22,8 @@ This project is a thin wrapper that exposes API Spec-related capabilities from [
 * [Constructing a "WebApi" Model](https://raml-org.github.io/webapi-parser/constructing.html)
 * [Translating RAML DataTypes to JSON Schemas](https://raml-org.github.io/webapi-parser/translating-raml-json.html)
 * [Translating JSON Schemas to RAML DataTypes](https://raml-org.github.io/webapi-parser/translating-json-raml.html)
+* [Migration guide (JS)](https://raml-org.github.io/webapi-parser/migration-guide-js.html)
+* [Migration guide (Java)](https://raml-org.github.io/webapi-parser/migration-guide-java.html)
 * [More examples](./examples)
 
 ## 🛠 Installation
