@@ -1,0 +1,462 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Migration guide (JS) · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="migration-guide-java.html" />
+    
+    
+    <link rel="prev" href="translating-json-raml.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="resolving.html">
+            
+                <a href="resolving.html">
+            
+                    
+                    Resolving a "WebApi" Model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="navigating.html">
+            
+                <a href="navigating.html">
+            
+                    
+                    Navigating a "WebApi" Model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="constructing.html">
+            
+                <a href="constructing.html">
+            
+                    
+                    Constructing a "WebApi" Model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="translating-raml-json.html">
+            
+                <a href="translating-raml-json.html">
+            
+                    
+                    Translating RAML DataTypes to JSON Schemas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="translating-json-raml.html">
+            
+                <a href="translating-json-raml.html">
+            
+                    
+                    Translating JSON Schemas to RAML DataTypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7" data-path="migration-guide-js.html">
+            
+                <a href="migration-guide-js.html">
+            
+                    
+                    Migration guide (JS)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="migration-guide-java.html">
+            
+                <a href="migration-guide-java.html">
+            
+                    
+                    Migration guide (Java)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Migration guide (JS)</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="migration-guide-js">Migration guide (JS)</h1>
+<p>Welcome!</p>
+<p>As you may already know RAML 0.8/1.0 JS parser <code>raml-1-parser</code> has been deprecated in favor of <code>webapi-parser</code>. This guide describes how to migrate an existing code from <code>raml-1-parser</code> to <code>webapi-parser</code>.</p>
+<p>Migration process consists of following steps:</p>
+<ol>
+<li><a href="#considering-parsers-differences">Considering parsers differences</a></li>
+<li>Installing the new parser (as described in respective <a href="https://github.com/raml-org/webapi-parser#javascript" target="_blank">readme section</a>)</li>
+<li><a href="#migrating-the-code">Migrating the code</a></li>
+</ol>
+<h2 id="considering-parsers-differences">Considering parsers differences</h2>
+<p>There are few differences to consider when migrating to <code>webapi-parser</code>:</p>
+<ul>
+<li>In addition to RAML 0.8 and RAML 1.0 parsing it can also resolve (flatten) it and validate. The parser also supports a number of other API Spec formats: OAS 2.0, OAS 3.0, AMF JSON-LD;</li>
+<li><code>webapi-parser</code> provides only async/Promise-based API;</li>
+<li>API of the model/object it produces on parsing is completely different from the one produced by <code>raml-1-parser</code>. You can research the new model API by following the link in the <a href="#need-assistance">assistance section</a> below.</li>
+</ul>
+<h2 id="migrating-the-code">Migrating the code</h2>
+<p>Consider this code which uses <code>raml-1-parser</code>:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> parser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;raml-1-parser&apos;</span>)
+
+<span class="hljs-keyword">async</span> someFunc () {
+  <span class="hljs-keyword">const</span> api = <span class="hljs-keyword">await</span> parser.loadRAML(<span class="hljs-string">&apos;/path/to/raml10/api.raml&apos;</span>)
+  <span class="hljs-keyword">const</span> expanded = api.expand(<span class="hljs-literal">true</span>)
+  <span class="hljs-comment">// Do something with the expanded API</span>
+}
+
+someFunc()
+</code></pre>
+<p>Here&apos;s how it can be reworked to use <code>webapi-parser</code>:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> wap = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webapi-parser&apos;</span>).WebApiParser
+
+<span class="hljs-keyword">async</span> someFunc () {
+  <span class="hljs-comment">// Or wap.raml08 for RAML 0.8 operations</span>
+  <span class="hljs-keyword">const</span> api = <span class="hljs-keyword">await</span> wap.raml10.parse(<span class="hljs-string">&apos;file:///path/to/raml10/api.raml&apos;</span>)
+  <span class="hljs-keyword">const</span> expanded = <span class="hljs-keyword">await</span> wap.raml10.resolve(api)
+  <span class="hljs-comment">// Do something with the expanded API</span>
+}
+
+someFunc()
+</code></pre>
+<p>In the example above, object <code>WebApiParser</code> contains namespaces for all the supported API Spec formats: <code>raml10</code>. <code>raml08</code>, <code>oas20</code>, <code>oas30</code>, <code>amfGraph</code>, each having an identical interface (OAS namespaces have an extra few methods). The list of supported operations each format supports includes parsing, resolution(flattening), validation and string generation.</p>
+<p>To get a description of each namespace and operation please research the new model API by following the link in the <a href="#need-assistance">assistance section</a> below.</p>
+<h2 id="detailed-migration-examples">Detailed migration examples</h2>
+<p>This section lists migration examples of the most common <code>raml-1-parser</code> parsing and model methods. Snippets are separated with a newline. First line of each example shows <code>raml-1-parser</code> method usage, while the second line shows how to achieve the same functionality with <code>webapi-parser</code> if possible. If no obvious alternative exists, a comment gives more detail.</p>
+<h3 id="parsers">Parsers</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> oldParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;raml-1-parser&apos;</span>)
+<span class="hljs-keyword">const</span> wp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webapi-parser&apos;</span>)
+<span class="hljs-keyword">const</span> wap = wp.WebApiParser
+
+<span class="hljs-comment">// Load and parse RAML file</span>
+<span class="hljs-keyword">const</span> node = <span class="hljs-keyword">await</span> oldParser.loadApi(<span class="hljs-string">&apos;/path/to/api.raml&apos;</span>)
+<span class="hljs-keyword">const</span> model = <span class="hljs-keyword">await</span> wap.raml10.parse(<span class="hljs-string">&apos;file:///path/to/api.raml&apos;</span>)
+<span class="hljs-comment">// or</span>
+<span class="hljs-comment">// const model = wap.raml08.parse(&apos;file:///path/to/api.raml&apos;)</span>
+
+<span class="hljs-comment">// Convert fragment representing node to FragmentDeclaration instance</span>
+oldParser.asFragment(node)
+<span class="hljs-comment">// Not necessary. Webapi-parser parses fragments into different model types.</span>
+
+<span class="hljs-comment">// Check if the AST node represents fragment</span>
+oldParser.isFragment(node)
+!(model <span class="hljs-keyword">instanceof</span> wp.webapi.WebApiDocument)
+
+<span class="hljs-comment">// Load and parse API file synchronously</span>
+oldParser.loadApiSync(<span class="hljs-string">&apos;/path/to/api.raml&apos;</span>)
+<span class="hljs-comment">// Not supported</span>
+
+<span class="hljs-comment">// Load and parse RAML file asynchronously. May load both Api and Typed fragments.</span>
+oldParser.loadRAML(<span class="hljs-string">&apos;/path/to/api.raml&apos;</span>)
+wap.raml10.parse(<span class="hljs-string">&apos;file:///path/to/api.raml&apos;</span>)
+wap.raml08.parse(<span class="hljs-string">&apos;file:///path/to/api.raml&apos;</span>)
+
+<span class="hljs-comment">// Load and parse RAML file synchronously. May load both Api and Typed fragments.</span>
+oldParser.loadRAMLSync(<span class="hljs-string">&apos;/path/to/api.raml&apos;</span>)
+<span class="hljs-comment">// Not supported</span>
+
+<span class="hljs-comment">// Parse RAML content asynchronously. May load both Api and Typed fragments.</span>
+oldParser.parseRAML(<span class="hljs-string">&apos;#%RAML 1.0\n...&apos;</span>)
+wap.raml10.parse(<span class="hljs-string">&apos;#%RAML 1.0\n...&apos;</span>)
+wap.raml08.parse(<span class="hljs-string">&apos;#%RAML 1.0\n...&apos;</span>)
+
+<span class="hljs-comment">// Parse RAML content synchronously. May load both Api and Typed fragments.</span>
+oldParser.parseRAMLSync(<span class="hljs-string">&apos;#%RAML 1.0\n...&apos;</span>)
+<span class="hljs-comment">// Not supported</span>
+</code></pre>
+<h3 id="api-models">API Models</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> oldParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;raml-1-parser&apos;</span>)
+<span class="hljs-keyword">const</span> wp = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;webapi-parser&apos;</span>)
+<span class="hljs-keyword">const</span> wap = wp.WebApiParser
+
+<span class="hljs-comment">// Load and parse RAML file</span>
+<span class="hljs-keyword">const</span> node = <span class="hljs-keyword">await</span> oldParser.loadApi(<span class="hljs-string">&apos;/path/to/api.raml&apos;</span>)
+<span class="hljs-keyword">const</span> model = <span class="hljs-keyword">await</span> wap.raml10.parse(<span class="hljs-string">&apos;file:///path/to/api.raml&apos;</span>)
+<span class="hljs-comment">// or</span>
+<span class="hljs-comment">// const model = wap.raml08.parse(&apos;file:///path/to/api.raml&apos;)</span>
+
+<span class="hljs-comment">// Get API resources/endpoints</span>
+node.resources()
+model.encodes.endPoints()
+<span class="hljs-comment">// Note that webapi-parser resources are flat and occur in the order defined in the RAML doc.</span>
+
+<span class="hljs-comment">// Get methods of a first API resource</span>
+node.resources()[<span class="hljs-number">0</span>].methods()
+model.encodes.endPoints()[<span class="hljs-number">0</span>].operations()
+
+<span class="hljs-comment">// Get &quot;annotationTypes&quot; declarations</span>
+node.annotationTypes()
+model.declares.filter(el -&gt; el <span class="hljs-keyword">instanceof</span> wp.model.domain.CustomDomainProperty)
+
+<span class="hljs-comment">// Get &quot;resourceTypes&quot; declarations</span>
+node.resourceTypes()
+model.declares.filter(el -&gt; el <span class="hljs-keyword">instanceof</span> wp.model.domain.ParametrizedResourceType)
+
+<span class="hljs-comment">// Get &quot;schemas&quot; declarations</span>
+node.schemas()
+model.declares.filter(el -&gt; el <span class="hljs-keyword">instanceof</span> wp.model.domain.SchemaShape)
+
+<span class="hljs-comment">// Get &quot;securitySchemes&quot; declarations</span>
+node.securitySchemes()
+model.declares.filter(el -&gt; el <span class="hljs-keyword">instanceof</span> wp.model.domain.SecurityScheme)
+
+<span class="hljs-comment">// Get &quot;traits&quot; declarations</span>
+node.traits()
+model.declares.filter(el -&gt; el <span class="hljs-keyword">instanceof</span> wp.model.domain.ParametrizedTrait)
+
+<span class="hljs-comment">// Get &quot;types&quot; declarations</span>
+node.types()
+model.declares.filter(el -&gt; el <span class="hljs-keyword">instanceof</span> wp.model.domain.AnyShape)
+
+<span class="hljs-comment">// Expand (resolve) parsed API model</span>
+node.expand()
+wap.raml10.resolve(model)
+</code></pre>
+<p>For more details on navigating the new model, please refer to <a href="navigating.html">Navigating a &quot;WebApi&quot; Model</a> tutorial.</p>
+<h2 id="need-assistance">Need Assistance?</h2>
+<p>Here are the things to do if you have more questions:</p>
+<ul>
+<li>Check out more of our <a href="./">tutorials</a></li>
+<li>Explore relevant <a href="https://github.com/raml-org/webapi-parser/tree/master/examples/js" target="_blank">examples</a></li>
+<li>Research the API with the <a href="https://raml-org.github.io/webapi-parser/js/modules/webapiparser.html" target="_blank">developer documentation</a></li>
+<li>Ask your question at <a href="https://github.com/raml-org/webapi-parser/issues" target="_blank">github issues</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="translating-json-raml.html" class="navigation navigation-prev " aria-label="Previous page: Translating JSON Schemas to RAML DataTypes">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="migration-guide-java.html" class="navigation navigation-next " aria-label="Next page: Migration guide (Java)">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Migration guide (JS)","level":"1.7","depth":1,"next":{"title":"Migration guide (Java)","level":"1.8","depth":1,"path":"migration-guide-java.md","ref":"migration-guide-java.md","articles":[]},"previous":{"title":"Translating JSON Schemas to RAML DataTypes","level":"1.6","depth":1,"path":"translating-json-raml.md","ref":"translating-json-raml.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"SUMMARY.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"migration-guide-js.md","mtime":"2020-03-24T07:20:39.085Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-24T07:33:03.416Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,468 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Migration guide (Java) · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="migration-guide-js.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Summary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="resolving.html">
+            
+                <a href="resolving.html">
+            
+                    
+                    Resolving a "WebApi" Model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="navigating.html">
+            
+                <a href="navigating.html">
+            
+                    
+                    Navigating a "WebApi" Model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="constructing.html">
+            
+                <a href="constructing.html">
+            
+                    
+                    Constructing a "WebApi" Model
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="translating-raml-json.html">
+            
+                <a href="translating-raml-json.html">
+            
+                    
+                    Translating RAML DataTypes to JSON Schemas
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="translating-json-raml.html">
+            
+                <a href="translating-json-raml.html">
+            
+                    
+                    Translating JSON Schemas to RAML DataTypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="migration-guide-js.html">
+            
+                <a href="migration-guide-js.html">
+            
+                    
+                    Migration guide (JS)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8" data-path="migration-guide-java.html">
+            
+                <a href="migration-guide-java.html">
+            
+                    
+                    Migration guide (Java)
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Migration guide (Java)</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="migration-guide-java">Migration guide (Java)</h1>
+<p>Welcome!</p>
+<p>As you may already know RAML 0.8/1.0 Java parser <code>raml-java-parser</code> has been deprecated in favor of <code>webapi-parser</code>. This guide describes how to migrate an existing code from <code>raml-java-parser</code> to <code>webapi-parser</code>.</p>
+<p>Migration process consists of following steps:</p>
+<ol>
+<li><a href="#considering-parsers-differences">Considering parsers differences</a></li>
+<li>Installing the new parser (as described in respective <a href="https://github.com/raml-org/webapi-parser#java" target="_blank">readme section</a>)</li>
+<li><a href="#migrating-the-code">Migrating the code</a></li>
+</ol>
+<h2 id="considering-parsers-differences">Considering parsers differences</h2>
+<p>There are few differences to consider when migrating to <code>webapi-parser</code>:</p>
+<ul>
+<li>In addition to RAML 0.8 and RAML 1.0 parsing it can also resolve (flatten) it and validate. The parser also supports a number of other API Spec formats: OAS 2.0, OAS 3.0, AMF JSON-LD;</li>
+<li><code>webapi-parser</code> provides only async/Promise-based API;</li>
+<li>API of the model/object it produces on parsing is completely different from the one produced by <code>raml-java-parser</code>. You can research the new model API by following the link in the <a href="#need-assistance">assistance section</a> below.</li>
+<li>When using resource types, traits, data types and other means of reusing patterns, old parser used to &quot;flatten&quot; these abstractions into a parsed document, making it possible to navigate and inspect them after parsing. E.g. if a resource uses a resourceType which defines a <code>200</code> response you could navigate to that response from the resource via parsed model and inspect it immediately after parsing. To achieve this behaviour in the new parser one would have to parse AND perform a <a href="resolving.html">model resolution</a>.</li>
+</ul>
+<h2 id="migrating-the-code">Migrating the code</h2>
+<p>Consider this code which uses <code>raml-java-parser</code>:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> co.acme.parse;
+
+<span class="hljs-keyword">import</span> org.raml.v2.api.RamlModelBuilder;
+<span class="hljs-keyword">import</span> org.raml.v2.api.RamlModelResult;
+<span class="hljs-keyword">import</span> org.raml.v2.api.model.common.ValidationResult;
+<span class="hljs-keyword">import</span> org.raml.v2.api.model.v10.api.Api;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Raml10Parsing</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parse</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+    RamlModelResult ramlModelResult = <span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(input);
+    <span class="hljs-keyword">if</span> (ramlModelResult.hasErrors()) {
+      <span class="hljs-keyword">for</span> (ValidationResult validationResult : ramlModelResult.getValidationResults()) {
+        System.out.println(validationResult.getMessage());
+      }
+    } <span class="hljs-keyword">else</span> {
+      Api api = ramlModelResult.getApiV10();
+    }
+  }
+}
+</code></pre>
+<p>Here&apos;s how it can be reworked to use <code>webapi-parser</code>:</p>
+<pre><code class="lang-java"><span class="hljs-keyword">package</span> co.acme.parse;
+
+<span class="hljs-keyword">import</span> webapi.Raml10;
+<span class="hljs-keyword">import</span> webapi.WebApiBaseUnit;
+<span class="hljs-keyword">import</span> webapi.WebApiDocument;
+<span class="hljs-keyword">import</span> amf.client.validate.ValidationReport;
+<span class="hljs-keyword">import</span> amf.client.validate.ValidationResult;
+
+<span class="hljs-keyword">import</span> java.util.concurrent.ExecutionException;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Raml10Parsing</span> </span>{
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">parse</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, ExecutionException </span>{
+    WebApiBaseUnit ramlModelResult = Raml10.parse(input).get();
+    ValidationReport validationReport = Raml10.validate(ramlModelResult).get();
+    <span class="hljs-keyword">if</span> (!validationReport.conforms()) {
+      <span class="hljs-keyword">for</span> (ValidationResult validationResult : validationReport.results()) {
+        System.out.println(validationResult.message());
+      }
+    } <span class="hljs-keyword">else</span> {
+      WebApiDocument document = (WebApiDocument) ramlModelResult;
+    }
+  }
+}
+</code></pre>
+<p>In the example above, namespace <code>webapi</code> contains namespaces for all the supported API Spec formats: <code>Raml10</code>. <code>Raml08</code>, <code>Oas20</code>, <code>Oas30</code>, <code>AmfGraph</code>, each having an identical interface (OAS namespaces have an extra few methods). The list of supported operations each format supports includes parsing, resolution(flattening), validation and string generation.</p>
+<p>To get a description of each namespace and operation please research the new model API by following the link in the <a href="#need-assistance">assistance section</a> below.</p>
+<h2 id="detailed-migration-examples">Detailed migration examples</h2>
+<p>This section lists migration examples of the most common <code>raml-java-parser</code> parsing and model methods. Snippets are separated with a newline. First line of each example shows <code>raml-java-parser</code> method usage, while the second line shows how to achieve the same functionality with <code>webapi-parser</code> if possible. If no obvious alternative exists, a comment gives more detail.</p>
+<h3 id="parsers">Parsers</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> org.raml.v2.api.RamlModelBuilder;
+<span class="hljs-keyword">import</span> webapi.Raml10;
+
+<span class="hljs-comment">// Create a model from File instance</span>
+<span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(ramlFile);
+<span class="hljs-comment">// Not supported</span>
+
+<span class="hljs-comment">// Create a model from Reader instance and a RAML file location (String)</span>
+<span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(reader, ramlLocation);
+<span class="hljs-comment">// Not supported</span>
+
+<span class="hljs-comment">// Create a model by parsing a RAML file at a particular location</span>
+<span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(ramlLocation);
+Raml10.parse(ramlLocation).get();
+Raml08.parse(ramlLocation).get();
+
+<span class="hljs-comment">// Create a model by parsing RAML content string and assigning it a</span>
+<span class="hljs-comment">// custom location</span>
+<span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(content, ramlLocation);
+Raml10.parse(content, ramlLocation).get();
+Raml08.parse(content, ramlLocation).get();
+</code></pre>
+<h3 id="api-models">API Models</h3>
+<pre><code class="lang-java"><span class="hljs-keyword">import</span> org.raml.v2.api.RamlModelResult;
+<span class="hljs-keyword">import</span> org.raml.v2.api.model.v10.api.Api;
+<span class="hljs-keyword">import</span> webapi;
+
+<span class="hljs-comment">// Extract 0.8 Api/WebApi instance from a parsed model</span>
+Api oldModel = <span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(input).getApiV08();
+webapi.WebApiDocument newModel = (webapi.WebApiDocument) Raml08.parse(input).get();
+
+<span class="hljs-comment">// Extract 1.0 Api/WebApi instance from a parsed model</span>
+Api oldModel = <span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(input).getApiV10();
+webapi.WebApiDocument newModel = (webapi.WebApiDocument) Raml10.parse(input).get();
+
+<span class="hljs-comment">// Parse RAML content or file path</span>
+RamlModelResult oldResult = <span class="hljs-keyword">new</span> RamlModelBuilder().buildApi(input);
+webapi.WebApiBaseUnit newResult = (webapi.WebApiBaseUnit) Raml10.parse(input).get();
+
+<span class="hljs-comment">// Check if parsed model has errors</span>
+oldResult.hasErrors();
+<span class="hljs-comment">// Validation must be performed. See example above.</span>
+
+<span class="hljs-comment">// Get parsed model validation results</span>
+oldResult.getValidationResults();
+<span class="hljs-comment">// Validation must be performed. See example above.</span>
+
+<span class="hljs-comment">// Convert parsed model to a Library to use its specific interface</span>
+oldResult.getLibrary();
+(webapi.WebApiModule) newResult;
+
+<span class="hljs-comment">// Convert parsed model to a DataType fragment to use its specific interface</span>
+oldResult.getTypeDeclaration();
+(webapi.WebApiDataType) newResult;
+
+<span class="hljs-comment">// Convert parsed model to a SecurityScheme fragment to use its specific interface</span>
+oldResult.getSecurityScheme();
+(webapi.WebApiSecuritySchemeFragment) newResult;
+
+<span class="hljs-comment">// Convert parsed model to a Trait fragment to use its specific interface</span>
+oldResult.getTrait();
+(webapi.WebApiTraitFragment) newResult;
+
+<span class="hljs-comment">// Convert parsed model to a ResourceType fragment to use its specific interface</span>
+oldResult.getResourceType();
+(webapi.WebApiResourceTypeFragment) newResult;
+
+<span class="hljs-comment">// Get API resources/endpoints</span>
+oldModel.resources();
+newModel.encodes().endPoints();
+<span class="hljs-comment">// Note that webapi-parser resources are flat and occur in the order defined in the RAML doc.</span>
+
+<span class="hljs-comment">// Get methods of a first resource</span>
+oldModel.resources().get(<span class="hljs-number">0</span>).methods();
+newModel.encodes().endPoints().get(<span class="hljs-number">0</span>).operations();
+</code></pre>
+<p>For more details on navigating the new model, please refer to <a href="navigating.html">Navigating a &quot;WebApi&quot; Model</a> tutorial.</p>
+<h2 id="need-assistance">Need Assistance?</h2>
+<p>Here are the things to do if you have more questions:</p>
+<ul>
+<li>Check out more of our <a href="./">tutorials</a></li>
+<li>Explore relevant <a href="https://github.com/raml-org/webapi-parser/tree/master/examples/java" target="_blank">examples</a></li>
+<li>Research the API with the <a href="https://raml-org.github.io/webapi-parser/java/index.html" target="_blank">developer documentation</a></li>
+<li>Ask your question at <a href="https://github.com/raml-org/webapi-parser/issues" target="_blank">github issues</a></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="migration-guide-js.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Migration guide (JS)">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Migration guide (Java)","level":"1.8","depth":1,"previous":{"title":"Migration guide (JS)","level":"1.7","depth":1,"path":"migration-guide-js.md","ref":"migration-guide-js.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"SUMMARY.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"migration-guide-java.md","mtime":"2020-03-24T07:20:39.085Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-03-24T07:33:03.416Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
