@@ -37,6 +37,14 @@ echo "Running buildjs script"
 ./scripts/buildjs.sh
 echo "Finished buildjs script"
 
+echo "Running fastOptJS"
+sbt webapiJS/fastOptJS
+echo "Finished fastOptJS"
+
+echo "Running buildjs-dev script"
+./scripts/buildjs-dev.sh
+echo "Finished buildjs-dev script"
+
 cp README.md js/module
 cd js/module
 

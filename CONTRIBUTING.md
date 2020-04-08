@@ -16,6 +16,11 @@ To generate JavaScript artifact (generated at `./js/module/webapi-parser.js`), r
 sbt webapiJS/fullOptJS && ./scripts/buildjs.sh
 ```
 
+To generate unobfuscated JavaScript artifact (generated at `./js/module/webapi-parser-dev.js`), run:
+```sh
+sbt webapiJS/fastOptJS && ./scripts/buildjs-dev.sh
+```
+
 To generate regular (not "fat") `.jar`, run:
 ```sh
 sbt package
