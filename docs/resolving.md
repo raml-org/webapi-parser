@@ -5,7 +5,7 @@
 This document describes `webapi-parser` process called "resolution". This process is performed by syntax-specific `.resolve()` methods of all supported API syntaxes (RAML, OAS, AMF Graph). Resolving produces a "flat" document/model with all the references replaced by redundant copies of an actual data.
 
 ## Input and Output
-Input to `.resolve()` is an [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html) either not resolved or already resolved (nothing happens in this case).
+Input to `.resolve()` is a [WebApi Model](https://raml-org.github.io/webapi-parser/js/classes/webapibaseunit.html) either not resolved or already resolved (nothing happens in this case).
 
 Output is a resolved(/flat/explicit) WebApi Model with all the references replaced by definitions.
 
@@ -22,9 +22,9 @@ A resolved WebApi Model has the following properties:
 * All the constraints defined for the type are valid
 * Unions can only appear at the top level of the type form
 
-## Examples
+### Examples
 
-### RAML 1.0
+#### RAML 1.0
 Unresolved
 
 ```raml
@@ -80,7 +80,7 @@ version: v1
                   required: true
 ```
 
-### OAS 2.0
+#### OAS 2.0
 Unresolved
 
 ```json
@@ -180,4 +180,71 @@ Resolved
     }
   }
 }
+```
+
+## Preserving root definitions
+When resolving a document it's possible to preserve root definitions like RAML 1.0 `types:`. This can be done by passing `true` boolean as the second argument to `.resolve()`. E.g. `.resolve(model, true)`.
+
+Here's how RAML from the previous section would look like when resolved with preserving root definitions:
+
+```raml
+title: Albums API
+version: v1
+types:
+  Song:
+    additionalProperties: true
+    properties:
+      title:
+        type: string
+        required: true
+  Album:
+    additionalProperties: true
+    properties:
+      title:
+        type: string
+        required: true
+      songs:
+        items:
+          additionalProperties: true
+          properties:
+            title:
+              type: string
+              required: true
+        required: true
+  ReleasedAlbum:
+    type: object
+    additionalProperties: true
+    properties:
+      title:
+        type: string
+        required: true
+      songs:
+        items:
+          additionalProperties: true
+          properties:
+            title:
+              type: string
+              required: true
+        required: true
+/released-albums:
+  get:
+    responses:
+      "200":
+        body:
+          application/json:
+            items:
+              type: object
+              additionalProperties: true
+              properties:
+                title:
+                  type: string
+                  required: true
+                songs:
+                  items:
+                    additionalProperties: true
+                    properties:
+                      title:
+                        type: string
+                        required: true
+                  required: true
 ```
