@@ -15,8 +15,8 @@
 
 
 # Build java and js docs
-# ./scripts/generate-java-docs.sh
-# ./scripts/generate-js-docs.sh
+./scripts/generate-java-docs.sh
+./scripts/generate-js-docs.sh
 
 
 cd docs
