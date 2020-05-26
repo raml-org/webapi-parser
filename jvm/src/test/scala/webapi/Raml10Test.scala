@@ -129,6 +129,20 @@ class Raml10Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       genStr should include ("firstName:")
       genStr should not include ("type: User")
       genStr should not include ("types:")
+      genStr should not include ("User:")
+    }
+  }
+
+  test("Resolution with preserving root definitions") {
+    for {
+      unit <- Raml10.parse(apiString).asInternal
+      resolved <- Raml10.resolve(unit, true).asInternal
+      genStr <- Raml10.generateString(resolved).asInternal
+    } yield {
+      genStr should include ("firstName:")
+      genStr should not include ("type: User")
+      genStr should include ("types:")
+      genStr should include ("User:")
     }
   }
 
