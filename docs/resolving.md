@@ -183,7 +183,7 @@ Resolved
 ```
 
 ## Preserving root definitions
-When resolving a document it's possible to preserve root definitions like RAML 1.0 `types:`. This can be done by passing `true` boolean as the second argument to `.resolve()`. E.g. `.resolve(model, true)`.
+When resolving a document it's possible to preserve RAML 1.0 root definitions: `types`, `annotationTypes`, `traits`, `resourceTypes`. This can be done by passing `true` boolean as the second argument to `.resolve()`. E.g. `.resolve(model, true)`.
 
 Here's how RAML from the previous section would look like when resolved with preserving root definitions:
 
