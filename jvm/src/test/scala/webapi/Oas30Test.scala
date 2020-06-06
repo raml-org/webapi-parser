@@ -241,6 +241,22 @@ class Oas30Test extends AsyncFunSuite with Matchers with WaitingFileReader {
       genStr <- Oas30.generateString(resolved).asInternal
     } yield {
       genStr should not include ("$ref")
+      genStr should not include ("schemas")
+      genStr should not include ("User")
+      genStr should include ("firstName")
+      genStr should include ("schema")
+    }
+  }
+
+  test("Resolution with preserving root definitions") {
+    for {
+      unit <- Oas30.parse(apiString).asInternal
+      resolved <- Oas30.resolve(unit, true).asInternal
+      genStr <- Oas30.generateString(resolved).asInternal
+    } yield {
+      genStr should not include ("$ref")
+      genStr should include ("schemas")
+      genStr should include ("User")
       genStr should include ("firstName")
       genStr should include ("schema")
     }

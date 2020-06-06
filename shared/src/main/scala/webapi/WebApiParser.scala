@@ -132,12 +132,18 @@ object Raml10 {
     * Resolution process includes resolving references to all types, libraries, etc.
     *
     * @param model Parsed WebApi Model to be resolved.
+    * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
-        val resolved: InternalBaseUnit = new Raml10Resolver().resolve(model)
+        var resolved: InternalBaseUnit = null
+        if(preserveDefinitions) {
+          resolved = new Raml10Resolver().resolve(model, "editing")
+        } else {
+          resolved = new Raml10Resolver().resolve(model)
+        }
         resolved
       }
     }).asClient
@@ -215,12 +221,18 @@ object Raml08 {
     * Resolution process includes resolving references to all types, libraries, etc.
     *
     * @param model Parsed WebApi Model to be resolved.
+    * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
-        val resolved: InternalBaseUnit = new Raml08Resolver().resolve(model)
+        var resolved: InternalBaseUnit = null
+        if(preserveDefinitions) {
+          resolved = new Raml08Resolver().resolve(model, "editing")
+        } else {
+          resolved = new Raml08Resolver().resolve(model)
+        }
         resolved
       }
     }).asClient
@@ -298,12 +310,18 @@ object Oas20 {
     * Resolution process includes resolving references to all types, libraries, etc.
     *
     * @param model Parsed WebApi Model to be resolved.
+    * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
-        val resolved: InternalBaseUnit = new Oas20Resolver().resolve(model)
+        var resolved: InternalBaseUnit = null
+        if(preserveDefinitions) {
+          resolved = new Oas20Resolver().resolve(model, "editing")
+        } else {
+          resolved = new Oas20Resolver().resolve(model)
+        }
         resolved
       }
     }).asClient
@@ -431,12 +449,18 @@ object Oas30 {
     * Resolution process includes resolving references to all types, libraries, etc.
     *
     * @param model Parsed WebApi Model to be resolved.
+    * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
-        val resolved: InternalBaseUnit = new Oas30Resolver().resolve(model)
+        var resolved: InternalBaseUnit = null
+        if(preserveDefinitions) {
+          resolved = new Oas30Resolver().resolve(model, "editing")
+        } else {
+          resolved = new Oas30Resolver().resolve(model)
+        }
         resolved
       }
     }).asClient
@@ -564,12 +588,18 @@ object AmfGraph {
     * Resolution process includes resolving references to all types, libraries, etc.
     *
     * @param model Parsed WebApi Model to be resolved.
+    * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
-        val resolved: InternalBaseUnit = new AmfGraphResolver().resolve(model)
+        var resolved: InternalBaseUnit = null
+        if(preserveDefinitions) {
+          resolved = new AmfGraphResolver().resolve(model, "editing")
+        } else {
+          resolved = new AmfGraphResolver().resolve(model)
+        }
         resolved
       }
     }).asClient

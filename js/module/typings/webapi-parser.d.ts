@@ -178,9 +178,10 @@ export namespace WebApiParser {
      * Resolution process includes resolving references to all types, libraries, etc.
      *
      * @param model Parsed WebApi Model to be resolved.
+     * @param preserveDefinitions Preserve root definitions.
      * @return Resolved parsed WebApi Model.
      */
-    static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
+    static resolve(model: WebApiBaseUnit, preserveDefinitions: boolean): Promise<WebApiBaseUnit>
   }
 
   /** Provides methods for RAML 0.8 processing */
@@ -228,9 +229,10 @@ export namespace WebApiParser {
      * Resolution process includes resolving references to all types, libraries, etc.
      *
      * @param model Parsed WebApi Model to be resolved.
+     * @param preserveDefinitions Preserve root definitions.
      * @return Resolved parsed WebApi Model.
      */
-    static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
+    static resolve(model: WebApiBaseUnit, preserveDefinitions: boolean): Promise<WebApiBaseUnit>
   }
 
   /** Provides methods for OAS 2.0 processing */
@@ -278,9 +280,10 @@ export namespace WebApiParser {
      * Resolution process includes resolving references to all types, libraries, etc.
      *
      * @param model Parsed WebApi Model to be resolved.
+     * @param preserveDefinitions Preserve root definitions.
      * @return Resolved parsed WebApi Model.
      */
-    static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
+    static resolve(model: WebApiBaseUnit, preserveDefinitions: boolean): Promise<WebApiBaseUnit>
 
     /** Parses OAS 2.0 YAML content from string or url.
      *
@@ -358,9 +361,10 @@ export namespace WebApiParser {
      * Resolution process includes resolving references to all types, libraries, etc.
      *
      * @param model Parsed WebApi Model to be resolved.
+     * @param preserveDefinitions Preserve root definitions.
      * @return Resolved parsed WebApi Model.
      */
-    static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
+    static resolve(model: WebApiBaseUnit, preserveDefinitions: boolean): Promise<WebApiBaseUnit>
 
     /** BETA! Parses OAS 3.0 YAML content from string or url.
      *
@@ -438,9 +442,10 @@ export namespace WebApiParser {
      * Resolution process includes resolving references to all types, libraries, etc.
      *
      * @param model Parsed WebApi Model to be resolved.
+     * @param preserveDefinitions Preserve root definitions.
      * @return Resolved parsed WebApi Model.
      */
-    static resolve(model: WebApiBaseUnit): Promise<WebApiBaseUnit>
+    static resolve(model: WebApiBaseUnit, preserveDefinitions: boolean): Promise<WebApiBaseUnit>
   }
 }
 
