@@ -169,7 +169,7 @@ class Oas30Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     } yield {
       val doc = unit.asInstanceOf[WebApiDocument]
       doc.location should be ("file://shared/src/test/resources/includes/api.json")
-      genStr should not include ("$ref")
+      genStr should not include ("cat-schema.json")
       genStr should include ("The cat's name")
     }
   }
@@ -182,7 +182,7 @@ class Oas30Test extends AsyncFunSuite with Matchers with WaitingFileReader {
     } yield {
       val doc = unit.asInstanceOf[WebApiDocument]
       doc.location should be ("http://a.ml/amf/default_document")
-      genStr should not include ("$ref")
+      genStr should not include ("cat-schema.json")
       genStr should not include ("The cat's name")
     }
   }
@@ -265,27 +265,27 @@ class Oas30Test extends AsyncFunSuite with Matchers with WaitingFileReader {
   test("YAML string parsing with reference and baseUrl param") {
     for {
       unit <- Oas30.parseYaml(
-        apiStringWithRef,
+        apiStringYamlWithRef,
         "file://shared/src/test/resources/includes/api.yaml").asInternal
       resolved <- Oas30.resolve(unit).asInternal
       genStr <- Oas30.generateYamlString(resolved).asInternal
     } yield {
       val doc = unit.asInstanceOf[WebApiDocument]
       doc.location should be ("file://shared/src/test/resources/includes/api.yaml")
-      genStr should not include ("$ref")
+      genStr should not include ("cat-schema.yaml")
       genStr should include ("The cat's name")
     }
   }
 
   test("YAML string parsing with reference and no baseUrl param") {
     for {
-      unit <- Oas30.parseYaml(apiStringWithRef).asInternal
+      unit <- Oas30.parseYaml(apiStringYamlWithRef).asInternal
       resolved <- Oas30.resolve(unit).asInternal
       genStr <- Oas30.generateYamlString(resolved).asInternal
     } yield {
       val doc = unit.asInstanceOf[WebApiDocument]
       doc.location should be ("http://a.ml/amf/default_document")
-      genStr should not include ("$ref")
+      genStr should not include ("cat-schema.yaml")
       genStr should not include ("The cat's name")
     }
   }
