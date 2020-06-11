@@ -378,12 +378,12 @@ object Oas20 {
   }
 }
 
-/** BETA. Provides methods for OAS 3.0 processing */
+/** Provides methods for OAS 3.0 processing */
 @JSExportAll
 @JSExportTopLevel("WebApiParser.oas30")
 object Oas30 {
 
-  /** BETA. Parses OAS 3.0 JSON content from string or url.
+  /** Parses OAS 3.0 JSON content from string or url.
     *
     * @param urlOrContent File url/path or content string.
     * @return Parsed WebApi Model (future).
@@ -398,7 +398,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Parses OAS 3.0 JSON content from string with a custom API Doc location.
+  /** Parses OAS 3.0 JSON content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
     * @param baseUrl Location to assign to a doc parsed from a content string.
@@ -411,7 +411,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Generates file with OAS 3.0 JSON content.
+  /** Generates file with OAS 3.0 JSON content.
     *
     * @param model Parsed WebApi Model to generate content from.
     * @param url Path to the generated file.
@@ -422,7 +422,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Generates string with OAS 3.0 JSON content.
+  /** Generates string with OAS 3.0 JSON content.
     *
     * @param model Parsed WebApi Model to generate content from.
     * @return Generated string (future).
@@ -433,7 +433,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Validates parsed OAS 3.0 model.
+  /** Validates parsed OAS 3.0 model.
     *
     * @param model Parsed WebApi Model to be validated.
     * @return Validation report (future).
@@ -444,7 +444,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Resolves parsed OAS 3.0 model.
+  /** Resolves parsed OAS 3.0 model.
     *
     * Resolution process includes resolving references to all types, libraries, etc.
     *
@@ -466,7 +466,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Parses OAS 3.0 YAML content from string or url.
+  /** Parses OAS 3.0 YAML content from string or url.
     *
     * @param urlOrContent File url/path or content string.
     * @return Parsed WebApi Model (future).
@@ -481,7 +481,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Parses OAS 3.0 YAML content from string with a custom API Doc location.
+  /** Parses OAS 3.0 YAML content from string with a custom API Doc location.
     *
     * @param content Content string to be parsed.
     * @param baseUrl Location to assign to a doc parsed from a content string.
@@ -494,7 +494,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Generates string with OAS 3.0 YAML content.
+  /** Generates string with OAS 3.0 YAML content.
     *
     * @param model Parsed WebApi Model to generate content from.
     * @return Generated string (future).
@@ -505,7 +505,7 @@ object Oas30 {
     }).asClient
   }
 
-  /** BETA. Generates file with OAS 3.0 YAML content.
+  /** Generates file with OAS 3.0 YAML content.
     *
     * @param model Parsed WebApi Model to generate content from.
     * @param url Path to the generated file.
