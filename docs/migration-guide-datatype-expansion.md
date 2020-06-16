@@ -4,19 +4,19 @@
 # Migration guide (datatype-expansion)
 Welcome!
 
-As you may already know RAML JS tool `datatype-expansion` has been deprecated. This guide describes a similar functionality offered by `webapi-parser`, thus allowing to migrate from `datatype-expansion` to `webapi-parser`.
+As you may be aware, the tool [`datatype-expansion`](https://github.com/raml-org/datatype-expansion) has been deprecated. This guide describes a similar functionality that leverages `webapi-parser`, which may help migrate from `datatype-expansion` to `webapi-parser`.
 
-## datatype-expansion and webapi-parser
-While `datatype-expansion` is a utility tool to expand a given type and create a canonical form, `webapi-parser` is an API Spec parser which currently supports RAML 0.8, RAML 1.0, OAS 2.0 and OAS 3.0(beta).
+## datatype-expansion vs. webapi-parser
+While `datatype-expansion` is a utility tool that expands a given type and creates a canonical form, `webapi-parser` is an API definition parser which currently supports RAML 0.8, RAML 1.0, OAS 2.0 and OAS 3.0(beta).
 
-Among other `webapi-parser` functionality is an API/process called "resolution". This process is performed by syntax-specific `.resolve()` methods of all supported API syntaxes (RAML, OAS, AMF Graph).
+Among the several steps of `webapi-parser`'s parsing process, there is a step called "resolution". This step is performed by the `.resolve()` method and this method is available in all supported API specification formats (RAML, OAS, AMF Graph).
 
-Resolving produces a "flat" document/model with all the references replaced by redundant copies of an actual data, thus replacing functionality offered by `datatype-expansion`. `webapi-parser` can resolve RAML APIs and all the supported fragments (Library, DataType, etc.).
+Resolving produces a "flat" model with all references replaced by redundant copies of actual referenced data. `webapi-parser` can resolve RAML API definitions and all of RAML's typed fragments (Library, DataType, etc.).
 
-For more details or resolution process, please see the [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving.html) document.
+For more details on the resolution process, you can read the [Resolving a "WebApi" Model](https://raml-org.github.io/webapi-parser/resolving.html) guide.
 
 ## Installing webapi-parser
-To install `webapi-parser` follow guidelines from the respective [readme section](https://github.com/raml-org/webapi-parser#javascript).
+To install `webapi-parser`, follow the steps described in the [README](https://github.com/raml-org/webapi-parser#javascript).
 
 ## Example project
 ### Files
@@ -91,9 +91,9 @@ types:
 ```
 
 ### Explanation
-Now considering the input (`input.raml`) let's describe contents of `index.js` line-by-line.
+Considering the input (`input.raml`), let's review `index.js` line-by-line.
 
-First all the necessary modules are imported. This includes `webapi-parser` namespace `WebApiParser` which contains most of the lib's public API:
+All the necessary modules are imported. This includes `webapi-parser` namespace `WebApiParser` which contains most of the lib's public API:
 ```js
 const wap = require('webapi-parser').WebApiParser
 const path = require('path')
@@ -110,7 +110,7 @@ Next line is where the magic happens. By calling the `.resolve()` method parsed 
   const resolved = await wap.raml10.resolve(model)
 ```
 
-To conclude our processing we generate output RAML file (`output.raml`) from the resolved model:
+To conclude, we generate the output RAML file (`output.raml`) from the resolved model:
 ```js
   const outPath = path.join(__dirname, './output.raml')
   await wap.raml10.generateFile(resolved, `file://${outPath}`)
@@ -121,9 +121,9 @@ We could also generate a RAML string instead of the file by calling:
   const ramlString = wap.raml10.generateString(resolved)
 ```
 
-Feel free to inspect contents of the `output.raml` file above and note how types definitions and their inheritance was flattened/expanded.
+Feel free to inspect contents of the `output.raml` file above and note how type definitions and their respective inheritances were flattened/expanded.
 
-Note that "WebApi" Model functionality isn't limited to output generation. It can also be inspected and altered in JS and Java code and converter to other API spec formats (OAS2.0, OAS 3.0, etc.).
+Note that the "WebApi Model" functionality isn't limited to output generation. It can also be inspected and altered in JavaScript or Java code, and converter to other API specification formats (OAS2.0, OAS 3.0, etc).
 
 ## Need Assistance?
 Here are the things to do if you have more questions:
@@ -131,3 +131,4 @@ Here are the things to do if you have more questions:
 * Explore relevant [examples](https://github.com/raml-org/webapi-parser/tree/master/examples/js)
 * Research the API with the [developer documentation](https://raml-org.github.io/webapi-parser/js/modules/webapiparser.html)
 * Ask your question at [github issues](https://github.com/raml-org/webapi-parser/issues)
+* Join the [RAML Community Slack workspace](https://raml.org/slack)
