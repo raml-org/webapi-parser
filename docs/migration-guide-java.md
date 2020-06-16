@@ -1,7 +1,7 @@
 ---
 ---
 
-# Migration guide (Java)
+# Migration guide (raml-java-parser, Java)
 Welcome!
 
 As you may already know RAML 0.8/1.0 Java parser `raml-java-parser` has been deprecated in favor of `webapi-parser`. This guide describes how to migrate an existing code from `raml-java-parser` to `webapi-parser`.

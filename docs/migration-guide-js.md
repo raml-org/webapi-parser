@@ -1,7 +1,7 @@
 ---
 ---
 
-# Migration guide (JS)
+# Migration guide (raml-1-parser, JS)
 Welcome!
 
 As you may already know RAML 0.8/1.0 JS parser `raml-1-parser` has been deprecated in favor of `webapi-parser`. This guide describes how to migrate an existing code from `raml-1-parser` to `webapi-parser`.

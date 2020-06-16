@@ -18,6 +18,7 @@ import co.acme.validate.AmfGraphValidation;
 import co.acme.model.Raml10Building;
 import co.acme.model.Raml10Navigation;
 import co.acme.model.Raml10UtilityMethods;
+import co.acme.model.Raml10Resolution;
 import co.acme.translate.RamlDtToJsonSchema;
 import co.acme.translate.JsonSchemaToRamlDt;
 
@@ -75,6 +76,7 @@ public class WebApiParserDemo {
     Raml10Building.buildApi();
     Raml10Navigation.navigateApi();
     Raml10UtilityMethods.navigateApi();
+    Raml10Resolution.resolveApi();
 
     RamlDtToJsonSchema.translateFromApi();
     RamlDtToJsonSchema.translateFromLibrary();
