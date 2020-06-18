@@ -41,7 +41,7 @@ async function main () {
   // Type can be selected using the utility function `getDeclarationByName()`
   console.log(
     'RAML Data Type from definitions using util:\n',
-    model.getDeclarationByName('User').toRamlDatatype)
+    model.getDeclarationByName('User').toRamlDatatype())
 }
 
 main()

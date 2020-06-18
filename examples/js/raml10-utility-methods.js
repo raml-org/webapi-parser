@@ -26,7 +26,7 @@ async function main () {
 
   // Get type defined in root by name
   const userInRoot = model.getDeclarationByName('User')
-  console.log(userInRoot.toJsonSchema)
+  console.log(userInRoot.toJsonSchema())
 
   // Edit type properties
   const age = userInRoot.properties[2]
@@ -38,7 +38,7 @@ async function main () {
   // Get type defined in root by name. Types without explicit name have a
   // special name "type"
   const userInStringRoot = stringModel.getDeclarationByName('type')
-  console.log(userInStringRoot.toJsonSchema)
+  console.log(userInStringRoot.toJsonSchema())
 }
 
 main()

@@ -26,10 +26,10 @@ const ramlLibrary = `
 async function main () {
   const libModel = await wap.raml10.parse(ramlLibrary)
   // Type can be selected using the utility function `getDeclarationByName()`
-  console.log(libModel.getDeclarationByName('Book').toJsonSchema)
+  console.log(libModel.getDeclarationByName('Book').toJsonSchema())
 
   // Type can also be selected by index
-  console.log(libModel.declares[0].toJsonSchema)
+  console.log(libModel.declares[0].toJsonSchema())
 }
 
 main()
