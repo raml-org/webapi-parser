@@ -14,6 +14,7 @@ import amf.core.remote.{
   Oas20 => RemoteOas20,
   Oas30 => RemoteOas30
 }
+import amf.core.resolution.pipelines.ResolutionPipeline
 import amf.core.model.document.{BaseUnit => InternalBaseUnit}
 
 import scala.concurrent._
@@ -140,7 +141,7 @@ object Raml10 {
       Future {
         var resolved: InternalBaseUnit = null
         if(preserveDefinitions) {
-          resolved = new Raml10Resolver().resolve(model, "editing")
+          resolved = new Raml10Resolver().resolve(model, ResolutionPipeline.EDITING_PIPELINE)
         } else {
           resolved = new Raml10Resolver().resolve(model)
         }
@@ -229,7 +230,7 @@ object Raml08 {
       Future {
         var resolved: InternalBaseUnit = null
         if(preserveDefinitions) {
-          resolved = new Raml08Resolver().resolve(model, "editing")
+          resolved = new Raml08Resolver().resolve(model, ResolutionPipeline.EDITING_PIPELINE)
         } else {
           resolved = new Raml08Resolver().resolve(model)
         }
@@ -318,7 +319,7 @@ object Oas20 {
       Future {
         var resolved: InternalBaseUnit = null
         if(preserveDefinitions) {
-          resolved = new Oas20Resolver().resolve(model, "editing")
+          resolved = new Oas20Resolver().resolve(model, ResolutionPipeline.EDITING_PIPELINE)
         } else {
           resolved = new Oas20Resolver().resolve(model)
         }
@@ -457,7 +458,7 @@ object Oas30 {
       Future {
         var resolved: InternalBaseUnit = null
         if(preserveDefinitions) {
-          resolved = new Oas30Resolver().resolve(model, "editing")
+          resolved = new Oas30Resolver().resolve(model, ResolutionPipeline.EDITING_PIPELINE)
         } else {
           resolved = new Oas30Resolver().resolve(model)
         }
@@ -596,7 +597,7 @@ object AmfGraph {
       Future {
         var resolved: InternalBaseUnit = null
         if(preserveDefinitions) {
-          resolved = new AmfGraphResolver().resolve(model, "editing")
+          resolved = new AmfGraphResolver().resolve(model, ResolutionPipeline.EDITING_PIPELINE)
         } else {
           resolved = new AmfGraphResolver().resolve(model)
         }
