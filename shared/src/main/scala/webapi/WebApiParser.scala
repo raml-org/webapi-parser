@@ -136,7 +136,7 @@ object Raml10 {
     * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         var resolved: InternalBaseUnit = null
@@ -149,6 +149,8 @@ object Raml10 {
       }
     }).asClient
   }
+
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = resolve(model, false)
 }
 
 /** Provides methods for RAML 0.8 processing */
@@ -225,7 +227,7 @@ object Raml08 {
     * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         var resolved: InternalBaseUnit = null
@@ -238,6 +240,8 @@ object Raml08 {
       }
     }).asClient
   }
+
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = resolve(model, false)
 }
 
 /** Provides methods for OAS 2.0 processing */
@@ -314,7 +318,7 @@ object Oas20 {
     * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         var resolved: InternalBaseUnit = null
@@ -327,6 +331,8 @@ object Oas20 {
       }
     }).asClient
   }
+
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = resolve(model, false)
 
   /** Parses OAS 2.0 YAML content from string or url.
     *
@@ -453,7 +459,7 @@ object Oas30 {
     * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         var resolved: InternalBaseUnit = null
@@ -466,6 +472,8 @@ object Oas30 {
       }
     }).asClient
   }
+
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = resolve(model, false)
 
   /** BETA. Parses OAS 3.0 YAML content from string or url.
     *
@@ -592,7 +600,7 @@ object AmfGraph {
     * @param preserveDefinitions Preserve root definitions.
     * @return Resolved parsed WebApi Model (future).
     */
-  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean = false): ClientFuture[WebApiBaseUnit] = {
+  def resolve(model: WebApiBaseUnit, preserveDefinitions: Boolean): ClientFuture[WebApiBaseUnit] = {
     WebApiParser.chainAfterInit(() => {
       Future {
         var resolved: InternalBaseUnit = null
@@ -605,4 +613,6 @@ object AmfGraph {
       }
     }).asClient
   }
+
+  def resolve(model: WebApiBaseUnit): ClientFuture[WebApiBaseUnit] = resolve(model, false)
 }
