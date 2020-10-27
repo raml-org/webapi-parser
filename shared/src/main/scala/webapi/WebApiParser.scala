@@ -280,7 +280,7 @@ object Oas20 {
     */
   def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas20Renderer().generateFile(model, url).asInternal
+      new Oas20Renderer().generateFile(model, url, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 
@@ -291,7 +291,7 @@ object Oas20 {
     */
   def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas20Renderer().generateString(model).asInternal
+      new Oas20Renderer().generateString(model, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 
@@ -363,7 +363,8 @@ object Oas20 {
     */
   def generateYamlString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
-      new Renderer(RemoteOas20.name, "application/yaml").generateString(model).asInternal
+      new Renderer(RemoteOas20.name, "application/yaml")
+        .generateString(model, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 
@@ -374,7 +375,8 @@ object Oas20 {
     */
   def generateYamlFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
-      new Renderer(RemoteOas20.name, "application/yaml").generateFile(model, url).asInternal
+      new Renderer(RemoteOas20.name, "application/yaml")
+        .generateFile(model, url, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 }
@@ -419,7 +421,7 @@ object Oas30 {
     */
   def generateFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas30Renderer().generateFile(model, url).asInternal
+      new Oas30Renderer().generateFile(model, url, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 
@@ -430,7 +432,7 @@ object Oas30 {
     */
   def generateString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
-      new Oas30Renderer().generateString(model).asInternal
+      new Oas30Renderer().generateString(model, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 
@@ -502,7 +504,8 @@ object Oas30 {
     */
   def generateYamlString(model: WebApiBaseUnit): ClientFuture[String] = {
     WebApiParser.chainAfterInit(() => {
-      new Renderer(RemoteOas30.name, "application/yaml").generateString(model).asInternal
+      new Renderer(RemoteOas30.name, "application/yaml")
+        .generateString(model, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 
@@ -513,7 +516,8 @@ object Oas30 {
     */
   def generateYamlFile(model: WebApiBaseUnit, url: String): ClientFuture[Unit] = {
     WebApiParser.chainAfterInit(() => {
-      new Renderer(RemoteOas30.name, "application/yaml").generateFile(model, url).asInternal
+      new Renderer(RemoteOas30.name, "application/yaml")
+        .generateFile(model, url, RenderOptions().withoutCompactedEmission).asInternal
     }).asClient
   }
 }
