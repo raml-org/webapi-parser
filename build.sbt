@@ -27,8 +27,8 @@ val settings = Common.settings ++ Common.publish ++ Seq(
   credentials ++= Common.credentials(),
   libraryDependencies ++= Seq(
     "org.scalatest"     %%% "scalatest"       % "3.0.5" % "test",
-    "com.github.amlorg" %%% "amf-webapi"      % "4.0.3",
-    "com.github.amlorg" %%% "amf-validation"  % "4.0.3"
+    "com.github.amlorg" %%% "amf-webapi"      % "4.4.0",
+    "com.github.amlorg" %%% "amf-validation"  % "4.4.0"
   )
 )
 

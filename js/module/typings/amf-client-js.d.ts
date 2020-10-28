@@ -1,4 +1,4 @@
-// As of 1919e69
+// As of 7c44cdd7b637b7b3c55588622d118ea926019042
 declare module 'amf-client-js' {
 
   /* amf-client-js */
@@ -456,9 +456,19 @@ declare module 'amf-client-js' {
       remove(): void
     }
 
+    class AnyField extends ValueField<any> implements BaseField {
+      option: any | undefined;
+
+      remove(): void;
+
+      value(): any;
+
+      annotations(): Annotations;
+
+    }
+
     namespace document {
 
-      /* Not exported */
       abstract class EncodesModel {
         encodes: domain.DomainElement
 
@@ -497,6 +507,8 @@ declare module 'amf-client-js' {
         findById(id: string): domain.DomainElement | undefined
 
         findByType(typeId: string): domain.DomainElement[]
+
+        withReferenceAlias(alias: string, fullUrl: string, relativeUrl: string): this
       }
 
       /* Not exported */
@@ -522,6 +534,7 @@ declare module 'amf-client-js' {
         /* DeclaresModel methods */
         declares: domain.DomainElement[]
 
+        withId(id: String): this
         withDeclaredElement(declared: domain.DomainElement): this
 
         withDeclares(declares: domain.DomainElement[]): this
@@ -552,7 +565,6 @@ declare module 'amf-client-js' {
 
       export class DocumentationItem extends Fragment {}
 
-      export class DataType extends Fragment {}
 
       export class NamedExample extends Fragment {}
 
@@ -563,6 +575,32 @@ declare module 'amf-client-js' {
       export class AnnotationTypeDeclaration extends Fragment {}
 
       export class SecuritySchemeFragment extends Fragment {}
+
+      export class Dialect extends BaseUnit {
+        name: StrField;
+        declares: domain.DomainElement[];
+        encodes: domain.DomainElement;
+        version: StrField;
+        documents: model.domain.DocumentsModel;
+        nameAndVersion: string
+        withName(name: string): Dialect;
+        withVersion(version: string): Dialect
+        withExternals(externals: model.domain.External[]): DialectLibrary;
+        withDocuments(documentsMapping: model.domain.DocumentsModel): Dialect
+      }
+
+      export class DialectLibrary extends  BaseUnit {
+        externals: model.domain.External[];
+        declares: domain.DomainElement[]
+        nodeMappings(): model.domain.NodeMapping[];
+        withExternals(externals: model.domain.External[]): DialectLibrary;
+        withNodeMappings(nodeMappings: model.domain.NodeMapping[]): DialectLibrary;
+      }
+
+      export class DialectInstance extends Document {
+        withDefinedBy(id: string): DialectInstance
+        definedBy(): StrField
+      }
 
       export class Vocabulary extends BaseUnit {
         name: StrField
@@ -589,6 +627,12 @@ declare module 'amf-client-js' {
     }
 
     namespace domain {
+
+      class AmfScalar {
+        value: any
+      }
+
+      export class DataType extends model.document.Fragment {}
 
       /* Not exported */
       abstract class DomainElement implements Annotable {
@@ -618,6 +662,127 @@ declare module 'amf-client-js' {
         getObjectByPropertyId(id: string): DomainElement[]
 
         remove(uri: string): this
+      }
+
+      export class DialectDomainElement extends DomainElement {
+        withDefinedby(nodeMapping: NodeMapping): DialectDomainElement
+        definedBy(): NodeMapping
+        withInstanceTypes(types: string[]): DialectDomainElement
+        setProperty(property: PropertyMapping, value: any): DialectDomainElement
+        setLiteralProperty(property: string, value: any): DialectDomainElement
+        setObjectProperty(propertyId: String,
+                          value: DialectDomainElement): DialectDomainElement
+        setObjectCollectionProperty(propertyId: String,
+                                    value: DialectDomainElement[]): DialectDomainElement
+        getScalarByPropertyUri(propertyId: String): core.parser.Value[];
+        getScalarValueByPropertyUri(propertyId: String): any[];
+        getObjectPropertyUri(propertyId: String): DialectDomainElement[];
+      }
+
+      export class DocumentsModel extends DomainElement {
+        root(): DocumentMapping;
+        withRoot(documentMapping: DocumentMapping): DocumentsModel;
+        fragments(): DocumentMapping[];
+        withFragments(fragments: DocumentMapping): DocumentsModel;
+        library(): DocumentMapping;
+        withLibrary(library: DocumentMapping): DocumentsModel;
+        selfEncoded(): BoolField;
+        withSelfEncoded(selfEncoded: boolean): DocumentsModel;
+        declarationsPath(): StrField;
+        withDeclarationsPath(declarationsPath: string): DocumentsModel;
+        keyProperty(): BoolField;
+        withKeyProperty(keyProperty: boolean): DocumentsModel;
+      }
+
+      export class DocumentMapping extends DomainElement {
+        documentName(): StrField;
+        withDocumentName(name: String): DocumentMapping;
+        encoded(): StrField;
+        withEncoded(encodedNode: StrField): DocumentMapping;
+        declaredNodes(): PublicNodeMapping[];
+        withDeclaredNodes(declarations: PublicNodeMapping[]): DocumentMapping;
+      }
+
+      export class PublicNodeMapping extends DomainElement {
+        name: StrField;
+        withName(name: string): PublicNodeMapping;
+        mappedNode(): StrField;
+        withMappedNode(mappedNode: string): PublicNodeMapping;
+      }
+
+
+      export class NodeMapping extends DomainElement implements Linkable {
+        name: StrField;
+        nodetypeMapping: StrField;
+        propertiesMapping(): PropertyMapping[];
+        idTemplate: StrField;
+        mergePolicy: StrField;
+
+        isLink: boolean;
+        linkLabel: StrField;
+        linkTarget: DomainElement | undefined;
+
+        linkCopy(): NodeMapping;
+        withLinkLabel(label: string): this;
+        withLinkTarget(target: Linkable): this;
+
+        withName(name: string): NodeMapping;
+        withNodeTypeMapping(nodeType: string): NodeMapping;
+        withPropertiesMapping(props: string[]): NodeMapping;
+        withIdTemplate(idTemplate: string): NodeMapping;
+        withMergePolicy(mergePolicy: string): NodeMapping;
+      }
+
+      export class UnionNodeMapping extends DomainElement implements Linkable {
+        isLink: boolean;
+        linkLabel: StrField;
+        linkTarget: DomainElement | undefined;
+        linkCopy(): UnionNodeMapping;
+        withLinkLabel(label: string): this;
+        withLinkTarget(target: Linkable): this;
+
+        name: StrField;
+        withName(name: StrField): UnionNodeMapping;
+        typeDiscriminatorName(): StrField;
+        typeDiscriminator():  {[name:string]: string};
+        objectRange(): StrField[];
+        withObjectRange(range: string[]): UnionNodeMapping;
+        withTypeDiscriminatorName(name: string):UnionNodeMapping;
+        withTypeDiscriminator(typesMapping: {[name:string]: string}): UnionNodeMapping;
+      }
+
+      export class PropertyMapping extends DomainElement {
+        withName(name: string): PropertyMapping;
+        name(): StrField
+        withNodePropertyMapping(propertyId: string): PropertyMapping;
+        nodePropertyMapping(): StrField
+        withLiteralRange(range: string): PropertyMapping;
+        literalRange(): StrField;
+        withObjectRange(range: string[]): PropertyMapping
+        objectRange(): StrField[];
+        mapKeyProperty(): StrField;
+        withMapKeyProperty(key: string): PropertyMapping
+        mapValueProperty(): StrField;
+        withMapValueProperty(value: string): PropertyMapping
+        minCount(): IntField;
+        withMinCount(minCount: number): IntField
+        pattern(): StrField
+        withPattern(pattern: string): PropertyMapping;
+        minimum(): DoubleField;
+        withMinimum(min: number): PropertyMapping;
+        maximum(): DoubleField;
+        withMaximum(max: number): PropertyMapping;
+        allowMultiple(): BoolField;
+        withAllowMultiple(allow: Boolean): PropertyMapping
+        enum(): AnyField;
+        withEnum(values: any[]): PropertyMapping;
+        sorted(): BoolField
+        withSorted(sorted: Boolean): PropertyMapping
+        typeDiscriminator(): {[t:string]: string};
+        withTypeDiscriminator(typesMapping: {[t:string]:string} ): PropertyMapping;
+        typeDiscriminatorName(): StrField;
+        withTypeDiscriminatorName(name: string): PropertyMapping
+        classification(): string;
       }
 
       export class ClassTerm extends DomainElement {
@@ -845,7 +1010,7 @@ declare module 'amf-client-js' {
 
         linkCopy(): AnyShape
 
-        toJsonSchema: string
+        toJsonSchema(): string
 
         validate(payload: string): Promise<client.validate.ValidationReport>
 
@@ -1806,17 +1971,41 @@ declare module 'amf-client-js' {
   namespace render {
     export class RenderOptions {
 
+      withCompactedEmission: RenderOptions
+      withoutCompactedEmission: RenderOptions
+      isWithCompactedEmission: boolean
+
       withSourceMaps: RenderOptions
-
       withoutSourceMaps: RenderOptions
-
       isWithSourceMaps: boolean
 
       withCompactUris: RenderOptions
-
       withoutCompactUris: RenderOptions
-
       isWithCompactUris: boolean
+
+      withPrettyPrint: RenderOptions
+      withoutPrettyPrint: RenderOptions
+      isPrettyPrint: boolean
+
+      withRawSourceMaps : RenderOptions
+      withoutRawSourceMaps : RenderOptions
+      isRawSourceMaps : boolean
+
+      withValidation : RenderOptions
+      withoutValidation : RenderOptions
+      isValidation : boolean
+
+      withNodeIds : RenderOptions
+      withoutNodeIds : RenderOptions
+      isNodeIds : boolean
+
+      withAmfJsonLdSerialization : RenderOptions
+      withoutAmfJsonLdSerialization : RenderOptions
+      isAmfJsonLdSerialization : boolean
+
+      withFlattenedJsonLd : RenderOptions
+      withoutFlattenedJsonLd : RenderOptions
+      isFlattenedJsonLd : boolean
 
       static apply(): RenderOptions
     }
@@ -1868,7 +2057,6 @@ declare module 'amf-client-js' {
   /* Not exported */
   namespace parse {
 
-    /* Not exported */
     class Parser {
       constructor(vendor: string, mediaType: string)
 
@@ -1880,9 +2068,15 @@ declare module 'amf-client-js' {
 
       parseFileAsync(url: string): Promise<model.document.BaseUnit>
 
+      parseFileAsync(url: string, options: parser.ParsingOptions): Promise<model.document.BaseUnit>
+
       parseStringAsync(url: string, stream: string): Promise<model.document.BaseUnit>
 
       parseStringAsync(stream: string): Promise<model.document.BaseUnit>
+
+      parseStringAsync(stream: string, options: parser.ParsingOptions): Promise<model.document.BaseUnit>
+
+      parseStringAsync(url: string, stream: string, options: parser.ParsingOptions): Promise<model.document.BaseUnit>
 
       reportValidation(profileName: string, messageStyle: string): Promise<client.validate.ValidationReport>
 
@@ -1952,6 +2146,9 @@ declare module 'amf-client-js' {
         toString(): string
       }
 
+      class Value {
+        value: model.domain.AmfScalar
+      }
     }
 
     namespace validation {
@@ -1973,6 +2170,19 @@ declare module 'amf-client-js' {
           static readonly COMPATIBILITY_PIPELINE: 'compatibility'
         }
       }
+    }
+  }
+
+  namespace parser {
+    export class ParsingOptions {
+      withoutAmfJsonLdSerialization: ParsingOptions;
+      withAmfJsonLdSerialization: ParsingOptions;
+      withBaseUnitUrl(baseUnit: string): ParsingOptions;
+      withoutBaseUnitUrl(): ParsingOptions;
+      setMaxYamlReferences(value: number): ParsingOptions;
+      isAmfJsonLdSerilization: boolean;
+      definedBaseUrl: String|undefined;
+      getMaxYamlReferences: number|undefined;
     }
   }
 }

@@ -71,7 +71,7 @@ class AmfGraphTest extends AsyncFunSuite with Matchers with WaitingFileReader {
       report <- AmfGraph.validate(unit).asInternal
     } yield {
       report.conforms should be (false)
-      report.results should have size 1
+      report.results should have size 2
     }
   }
 

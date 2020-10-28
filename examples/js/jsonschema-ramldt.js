@@ -27,16 +27,16 @@ async function main () {
 
   // Parsing an OAS 2.0 string
   const model = await wap.oas20.parse(JSON.stringify(parsedSchema))
-  
+
   // Type can be accessed using utility function `model.getDeclarationByName()`
   console.log(
     'RAML Data Type from definitions using util:\n',
-    model.getDeclarationByName('User').toRamlDatatype)
-  
+    model.getDeclarationByName('User').toRamlDatatype())
+
   // Type can also be accessed by index
   console.log(
     'RAML Data Type from definitions by index:\n',
-    model.declares[0].toRamlDatatype)
+    model.declares[0].toRamlDatatype())
 }
 
 main()
