@@ -1,3 +1,5 @@
+DEPRECATION NOTICE: please note that this parser is now deprecated in favour of [AMF](https://github.com/aml-org/amf) new mayor version (5.x.x) which defines simple interfaces for interacting with API Specs.
+
 # `webapi-parser`
 
 [![Build status](https://img.shields.io/travis/raml-org/webapi-parser/master.svg?style=flat)](https://travis-ci.org/raml-org/webapi-parser)
